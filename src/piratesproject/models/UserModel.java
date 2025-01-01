@@ -2,14 +2,14 @@ package user_model;
 
 public class UserModel {
     
-    String userFirstName; 
-    String userLastName;
-    String userName; 
-    String userPassword; 
-    String userIsOnline; 
-    String userIsplayingnow; 
-    String userTotalGamePlayed; 
-    int userTotalScore;
+    private String userFirstName; 
+    private String userLastName;
+    private String userName; 
+    private String userPassword; 
+    private String userIsOnline; 
+    private String userIsplayingnow; 
+    private String userTotalGamePlayed; 
+    private int userTotalScore;
     
     
     public String getUserFirstName() {
