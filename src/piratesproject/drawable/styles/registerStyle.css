@@ -1,0 +1,5 @@
+.root{
+    -fx-background-image: url("../images/registerBg.jpg");
+    -fx-background-size: 600px 400px;
+    -fx-background-repeat: no-repeat;
+}
