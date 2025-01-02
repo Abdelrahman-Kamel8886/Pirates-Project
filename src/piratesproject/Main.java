@@ -4,13 +4,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import piratesproject.ui.reg.LoginBase;
 import piratesproject.utils.Consts;
 
 public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = new BorderPane();
+        Parent root = new LoginBase();
         Scene scene = new Scene(root);
         stage.setTitle(Consts.APP_NAME);
         stage.setScene(scene);

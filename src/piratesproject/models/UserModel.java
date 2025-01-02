@@ -1,4 +1,4 @@
-package user_model;
+package piratesproject.models;
 
 public class UserModel {
     
@@ -6,9 +6,9 @@ public class UserModel {
     private String userLastName;
     private String userName; 
     private String userPassword; 
-    private String userIsOnline; 
-    private String userIsplayingnow; 
-    private String userTotalGamePlayed; 
+    private Boolean userIsOnline; 
+    private Boolean userIsplayingnow; 
+    private int userTotalGamePlayed; 
     private int userTotalScore;
     
     
@@ -46,11 +46,11 @@ public class UserModel {
         this.userPassword = userPassword;
     }
 
-    public String getUserIsOnline() {
+    public Boolean getUserIsOnline() {
         return userIsOnline;
     }
 
-    public void setUserIsOnline(String userIsOnline) {
+    public void setUserIsOnline(Boolean userIsOnline) {
         this.userIsOnline = userIsOnline;
     }
     public int getUserTotalScore() {
@@ -61,25 +61,22 @@ public class UserModel {
         this.userTotalScore = userTotalScore;
     }
 
-    public String getUserIsplayingnow() {
+    public Boolean getUserIsplayingnow() {
         return userIsplayingnow;
     }
 
-    public void setUserIsplayingnow(String userIsplayingnow) {
+    public void setUserIsplayingnow(Boolean userIsplayingnow) {
         this.userIsplayingnow = userIsplayingnow;
     }
 
-    public String getUserTotalGamePlayed() {
+    public int getUserTotalGamePlayed() {
         return userTotalGamePlayed;
     }
 
-    public void setUserTotalGamePlayed(String userTotalGamePlayed) {
+    public void setUserTotalGamePlayed(int userTotalGamePlayed) {
         this.userTotalGamePlayed = userTotalGamePlayed;
     }
-    
-    // can add vector of history score of each users 
      
-  
     
     public UserModel(String Fname , String username , String password ){
         this.userFirstName = Fname ; 
@@ -95,10 +92,5 @@ public class UserModel {
         this.userPassword = userPassword; 
     }    
     
-    public static void main(String[] args) {
-        UserModel myUser = new UserModel("Mohamed" , "Ahmed" , "username123" , "password"); 
- 
-        
-    }
 
 }
