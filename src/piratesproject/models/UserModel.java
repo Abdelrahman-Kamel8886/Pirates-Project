@@ -1,4 +1,4 @@
-package user_model;
+package piratesproject.models;
 
 public class UserModel {
     
