@@ -8,7 +8,10 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PiratesProject.jar" size="1264722" download="eager" />
+    <jar href="PiratesProject.jar" size="3069467" download="eager" />
+    <jar href="lib\slf4j-api-2.0.7.jar" size="63635" download="eager" />
+    <jar href="lib\slf4j-simple-2.0.7.jar" size="15972" download="eager" />
+    <jar href="lib\sqlite-jdbc-3.46.0.0.jar" size="13615436" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PiratesProject" >
     <param name="requiredFXVersion" value="8.0+"/>
