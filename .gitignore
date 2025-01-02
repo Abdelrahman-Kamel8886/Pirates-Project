@@ -1,1 +1,5 @@
-\build\built-jar.properties
+# Ignore build directory
+build/
+
+# Ignore dist directory
+dist/
