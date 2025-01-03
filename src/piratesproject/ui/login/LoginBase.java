@@ -3,9 +3,11 @@ package piratesproject.ui.login;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import piratesproject.models.LoginResponseModel;
 import piratesproject.ui.reg.LoginBase2;
 
 public class LoginBase extends AnchorPane {
@@ -26,14 +29,14 @@ public class LoginBase extends AnchorPane {
     protected final VBox vBox;
     protected final TextField TFname;
     protected final Label nameError;
-    protected final PasswordField  Tfpass;
+    protected final PasswordField Tfpass;
     protected final Label passerror;
     protected final Button Blogin;
     protected final Hyperlink sginuplink;
     private final Stage mystage;
     private Socket mySocket;
-    private DataInputStream dis;
-    private DataOutputStream ps;
+    private ObjectInputStream ois;
+    private DataOutputStream dos;
 
     public LoginBase(Stage stage) {
         mystage = stage;
@@ -41,7 +44,7 @@ public class LoginBase extends AnchorPane {
         vBox = new VBox();
         TFname = new TextField();
         nameError = new Label();
-        Tfpass = new PasswordField ();
+        Tfpass = new PasswordField();
         passerror = new Label();
         Blogin = new Button();
         sginuplink = new Hyperlink();
@@ -145,26 +148,30 @@ public class LoginBase extends AnchorPane {
     }
 
     private void connectToServer(String name, String pass) {
-        try {
-            mySocket = new Socket("127.0.0.1", 5005);
-            dis = new DataInputStream(mySocket.getInputStream());
-            ps = new DataOutputStream(mySocket.getOutputStream());
-            ps.writeUTF(name);
-            ps.writeUTF(pass);
-            String respons = dis.readUTF();
-            System.out.println(respons);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        new Thread(() -> {
+
             try {
-                ps.close();
-                dis.close();
-                mySocket.close();
+                mySocket = new Socket("127.0.0.1", 5005);
+                ois = new ObjectInputStream(mySocket.getInputStream());
+                dos = new DataOutputStream(mySocket.getOutputStream());
+                dos.writeUTF(name);
+                dos.writeUTF(pass);
+                dos.flush();
+                 Object response = ois.readObject();
+                 if(response instanceof LoginResponseModel){
+                     LoginResponseModel loginResponse = (LoginResponseModel) response;
+                      Platform.runLater(() -> handleServerResponse(loginResponse));
+                 }
             } catch (IOException ex) {
                 Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        }
-       
+
+        }).start();
+    }
+    
+    private void handleServerResponse(LoginResponseModel response){
+        
     }
 }
