@@ -1,6 +1,8 @@
 package piratesproject.models;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
     
     private String userFirstName; 
     private String userLastName;
@@ -10,6 +12,11 @@ public class UserModel {
     private Boolean userIsplayingnow; 
     private int userTotalGamePlayed; 
     private int userTotalScore;
+
+    @Override
+    public String toString() {
+        return "UserModel{" + "userFirstName=" + userFirstName + ", userLastName=" + userLastName + ", userName=" + userName + ", userPassword=" + userPassword + ", userIsOnline=" + userIsOnline + ", userIsplayingnow=" + userIsplayingnow + ", userTotalGamePlayed=" + userTotalGamePlayed + ", userTotalScore=" + userTotalScore + '}';
+    }
     
     
     public String getUserFirstName() {
