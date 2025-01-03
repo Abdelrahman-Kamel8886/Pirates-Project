@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="304.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane id="AnchorPane" prefHeight="304.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/piratesproject/drawable/styles/xogameboard.css" />
     </stylesheets>
@@ -17,15 +17,15 @@
             <Image url="@../../drawable/images/xo_game_board.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnGrid_0_0" layoutX="139.0" layoutY="92.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="92.0" textAlignment="CENTER" />
-      <Button fx:id="btnGrid_0_1" layoutX="243.0" layoutY="92.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_0_2" layoutX="354.0" layoutY="92.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_1_0" layoutX="136.0" layoutY="169.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="92.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_1_1" layoutX="240.0" layoutY="169.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_1_2" layoutX="354.0" layoutY="169.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_2_0" layoutX="136.0" layoutY="245.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="92.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_2_1" layoutX="240.0" layoutY="245.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="btnGrid_2_2" layoutX="354.0" layoutY="245.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_0_0" layoutX="139.0" layoutY="92.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="92.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" />
+      <Button fx:id="btnGrid_0_1" layoutX="243.0" layoutY="92.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_0_2" layoutX="354.0" layoutY="92.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_1_0" layoutX="136.0" layoutY="169.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="92.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_1_1" layoutX="240.0" layoutY="169.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_1_2" layoutX="354.0" layoutY="169.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" text="x" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_2_0" layoutX="136.0" layoutY="245.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="92.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_2_1" layoutX="240.0" layoutY="245.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnGrid_2_2" layoutX="354.0" layoutY="245.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="100.0" style="-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;" textAlignment="CENTER" wrapText="true" />
       <Text fx:id="playerOneScore" layoutX="271.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="18.6708984375" />
       <Text fx:id="playerTowScore" layoutX="291.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="18.6708984375" />
    </children>
