@@ -6,10 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import piratesproject.utils.Consts;
 
-
-public class XOGameBoard extends AnchorPane {
+public abstract class XOGameBoard extends AnchorPane {
 
     protected final ImageView imageView;
     protected final Button btnGrid_0_0;
@@ -43,19 +41,20 @@ public class XOGameBoard extends AnchorPane {
         setPrefHeight(304.0);
         setPrefWidth(600.0);
         getStyleClass().add("mainFxmlClass");
-        getStylesheets().add("/piratesproject/ui/xo_game_board//piratesproject/drawable/styles/xogameboard.css");
+        getStylesheets().add("/piratesproject/ui/xogameboard//piratesproject/drawable/styles/xogameboard.css");
 
         imageView.setFitHeight(343.0);
         imageView.setFitWidth(600.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
-        imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
-                                                           
+        imageView.setImage(new Image(getClass().getResource("../../drawable/images/xo_game_board.jpg").toExternalForm()));
+
         btnGrid_0_0.setLayoutX(139.0);
         btnGrid_0_0.setLayoutY(92.0);
         btnGrid_0_0.setMnemonicParsing(false);
         btnGrid_0_0.setPrefHeight(65.0);
         btnGrid_0_0.setPrefWidth(92.0);
+        btnGrid_0_0.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_0_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
 
         btnGrid_0_1.setLayoutX(243.0);
@@ -63,6 +62,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_0_1.setMnemonicParsing(false);
         btnGrid_0_1.setPrefHeight(65.0);
         btnGrid_0_1.setPrefWidth(100.0);
+        btnGrid_0_1.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_0_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_1.setWrapText(true);
 
@@ -71,6 +71,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_0_2.setMnemonicParsing(false);
         btnGrid_0_2.setPrefHeight(65.0);
         btnGrid_0_2.setPrefWidth(100.0);
+        btnGrid_0_2.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_0_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_2.setWrapText(true);
 
@@ -79,6 +80,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_0.setMnemonicParsing(false);
         btnGrid_1_0.setPrefHeight(65.0);
         btnGrid_1_0.setPrefWidth(92.0);
+        btnGrid_1_0.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_1_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_0.setWrapText(true);
 
@@ -87,6 +89,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_1.setMnemonicParsing(false);
         btnGrid_1_1.setPrefHeight(65.0);
         btnGrid_1_1.setPrefWidth(100.0);
+        btnGrid_1_1.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_1_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_1.setWrapText(true);
 
@@ -95,6 +98,8 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_2.setMnemonicParsing(false);
         btnGrid_1_2.setPrefHeight(65.0);
         btnGrid_1_2.setPrefWidth(100.0);
+        btnGrid_1_2.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
+        btnGrid_1_2.setText("x");
         btnGrid_1_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_2.setWrapText(true);
 
@@ -103,6 +108,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_0.setMnemonicParsing(false);
         btnGrid_2_0.setPrefHeight(65.0);
         btnGrid_2_0.setPrefWidth(92.0);
+        btnGrid_2_0.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_2_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_0.setWrapText(true);
 
@@ -111,6 +117,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_1.setMnemonicParsing(false);
         btnGrid_2_1.setPrefHeight(65.0);
         btnGrid_2_1.setPrefWidth(100.0);
+        btnGrid_2_1.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_2_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_1.setWrapText(true);
 
@@ -119,6 +126,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_2.setMnemonicParsing(false);
         btnGrid_2_2.setPrefHeight(65.0);
         btnGrid_2_2.setPrefWidth(100.0);
+        btnGrid_2_2.setStyle("-fx-background-color: private String userFirstName;     private String userLastName;    private String userName;     private String userPassword;     private Boolean userIsOnline;     private Boolean userIsplayingnow;     private int userTotalGamePlayed;     private int userTotalScore;;");
         btnGrid_2_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_2.setWrapText(true);
 
