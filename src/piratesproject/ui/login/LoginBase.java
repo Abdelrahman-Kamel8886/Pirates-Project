@@ -117,7 +117,7 @@ public class LoginBase extends AnchorPane {
             String name = TFname.getText();
             String pass = Tfpass.getText();
             connectToServer(name, pass);
-            System.out.println("Done");
+            System.out.println("ok");
         }
         return islogin;
     }
@@ -172,6 +172,11 @@ public class LoginBase extends AnchorPane {
     }
     
     private void handleServerResponse(LoginResponseModel response){
-        
+        if(response.getStatus()==""){
+            //goto home page
+        }
+        else{
+            //show alert
+        }
     }
 }
