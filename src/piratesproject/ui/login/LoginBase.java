@@ -1,41 +1,55 @@
 package piratesproject.ui.login;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import piratesproject.ui.reg.LoginBase;
+import piratesproject.ui.reg.LoginBase2;
 
-public class loginBase2 extends AnchorPane {
+public class LoginBase extends AnchorPane {
 
     protected final ImageView imageView;
     protected final VBox vBox;
     protected final TextField TFname;
     protected final Label nameError;
-    protected final TextField Tfpass;
+    protected final PasswordField  Tfpass;
     protected final Label passerror;
     protected final Button Blogin;
     protected final Hyperlink sginuplink;
-    private Stage mystage;
+    private final Stage mystage;
+    private Socket mySocket;
+    private DataInputStream dis;
+    private DataOutputStream ps;
 
-    public loginBase2(Stage stage) {
+    public LoginBase(Stage stage) {
         mystage = stage;
         imageView = new ImageView();
         vBox = new VBox();
         TFname = new TextField();
         nameError = new Label();
-        Tfpass = new TextField();
+        Tfpass = new PasswordField ();
         passerror = new Label();
         Blogin = new Button();
         sginuplink = new Hyperlink();
+        draw();
+        listenToAllEvents();
+    }
 
+    private void draw() {
         setId("AnchorPane");
         setPrefHeight(400.0);
         setPrefWidth(600.0);
@@ -69,15 +83,12 @@ public class loginBase2 extends AnchorPane {
 
         Blogin.setText("login");
         Blogin.getStyleClass().add("loginButton");
-        Blogin.setOnAction(event -> login());
         Blogin.prefWidthProperty().bind(mystage.widthProperty().multiply(0.12)); // 50% of stage width
 
         formContainer.getChildren().addAll(TFname, nameError, Tfpass, passerror, Blogin, sginuplink);
 
         sginuplink.setText("Register");
         sginuplink.getStyleClass().add("registerLink");
-        sginuplink.setOnAction(event -> gotosginup());
-        //sginuplink.prefWidthProperty().bind(mystage.widthProperty().multiply(0.09)); // 50% of stage width
 
         nameError.setText("enter your name");
         nameError.setVisible(false);
@@ -91,17 +102,24 @@ public class loginBase2 extends AnchorPane {
         getChildren().add(formContainer);
     }
 
-    public boolean login() {
+    private void listenToAllEvents() {
+        Blogin.setOnAction(event -> login());
+
+        sginuplink.setOnAction(event -> gotosginup());
+    }
+
+    private boolean login() {
         boolean islogin = false;
         if (isFull()) {
             String name = TFname.getText();
             String pass = Tfpass.getText();
+            connectToServer(name, pass);
             System.out.println("Done");
         }
         return islogin;
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         boolean isfull = true;
 
         if (TFname.getText().isEmpty()) {
@@ -120,9 +138,33 @@ public class loginBase2 extends AnchorPane {
         return isfull;
     }
 
-   public void gotosginup() {
-    LoginBase signupPage = new LoginBase(); // Replace with the new page's class
-    Scene signupScene = new Scene(signupPage);
-    mystage.setScene(signupScene);
-}
+    private void gotosginup() {
+        LoginBase2 signupPage = new LoginBase2();
+        Scene signupScene = new Scene(signupPage);
+        mystage.setScene(signupScene);
+    }
+
+    private void connectToServer(String name, String pass) {
+        try {
+            mySocket = new Socket("127.0.0.1", 5005);
+            dis = new DataInputStream(mySocket.getInputStream());
+            ps = new DataOutputStream(mySocket.getOutputStream());
+            ps.writeUTF(name);
+            ps.writeUTF(pass);
+            String respons = dis.readUTF();
+            System.out.println(respons);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            try {
+                ps.close();
+                dis.close();
+                mySocket.close();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+       
+    }
 }

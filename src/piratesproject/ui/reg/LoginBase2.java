@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import piratesproject.models.UserModel;
 
-public class LoginBase extends AnchorPane {
+public class LoginBase2 extends AnchorPane {
 
     protected final VBox vBox;
     protected final TextField firstNameTF;
@@ -32,7 +32,7 @@ public class LoginBase extends AnchorPane {
     protected final Text text;
     protected final Text loginText;
 
-    public LoginBase() {
+    public LoginBase2() {
         vBox = new VBox();
         firstNameTF = new TextField();
         firstNameReq = new Label();
