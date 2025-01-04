@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
-import piratesproject.ui.login.loginBase2;
+import piratesproject.ui.login.LoginBase;
 
 public class RegisterController extends RegisterBase {
 
@@ -123,7 +123,7 @@ public class RegisterController extends RegisterBase {
     }
 
     void goToLogin() {
-        loginBase2 loginPage = new loginBase2(stage);
+        LoginBase loginPage = new LoginBase(stage);
         Scene loginScene = new Scene(loginPage);
         stage.setScene(loginScene);
     }

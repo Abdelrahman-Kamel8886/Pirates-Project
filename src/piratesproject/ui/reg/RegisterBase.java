@@ -1,22 +1,10 @@
 package piratesproject.ui.reg;
 
-import java.awt.event.MouseEvent;
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -26,12 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import piratesproject.models.ResponseModel;
-import piratesproject.models.UserModel;
-import piratesproject.ui.login.loginBase2;
 
 public class RegisterBase extends AnchorPane {
 
@@ -48,16 +32,12 @@ public class RegisterBase extends AnchorPane {
     protected final Label confirmPasswordReq;
     protected final Button signUpButton;
     protected final HBox hBox;
-    Socket mySocket;
-    ObjectOutputStream talker;
-    ObjectInputStream reader;
-
     protected Stage stage;
     protected final Hyperlink loginText;
 
     public RegisterBase(Stage s) {
         stage = s;
-       stage.setMaximized(false);
+        stage.setMaximized(false);
         vBox = new VBox();
         firstNameTF = new TextField();
         firstNameReq = new Label();
@@ -71,17 +51,8 @@ public class RegisterBase extends AnchorPane {
         confirmPasswordReq = new Label();
         signUpButton = new Button();
         hBox = new HBox();
-
         loginText = new Hyperlink();
 
-//        try {
-//            mySocket = new Socket("127.0.0.1", 1422);
-//            reader = new ObjectInputStream(mySocket.getInputStream());
-//            talker = new ObjectOutputStream(mySocket.getOutputStream());
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
         draw();
         
