@@ -20,6 +20,7 @@ import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.login.LoginBase;
+import piratesproject.ui.login.LoginController;
 
 public class RegisterController extends RegisterBase {
 
@@ -75,7 +76,7 @@ public class RegisterController extends RegisterBase {
 //                    } catch (IOException ex) {
 //                        Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
-                      new Thread(() -> NetworkAccessLayer.registerToServer(user)).start();
+                      new Thread(() -> NetworkAccessLayer.registerToServer(user,stage)).start();
 
                 }
 
@@ -123,7 +124,7 @@ public class RegisterController extends RegisterBase {
     }
 
     void goToLogin() {
-        LoginBase loginPage = new LoginBase(stage);
+        LoginController loginPage = new LoginController(stage);
         Scene loginScene = new Scene(loginPage);
         stage.setScene(loginScene);
     }
