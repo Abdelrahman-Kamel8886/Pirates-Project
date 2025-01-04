@@ -97,7 +97,6 @@ public class UserModel  {
     public void setScore(Integer score) {
         this.score = score;
     }
-   
     
 
 }
