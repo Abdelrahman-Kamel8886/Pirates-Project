@@ -52,12 +52,12 @@ public class RegisterBase extends AnchorPane {
     ObjectOutputStream talker;
     ObjectInputStream reader;
 
-    private Stage stage;
+    protected Stage stage;
     protected final Hyperlink loginText;
 
     public RegisterBase(Stage s) {
         stage = s;
-        stage.setMaximized(false);
+       stage.setMaximized(false);
         vBox = new VBox();
         firstNameTF = new TextField();
         firstNameReq = new Label();
@@ -74,18 +74,18 @@ public class RegisterBase extends AnchorPane {
 
         loginText = new Hyperlink();
 
-        try {
-            mySocket = new Socket("127.0.0.1", 1422);
-            reader = new ObjectInputStream(mySocket.getInputStream());
-            talker = new ObjectOutputStream(mySocket.getOutputStream());
-
-        } catch (IOException ex) {
-            Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            mySocket = new Socket("127.0.0.1", 1422);
+//            reader = new ObjectInputStream(mySocket.getInputStream());
+//            talker = new ObjectOutputStream(mySocket.getOutputStream());
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         draw();
+        
 
-        listenToAllEvents();
     }
 
     private void draw() {
@@ -224,140 +224,7 @@ public class RegisterBase extends AnchorPane {
         getChildren().add(vBox);
     }
 
-    private void listenToAllEvents() {
-        signUpButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                boolean b = register();
-            }
 
-        });
-        loginText.setOnAction(event -> {
-            goToLogin();
-        });
-    }
 
-    boolean register() {
-        setAllLabelsToDefault();
-        boolean isAnyFieldEmpty = checkAllTextFields();
-        boolean logged = true;
-        if (isAnyFieldEmpty) {
-            logged = false;
-        } else {
-            if (passwordTF.getText().length() < 6) {
-                passwordReq.setText("Passwords should at least contain 6 characters");
-                passwordReq.setVisible(true);
-                logged = false;
-            } else {
-                if (!passwordTF.getText().equals(confirmPasswordTF.getText())) {
-                    confirmPasswordReq.setText("Passwords do not match");
-                    confirmPasswordReq.setVisible(true);
-                    logged = false;
-
-                } else //everything is alright only username will be checked from the db
-                {
-                    UserModel user = new UserModel(firstNameTF.getText(),
-                            lastNameTF.getText(),
-                            usernameTF.getText(),
-                            passwordTF.getText());
-                    try {
-                        mySocket = new Socket("127.0.0.1", 1422);
-                        reader = new ObjectInputStream(mySocket.getInputStream());
-                        talker = new ObjectOutputStream(mySocket.getOutputStream());
-                        talker.writeObject(user);
-                        ResponseHandler r = new ResponseHandler();
-                        r.start();
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                }
-
-            }
-
-        }
-
-        return logged;
-    }
-
-    boolean checkAllTextFields() {  //return false if at least 1 textfield is empty
-        boolean isEmpty = false;
-        if (firstNameTF.getText().isEmpty()) {
-            isEmpty = true;
-            firstNameReq.setVisible(true);
-        }
-        if (lastNameTF.getText().isEmpty()) {
-            isEmpty = true;
-            lastNameReq.setVisible(true);
-        }
-        if (usernameTF.getText().isEmpty()) {
-            isEmpty = true;
-            usernameReq.setVisible(true);
-        }
-        if (passwordTF.getText().isEmpty()) {
-            isEmpty = true;
-            passwordReq.setVisible(true);
-        }
-        if (confirmPasswordTF.getText().isEmpty()) {
-            isEmpty = true;
-            confirmPasswordReq.setVisible(true);
-        }
-        return isEmpty;
-    }
-
-    void setAllLabelsToDefault() {
-        confirmPasswordReq.setText("Confirm password required");
-        passwordReq.setText("Passwords required");
-        firstNameReq.setVisible(false);
-        lastNameReq.setVisible(false);
-        usernameReq.setVisible(false);
-        passwordReq.setVisible(false);
-        confirmPasswordReq.setVisible(false);
-
-    }
-
-    void goToLogin() {
-        loginBase2 loginPage = new loginBase2(stage);
-        Scene loginScene = new Scene(loginPage);
-        stage.setScene(loginScene);
-    }
-
-    class ResponseHandler extends Thread {
-
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    ResponseModel r = (ResponseModel) reader.readObject();
-                    if (r != null) {
-                        if (r.getStatus() == 1) {
-                            //goToHomePage
-                        } else {
-                            Platform.runLater(() -> {
-                                Alert a = new Alert(AlertType.INFORMATION);
-                                a.setContentText(r.getMessage() == null ? "no message yet" : r.getMessage());
-                                a.showAndWait();
-                            });
-                            try {
-                                talker.close();
-                                reader.close();
-                                mySocket.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-                } catch (IOException ex) {
-                  ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                     ex.printStackTrace();
-
-                }
-            }
-        }
-
-    }
-
+    
 }

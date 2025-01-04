@@ -10,20 +10,24 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.login.loginBase2;
 
-class RegisterController extends RegisterBase {
+public class RegisterController extends RegisterBase {
 
-    Stage stage;
+   
 
     public RegisterController(Stage s) {
         super(s);
-        stage = s;
+        listenToAllEvents();
     }
 
     void listenToAllEvents() {
@@ -71,6 +75,7 @@ class RegisterController extends RegisterBase {
 //                    } catch (IOException ex) {
 //                        Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
+                      new Thread(() -> NetworkAccessLayer.registerToServer(user)).start();
 
                 }
 
@@ -122,6 +127,7 @@ class RegisterController extends RegisterBase {
         Scene loginScene = new Scene(loginPage);
         stage.setScene(loginScene);
     }
+    
 }
 
 /**
