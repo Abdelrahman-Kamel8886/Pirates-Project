@@ -143,7 +143,7 @@ public class LoginBase extends AnchorPane {
 
     public void gotosginup() {
         Parent signupPage = new RegisterController(mystage); // Replace with the new page's class
-        Scene signupScene = new Scene(signupPage, 600, 400);
+        Scene signupScene = new Scene(signupPage);
         mystage.setScene(signupScene);
     }
 }

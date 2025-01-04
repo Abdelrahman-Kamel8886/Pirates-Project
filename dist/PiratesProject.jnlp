@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PiratesProject.jar" size="7201582" download="eager" />
+    <jar href="PiratesProject.jar" size="7201801" download="eager" />
     <jar href="lib\gson-2.10.1.jar" size="283367" download="eager" />
     <jar href="lib\slf4j-api-2.0.7.jar" size="63635" download="eager" />
     <jar href="lib\slf4j-simple-2.0.7.jar" size="15972" download="eager" />
