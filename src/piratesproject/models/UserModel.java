@@ -76,16 +76,15 @@ public class UserModel {
     public void setUserTotalGamePlayed(int userTotalGamePlayed) {
         this.userTotalGamePlayed = userTotalGamePlayed;
     }
-     
+
+    public UserModel() {}
     
     public UserModel(String Fname , String username , String password ){
         this.userFirstName = Fname ; 
         this.userName = username ; 
         this.userPassword = password; 
     }
-    
     public UserModel(String userFirstName  , String userLastName  , String userName,String userPasswor ){
-     
         this.userFirstName = userFirstName; 
         this.userLastName = userLastName;
         this.userName = userName; 

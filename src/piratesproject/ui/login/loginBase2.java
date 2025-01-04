@@ -36,6 +36,11 @@ public class loginBase2 extends AnchorPane {
         Blogin = new Button();
         sginuplink = new Hyperlink();
 
+        drawAllViews();
+        listenToAllEvents();
+    }
+    
+    private void drawAllViews(){
         setId("AnchorPane");
         setPrefHeight(400.0);
         setPrefWidth(600.0);
@@ -69,14 +74,14 @@ public class loginBase2 extends AnchorPane {
 
         Blogin.setText("login");
         Blogin.getStyleClass().add("loginButton");
-        Blogin.setOnAction(event -> login());
+        
         Blogin.prefWidthProperty().bind(mystage.widthProperty().multiply(0.12)); // 50% of stage width
 
         formContainer.getChildren().addAll(TFname, nameError, Tfpass, passerror, Blogin, sginuplink);
 
         sginuplink.setText("Register");
         sginuplink.getStyleClass().add("registerLink");
-        sginuplink.setOnAction(event -> gotosginup());
+        
         //sginuplink.prefWidthProperty().bind(mystage.widthProperty().multiply(0.09)); // 50% of stage width
 
         nameError.setText("enter your name");
@@ -90,8 +95,13 @@ public class loginBase2 extends AnchorPane {
         getChildren().add(imageView);
         getChildren().add(formContainer);
     }
+    
+    private void listenToAllEvents(){
+        Blogin.setOnAction(event -> login());
+        sginuplink.setOnAction(event -> gotosginup());
+    }
 
-    public boolean login() {
+    private boolean login() {
         boolean islogin = false;
         if (isFull()) {
             String name = TFname.getText();
@@ -101,7 +111,7 @@ public class loginBase2 extends AnchorPane {
         return islogin;
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         boolean isfull = true;
 
         if (TFname.getText().isEmpty()) {
@@ -120,7 +130,7 @@ public class loginBase2 extends AnchorPane {
         return isfull;
     }
 
-   public void gotosginup() {
+   private void gotosginup() {
     LoginBase signupPage = new LoginBase(); // Replace with the new page's class
     Scene signupScene = new Scene(signupPage);
     mystage.setScene(signupScene);
