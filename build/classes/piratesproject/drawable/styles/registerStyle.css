@@ -1,0 +1,11 @@
+.root{
+    -fx-background-image: url("../images/registerBg.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+.hyperlink{
+    -fx-text-fill: white;
+    -fx-margin:0 0 0 0;
+    -fx-padding:0 0 0 0;
+    
+}
