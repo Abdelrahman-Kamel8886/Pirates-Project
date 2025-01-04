@@ -1,15 +1,31 @@
 package piratesproject.models;
 
-public class ResponseModel {
+import java.io.Serializable;
+
+public class ResponseModel implements Serializable {
     
-    private String status;
+    private int status;
     private String message;
 
-    public String getStatus() {
+    public ResponseModel() {
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseModel{" + "status=" + status + ", message=" + message + '}';
+    }
+    
+
+    public ResponseModel(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
