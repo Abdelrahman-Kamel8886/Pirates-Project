@@ -1,6 +1,8 @@
 package piratesproject.utils;
 
 import com.google.gson.Gson;
+import piratesproject.models.LoginRequestModel;
+import piratesproject.models.LoginResponseModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
@@ -35,5 +37,23 @@ public class JsonUtils {
     // Convert JSON string to ResponseModel
     public static ResponseModel jsonToRequestModel(String requestModel) {
         return gson.fromJson(requestModel, ResponseModel.class);
+    }
+    
+      public static String LoginRequstModelToJson(LoginRequestModel loginRequestModel) {
+        return gson.toJson(loginRequestModel);
+    }
+
+    // Convert JSON string to ResponseModel
+    public static LoginRequestModel jsonToLoginRequestModel(String loginRequestModel) {
+        return gson.fromJson(loginRequestModel, LoginRequestModel.class);
+    }
+              // Convert ResponseModel to JSON string
+    public static String loginResponseModelToJson(LoginResponseModel responseModel) {
+        return gson.toJson(responseModel);
+    }
+
+    // Convert JSON string to ResponseModel
+    public static LoginResponseModel jsonToLoginResponseModel(String json) {
+        return gson.fromJson(json, LoginResponseModel.class);
     }
 }
