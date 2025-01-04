@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -21,7 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import piratesproject.models.LoginResponseModel;
-import piratesproject.ui.reg.LoginBase2;
+import piratesproject.ui.reg.RegisterController;
 
 public class LoginBase extends AnchorPane {
 
@@ -48,11 +49,11 @@ public class LoginBase extends AnchorPane {
         passerror = new Label();
         Blogin = new Button();
         sginuplink = new Hyperlink();
-        draw();
+        drawAllViews();
         listenToAllEvents();
     }
 
-    private void draw() {
+    private void drawAllViews() {
         setId("AnchorPane");
         setPrefHeight(400.0);
         setPrefWidth(600.0);
@@ -86,6 +87,7 @@ public class LoginBase extends AnchorPane {
 
         Blogin.setText("login");
         Blogin.getStyleClass().add("loginButton");
+
         Blogin.prefWidthProperty().bind(mystage.widthProperty().multiply(0.12)); // 50% of stage width
 
         formContainer.getChildren().addAll(TFname, nameError, Tfpass, passerror, Blogin, sginuplink);
@@ -107,7 +109,6 @@ public class LoginBase extends AnchorPane {
 
     private void listenToAllEvents() {
         Blogin.setOnAction(event -> login());
-
         sginuplink.setOnAction(event -> gotosginup());
     }
 
@@ -116,7 +117,6 @@ public class LoginBase extends AnchorPane {
         if (isFull()) {
             String name = TFname.getText();
             String pass = Tfpass.getText();
-            connectToServer(name, pass);
             System.out.println("ok");
         }
         return islogin;
@@ -141,42 +141,9 @@ public class LoginBase extends AnchorPane {
         return isfull;
     }
 
-    private void gotosginup() {
-        LoginBase2 signupPage = new LoginBase2();
-        Scene signupScene = new Scene(signupPage);
+    public void gotosginup() {
+        Parent signupPage = new RegisterController(mystage); // Replace with the new page's class
+        Scene signupScene = new Scene(signupPage, 600, 400);
         mystage.setScene(signupScene);
-    }
-
-    private void connectToServer(String name, String pass) {
-        new Thread(() -> {
-
-            try {
-                mySocket = new Socket("127.0.0.1", 5005);
-                ois = new ObjectInputStream(mySocket.getInputStream());
-                dos = new DataOutputStream(mySocket.getOutputStream());
-                dos.writeUTF(name);
-                dos.writeUTF(pass);
-                dos.flush();
-                 Object response = ois.readObject();
-                 if(response instanceof LoginResponseModel){
-                     LoginResponseModel loginResponse = (LoginResponseModel) response;
-                      Platform.runLater(() -> handleServerResponse(loginResponse));
-                 }
-            } catch (IOException ex) {
-                Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginBase.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }).start();
-    }
-    
-    private void handleServerResponse(LoginResponseModel response){
-        if(response.getStatus()==""){
-            //goto home page
-        }
-        else{
-            //show alert
-        }
     }
 }

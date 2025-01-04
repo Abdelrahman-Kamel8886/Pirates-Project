@@ -1,34 +1,54 @@
 package piratesproject.models;
 
-public class UserModel {
+public class UserModel  {
     
-    private String userFirstName; 
-    private String userLastName;
+   private String firstName; 
+    private String lastName;
     private String userName; 
-    private String userPassword; 
-    private Boolean userIsOnline; 
-    private Boolean userIsplayingnow; 
-    private int userTotalGamePlayed; 
-    private int userTotalScore;
+    private String password; 
+    private Boolean isOnline; 
+    private Boolean isplayingnow; 
+    private Integer GamesPlayed; 
+    private Integer score;
     
     
-    public String getUserFirstName() {
-        return userFirstName;
+
+    public UserModel() {
     }
 
-    public void setUserFirstName(String userFirstName) {
-        this.userFirstName = userFirstName;
+    public UserModel(String firstName, String lastName, String userName, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
     }
 
-    
-    public String getUserLastName() {
-        return userLastName;
+    public UserModel(String firstName, String lastName, String userName, String password, Boolean isOnline, Boolean isplayingnow, Integer GamesPlayed, Integer score) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+        this.isOnline = isOnline;
+        this.isplayingnow = isplayingnow;
+        this.GamesPlayed = GamesPlayed;
+        this.score = score;
     }
 
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
+    public String getFirstName() {
+        return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getUserName() {
         return userName;
@@ -38,59 +58,45 @@ public class UserModel {
         this.userName = userName;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Boolean getUserIsOnline() {
-        return userIsOnline;
+    public Boolean getIsOnline() {
+        return isOnline;
     }
 
-    public void setUserIsOnline(Boolean userIsOnline) {
-        this.userIsOnline = userIsOnline;
-    }
-    public int getUserTotalScore() {
-        return userTotalScore;
+    public void setIsOnline(Boolean isOnline) {
+        this.isOnline = isOnline;
     }
 
-    public void setUserTotalScore(int userTotalScore) {
-        this.userTotalScore = userTotalScore;
+    public Boolean getIsplayingnow() {
+        return isplayingnow;
     }
 
-    public Boolean getUserIsplayingnow() {
-        return userIsplayingnow;
+    public void setIsplayingnow(Boolean isplayingnow) {
+        this.isplayingnow = isplayingnow;
     }
 
-    public void setUserIsplayingnow(Boolean userIsplayingnow) {
-        this.userIsplayingnow = userIsplayingnow;
+    public Integer getGamesPlayed() {
+        return GamesPlayed;
     }
 
-    public int getUserTotalGamePlayed() {
-        return userTotalGamePlayed;
+    public void setGamesPlayed(Integer GamesPlayed) {
+        this.GamesPlayed = GamesPlayed;
     }
 
-    public void setUserTotalGamePlayed(int userTotalGamePlayed) {
-        this.userTotalGamePlayed = userTotalGamePlayed;
+    public Integer getScore() {
+        return score;
     }
-     
-    
-    public UserModel(String Fname , String username , String password ){
-        this.userFirstName = Fname ; 
-        this.userName = username ; 
-        this.userPassword = password; 
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
-    
-    public UserModel(String userFirstName  , String userLastName  , String userName,String userPasswor ){
-     
-        this.userFirstName = userFirstName; 
-        this.userLastName = userLastName;
-        this.userName = userName; 
-        this.userPassword = userPassword; 
-    }    
     
 
 }
