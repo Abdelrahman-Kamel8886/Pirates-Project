@@ -6,8 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import piratesproject.utils.Consts;
 
-public abstract class XOGameBoard extends AnchorPane {
+public class XOGameBoard extends AnchorPane {
 
     protected final ImageView imageView;
     protected final Button btnGrid_0_0;
@@ -47,7 +48,7 @@ public abstract class XOGameBoard extends AnchorPane {
         imageView.setFitWidth(600.0);
         imageView.setPickOnBounds(true);
         imageView.setPreserveRatio(true);
-        imageView.setImage(new Image(getClass().getResource("../../drawable/images/xo_game_board.jpg").toExternalForm()));
+        imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
 
         btnGrid_0_0.setLayoutX(139.0);
         btnGrid_0_0.setLayoutY(92.0);
