@@ -21,7 +21,7 @@
     <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox fx:id="box" fillHeight="false" prefHeight="143.0" prefWidth="600.0" spacing="500.0" stylesheets="@../../drawable/styles/home_page.css">
+      <HBox fx:id="box" fillHeight="false" prefHeight="143.0" prefWidth="600.0" stylesheets="@../../drawable/styles/home_page.css">
          <GridPane.margin>
             <Insets bottom="100.0" left="40.0" right="40.0" top="40.0" />
          </GridPane.margin>
@@ -31,38 +31,43 @@
                   <Image url="@../../drawable/images/app_logo.png" />
                </image>
             </ImageView>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../drawable/icons/multi.png" />
-                           </image>
-                        </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Multi Mood " wrappingWidth="151.92578125">
-                           <font>
-                              <Font name="Malgun Gothic Bold" size="24.0" />
-                           </font>
-                        </Text>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../drawable/icons/computer.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Computer " wrappingWidth="151.92578125">
+                                 <font>
+                                    <Font name="Malgun Gothic Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../drawable/icons/multi.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Multi Mood" textAlignment="CENTER" wrappingWidth="154.48828125">
+                                 <font>
+                                    <Font name="Malgun Gothic Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../drawable/icons/multi.png" />
-                           </image>
-                        </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Multi Mood" textAlignment="CENTER" wrappingWidth="154.48828125">
-                           <font>
-                              <Font name="Malgun Gothic Bold" size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </HBox>
       <GridPane hgap="20.0" GridPane.rowIndex="1">
