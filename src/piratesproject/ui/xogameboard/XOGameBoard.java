@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import piratesproject.utils.Consts;
 
 public class XOGameBoard extends AnchorPane {
@@ -23,7 +24,7 @@ public class XOGameBoard extends AnchorPane {
     protected final Text playerOneScore;
     protected final Text playerTowScore;
 
-    public XOGameBoard() {
+    public XOGameBoard(Stage stage ) {
 
         imageView = new ImageView();
         btnGrid_0_0 = new Button();
@@ -46,8 +47,10 @@ public class XOGameBoard extends AnchorPane {
 
         imageView.setFitHeight(343.0);
         imageView.setFitWidth(600.0);
-        imageView.setPickOnBounds(true);
-        imageView.setPreserveRatio(true);
+        //imageView.setPickOnBounds(true);
+        //imageView.setPreserveRatio(true);
+        imageView.fitHeightProperty().bind(stage.heightProperty());
+        imageView.fitWidthProperty().bind(stage.widthProperty());
         imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
 
         btnGrid_0_0.setLayoutX(139.0);

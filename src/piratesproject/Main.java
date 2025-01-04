@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         //Parent root = new loginBase2(stage);
-        Parent root = new XOGameBoard();
+        Parent root = new XOGameBoard(stage);
         Scene scene = new Scene(root,600,400);
         stage.setTitle(Consts.APP_NAME);
         
