@@ -11,7 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import piratesproject.ui.reg.LoginBase;
+import piratesproject.ui.reg.RegisterBase;
+import piratesproject.ui.reg.RegisterController;
 
 public class loginBase2 extends AnchorPane {
 
@@ -121,8 +122,8 @@ public class loginBase2 extends AnchorPane {
     }
 
    public void gotosginup() {
-    LoginBase signupPage = new LoginBase(); // Replace with the new page's class
-    Scene signupScene = new Scene(signupPage);
+    RegisterBase signupPage = new RegisterController(mystage); // Replace with the new page's class
+    Scene signupScene = new Scene(signupPage,600,400);
     mystage.setScene(signupScene);
 }
 }
