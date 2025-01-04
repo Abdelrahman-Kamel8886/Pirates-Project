@@ -1,9 +1,24 @@
 package piratesproject.ui.reg;
 
+import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -12,9 +27,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
+import piratesproject.ui.login.loginBase2;
 
-public class LoginBase extends AnchorPane {
+public class RegisterBase extends AnchorPane {
 
     protected final VBox vBox;
     protected final TextField firstNameTF;
@@ -29,10 +48,16 @@ public class LoginBase extends AnchorPane {
     protected final Label confirmPasswordReq;
     protected final Button signUpButton;
     protected final HBox hBox;
-    protected final Text text;
-    protected final Text loginText;
+    Socket mySocket;
+    ObjectOutputStream talker;
+    ObjectInputStream reader;
 
-    public LoginBase() {
+    protected Stage stage;
+    protected final Hyperlink loginText;
+
+    public RegisterBase(Stage s) {
+        stage = s;
+       stage.setMaximized(false);
         vBox = new VBox();
         firstNameTF = new TextField();
         firstNameReq = new Label();
@@ -46,26 +71,49 @@ public class LoginBase extends AnchorPane {
         confirmPasswordReq = new Label();
         signUpButton = new Button();
         hBox = new HBox();
-        text = new Text();
-        loginText = new Text();
+
+        loginText = new Hyperlink();
+
+//        try {
+//            mySocket = new Socket("127.0.0.1", 1422);
+//            reader = new ObjectInputStream(mySocket.getInputStream());
+//            talker = new ObjectOutputStream(mySocket.getOutputStream());
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         draw();
+        
 
-        listenToAllEvents();
     }
 
     private void draw() {
-        
-      
-        setId("AnchorPane");
-        setPrefHeight(400.0);
-        setPrefWidth(600.0);
-        getStylesheets().add("piratesproject/drawable/styles/registerStyle.css");
 
-        vBox.setLayoutX(79.0);
-        vBox.setLayoutY(105.0);
-        vBox.setPrefHeight(268.0);
-        vBox.setPrefWidth(184.0);
+        setId("AnchorPane");
+
+        getStylesheets().add("piratesproject/drawable/styles/registerStyle.css");
+        setPrefHeight(stage.getHeight());
+        setPrefWidth(stage.getWidth());
+       vBox.setLayoutX(Screen.getPrimary().getVisualBounds().getWidth() * 0.04);
+              vBox.setLayoutY(Screen.getPrimary().getVisualBounds().getHeight() * 0.1);
+        stage.widthProperty().addListener((obs, ow, nw)->{
+           
+        if(stage.isMaximized()){
+            vBox.setLayoutY(Screen.getPrimary().getVisualBounds().getHeight() * 0.3);
+            vBox.setLayoutX(Screen.getPrimary().getVisualBounds().getWidth() * 0.08);
+        }
+        else {
+              vBox.setLayoutX(Screen.getPrimary().getVisualBounds().getWidth() * 0.04);
+              vBox.setLayoutY(Screen.getPrimary().getVisualBounds().getHeight() * 0.1);
+        }
+        
+        });
+       
+
+        vBox.setAlignment(Pos.CENTER);
+        // vBox.setPrefHeight(268.0);
+        // vBox.setPrefWidth(184.0);
 
         firstNameTF.setMinHeight(USE_PREF_SIZE);
         firstNameTF.setPrefHeight(25.0);
@@ -134,7 +182,6 @@ public class LoginBase extends AnchorPane {
         confirmPasswordTF.setPromptText("Confirm Password");
         confirmPasswordTF.setStyle("-fx-background-radius: 10;");
         confirmPasswordTF.setFont(new Font(13.0));
-        VBox.setMargin(confirmPasswordTF, new Insets(0.0, 0.0, 1.0, 0.0));
 
         confirmPasswordReq.setLayoutX(10.0);
         confirmPasswordReq.setLayoutY(201.0);
@@ -149,110 +196,35 @@ public class LoginBase extends AnchorPane {
         signUpButton.setPrefWidth(52.0);
         signUpButton.setStyle("-fx-background-color: #e28409; -fx-background-radius: 10;");
         signUpButton.setText("SignUp");
-        VBox.setMargin(signUpButton, new Insets(1.0, 0.0, 1.0, 55.0));
+        VBox.setMargin(signUpButton, new Insets(1.0, 0.0, 1.0, 20.0));
         signUpButton.setFont(new Font(13.0));
         signUpButton.setPadding(new Insets(1.0, 5.0, 0.0, 5.0));
 
         hBox.setPrefHeight(17.0);
         hBox.setPrefWidth(183.0);
 
-        text.setFill(javafx.scene.paint.Color.WHITE);
-        text.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
-        text.setStrokeWidth(0.0);
-        text.setText("Already have an account?");
-        text.setFont(new Font(11.0));
-        HBox.setMargin(text, new Insets(0.0, 0.0, 0.0, 5.0));
+        hBox.translateXProperty().bind(stage.widthProperty().multiply(0.02));
+        hBox.translateYProperty().bind(stage.heightProperty().multiply(0.006));
+        vBox.translateXProperty().bind(stage.widthProperty().multiply(0.03));
+        vBox.translateYProperty().bind(stage.heightProperty().multiply(0.003));
+        vBox.prefWidthProperty().bind(stage.widthProperty().multiply(0.34)); // 
+        vBox.prefHeightProperty().bind(stage.heightProperty().multiply(0.48)); // }
 
-        loginText.setFill(javafx.scene.paint.Color.valueOf("#e28409"));
-        loginText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
-        loginText.setStrokeWidth(0.0);
-        loginText.setText("Login");
-        loginText.setFont(new Font(11.0));
         HBox.setMargin(loginText, new Insets(0.0, 0.0, 0.0, 5.0));
-        hBox.getChildren().addAll(text,loginText);
-        vBox.getChildren().addAll(firstNameTF,firstNameReq,lastNameTF,lastNameReq,usernameTF,usernameReq,passwordTF,passwordReq,confirmPasswordTF,confirmPasswordReq,signUpButton,
-           hBox
+//      firstNameTF.prefWidthProperty().bind(stage.widthProperty().multiply(0.1)); // 
+//        firstNameTF.prefHeightProperty().bind(stage.heightProperty().multiply(0.055)); 
+//       
+        loginText.setText("Already have an account? Login");
+        loginText.setFont(new Font(11.0));
+        HBox.setMargin(loginText, new Insets(0.0, 0.0, 0.0, 7.0));
+        hBox.getChildren().addAll(loginText);
+        vBox.getChildren().addAll(firstNameTF, firstNameReq, lastNameTF, lastNameReq, usernameTF, usernameReq, passwordTF, passwordReq, confirmPasswordTF, confirmPasswordReq, signUpButton,
+                hBox
         );
         getChildren().add(vBox);
     }
 
-    private void listenToAllEvents() {
-        signUpButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                boolean b = login();
-            }
 
-        });
-    }
 
-    boolean login() {
-        setAllLabelsToDefault();
-        boolean isAnyFieldEmpty = checkAllTextFields();
-        boolean logged = true;
-        if (isAnyFieldEmpty) {
-            logged = false;
-        } else {
-            if (passwordTF.getText().length() < 6) {
-                passwordReq.setText("Passwords should at least contain 6 characters");
-                passwordReq.setVisible(true);
-                logged = false;
-            } else {
-                if (!passwordTF.getText().equals(confirmPasswordTF.getText())) {
-                    confirmPasswordReq.setText("Passwords do not match");
-                    confirmPasswordReq.setVisible(true);
-                    logged = false;
-
-                } else //everything is alright only username will be checked from the db
-                {
-                    UserModel user = new UserModel(firstNameTF.getText(),
-                            lastNameTF.getText(),
-                            usernameTF.getText(),
-                            passwordTF.getText());
-
-                }
-
-            }
-
-        }
-
-        return logged;
-    }
-
-    boolean checkAllTextFields() {  //return false if at least 1 textfield is empty
-        boolean isEmpty = false;
-        if (firstNameTF.getText().isEmpty()) {
-            isEmpty = true;
-            firstNameReq.setVisible(true);
-        }
-        if (lastNameTF.getText().isEmpty()) {
-            isEmpty = true;
-            lastNameReq.setVisible(true);
-        }
-        if (usernameTF.getText().isEmpty()) {
-            isEmpty = true;
-            usernameReq.setVisible(true);
-        }
-        if (passwordTF.getText().isEmpty()) {
-            isEmpty = true;
-            passwordReq.setVisible(true);
-        }
-        if (confirmPasswordTF.getText().isEmpty()) {
-            isEmpty = true;
-            confirmPasswordReq.setVisible(true);
-        }
-        return isEmpty;
-    }
-
-    void setAllLabelsToDefault() {
-        confirmPasswordReq.setText("Confirm password required");
-        passwordReq.setText("Passwords required");
-        firstNameReq.setVisible(false);
-        lastNameReq.setVisible(false);
-        usernameReq.setVisible(false);
-        passwordReq.setVisible(false);
-        confirmPasswordReq.setVisible(false);
-
-    }
-
+    
 }

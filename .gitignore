@@ -1,5 +1,6 @@
 # Ignore build directory
 build/
-
 # Ignore dist directory
 dist/
+private/
+built-jar.properties

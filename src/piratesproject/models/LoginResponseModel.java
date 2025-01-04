@@ -6,7 +6,8 @@ public class LoginResponseModel extends ResponseModel{
     
     public LoginResponseModel() {
     }
-    public LoginResponseModel(String status, String message , UserModel user) {
+  
+    public LoginResponseModel(int status, String message) {
         super(status, message);
         this.userModel = user;
     }
