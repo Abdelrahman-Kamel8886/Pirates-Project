@@ -34,10 +34,10 @@ public class LoginBase extends AnchorPane {
     protected final Label passerror;
     protected final Button Blogin;
     protected final Hyperlink sginuplink;
-    private final Stage mystage;
-    private Socket mySocket;
-    private ObjectInputStream ois;
-    private DataOutputStream dos;
+    protected final Stage mystage;
+    protected Socket mySocket;
+    protected ObjectInputStream ois;
+    protected DataOutputStream dos;
 
     public LoginBase(Stage stage) {
         mystage = stage;
@@ -50,7 +50,6 @@ public class LoginBase extends AnchorPane {
         Blogin = new Button();
         sginuplink = new Hyperlink();
         drawAllViews();
-        listenToAllEvents();
     }
 
     private void drawAllViews() {
@@ -73,22 +72,24 @@ public class LoginBase extends AnchorPane {
         VBox formContainer = new VBox(6);
         formContainer.setAlignment(Pos.CENTER);
         formContainer.setId("formContainer");
-
         formContainer.translateXProperty().bind(mystage.widthProperty().multiply(0.15));
         formContainer.translateYProperty().bind(mystage.heightProperty().multiply(0.45));
 
         TFname.setPromptText("userName");
         TFname.getStyleClass().add("textField");
-        TFname.prefWidthProperty().bind(mystage.widthProperty().multiply(0.24)); // 50% of stage width
+        TFname.prefWidthProperty().bind(mystage.widthProperty().multiply(0.24));
+        TFname.prefHeightProperty().bind(mystage.widthProperty().multiply(0.03));
 
         Tfpass.setPromptText("password");
         Tfpass.getStyleClass().add("textField");
-        Tfpass.prefWidthProperty().bind(mystage.widthProperty().multiply(0.24)); // 50% of stage width
+        Tfpass.prefWidthProperty().bind(mystage.widthProperty().multiply(0.24));
+        Tfpass.prefHeightProperty().bind(mystage.widthProperty().multiply(0.03));
 
         Blogin.setText("login");
         Blogin.getStyleClass().add("loginButton");
 
-        Blogin.prefWidthProperty().bind(mystage.widthProperty().multiply(0.12)); // 50% of stage width
+        Blogin.prefWidthProperty().bind(mystage.widthProperty().multiply(0.12));
+        Blogin.prefHeightProperty().bind(mystage.widthProperty().multiply(0.03));
 
         formContainer.getChildren().addAll(TFname, nameError, Tfpass, passerror, Blogin, sginuplink);
 
@@ -106,6 +107,7 @@ public class LoginBase extends AnchorPane {
         getChildren().add(imageView);
         getChildren().add(formContainer);
     }
+
 
     private void listenToAllEvents() {
         Blogin.setOnAction(event -> login());
@@ -146,4 +148,5 @@ public class LoginBase extends AnchorPane {
         Scene signupScene = new Scene(signupPage);
         mystage.setScene(signupScene);
     }
+
 }

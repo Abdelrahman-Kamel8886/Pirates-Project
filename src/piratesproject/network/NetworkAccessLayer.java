@@ -10,10 +10,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import piratesproject.enums.RequestTypesEnum;
+import piratesproject.models.LoginRequestModel;
+import piratesproject.models.LoginResponseModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.FXMLController;
+
+import piratesproject.ui.reg.RegisterController;
+
 import piratesproject.utils.Consts;
 import piratesproject.utils.JsonUtils;
 
@@ -43,7 +48,45 @@ public class NetworkAccessLayer {
                 ResponseModel responseModel = JsonUtils.jsonToResponseModel(responseJson);
                 if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
                     Platform.runLater(() -> {
+
                         FXMLController signupPage = new FXMLController(s);
+
+                        Scene signupScene = new Scene(signupPage, 1920, 1080);
+                        s.setScene(signupScene);
+                    });
+
+                }
+                System.out.println("Received response -> staues code :" + responseModel.getStatus() + " - Message : " + responseModel.getMessage());
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void loginToServer(LoginRequestModel u, Stage s) {
+        try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
+                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+            // Create a UserModel object and convert it to JSON
+            LoginRequestModel user = u;
+
+            String userJson = JsonUtils.LoginRequstModelToJson(user);
+            RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, userJson);
+            String reqJson = JsonUtils.requestModelToJson(myReq);
+            out.println(reqJson); // Send JSON string to the server
+            System.out.println("UserModel sent to server as JSON: " + userJson);
+
+            // Listen for a response from the server
+            String responseJson = in.readLine();
+            if (responseJson != null) {
+                // Convert JSON string to ResponseModel
+                LoginResponseModel responseModel = JsonUtils.jsonToLoginResponseModel(responseJson);
+              if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
+                    Platform.runLater(() -> {
+                        Parent signupPage = new FXMLController(s);
+
                         Scene signupScene = new Scene(signupPage, 1920, 1080);
                         s.setScene(signupScene);
                     });

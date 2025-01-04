@@ -64,8 +64,7 @@ public class RegisterBase extends AnchorPane {
     }
 
     private void draw() {
-      stage.setMaximized(true);
-      stage.setFullScreen(true);
+
         setId("AnchorPane");
 
         getStylesheets().add("piratesproject/drawable/styles/registerStyle.css");
