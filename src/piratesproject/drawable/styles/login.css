@@ -20,7 +20,7 @@
 
 /* Text fields */
 .textField {
-    -fx-background-radius: 10px;
+    -fx-background-radius: 20px;
     -fx-padding: 3px;
     -fx-font-size: 14px;
     -fx-pref-width: 160px;
@@ -30,7 +30,7 @@
 .loginButton {
     -fx-background-color: #e28409;
     -fx-text-fill: white;
-    -fx-background-radius: 10px;
+    -fx-background-radius: 20px;
     -fx-font-size: 14px;
     -fx-padding: 3px;
 }
