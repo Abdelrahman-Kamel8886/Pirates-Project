@@ -13,18 +13,23 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import piratesproject.Main;
+import piratesproject.models.LoginRequestModel;
+import piratesproject.models.LoginResponseModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.home.FXMLController;
 import piratesproject.ui.login.LoginBase;
 import piratesproject.ui.login.LoginController;
+import piratesproject.utils.Consts;
 
 public class RegisterController extends RegisterBase {
-
-   
 
     public RegisterController(Stage s) {
         super(s);
@@ -67,17 +72,13 @@ public class RegisterController extends RegisterBase {
                             lastNameTF.getText(),
                             usernameTF.getText(),
                             passwordTF.getText());
-//                    try {
-//                        mySocket = new Socket("127.0.0.1", 1422);
-//
-//                        talker = new ObjectOutputStream(mySocket.getOutputStream());
-//                        talker.writeObject(user);
-//
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(RegisterBase.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-                      new Thread(() -> NetworkAccessLayer.registerToServer(user,stage)).start();
+                    
+                    Thread th = new Thread(() -> {
+                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+                        checkRegisterState(responseModel);
 
+                    });
+                    th.start();
                 }
 
             }
@@ -85,6 +86,56 @@ public class RegisterController extends RegisterBase {
         }
 
         return logged;
+    }
+    
+    public void showErrorAlert(String msg){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(stage);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setTitle("Error");
+        alert.setHeaderText(msg);
+        alert.setContentText(null);
+        alert.showAndWait();
+    }
+    
+    public void showConfirmationAlert(String msg){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(stage);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setTitle("Confirm");
+        alert.setHeaderText(msg);
+        alert.setContentText(null);
+        alert.showAndWait();
+        gotoHome();
+    }
+
+    private void checkRegisterState(ResponseModel responseModel) {
+        if (responseModel != null) {
+            if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
+                 if (Platform.isFxApplicationThread()) {
+                        showConfirmationAlert(responseModel.getMessage());
+                    } else {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                showConfirmationAlert(responseModel.getMessage());
+                            }
+                        });
+                    }
+            }
+            else{
+                if (Platform.isFxApplicationThread()) {
+                        showErrorAlert(responseModel.getMessage());
+                    } else {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                showErrorAlert(responseModel.getMessage());
+                            }
+                        });
+                    }
+            }
+        }
     }
 
     boolean checkAllTextFields() {  //return false if at least 1 textfield is empty
@@ -125,13 +176,12 @@ public class RegisterController extends RegisterBase {
 
     void goToLogin() {
         LoginController loginPage = new LoginController(stage);
-        Scene loginScene = new Scene(loginPage);
-        stage.setScene(loginScene);
+        Main.resetScene(loginPage);
     }
-    
-}
 
-/**
- *
- * @author jaila
- */
+    public void gotoHome() {
+        Parent homePage = new FXMLController(stage);
+        Main.resetScene(homePage);
+    }
+
+}
