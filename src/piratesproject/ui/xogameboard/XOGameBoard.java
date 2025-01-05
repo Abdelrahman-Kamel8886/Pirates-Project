@@ -47,8 +47,6 @@ public class XOGameBoard extends AnchorPane {
 
         imageView.setFitHeight(343.0);
         imageView.setFitWidth(600.0);
-        //imageView.setPickOnBounds(true);
-        //imageView.setPreserveRatio(true);
         imageView.fitHeightProperty().bind(stage.heightProperty());
         imageView.fitWidthProperty().bind(stage.widthProperty());
         imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
