@@ -6,16 +6,8 @@
 }
 .text-field {
     -fx-background-radius: 40px;
-    
-    -fx-padding: 3px;
+    -fx-padding: 20px;
     -fx-font-size: 20px;
-    -fx-pref-width: 160px;
-}
-.text-field:focused {
-    -fx-background-radius: 40px;
-    
-    -fx-padding: 3px;
-    -fx-font-size: 14px;
     -fx-pref-width: 160px;
 }
 .textfield{-fx-background-radius: 100px;}

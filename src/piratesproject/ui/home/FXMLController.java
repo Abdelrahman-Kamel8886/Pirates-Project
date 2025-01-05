@@ -27,17 +27,24 @@ public class FXMLController extends HomePage {
         initializeImages();
         styleComponents();
         myStage = stage ; 
-        addResponsiveBehavior(stage);
     }
 
+ 
+
     private void initializeImages() {
-        imageView.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/app_logo.png").toExternalForm()));
-        imageView1.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/multi.png").toExternalForm()));
-        imageView0.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/multi.png").toExternalForm()));
-        imageView0.setOnMouseClicked((MouseEvent event) -> {
+        logoImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/app_logo.png").toExternalForm()));
+        multiPlayersImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/multi.png").toExternalForm()));
+        computerImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/computer.png").toExternalForm()));
+        avatar.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/avatar.png").toExternalForm()));
+        multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
             Parent home =  new XOGameBoard(myStage);
             Main.resetScene(home);
         });
+        computerImage.setOnMouseClicked((MouseEvent event) -> {
+            Parent home =  new XOGameBoard(myStage);
+            Main.resetScene(home);
+        });
+
     }
 
     private void styleComponents() {
@@ -58,7 +65,6 @@ public class FXMLController extends HomePage {
         double height = stage.getHeight();
 
         if (width > 0 && height > 0) {
-            box.setSpacing(width/2);
             GridPane.setMargin(box, calculateInsets(height, width, BOX_TOP_MARGIN_RATIO, BOX_RIGHT_MARGIN_RATIO, BOX_BOTTOM_MARGIN_RATIO, BOX_LEFT_MARGIN_RATIO));
             GridPane.setMargin(gridPane, calculateInsets(height, width, GRID_TOP_MARGIN_RATIO, GRID_RIGHT_MARGIN_RATIO, GRID_BOTTOM_MARGIN_RATIO, GRID_LEFT_MARGIN_RATIO));
         }
