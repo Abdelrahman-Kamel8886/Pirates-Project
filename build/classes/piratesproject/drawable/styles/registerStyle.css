@@ -1,5 +1,26 @@
 .root{
     -fx-background-image: url("../images/registerBg.jpg");
-    -fx-background-size: 600px 400px;
+    -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
+
+}
+.text-field {
+    -fx-background-radius: 40px;
+    -fx-padding: 20px;
+    -fx-font-size: 20px;
+    -fx-pref-width: 160px;
+}
+.textfield{-fx-background-radius: 100px;}
+
+
+.hyperlink{
+    -fx-text-fill: white;
+    -fx-margin:0 0 0 0;
+    -fx-padding:0 0 0 0;
+    
+}
+
+#backgroundImage {
+    -fx-opacity: 0.9;
+     -fx-background-size: cover;
 }
