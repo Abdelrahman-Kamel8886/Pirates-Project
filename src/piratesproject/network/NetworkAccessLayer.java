@@ -24,10 +24,11 @@ import piratesproject.utils.JsonUtils;
 
 public class NetworkAccessLayer {
 
-    private static final String SERVER_HOST = "172.16.224.222"; // Change to your server's address
+    private static final String SERVER_HOST = "127.0.0.1"; // Change to your server's address
     private static final int SERVER_PORT = 1422; // Change to your server's port
 
-    public static void registerToServer(UserModel u, Stage s) {
+    public static ResponseModel registerToServer(UserModel u) {
+        ResponseModel responseModel = null;
         try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
@@ -45,26 +46,18 @@ public class NetworkAccessLayer {
             String responseJson = in.readLine();
             if (responseJson != null) {
                 // Convert JSON string to ResponseModel
-                ResponseModel responseModel = JsonUtils.jsonToResponseModel(responseJson);
-                if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
-                    Platform.runLater(() -> {
-
-                        FXMLController signupPage = new FXMLController(s);
-
-                        Scene signupScene = new Scene(signupPage, 1920, 1080);
-                        s.setScene(signupScene);
-                    });
-
-                }
+                responseModel = JsonUtils.jsonToResponseModel(responseJson);
                 System.out.println("Received response -> staues code :" + responseModel.getStatus() + " - Message : " + responseModel.getMessage());
             }
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+        return responseModel;
     }
 
-    public static void loginToServer(LoginRequestModel u, Stage s) {
+    public static LoginResponseModel loginToServer(LoginRequestModel u) {
+        LoginResponseModel responseModel = null;
         try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
@@ -82,21 +75,13 @@ public class NetworkAccessLayer {
             String responseJson = in.readLine();
             if (responseJson != null) {
                 // Convert JSON string to ResponseModel
-                LoginResponseModel responseModel = JsonUtils.jsonToLoginResponseModel(responseJson);
-              if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
-                    Platform.runLater(() -> {
-                        Parent signupPage = new FXMLController(s);
-
-                        Scene signupScene = new Scene(signupPage, 1920, 1080);
-                        s.setScene(signupScene);
-                    });
-
-                }
+                responseModel = JsonUtils.jsonToLoginResponseModel(responseJson);
                 System.out.println("Received response -> staues code :" + responseModel.getStatus() + " - Message : " + responseModel.getMessage());
             }
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }
+        return responseModel;
     }
 }
