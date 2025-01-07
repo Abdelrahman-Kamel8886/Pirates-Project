@@ -24,7 +24,7 @@ import piratesproject.utils.JsonUtils;
 
 public class NetworkAccessLayer {
 
-    private static final String SERVER_HOST = "127.0.0.1"; // Change to your server's address
+    private static final String SERVER_HOST = "172.16.222.147"; // Change to your server's address
     private static final int SERVER_PORT = 1422; // Change to your server's port
 
     public static ResponseModel registerToServer(UserModel u) {
