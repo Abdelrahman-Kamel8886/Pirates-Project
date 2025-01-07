@@ -43,6 +43,7 @@ public class XOGameBoard extends AnchorPane {
     protected final Button btnGrid_2_1;
     protected final Text playerOneScore;
     protected final Text playerTowScore;
+
     protected final Text column;
 
     public static final double GRID_X_0_0 = 428.0;
@@ -145,7 +146,7 @@ public class XOGameBoard extends AnchorPane {
             line1.setStroke(Color.GREEN);
             getChildren().add(line1);
 
-            Line line2 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH) / 2, GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH) / 2);
+            Line line2 = new Line(GRID_X_0_0, GRID_Y_0_0 , GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH*3));
             line2.setStrokeWidth(20);
             line2.setStroke(Color.GREEN);
             getChildren().add(line2);
@@ -333,5 +334,5 @@ public class XOGameBoard extends AnchorPane {
         getChildren().add(playerTowScore);
         getChildren().add(column);
 
+            }
     }
-}

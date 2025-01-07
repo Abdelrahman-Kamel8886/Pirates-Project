@@ -93,9 +93,9 @@ public class FXMLController extends HomePage {
 
     private void addOnliePlayer() {
         ObservableList<Player> data = FXCollections.observableArrayList(
-                new Player("John Doe", 90),
-                new Player("Jane Smith", 85),
-                new Player("Alice Johnson", 95)
+                new Player("test1", 90),
+                new Player("test2", 85),
+                new Player("test3", 95)
         );
 
         tableView.setItems(data);
@@ -107,7 +107,7 @@ public class FXMLController extends HomePage {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Send request to "+ player.getPlayerName());
         alert.setContentText("Are you sure you want to send to user "+player.getPlayerName() +"\n"+" and its score is "+player.getScore()
-                    +"\n"+" يبني ركز يا حبيبي " );
+                    +"\n"+"  ركز يا حبيبي " );
         alert.showAndWait();
     }
 

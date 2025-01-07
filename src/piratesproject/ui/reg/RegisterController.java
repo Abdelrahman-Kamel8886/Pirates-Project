@@ -5,27 +5,21 @@
  */
 package piratesproject.ui.reg;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import piratesproject.Main;
-import piratesproject.models.LoginRequestModel;
-import piratesproject.models.LoginResponseModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
-import piratesproject.ui.home.FXMLController;
+
+import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.login.LoginBase;
+
 import piratesproject.ui.login.LoginController;
 import piratesproject.utils.Consts;
 
@@ -180,7 +174,7 @@ public class RegisterController extends RegisterBase {
     }
 
     public void gotoHome() {
-        Parent homePage = new FXMLController(stage);
+        Parent homePage = new HomePageController(stage);
         Main.resetScene(homePage);
     }
 

@@ -128,22 +128,22 @@ public abstract class HomePage extends GridPane {
         avatar.setFitWidth(100.0);
         avatar.setPickOnBounds(true);
         avatar.setPreserveRatio(true);
-
+        
         userNameText.setFill(javafx.scene.paint.Color.WHITE);
         userNameText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         userNameText.setStrokeWidth(0.0);
         userNameText.setText("UserName");
         userNameText.setWrappingWidth(151.92578125);
         userNameText.setFont(new Font("Old English Text MT", 24.0));
-        HBox.setMargin(userNameText, new Insets(20.0, 0.0, 0.0, 20.0));
-
+        HBox.setMargin(userNameText, new Insets(30.0, 0.0, 0.0, 20.0));
+        
         scoreText.setFill(javafx.scene.paint.Color.WHITE);
         scoreText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         scoreText.setStrokeWidth(0.0);
         scoreText.setText("Score : 190");
         scoreText.setWrappingWidth(151.92578125);
         scoreText.setFont(new Font("Old English Text MT", 24.0));
-        HBox.setMargin(scoreText, new Insets(20.0, 0.0, 0.0, 0.0));
+        HBox.setMargin(scoreText, new Insets(30.0, 0.0, 0.0, 20.0));
         hBox.setPadding(new Insets(20.0));
 
         hBox0.setPrefHeight(100.0);
