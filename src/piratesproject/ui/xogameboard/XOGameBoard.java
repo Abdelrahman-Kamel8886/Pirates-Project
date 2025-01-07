@@ -165,17 +165,21 @@ public class XOGameBoard extends AnchorPane {
             line5.setStroke(Color.GREEN);
             getChildren().add(line5);
             
-            Line line6 = new Line(GRID_X_0_0, GRID_Y_0_0 , GRID_X_0_0+(3*GRID_BTN_WIGTH) ,  GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+            Line line6 = new Line(GRID_X_0_0+(1.5*GRID_BTN_WIGTH), GRID_Y_0_0 , GRID_X_0_0+(1.5*GRID_BTN_WIGTH) ,  GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
             line6.setStrokeWidth(20);
             line6.setStroke(Color.GREEN);
             getChildren().add(line6);
             
-            Line line7 = new Line(GRID_X_0_0, GRID_Y_0_0 , GRID_X_0_0+(3*GRID_BTN_WIGTH) ,  GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+            Line line7 = new Line(GRID_X_0_0+(2.5*GRID_BTN_WIGTH), GRID_Y_0_0 , GRID_X_0_0+(2.5*GRID_BTN_WIGTH) ,  GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
             line7.setStrokeWidth(20);
             line7.setStroke(Color.GREEN);
             getChildren().add(line7);
             
-
+            Line line8 = new Line(GRID_X_0_0+(3*GRID_BTN_WIGTH), GRID_Y_0_0 , GRID_X_0_0 ,  GRID_Y_0_0+(GRID_BTN_HEIGTH*3) );
+            line8.setStrokeWidth(20);
+            line8.setStroke(Color.GREEN);
+            getChildren().add(line8);
+            
             Main.resetScene(this);
         });
 

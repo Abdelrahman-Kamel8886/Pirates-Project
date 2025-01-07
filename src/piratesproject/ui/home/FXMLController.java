@@ -1,8 +1,13 @@
 package piratesproject.ui.home;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -21,15 +26,15 @@ public class FXMLController extends HomePage {
     private static final double GRID_RIGHT_MARGIN_RATIO = 0.08;
     private static final double GRID_BOTTOM_MARGIN_RATIO = 0.08;
     private static final double GRID_LEFT_MARGIN_RATIO = 0.08;
-    Stage myStage ; 
-    
+    Stage myStage;
+
     public FXMLController(Stage stage) {
         initializeImages();
         styleComponents();
-        myStage = stage ; 
+        myStage = stage;
+        addOnliePlayer();
+        
     }
-
- 
 
     private void initializeImages() {
         logoImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/app_logo.png").toExternalForm()));
@@ -37,12 +42,20 @@ public class FXMLController extends HomePage {
         computerImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/computer.png").toExternalForm()));
         avatar.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/avatar.png").toExternalForm()));
         multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home =  new XOGameBoard(myStage);
+            Parent home = new XOGameBoard(myStage);
             Main.resetScene(home);
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home =  new XOGameBoard(myStage);
+            Parent home = new XOGameBoard(myStage);
             Main.resetScene(home);
+        });
+        tableView.setRowFactory(tv -> {
+            TableRow<Player> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                System.out.println("Clicked row: ");
+                showSimpleAlert(new Player("here is user name ", 1800));
+            });
+            return row;
         });
 
     }
@@ -55,7 +68,7 @@ public class FXMLController extends HomePage {
     }
 
     private void addResponsiveBehavior(Stage stage) {
-        
+
         stage.widthProperty().addListener((observable, oldValue, newValue) -> updateMargins(stage));
         stage.heightProperty().addListener((observable, oldValue, newValue) -> updateMargins(stage));
     }
@@ -77,4 +90,53 @@ public class FXMLController extends HomePage {
         double left = width * leftRatio;
         return new Insets(top, right, bottom, left);
     }
+
+    private void addOnliePlayer() {
+        ObservableList<Player> data = FXCollections.observableArrayList(
+                new Player("John Doe", 90),
+                new Player("Jane Smith", 85),
+                new Player("Alice Johnson", 95)
+        );
+
+        tableView.setItems(data);
+
+    }
+
+    private void showSimpleAlert(Player player) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Send request to "+ player.getPlayerName());
+        alert.setContentText("Are you sure you want to send to user "+player.getPlayerName() +"\n"+" and its score is "+player.getScore()
+                    +"\n"+" يبني ركز يا حبيبي " );
+        alert.showAndWait();
+    }
+
+    class Player {
+
+        public String playerName;
+        public int score;
+
+        public Player(String playerName, int score) {
+            this.playerName = playerName;
+            this.score = score;
+        }
+
+        public String getPlayerName() {
+            return playerName;
+        }
+
+        public void setPlayerName(String playerName) {
+            this.playerName = playerName;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
+
+    }
+
 }
