@@ -81,7 +81,8 @@ public class LoginController extends LoginBase {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                showConfirmationAlert(responseModel.getMessage());
+                                gotoHome();
+                               // showConfirmationAlert(responseModel.getMessage());
                             }
                         });
                     }

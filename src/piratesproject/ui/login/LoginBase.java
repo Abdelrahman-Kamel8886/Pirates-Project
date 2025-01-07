@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,6 +39,7 @@ public class LoginBase extends AnchorPane {
     protected Socket mySocket;
     protected ObjectInputStream ois;
     protected DataOutputStream dos;
+    protected final Hyperlink Guest;
 
     public LoginBase(Stage stage) {
         mystage = stage;
@@ -49,6 +51,8 @@ public class LoginBase extends AnchorPane {
         passerror = new Label();
         Blogin = new Button();
         sginuplink = new Hyperlink();
+        Guest = new Hyperlink();
+
         drawAllViews();
     }
 
@@ -69,7 +73,7 @@ public class LoginBase extends AnchorPane {
         imageView.fitWidthProperty().bind(mystage.widthProperty());
         imageView.fitHeightProperty().bind(mystage.heightProperty());
 
-        VBox formContainer = new VBox(6);
+        VBox formContainer = new VBox(7);
         formContainer.setAlignment(Pos.CENTER);
         formContainer.setId("formContainer");
         formContainer.translateXProperty().bind(mystage.widthProperty().multiply(0.15));
@@ -91,11 +95,14 @@ public class LoginBase extends AnchorPane {
         Blogin.prefWidthProperty().bind(mystage.widthProperty().multiply(0.12));
         Blogin.prefHeightProperty().bind(mystage.widthProperty().multiply(0.03));
 
-        formContainer.getChildren().addAll(TFname, nameError, Tfpass, passerror, Blogin, sginuplink);
+        formContainer.getChildren().addAll(TFname, nameError, Tfpass, passerror, Blogin, sginuplink,Guest);
 
-        sginuplink.setText("Register");
+        sginuplink.setText("Don't have an accout? Register");
         sginuplink.getStyleClass().add("registerLink");
 
+        Guest.setText("Guest");
+        Guest.getStyleClass().add("registerLink");
+        
         nameError.setText("enter your name");
         nameError.setVisible(false);
         nameError.getStyleClass().add("errorLabel");
@@ -103,50 +110,11 @@ public class LoginBase extends AnchorPane {
         passerror.setText("enter your password");
         passerror.setVisible(false);
         passerror.getStyleClass().add("errorLabel");
+        
+        
 
         getChildren().add(imageView);
         getChildren().add(formContainer);
-    }
-
-
-    private void listenToAllEvents() {
-        Blogin.setOnAction(event -> login());
-        sginuplink.setOnAction(event -> gotosginup());
-    }
-
-    private boolean login() {
-        boolean islogin = false;
-        if (isFull()) {
-            String name = TFname.getText();
-            String pass = Tfpass.getText();
-            System.out.println("ok");
-        }
-        return islogin;
-    }
-
-    private boolean isFull() {
-        boolean isfull = true;
-
-        if (TFname.getText().isEmpty()) {
-            nameError.setVisible(true);
-            isfull = false;
-        } else {
-            nameError.setVisible(false);
-        }
-
-        if (Tfpass.getText().isEmpty()) {
-            passerror.setVisible(true);
-            isfull = false;
-        } else {
-            passerror.setVisible(false);
-        }
-        return isfull;
-    }
-
-    public void gotosginup() {
-        Parent signupPage = new RegisterController(mystage); // Replace with the new page's class
-        Scene signupScene = new Scene(signupPage);
-        mystage.setScene(signupScene);
     }
 
 }

@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.ui.levels.LevelsBase;
 import piratesproject.ui.xogameboard.XOGameBoard;
 
 public class FXMLController extends HomePage {
@@ -41,7 +42,7 @@ public class FXMLController extends HomePage {
             Main.resetScene(home);
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home =  new XOGameBoard(myStage);
+            Parent home =  new LevelsBase();
             Main.resetScene(home);
         });
 
