@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import piratesproject.ui.home.FXMLController;
 import piratesproject.ui.login.LoginController;
 import piratesproject.ui.reg.RegisterController;
+import piratesproject.ui.xogameboard.XOGameBoard;
 import piratesproject.utils.Consts;
 
 
@@ -21,6 +22,7 @@ public class Main extends Application {
         stage.setFullScreen(true);
 
         Parent root = new LoginController(stage);
+        
         scene = new Scene(root);
         stage.setTitle(Consts.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Consts.APP_LOGO_PATH).toString()));
