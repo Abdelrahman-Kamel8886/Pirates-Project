@@ -43,6 +43,7 @@ public class XOGameBoard extends AnchorPane {
     protected final Button btnGrid_2_1;
     protected final Text playerOneScore;
     protected final Text playerTowScore;
+
     protected final Text column;
 
     public static final double GRID_X_0_0 = 428.0;
@@ -329,5 +330,5 @@ public class XOGameBoard extends AnchorPane {
         getChildren().add(playerTowScore);
         getChildren().add(column);
 
+            }
     }
-}
