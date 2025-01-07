@@ -32,7 +32,7 @@ public  class XOGameBoard extends AnchorPane {
     protected final Button btnGrid_1_24;
     protected final Button btnGrid_1_212;
     protected final Button btnGrid_1_222;
-
+    
     public XOGameBoard(Stage stage ){ 
 
         imageView = new ImageView();
@@ -279,5 +279,5 @@ public  class XOGameBoard extends AnchorPane {
         getChildren().add(btnGrid_1_212);
         getChildren().add(btnGrid_1_222);
 
+            }
     }
-}

@@ -1,16 +1,19 @@
 package piratesproject.ui.home;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.drawable.values.Strings;
+import piratesproject.ui.login.LoginController;
 import piratesproject.ui.xogameboard.XOGameBoard;
+import piratesproject.utils.SharedModel;
 
-public class FXMLController extends HomePage {
+public class HomePageController extends HomePage {
 
     private static final double BOX_TOP_MARGIN_RATIO = 0.05;
     private static final double BOX_RIGHT_MARGIN_RATIO = 0.02;
@@ -21,30 +24,63 @@ public class FXMLController extends HomePage {
     private static final double GRID_RIGHT_MARGIN_RATIO = 0.08;
     private static final double GRID_BOTTOM_MARGIN_RATIO = 0.08;
     private static final double GRID_LEFT_MARGIN_RATIO = 0.08;
-    Stage myStage ; 
-    
-    public FXMLController(Stage stage) {
-        initializeImages();
+    Stage myStage;
+
+    public HomePageController(Stage stage) {
+        myStage = stage;
+        initView();
         styleComponents();
-        myStage = stage ; 
+
     }
 
- 
-
-    private void initializeImages() {
+    private void initView() {
         logoImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/app_logo.png").toExternalForm()));
         multiPlayersImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/multi.png").toExternalForm()));
         computerImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/computer.png").toExternalForm()));
+
+        if (SharedModel.getUser() == null) {
+            initGuestView();
+        } else {
+            initUserView();
+        }
+        onClicks();
+    }
+
+    private void initGuestView() {
+        avatar.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/guest.png").toExternalForm()));
+        userNameText.setText(Strings.SIGNIN_TEXT);
+        userNameText.setUnderline(true);
+        scoreText.setVisible(false);
+        gridPane.setVisible(false);
+
+    }
+
+    private void initUserView() {
+        userNameText.setText(SharedModel.getUser().getUserName());
+        scoreText.setText("Score : "+SharedModel.getUser().getScore());
         avatar.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/avatar.png").toExternalForm()));
+    }
+
+    private void onClicks() {
+
+        if (SharedModel.getUser() == null) {
+            userNameText.setOnMouseClicked((MouseEvent event) -> {
+                goToLogin();
+            });
+        }
+
         multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home =  new XOGameBoard(myStage);
-            Main.resetScene(home);
+            goToGame();
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home =  new XOGameBoard(myStage);
-            Main.resetScene(home);
+            Parent home = new XOGameBoard(myStage);
+            goToGame();
         });
+    }
 
+    void goToLogin() {
+        LoginController loginPage = new LoginController(myStage);
+        Main.resetScene(loginPage);
     }
 
     private void styleComponents() {
@@ -55,7 +91,7 @@ public class FXMLController extends HomePage {
     }
 
     private void addResponsiveBehavior(Stage stage) {
-        
+
         stage.widthProperty().addListener((observable, oldValue, newValue) -> updateMargins(stage));
         stage.heightProperty().addListener((observable, oldValue, newValue) -> updateMargins(stage));
     }
@@ -76,5 +112,10 @@ public class FXMLController extends HomePage {
         double bottom = height * bottomRatio;
         double left = width * leftRatio;
         return new Insets(top, right, bottom, left);
+    }
+
+    private void goToGame() {
+        Parent game = new XOGameBoard(myStage);
+        Main.resetScene(game);
     }
 }
