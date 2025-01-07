@@ -17,8 +17,6 @@ import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
 
-import piratesproject.ui.home.FXMLController;
-
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.login.LoginBase;
 

@@ -25,7 +25,7 @@ public class Main extends Application {
         SharedModel.setUser(user);
         stage.setFullScreen(true);
         Parent root = new HomePageController(stage);
-        scene = new Scene(root);
+        scene = new Scene(root,1920,1080);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
         stage.setScene(scene);
