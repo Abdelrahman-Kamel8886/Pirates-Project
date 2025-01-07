@@ -16,7 +16,12 @@ import piratesproject.Main;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
+
 import piratesproject.ui.home.FXMLController;
+
+import piratesproject.ui.home.HomePageController;
+import piratesproject.ui.login.LoginBase;
+
 import piratesproject.ui.login.LoginController;
 import piratesproject.utils.Consts;
 
@@ -171,7 +176,7 @@ public class RegisterController extends RegisterBase {
     }
 
     public void gotoHome() {
-        Parent homePage = new FXMLController(stage);
+        Parent homePage = new HomePageController(stage);
         Main.resetScene(homePage);
     }
 

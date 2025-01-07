@@ -1,0 +1,92 @@
+.root {
+    -fx-background-image: url("../images/home_background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;    
+}
+
+#personalDetailsLayout{
+    -fx-alignment: center; 
+    -fx-spacing: 10;
+    -fx-padding: 20;
+}
+#gamesDetailsLayout{
+    -fx-alignment: center; 
+    -fx-spacing: 20;
+    -fx-padding: 20;
+}
+
+#fullName {
+    -fx-font-family: "Old English Text MT";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#userName {
+    -fx-font-family: "Old English Text MT";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+    -fx-underline: true;
+}
+
+#cardText{
+    -fx-font-family: "Old English Text MT";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-background-color: #2a9df4; 
+    -fx-background-radius: 15;
+}
+
+#editPasswordLayout{
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+#titleLayout{
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-padding: 0 0 20px 0;
+}
+
+#titleLayout .label{
+    -fx-font-family: "Old English Text MT";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+#entry{
+    -fx-spacing: 20;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 20px;
+}
+
+#entry .label{
+    -fx-font-family: "Old English Text MT";
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+    -fx-min-width: 150px;
+    
+}
+
+#entry .password-field {
+    -fx-background-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-min-width: 120px;
+}
+#confirmBtn {
+    -fx-background-color: #e28409;
+    -fx-font-size: 18px;
+    -fx-font-family: "Old English Text MT";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-background-radius: 15;  
+}

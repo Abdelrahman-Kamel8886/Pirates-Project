@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="642.0" stylesheets="@../drawable/styles/settings.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="personalDetailsLayout" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <ImageView fx:id="avatar" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../drawable/icons/avatar.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="fullName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UserFullName" />
+            <Text fx:id="userName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="\@username" />
+            <HBox fx:id="gamesDetailsLayout" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="scoreText" text="Score  : 24" />
+                  <Label fx:id="gamesPlayedText" text="GamesPlayed : 24" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="editPasswordLayout" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <VBox fx:id="titleLayout" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Line endX="357.5" startX="-100.0" stroke="WHITE" strokeWidth="3.0" />
+                  <Label text="Update Your Password Security" />
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="entry">
+               <children>
+                  <Label text="Old Password" />
+                  <TextField fx:id="oldPassword" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="entry">
+               <children>
+                  <Label text="New Password" />
+                  <TextField fx:id="newPassword" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="entry">
+               <children>
+                  <Label text="Confirm Password" />
+                  <TextField fx:id="confirmPassword" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
