@@ -10,8 +10,6 @@ import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.utils.SharedModel;
-
-
 public class Main extends Application {
 
     private static Scene scene ;
