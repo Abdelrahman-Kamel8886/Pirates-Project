@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
-import piratesproject.forms.SettingsForm;
+import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.ui.login.LoginController;
 import piratesproject.ui.xogameboard.XOGameBoard;
 import piratesproject.utils.SharedModel;

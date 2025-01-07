@@ -1,4 +1,4 @@
-package piratesproject.forms;
+package piratesproject.forms.Settings;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

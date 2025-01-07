@@ -1,4 +1,4 @@
-package piratesproject.forms;
+package piratesproject.forms.Settings;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;

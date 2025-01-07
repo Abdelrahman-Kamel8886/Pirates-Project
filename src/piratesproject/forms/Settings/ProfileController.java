@@ -1,4 +1,4 @@
-package piratesproject.forms;
+package piratesproject.forms.Settings;
 
 import piratesproject.drawable.values.Strings;
 import piratesproject.utils.SharedModel;
