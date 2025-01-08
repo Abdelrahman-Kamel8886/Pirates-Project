@@ -123,7 +123,6 @@ public abstract class HomePage extends GridPane {
         hBox.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
         hBox.setPrefHeight(100.0);
         hBox.setPrefWidth(200.0);
-
         avatar.setFitHeight(100.0);
         avatar.setFitWidth(100.0);
         avatar.setPickOnBounds(true);
