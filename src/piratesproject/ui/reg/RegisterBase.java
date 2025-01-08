@@ -31,6 +31,7 @@ public class RegisterBase extends AnchorPane {
     protected final HBox hBox;
     protected Stage stage;
     protected final Hyperlink loginText;
+    protected final Hyperlink AsAGuestText;
     Rectangle2D screenBounds ;
     double screenWidth;
     double screenHeight;
@@ -56,6 +57,7 @@ public class RegisterBase extends AnchorPane {
         signUpButton = new Button();
         hBox = new HBox();
         loginText = new Hyperlink();
+        AsAGuestText = new Hyperlink();
 
 
         draw();
@@ -88,7 +90,7 @@ public class RegisterBase extends AnchorPane {
         firstNameTF.setFont(new Font(20.0));
 
         firstNameReq.setText("First name required");
-        firstNameReq.setTextFill(javafx.scene.paint.Color.valueOf("#ed0303"));
+        firstNameReq.setTextFill(javafx.scene.paint.Color.valueOf("#ff6434"));
         firstNameReq.setVisible(false);
         firstNameReq.setFont(new Font(20.0));
         VBox.setMargin(firstNameReq, new Insets(0.0, 0.0, 6.0, 0.0));
@@ -105,7 +107,7 @@ public class RegisterBase extends AnchorPane {
         lastNameReq.setLayoutX(10.0);
         lastNameReq.setLayoutY(41.0);
         lastNameReq.setText("Last name required");
-        lastNameReq.setTextFill(javafx.scene.paint.Color.valueOf("#ed0303"));
+        lastNameReq.setTextFill(javafx.scene.paint.Color.valueOf("#ff6434"));
         lastNameReq.setVisible(false);
         lastNameReq.setFont(new Font(20.0));
 
@@ -122,7 +124,7 @@ public class RegisterBase extends AnchorPane {
         usernameReq.setLayoutX(10.0);
         usernameReq.setLayoutY(95.0);
         usernameReq.setText("Username required");
-        usernameReq.setTextFill(javafx.scene.paint.Color.valueOf("#ed0303"));
+        usernameReq.setTextFill(javafx.scene.paint.Color.valueOf("#ff6434"));
         usernameReq.setVisible(false);
         usernameReq.setFont(new Font(20.0));
 
@@ -136,7 +138,7 @@ public class RegisterBase extends AnchorPane {
         passwordReq.setLayoutX(10.0);
         passwordReq.setLayoutY(148.0);
         passwordReq.setText("Password required");
-        passwordReq.setTextFill(javafx.scene.paint.Color.valueOf("#ed0303"));
+        passwordReq.setTextFill(javafx.scene.paint.Color.valueOf("#ff6434"));
         passwordReq.setVisible(false);
         passwordReq.setFont(new Font(20.0));
 
@@ -152,7 +154,7 @@ public class RegisterBase extends AnchorPane {
         confirmPasswordReq.setLayoutX(10.0);
         confirmPasswordReq.setLayoutY(201.0);
         confirmPasswordReq.setText("Confirm Password required");
-        confirmPasswordReq.setTextFill(javafx.scene.paint.Color.valueOf("#ed0303"));
+        confirmPasswordReq.setTextFill(javafx.scene.paint.Color.valueOf("#ff6434"));
         confirmPasswordReq.setVisible(false);
         confirmPasswordReq.setFont(new Font(20.0));
 
@@ -162,7 +164,8 @@ public class RegisterBase extends AnchorPane {
         signUpButton.setPrefWidth(screenWidth*0.12);
         signUpButton.setStyle("-fx-background-color: #e28409; -fx-background-radius: 50;");
         signUpButton.setText("SignUp");
-        VBox.setMargin(signUpButton, new Insets(1.0, 0.0, 16.0, 20.0));
+        VBox.setMargin(signUpButton, new Insets(15.0, 0.0, 16.0, 20.0));
+         VBox.setMargin(AsAGuestText, new Insets(5, 0, 0, 0));
         signUpButton.setFont(new Font(20.0));
         signUpButton.setPadding(new Insets(10, 25.0, 10, 25.0));
 
@@ -181,16 +184,20 @@ public class RegisterBase extends AnchorPane {
          usernameTF.prefHeightProperty().bind(stage.heightProperty().multiply(0.05));
          passwordTF.prefHeightProperty().bind(stage.heightProperty().multiply(0.05));
          confirmPasswordTF.prefHeightProperty().bind(stage.heightProperty().multiply(0.05));
-        HBox.setMargin(loginText, new Insets(0.0, 0.0, 0.0, 5.0));
+        
+        
+        
 //      firstNameTF.prefWidthProperty().bind(stage.widthProperty().multiply(0.1)); // 
 //        firstNameTF.prefHeightProperty().bind(stage.heightProperty().multiply(0.055)); 
 //       
-        loginText.setText(" Login");
+        loginText.setText("Already have an account? Login");
+        AsAGuestText.setText("Continue as a guest");
         loginText.setFont(new Font(20));
-        HBox.setMargin(loginText, new Insets(0.0, 0, 0.0, screenWidth*0.16));
-        hBox.getChildren().addAll(loginText);
+        HBox.setMargin(loginText, new Insets(0.0, 20, 0.0, screenWidth*0.16));
+       // hBox.getChildren().addAll(loginText);
+        AsAGuestText.setId("guestHL");
         vBox.getChildren().addAll(firstNameTF, firstNameReq, lastNameTF, lastNameReq, usernameTF, usernameReq, passwordTF, passwordReq, confirmPasswordTF, confirmPasswordReq, signUpButton,
-                hBox
+               loginText, AsAGuestText
         );
         getChildren().add(vBox);
     }

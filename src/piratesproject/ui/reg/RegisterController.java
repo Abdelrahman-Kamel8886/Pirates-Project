@@ -41,6 +41,9 @@ public class RegisterController extends RegisterBase {
         loginText.setOnAction(event -> {
             goToLogin();
         });
+        AsAGuestText.setOnAction(event->{
+            gotoHome();
+        });
     }
 
     boolean register() {
