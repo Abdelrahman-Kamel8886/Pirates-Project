@@ -9,6 +9,7 @@ import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.BackgroundMusic;
 import piratesproject.utils.SharedModel;
 public class Main extends Application {
 
@@ -33,6 +34,14 @@ public class Main extends Application {
         stage.show();
 
     }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        BackgroundMusic.stopMusic();
+    }
+    
+    
     
     public static void resetScene(Parent p){
         scene.setRoot(p);

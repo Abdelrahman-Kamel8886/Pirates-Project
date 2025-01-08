@@ -1,9 +1,9 @@
 package piratesproject.ui.home;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -19,17 +19,25 @@ public abstract class HomePage extends GridPane {
     protected final RowConstraints rowConstraints;
     protected final RowConstraints rowConstraints0;
     protected final HBox box;
-    protected final ImageView logoImage;
     protected final VBox vBox;
+    protected final ImageView logoImage;
+    protected final Text sountrackText;
+    protected final ProgressBar soundBar;
     protected final HBox hBox;
+    protected final ImageView prevBtn;
+    protected final ImageView playBtn;
+    protected final ImageView stopBtn;
+    protected final ImageView nextBtn;
+    protected final VBox vBox0;
+    protected final HBox hBox0;
     protected final ImageView avatar;
     protected final Text userNameText;
     protected final Text scoreText;
-    protected final HBox hBox0;
-    protected final VBox vBox0;
+    protected final HBox hBox1;
+    protected final VBox vBox1;
     protected final ImageView computerImage;
     protected final Text text;
-    protected final VBox vBox1;
+    protected final VBox vBox2;
     protected final ImageView multiPlayersImage;
     protected final Text text0;
     protected final GridPane gridPane;
@@ -55,17 +63,25 @@ public abstract class HomePage extends GridPane {
         rowConstraints = new RowConstraints();
         rowConstraints0 = new RowConstraints();
         box = new HBox();
-        logoImage = new ImageView();
         vBox = new VBox();
+        logoImage = new ImageView();
+        sountrackText = new Text();
+        soundBar = new ProgressBar();
         hBox = new HBox();
+        prevBtn = new ImageView();
+        playBtn = new ImageView();
+        stopBtn = new ImageView();
+        nextBtn = new ImageView();
+        vBox0 = new VBox();
+        hBox0 = new HBox();
         avatar = new ImageView();
         userNameText = new Text();
         scoreText = new Text();
-        hBox0 = new HBox();
-        vBox0 = new VBox();
+        hBox1 = new HBox();
+        vBox1 = new VBox();
         computerImage = new ImageView();
         text = new Text();
-        vBox1 = new VBox();
+        vBox2 = new VBox();
         multiPlayersImage = new ImageView();
         text0 = new Text();
         gridPane = new GridPane();
@@ -112,45 +128,85 @@ public abstract class HomePage extends GridPane {
         box.setSpacing(700.0);
         GridPane.setMargin(box, new Insets(40.0, 40.0, 100.0, 40.0));
 
+        vBox.setAlignment(javafx.geometry.Pos.CENTER);
+        vBox.setPrefHeight(200.0);
+        vBox.setPrefWidth(100.0);
+        vBox.setSpacing(20.0);
+
         logoImage.setFitHeight(150.0);
         logoImage.setFitWidth(200.0);
         logoImage.setPickOnBounds(true);
         logoImage.setPreserveRatio(true);
 
-        vBox.setPrefHeight(200.0);
-        vBox.setPrefWidth(100.0);
+        sountrackText.setFill(javafx.scene.paint.Color.WHITE);
+        sountrackText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+        sountrackText.setStrokeWidth(0.0);
+        sountrackText.setText("Sound Tracks");
+        sountrackText.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        sountrackText.setWrappingWidth(151.92578125);
+        sountrackText.setFont(new Font("Old English Text MT", 24.0));
 
-        hBox.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
+        soundBar.setPrefWidth(200.0);
+        soundBar.setProgress(0.0);
+
         hBox.setPrefHeight(100.0);
         hBox.setPrefWidth(200.0);
+
+        prevBtn.setFitHeight(48.0);
+        prevBtn.setFitWidth(48.0);
+        prevBtn.setPickOnBounds(true);
+        prevBtn.setPreserveRatio(true);
+
+        playBtn.setFitHeight(48.0);
+        playBtn.setFitWidth(48.0);
+        playBtn.setPickOnBounds(true);
+        playBtn.setPreserveRatio(true);
+
+        stopBtn.setFitHeight(48.0);
+        stopBtn.setFitWidth(48.0);
+        stopBtn.setPickOnBounds(true);
+        stopBtn.setPreserveRatio(true);
+
+        nextBtn.setFitHeight(48.0);
+        nextBtn.setFitWidth(48.0);
+        nextBtn.setPickOnBounds(true);
+        nextBtn.setPreserveRatio(true);
+        HBox.setMargin(vBox, new Insets(0.0, 0.0, 0.0, 50.0));
+
+        vBox0.setPrefHeight(200.0);
+        vBox0.setPrefWidth(100.0);
+
+        hBox0.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
+        hBox0.setPrefHeight(100.0);
+        hBox0.setPrefWidth(200.0);
 
         avatar.setFitHeight(100.0);
         avatar.setFitWidth(100.0);
         avatar.setPickOnBounds(true);
         avatar.setPreserveRatio(true);
-        
+
         userNameText.setFill(javafx.scene.paint.Color.WHITE);
         userNameText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         userNameText.setStrokeWidth(0.0);
         userNameText.setText("UserName");
         userNameText.setWrappingWidth(151.92578125);
         userNameText.setFont(new Font("Old English Text MT", 24.0));
-        HBox.setMargin(userNameText, new Insets(30.0, 0.0, 0.0, 20.0));
-        
+        HBox.setMargin(userNameText, new Insets(20.0, 0.0, 0.0, 20.0));
+
         scoreText.setFill(javafx.scene.paint.Color.WHITE);
         scoreText.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         scoreText.setStrokeWidth(0.0);
         scoreText.setText("Score : 190");
         scoreText.setWrappingWidth(151.92578125);
         scoreText.setFont(new Font("Old English Text MT", 24.0));
-        HBox.setMargin(scoreText, new Insets(30.0, 0.0, 0.0, 20.0));
-        hBox.setPadding(new Insets(20.0));
+        HBox.setMargin(scoreText, new Insets(20.0, 0.0, 0.0, 0.0));
+        hBox0.setPadding(new Insets(20.0));
 
-        hBox0.setPrefHeight(100.0);
-        hBox0.setPrefWidth(200.0);
+        hBox1.setPrefHeight(100.0);
+        hBox1.setPrefWidth(200.0);
 
-        vBox0.setPrefHeight(200.0);
-        vBox0.setPrefWidth(100.0);
+        vBox1.setPrefHeight(200.0);
+        vBox1.setPrefWidth(100.0);
 
         computerImage.setFitHeight(150.0);
         computerImage.setFitWidth(200.0);
@@ -165,8 +221,8 @@ public abstract class HomePage extends GridPane {
         text.setWrappingWidth(154.48828125);
         text.setFont(new Font("Old English Text MT", 24.0));
 
-        vBox1.setPrefHeight(200.0);
-        vBox1.setPrefWidth(100.0);
+        vBox2.setPrefHeight(200.0);
+        vBox2.setPrefWidth(100.0);
 
         multiPlayersImage.setFitHeight(150.0);
         multiPlayersImage.setFitWidth(200.0);
@@ -249,25 +305,30 @@ public abstract class HomePage extends GridPane {
         tableColumn4.setText("Time");
         VBox.setMargin(tableView0, new Insets(20.0));
         GridPane.setMargin(gridPane, new Insets(20.0, 50.0, 20.0, 50.0));
-        
-        box.setSpacing(1200);
 
         getColumnConstraints().add(columnConstraints);
         getRowConstraints().add(rowConstraints);
         getRowConstraints().add(rowConstraints0);
-        box.getChildren().add(logoImage);
-        hBox.getChildren().add(avatar);
-        hBox.getChildren().add(userNameText);
-        hBox.getChildren().add(scoreText);
+        vBox.getChildren().add(logoImage);
+        vBox.getChildren().add(sountrackText);
+        hBox.getChildren().add(prevBtn);
+        hBox.getChildren().add(playBtn);
+        hBox.getChildren().add(stopBtn);
+        hBox.getChildren().add(nextBtn);
         vBox.getChildren().add(hBox);
-        vBox0.getChildren().add(computerImage);
-        vBox0.getChildren().add(text);
-        hBox0.getChildren().add(vBox0);
-        vBox1.getChildren().add(multiPlayersImage);
-        vBox1.getChildren().add(text0);
-        hBox0.getChildren().add(vBox1);
-        vBox.getChildren().add(hBox0);
         box.getChildren().add(vBox);
+        hBox0.getChildren().add(avatar);
+        hBox0.getChildren().add(userNameText);
+        hBox0.getChildren().add(scoreText);
+        vBox0.getChildren().add(hBox0);
+        vBox1.getChildren().add(computerImage);
+        vBox1.getChildren().add(text);
+        hBox1.getChildren().add(vBox1);
+        vBox2.getChildren().add(multiPlayersImage);
+        vBox2.getChildren().add(text0);
+        hBox1.getChildren().add(vBox2);
+        vBox0.getChildren().add(hBox1);
+        box.getChildren().add(vBox0);
         getChildren().add(box);
         gridPane.getColumnConstraints().add(columnConstraints0);
         gridPane.getColumnConstraints().add(columnConstraints1);
