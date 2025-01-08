@@ -18,9 +18,14 @@
     -fx-margin:0 0 0 0;
     -fx-padding:0 0 0 0;
     
+    
 }
 
 #backgroundImage {
     -fx-opacity: 0.9;
      -fx-background-size: cover;
+}
+#guestHL{
+    -fx-text-fill: orange;
+   -fx-font-size: 20;
 }

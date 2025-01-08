@@ -151,7 +151,6 @@ public abstract class HomePage extends GridPane {
 
         hBox.setPrefHeight(100.0);
         hBox.setPrefWidth(200.0);
-
         prevBtn.setFitHeight(48.0);
         prevBtn.setFitWidth(48.0);
         prevBtn.setPickOnBounds(true);
@@ -179,7 +178,7 @@ public abstract class HomePage extends GridPane {
         hBox0.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
         hBox0.setPrefHeight(100.0);
         hBox0.setPrefWidth(200.0);
-
+        
         avatar.setFitHeight(100.0);
         avatar.setFitWidth(100.0);
         avatar.setPickOnBounds(true);
@@ -273,7 +272,7 @@ public abstract class HomePage extends GridPane {
         tableColumn0.setPrefWidth(100.0);
         tableColumn0.setText("Score");
         VBox.setMargin(tableView, new Insets(20.0));
-
+   
         GridPane.setColumnIndex(box1, 1);
         box1.setPrefHeight(210.0);
         box1.setPrefWidth(261.0);
@@ -335,7 +334,7 @@ public abstract class HomePage extends GridPane {
         gridPane.getRowConstraints().add(rowConstraints1);
         box0.getChildren().add(userNameText1);
         tableView.getColumns().add(tableColumn);
-        tableView.getColumns().add(tableColumn0);
+        tableView.getColumns().add(tableColumn0); 
         box0.getChildren().add(tableView);
         gridPane.getChildren().add(box0);
         box1.getChildren().add(userNameText11);

@@ -17,6 +17,7 @@ public class Pathes {
     //styles
     static public final String HOMEPAGE_STYLE_PATH = "/piratesproject/drawable/styles/home_page.css";
     static public final String SETTINGS_STYLE_PATH = "/piratesproject/drawable/styles/settings.css";
+    static public final String RECEIVINGINVITIONFORM_STYLE_PATH = "/piratesproject/drawable/styles/receivinginvitationform.css";
     
     //media
     
