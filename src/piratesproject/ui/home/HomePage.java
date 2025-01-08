@@ -216,7 +216,7 @@ public abstract class HomePage extends GridPane {
         tableColumn0.setPrefWidth(100.0);
         tableColumn0.setText("Score");
         VBox.setMargin(tableView, new Insets(20.0));
-
+   
         GridPane.setColumnIndex(box1, 1);
         box1.setPrefHeight(210.0);
         box1.setPrefWidth(261.0);
@@ -273,7 +273,7 @@ public abstract class HomePage extends GridPane {
         gridPane.getRowConstraints().add(rowConstraints1);
         box0.getChildren().add(userNameText1);
         tableView.getColumns().add(tableColumn);
-        tableView.getColumns().add(tableColumn0);
+        tableView.getColumns().add(tableColumn0); 
         box0.getChildren().add(tableView);
         gridPane.getChildren().add(box0);
         box1.getChildren().add(userNameText11);
