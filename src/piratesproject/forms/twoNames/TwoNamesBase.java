@@ -1,4 +1,4 @@
-package piratesproject.ui.twoNames;
+package piratesproject.forms.twoNames;
 
 import java.net.URL;
 import javafx.event.ActionEvent;
@@ -53,7 +53,7 @@ public abstract class TwoNamesBase extends AnchorPane {
 
         imageView.setFitHeight(400.0);
         imageView.setFitWidth(600.0);
-        imageView.setImage(new Image(getClass().getResource("../../drawable/images/BackGround.jpg").toExternalForm()));
+        imageView.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/BackGround.jpg").toExternalForm()));
 
         gridPane.setPrefHeight(284.0);
         gridPane.setPrefWidth(600.0);
