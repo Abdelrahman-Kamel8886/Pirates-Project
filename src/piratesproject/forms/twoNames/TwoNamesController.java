@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package piratesproject.ui.twoNames;
+package piratesproject.forms.twoNames;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,7 +21,7 @@ import piratesproject.ui.xogameboard.XOGameBoard;
  * @author Abram
  */
 public class TwoNamesController extends TwoNamesBase {
-private Stage myStage;
+private final Stage myStage;
     public TwoNamesController(Stage stage) {
         this.myStage = stage;
         listen();
@@ -44,6 +44,7 @@ private Stage myStage;
         
         Parent game = new XOGameBoard(myStage);
         Main.resetScene(game);
+        TwoNamesForm.closeForm();
     }
     
 }
