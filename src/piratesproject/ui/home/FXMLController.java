@@ -3,9 +3,11 @@ package piratesproject.ui.home;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.ui.levels.LevelsBase;
@@ -41,10 +43,16 @@ public class FXMLController extends HomePage {
             Parent home =  new XOGameBoard(myStage);
             Main.resetScene(home);
         });
-        computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home =  new LevelsBase();
-            Main.resetScene(home);
-        });
+      computerImage.setOnMouseClicked((MouseEvent event) -> {
+        Stage levelsStage = new Stage();
+        LevelsBase levelsBase = new LevelsBase(); 
+        Scene levelsScene = new Scene(levelsBase, 400, 400); 
+        levelsStage.setScene(levelsScene);
+        levelsStage.setTitle("Levels page"); 
+        levelsStage.initModality(Modality.WINDOW_MODAL); 
+        levelsStage.initOwner(myStage); 
+        levelsStage.show(); 
+    });
 
     }
 
