@@ -90,7 +90,7 @@ public class ReplayBase extends AnchorPane {
         imageView.setFitHeight(800.0);
         imageView.setFitWidth(1280.0);
         imageView.setPickOnBounds(true);
-        imageView.setImage(new Image(getClass().getResource(Consts.RECORD_XO_GAME_Board).toExternalForm()));
+        imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
 
         NameArea.setLayoutX(313.0);
         NameArea.setLayoutY(71.0);

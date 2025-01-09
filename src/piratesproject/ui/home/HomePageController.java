@@ -14,6 +14,8 @@ import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.SoundTrackStateEnum;
 import piratesproject.forms.Settings.SettingsForm;
+import piratesproject.forms.levels.LevelController;
+import piratesproject.forms.levels.LevelForm;
 import piratesproject.ui.login.LoginController;
 import piratesproject.ui.xogameboard.XOGameBoard;
 import piratesproject.utils.BackgroundMusic;
@@ -94,8 +96,7 @@ public class HomePageController extends HomePage {
             goToGame();
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home = new XOGameBoard(myStage);
-            goToGame();
+            showLevels();
         });
 
         playBtn.setOnMouseClicked((MouseEvent event) -> {
@@ -182,5 +183,10 @@ public class HomePageController extends HomePage {
     private void openSettings() {
         SettingsForm settings = new SettingsForm();
         settings.display(myStage);
+    }
+    private void showLevels()
+    {
+        LevelForm.display(myStage);
+        
     }
 }
