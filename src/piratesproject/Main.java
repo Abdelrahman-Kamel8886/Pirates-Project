@@ -20,7 +20,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         stage.setFullScreen(true);
 
-        Parent root = new LoginController(stage);
+        Parent root = new FXMLController(stage);
         scene = new Scene(root);
         stage.setTitle(Consts.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Consts.APP_LOGO_PATH).toString()));

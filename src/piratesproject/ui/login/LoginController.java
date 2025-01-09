@@ -122,16 +122,12 @@ public class LoginController extends LoginBase {
     }
 
     public void gotoSginup() {
-        //Parent signupPage = new RegisterController(mystage);
-        Parent signupPage = new DrawBase();
-        
+        Parent signupPage = new RegisterController(mystage);
         Main.resetScene(signupPage);
     }
 
     public void gotoHome() {
        Parent homePage = new FXMLController(mystage);
-        //Parent homePage = new DrawBase();
-
         Main.resetScene(homePage);
     }
 }

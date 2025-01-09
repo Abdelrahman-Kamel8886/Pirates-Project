@@ -7,6 +7,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class LevelsBase extends VBox {
 
@@ -16,12 +17,14 @@ public class LevelsBase extends VBox {
     protected final Button playb;
 
     public LevelsBase() {
-
         image1 = new ImageView();
         easy = new Label();
         slider = new Slider(0, 2, 1);
         playb = new Button();
+        drawAll();
+    }
 
+    private void drawAll() {
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
         setMinHeight(USE_PREF_SIZE);
@@ -36,13 +39,13 @@ public class LevelsBase extends VBox {
         slider.getStyleClass().add("slider");
         easy.getStyleClass().add("label");
         playb.getStyleClass().add("button");
-        image1.setFitHeight(150.0);
-        image1.setFitWidth(150.0);
+        image1.setFitHeight(200.0);
+        image1.setFitWidth(200.0);
         image1.setPickOnBounds(true);
         image1.setPreserveRatio(true);
-        image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/nor.png").toExternalForm()));
+        image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Normal-01.png").toExternalForm()));
 
-        VBox.setMargin(image1, new Insets(50.0, 0.0, 0.0, 120.0));
+        VBox.setMargin(image1, new Insets(50.0, 0.0, 0.0, 80.0));
 
         slider.setShowTickLabels(true);
         slider.setMajorTickUnit(1);
@@ -70,19 +73,19 @@ public class LevelsBase extends VBox {
             switch (value) {
                 case 0:
                     easy.setText("Difficulty: Easy");
-                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/easy.png").toExternalForm())); // Easy image
+                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Easy-01.png").toExternalForm())); // Easy image
                     break;
                 case 1:
                     easy.setText("Difficulty: Normal");
-                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/nor.png").toExternalForm())); // Normal image
+                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Normal-01.png").toExternalForm())); // Normal image
                     break;
                 case 2:
                     easy.setText("Difficulty: Hard");
-                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/hard.png").toExternalForm())); // Hard image
+                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Hard-01.png").toExternalForm())); // Hard image
                     break;
             }
-            image1.setFitHeight(150.0);
-            image1.setFitWidth(150.0);
+            image1.setFitHeight(200.0);
+            image1.setFitWidth(200.0);
         });
 
         getChildren().add(image1);

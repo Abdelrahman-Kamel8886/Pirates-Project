@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.ui.levels.LevelController;
+import piratesproject.ui.levels.LevelForm;
 import piratesproject.ui.levels.LevelsBase;
 import piratesproject.ui.xogameboard.XOGameBoard;
 
@@ -44,14 +46,7 @@ public class FXMLController extends HomePage {
             Main.resetScene(home);
         });
       computerImage.setOnMouseClicked((MouseEvent event) -> {
-        Stage levelsStage = new Stage();
-        LevelsBase levelsBase = new LevelsBase(); 
-        Scene levelsScene = new Scene(levelsBase, 400, 400); 
-        levelsStage.setScene(levelsScene);
-        levelsStage.setTitle("Levels page"); 
-        levelsStage.initModality(Modality.WINDOW_MODAL); 
-        levelsStage.initOwner(myStage); 
-        levelsStage.show(); 
+        LevelForm.display(myStage);
     });
 
     }
