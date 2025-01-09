@@ -1,6 +1,8 @@
 package piratesproject.ui.twoNames;
 
 import java.net.URL;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -119,6 +121,7 @@ public abstract class TwoNamesBase extends AnchorPane {
         button.setText("Play");
         button.setTextFill(javafx.scene.paint.Color.WHITE);
         button.setFont(new Font("Old English Text MT", 32.0));
+
 
         getChildren().add(imageView);
         gridPane.getColumnConstraints().add(columnConstraints);

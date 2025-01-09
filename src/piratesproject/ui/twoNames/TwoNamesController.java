@@ -7,21 +7,43 @@ package piratesproject.ui.twoNames;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import piratesproject.Main;
+import piratesproject.ui.xogameboard.XOGameBoard;
 
 /**
  * FXML Controller class
  *
  * @author Abram
  */
-public class TwoNamesController implements Initializable {
-
+public class TwoNamesController extends TwoNamesBase {
+private Stage myStage;
+    public TwoNamesController(Stage stage) {
+        this.myStage = stage;
+        listen();
+        
+    }
+    
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    private void listen()
+    {
+                button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            goToGame();
+            }
+        });
+    }
+     private void goToGame() {
+        
+        Parent game = new XOGameBoard(myStage);
+        Main.resetScene(game);
+    }
     
 }
