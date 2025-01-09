@@ -43,22 +43,27 @@ public class DrawBase extends StackPane {
         vBox.setPrefHeight(200.0);
         vBox.setPrefWidth(100.0);
 
+        // Configure Play Again Button
         playAgainB.setMnemonicParsing(false);
-        playAgainB.setStyle("-fx-background-radius: 20px;");
         playAgainB.setText("Play again");
         playAgainB.setFont(new Font("Gigi", 24.0));
-        VBox.setMargin(playAgainB, new Insets(500.0, 0.0, 0.0, 650.0));
+        playAgainB.getStyleClass().add("play-again-button"); // Add CSS class
+        VBox.setMargin(playAgainB, new Insets(500.0, 0.0, 0.0, 850.0));
 
+        // Configure Exit Button
         exitB.setMnemonicParsing(false);
-        exitB.setStyle("-fx-background-radius: 20px;");
         exitB.setText("Exit");
         exitB.setFont(new Font("Gigi", 24.0));
-        VBox.setMargin(exitB, new Insets(50.0, 0.0, 0.0, 670.0));
+        exitB.getStyleClass().add("exit-button"); // Add CSS class
+        VBox.setMargin(exitB, new Insets(50.0, 0.0, 0.0, 880.0));
 
         vBox.getChildren().add(playAgainB);
         vBox.getChildren().add(exitB);
 
         // Add the media view and VBox to the StackPane
         getChildren().addAll(mediaView, vBox);
+
+        // Load the CSS file
+        getStylesheets().add(getClass().getResource("draw.css").toExternalForm());
     }
 }
