@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import piratesproject.models.UserModel;
 import piratesproject.utils.Consts;
 
 public class DataAccsessLayer {
@@ -52,6 +53,23 @@ public class DataAccsessLayer {
             Logger.getLogger(DataAccsessLayer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
+    }
+
+    public void status(UserModel user) {
+        try {
+            String myStatment
+                    = "INSERT INTO localUserTable VALUES(?,?,?,?,?)";
+            
+            PreparedStatement pst = connection.prepareStatement(myStatment);
+            pst.setString(1, user.getFirstName());
+            pst.setString(2, user.getLastName());
+            pst.setString(3, user.getUserName());
+            pst.setInt(4, user.getScore());
+            pst.setInt(5, user.getGamesPlayed());
+        } catch (SQLException ex) {
+            Logger.getLogger(DataAccsessLayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
