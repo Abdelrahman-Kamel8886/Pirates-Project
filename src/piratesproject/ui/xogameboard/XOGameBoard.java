@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.utils.Consts;
+import piratesproject.utils.SharedModel;
 
 public class XOGameBoard extends AnchorPane {
 

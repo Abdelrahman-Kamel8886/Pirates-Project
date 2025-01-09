@@ -16,6 +16,7 @@ import piratesproject.enums.SoundTrackStateEnum;
 import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.forms.levels.LevelController;
 import piratesproject.forms.levels.LevelForm;
+import piratesproject.forms.twoNames.TwoNamesForm;
 import piratesproject.ui.login.LoginController;
 import piratesproject.ui.xogameboard.XOGameBoard;
 import piratesproject.utils.BackgroundMusic;
@@ -93,7 +94,7 @@ public class HomePageController extends HomePage {
         }
 
         multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
-            goToGame();
+            showTwoNames();
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
             showLevels();
@@ -187,6 +188,11 @@ public class HomePageController extends HomePage {
     private void showLevels()
     {
         LevelForm.display(myStage);
+        
+    }
+        private void showTwoNames()
+    {
+        TwoNamesForm.display(myStage);
         
     }
 }

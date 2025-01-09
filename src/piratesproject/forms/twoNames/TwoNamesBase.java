@@ -1,6 +1,8 @@
-package piratesproject.ui.twoNames;
+package piratesproject.forms.twoNames;
 
 import java.net.URL;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -51,7 +53,7 @@ public abstract class TwoNamesBase extends AnchorPane {
 
         imageView.setFitHeight(400.0);
         imageView.setFitWidth(600.0);
-        imageView.setImage(new Image(getClass().getResource("../../drawable/images/BackGround.jpg").toExternalForm()));
+        imageView.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/BackGround.jpg").toExternalForm()));
 
         gridPane.setPrefHeight(284.0);
         gridPane.setPrefWidth(600.0);
@@ -119,6 +121,7 @@ public abstract class TwoNamesBase extends AnchorPane {
         button.setText("Play");
         button.setTextFill(javafx.scene.paint.Color.WHITE);
         button.setFont(new Font("Old English Text MT", 32.0));
+
 
         getChildren().add(imageView);
         gridPane.getColumnConstraints().add(columnConstraints);

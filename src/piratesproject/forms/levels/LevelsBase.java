@@ -68,25 +68,7 @@ public class LevelsBase extends VBox {
         playb.setText("Play");
         VBox.setMargin(playb, new Insets(10.0, 0.0, 0.0, 120.0));
 
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            int value = newValue.intValue();
-            switch (value) {
-                case 0:
-                    easy.setText("Difficulty: Easy");
-                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Easy-01.png").toExternalForm())); // Easy image
-                    break;
-                case 1:
-                    easy.setText("Difficulty: Normal");
-                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Normal-01.png").toExternalForm())); // Normal image
-                    break;
-                case 2:
-                    easy.setText("Difficulty: Hard");
-                    image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Hard-01.png").toExternalForm())); // Hard image
-                    break;
-            }
-            image1.setFitHeight(200.0);
-            image1.setFitWidth(200.0);
-        });
+
 
         getChildren().add(image1);
         getChildren().add(easy);
