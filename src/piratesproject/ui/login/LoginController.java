@@ -13,6 +13,7 @@ import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
+import piratesproject.forms.draw.DrawBase;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.reg.RegisterController;
 import piratesproject.utils.Consts;
@@ -44,14 +45,14 @@ public class LoginController extends LoginBase {
             Thread th = new Thread(() -> {
                 LoginResponseModel responseModel = NetworkAccessLayer.loginToServer(new LoginRequestModel(name, pass));
                 checkLoginState(responseModel);
-                
+
             });
             th.start();
         }
         return islogin;
     }
-    
-    public void showErrorAlert(String msg){
+
+    public void showErrorAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(mystage);
         alert.initModality(Modality.APPLICATION_MODAL);
@@ -60,8 +61,8 @@ public class LoginController extends LoginBase {
         alert.setContentText(null);
         alert.showAndWait();
     }
-    
-    public void showConfirmationAlert(String msg){
+
+    public void showConfirmationAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(mystage);
         alert.initModality(Modality.APPLICATION_MODAL);
@@ -75,32 +76,31 @@ public class LoginController extends LoginBase {
     private void checkLoginState(LoginResponseModel responseModel) {
         if (responseModel != null) {
             if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
-                 if (Platform.isFxApplicationThread()) {
-                        showConfirmationAlert(responseModel.getMessage());
-                    } else {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                showConfirmationAlert(responseModel.getMessage());
-                            }
-                        });
-                    }
-            }
-            else{
                 if (Platform.isFxApplicationThread()) {
-                        showErrorAlert(responseModel.getMessage());
-                    } else {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                showErrorAlert(responseModel.getMessage());
-                            }
-                        });
-                    }
+                    showConfirmationAlert(responseModel.getMessage());
+                } else {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            gotoHome();
+                            // showConfirmationAlert(responseModel.getMessage());
+                        }
+                    });
+                }
+            } else {
+                if (Platform.isFxApplicationThread()) {
+                    showErrorAlert(responseModel.getMessage());
+                } else {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            showErrorAlert(responseModel.getMessage());
+                        }
+                    });
+                }
             }
         }
     }
-
 
     private boolean isFull() {
         boolean isfull = true;
@@ -127,6 +127,7 @@ public class LoginController extends LoginBase {
     }
 
     public void gotoHome() {
+
         Parent homePage = new HomePageController(mystage);
         Main.resetScene(homePage);
     }

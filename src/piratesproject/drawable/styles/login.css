@@ -38,7 +38,7 @@
 
 /* Register hyperlink */
 .registerLink {
-    -fx-text-fill: #ffffffde;
+    -fx-text-fill: #ffffffff;
     -fx-font-size: 20px;
 }
 
