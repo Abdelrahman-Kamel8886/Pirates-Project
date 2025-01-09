@@ -1,7 +1,6 @@
 package piratesproject.ui.xogameboard;
 
 import java.net.URL;
-import javafx.event.ActionEvent;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Blend;
@@ -11,15 +10,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import piratesproject.Main;
 import piratesproject.utils.Consts;
 
-public class XOGameBoard extends AnchorPane {
+public abstract class XOGameBoard3 extends AnchorPane {
 
     protected final ImageView imageView;
     protected final GridPane gridPane;
@@ -43,12 +40,10 @@ public class XOGameBoard extends AnchorPane {
     protected final Button btnGrid_2_1;
     protected final Text playerOneScore;
     protected final Text playerTowScore;
-
     protected final Text column;
+    protected final MediaView mediaView;
 
-
-
-    public XOGameBoard(Stage stage) {
+    public XOGameBoard3(Stage stage) {
 
         imageView = new ImageView();
         gridPane = new GridPane();
@@ -73,6 +68,7 @@ public class XOGameBoard extends AnchorPane {
         playerOneScore = new Text();
         playerTowScore = new Text();
         column = new Text();
+        mediaView = new MediaView();
 
         setId("AnchorPane");
         setPrefHeight(1080.0);
@@ -80,6 +76,7 @@ public class XOGameBoard extends AnchorPane {
         getStyleClass().add("mainFxmlClass");
         getStylesheets().add("/piratesproject/ui/xogameboard//piratesproject/drawable/styles/xogameboard.css");
 
+        AnchorPane.setLeftAnchor(imageView, 0.0);
         imageView.setFitHeight(1080.0);
         imageView.setFitWidth(1920.0);
         imageView.setPickOnBounds(true);
@@ -126,22 +123,20 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_0_0.setMnemonicParsing(false);
         btnGrid_0_0.setPrefHeight(230.0);
         btnGrid_0_0.setPrefWidth(345.0);
-        btnGrid_0_0.setStyle("-fx-background-color: #436399;");
-        btnGrid_0_0.setText("");
+        btnGrid_0_0.setStyle("-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;");
+        btnGrid_0_0.setText("X");
         btnGrid_0_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_0.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_0_0.setWrapText(true);
         btnGrid_0_0.setFont(new Font(96.0));
-
- 
 
         GridPane.setColumnIndex(btnGrid_0_1, 1);
         GridPane.setHalignment(btnGrid_0_1, javafx.geometry.HPos.CENTER);
         btnGrid_0_1.setMnemonicParsing(false);
         btnGrid_0_1.setPrefHeight(213.0);
         btnGrid_0_1.setPrefWidth(345.0);
-        btnGrid_0_1.setStyle("-fx-background-color: #436399;");
-        btnGrid_0_1.setText("");
+        btnGrid_0_1.setStyle("-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;");
+        btnGrid_0_1.setText("X");
         btnGrid_0_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_1.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_0_1.setWrapText(true);
@@ -152,7 +147,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_0_2.setPrefHeight(241.0);
         btnGrid_0_2.setPrefWidth(345.0);
         btnGrid_0_2.setStyle("-fx-background-color: #436399;");
-        btnGrid_0_2.setText("");
+        btnGrid_0_2.setText("O");
         btnGrid_0_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_2.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_0_2.setWrapText(true);
@@ -166,7 +161,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_2.setPrefHeight(230.0);
         btnGrid_1_2.setPrefWidth(345.0);
         btnGrid_1_2.setStyle("-fx-background-color: #436399;");
-        btnGrid_1_2.setText("");
+        btnGrid_1_2.setText("X");
         btnGrid_1_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_2.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_1_2.setWrapText(true);
@@ -180,7 +175,7 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_2.setMnemonicParsing(false);
         btnGrid_2_2.setPrefHeight(230.0);
         btnGrid_2_2.setPrefWidth(345.0);
-        btnGrid_2_2.setStyle("-fx-background-color: #436399;");
+        btnGrid_2_2.setStyle("-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;");
         btnGrid_2_2.setText("X");
         btnGrid_2_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_2.setTextFill(javafx.scene.paint.Color.WHITE);
@@ -195,8 +190,8 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_1.setMnemonicParsing(false);
         btnGrid_1_1.setPrefHeight(230.0);
         btnGrid_1_1.setPrefWidth(345.0);
-        btnGrid_1_1.setStyle("-fx-background-color: #436399;");
-        btnGrid_1_1.setText("");
+        btnGrid_1_1.setStyle("-fx-background-color:#2D639C ;");
+        btnGrid_1_1.setText("O");
         btnGrid_1_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_1.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_1_1.setWrapText(true);
@@ -206,8 +201,8 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_0.setMnemonicParsing(false);
         btnGrid_1_0.setPrefHeight(230.0);
         btnGrid_1_0.setPrefWidth(345.0);
-        btnGrid_1_0.setStyle("-fx-background-color: #436399;");
-        btnGrid_1_0.setText("");
+        btnGrid_1_0.setStyle("-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;");
+        btnGrid_1_0.setText("O");
         btnGrid_1_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_0.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_1_0.setWrapText(true);
@@ -217,8 +212,8 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_0.setMnemonicParsing(false);
         btnGrid_2_0.setPrefHeight(230.0);
         btnGrid_2_0.setPrefWidth(345.0);
-        btnGrid_2_0.setStyle("-fx-background-color: #436399;");
-        btnGrid_2_0.setText("");
+        btnGrid_2_0.setStyle("-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;");
+        btnGrid_2_0.setText("X");
         btnGrid_2_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_0.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_2_0.setWrapText(true);
@@ -230,8 +225,8 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_1.setMnemonicParsing(false);
         btnGrid_2_1.setPrefHeight(230.0);
         btnGrid_2_1.setPrefWidth(345.0);
-        btnGrid_2_1.setStyle("-fx-background-color: #436399;");
-        btnGrid_2_1.setText("");
+        btnGrid_2_1.setStyle("-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;");
+        btnGrid_2_1.setText("O");
         btnGrid_2_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_1.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_2_1.setWrapText(true);
@@ -241,7 +236,7 @@ public class XOGameBoard extends AnchorPane {
         playerOneScore.setLayoutY(196.0);
         playerOneScore.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         playerOneScore.setStrokeWidth(0.0);
-        playerOneScore.setText("00");
+        playerOneScore.setText("99");
         playerOneScore.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         playerOneScore.setWrappingWidth(115.0);
         playerOneScore.setFont(new Font(64.0));
@@ -250,7 +245,7 @@ public class XOGameBoard extends AnchorPane {
         playerTowScore.setLayoutY(198.0);
         playerTowScore.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         playerTowScore.setStrokeWidth(0.0);
-        playerTowScore.setText("00");
+        playerTowScore.setText("22");
         playerTowScore.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         playerTowScore.setWrappingWidth(115.0);
         playerTowScore.setFont(new Font(64.0));
@@ -264,13 +259,21 @@ public class XOGameBoard extends AnchorPane {
         column.setWrappingWidth(115.0);
         column.setFont(new Font(64.0));
 
+        AnchorPane.setLeftAnchor(mediaView, 460.0);
+        AnchorPane.setRightAnchor(mediaView, 460.0);
+        AnchorPane.setTopAnchor(mediaView, 200.0);
+        mediaView.setFitHeight(700.0);
+        mediaView.setFitWidth(1000.0);
+
         getChildren().add(imageView);
+        //getChildren().add(mediaView);
         gridPane.getColumnConstraints().add(columnConstraints);
         gridPane.getColumnConstraints().add(columnConstraints0);
         gridPane.getColumnConstraints().add(columnConstraints1);
         gridPane.getRowConstraints().add(rowConstraints);
         gridPane.getRowConstraints().add(rowConstraints0);
         gridPane.getRowConstraints().add(rowConstraints1);
+        
         gridPane.getChildren().add(btnGrid_0_0);
         gridPane.getChildren().add(btnGrid_0_1);
         gridPane.getChildren().add(btnGrid_0_2);
@@ -284,6 +287,7 @@ public class XOGameBoard extends AnchorPane {
         getChildren().add(playerOneScore);
         getChildren().add(playerTowScore);
         getChildren().add(column);
+        //getChildren().add(mediaView);
 
-            }
     }
+}

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -18,7 +19,7 @@
         <URL value="@/piratesproject/drawable/styles/xogameboard.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" smooth="false" AnchorPane.leftAnchor="0.0">
          <image>
             <Image url="@../../drawable/images/xo_game_board.jpg" />
          </image>
@@ -108,5 +109,6 @@
             <Font size="64.0" />
          </font>
       </Text>
+      <MediaView fitHeight="700.0" fitWidth="1000.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="460.0" AnchorPane.topAnchor="200.0" />
    </children>
 </AnchorPane>
