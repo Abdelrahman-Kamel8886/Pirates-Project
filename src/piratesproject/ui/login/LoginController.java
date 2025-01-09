@@ -13,8 +13,8 @@ import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
-import piratesproject.ui.draw.DrawBase;
-import piratesproject.ui.home.FXMLController;
+import piratesproject.forms.draw.DrawBase;
+import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.reg.RegisterController;
 import piratesproject.utils.Consts;
 
@@ -127,7 +127,8 @@ public class LoginController extends LoginBase {
     }
 
     public void gotoHome() {
-       Parent homePage = new FXMLController(mystage);
+
+        Parent homePage = new HomePageController(mystage);
         Main.resetScene(homePage);
     }
 }
