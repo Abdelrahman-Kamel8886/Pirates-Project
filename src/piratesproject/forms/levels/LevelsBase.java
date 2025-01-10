@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import piratesproject.drawable.values.Pathes;
 
 public class LevelsBase extends VBox {
 
@@ -43,7 +44,7 @@ public class LevelsBase extends VBox {
         image1.setFitWidth(200.0);
         image1.setPickOnBounds(true);
         image1.setPreserveRatio(true);
-        image1.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/Normal-01.png").toExternalForm()));
+        image1.setImage(new Image(getClass().getResource(Pathes.NORMAL_LOGO_PATH).toExternalForm()));
 
         VBox.setMargin(image1, new Insets(50.0, 0.0, 0.0, 80.0));
 
