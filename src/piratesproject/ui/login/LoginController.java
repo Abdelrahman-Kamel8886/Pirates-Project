@@ -33,6 +33,7 @@ public class LoginController extends LoginBase {
     private void listenToAllEvents() {
         Blogin.setOnAction(event -> login());
         sginuplink.setOnAction(event -> gotoSginup());
+        Guest.setOnAction(event -> gotoHome());
     }
 
     private boolean login() {
