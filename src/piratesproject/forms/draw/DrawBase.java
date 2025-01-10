@@ -15,20 +15,20 @@ public class DrawBase extends StackPane {
     protected final VBox vBox;
     protected final Button playAgainB;
     protected final Button exitB;
-    private final MediaView mediaView;
+    protected final MediaView mediaViewPlay;
+    protected final MediaPlayer mediaPlayer;
 
     public DrawBase() {
 
         String videoPath = getClass().getResource(Pathes.DRAW_VEDIO_PATH).toExternalForm();
         Media media = new Media(videoPath);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaView = new MediaView(mediaPlayer);
+        mediaPlayer = new MediaPlayer(media);
+        mediaViewPlay = new MediaView(mediaPlayer);
 
-
-        mediaView.setFitWidth(1920);
-        mediaView.setFitHeight(1080);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); 
-        mediaPlayer.play(); 
+        mediaViewPlay.setFitWidth(1920);
+        mediaViewPlay.setFitHeight(1080);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
 
         vBox = new VBox();
         playAgainB = new Button();
@@ -48,23 +48,20 @@ public class DrawBase extends StackPane {
         playAgainB.setMnemonicParsing(false);
         playAgainB.setText("Play again");
         playAgainB.setFont(new Font("Gigi", 24.0));
-       // playAgainB.getStyleClass().add("play-again-button"); // Add CSS class
+
         VBox.setMargin(playAgainB, new Insets(500.0, 0.0, 0.0, 850.0));
 
-
+       
         exitB.setMnemonicParsing(false);
         exitB.setText("Exit");
         exitB.setFont(new Font("Gigi", 24.0));
-        //exitB.getStyleClass().add("exit-button"); // Add CSS class
+
         VBox.setMargin(exitB, new Insets(50.0, 0.0, 0.0, 880.0));
 
         vBox.getChildren().add(playAgainB);
         vBox.getChildren().add(exitB);
 
-
-        getChildren().addAll(mediaView, vBox);
-
-
+        getChildren().addAll(mediaViewPlay, vBox);
         getStylesheets().add(getClass().getResource("/piratesproject/drawable/styles/draw.css").toExternalForm());
     }
 }

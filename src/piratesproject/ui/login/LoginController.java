@@ -14,6 +14,7 @@ import piratesproject.models.LoginResponseModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.forms.draw.DrawBase;
+import piratesproject.forms.draw.DrawController;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.reg.RegisterController;
 import piratesproject.utils.Consts;
@@ -129,7 +130,8 @@ public class LoginController extends LoginBase {
 
     public void gotoHome() {
 
-        Parent homePage = new HomePageController(mystage);
+//        Parent homePage = new HomePageController(mystage);
+        Parent homePage = new DrawController(mystage);
         Main.resetScene(homePage);
     }
 }
