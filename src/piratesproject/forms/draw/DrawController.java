@@ -9,25 +9,35 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.ui.xogameboard.XOGameBoard;
 
 /**
  *
  * @author Admin
  */
-public class DrawController extends DrawBase{
+public class DrawController extends DrawBase {
+
     private final Stage mystage;
 
     public DrawController(Stage myStage) {
         this.mystage = myStage;
         listenToAllEvent();
     }
-    public void listenToAllEvent(){
+
+    private void listenToAllEvent() {
         exitB.setOnAction(event -> exitToHome());
+        playAgainB.setOnAction(event -> goToXOPageToPlayAgin());
+    }
+
+    private void goToXOPageToPlayAgin() {
+        mediaPlayer.stop();
+        Parent XOgame = new XOGameBoard(mystage);
+        Main.resetScene(XOgame);
     }
 
     private void exitToHome() {
         mediaPlayer.stop();
-         Parent homePage = new HomePageController(mystage);
-         Main.resetScene(homePage);
+        Parent homePage = new HomePageController(mystage);
+        Main.resetScene(homePage);
     }
 }
