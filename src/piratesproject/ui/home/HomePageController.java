@@ -1,6 +1,10 @@
 package piratesproject.ui.home;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableRow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -8,6 +12,8 @@ import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.forms.Settings.SettingsForm;
+import piratesproject.forms.sendinvitatation.SendInvitationFormController;
+import piratesproject.forms.sendinvitatation.SendInvitationFormHandler;
 import piratesproject.ui.login.LoginController;
 import piratesproject.ui.xogameboard.XOGameBoard;
 import piratesproject.utils.SharedModel;
@@ -19,6 +25,7 @@ public class HomePageController extends HomePage {
     public HomePageController(Stage stage) {
         myStage = stage;
         initView();
+        addOnliePlayer();
     }
 
     private void initView() {
@@ -37,6 +44,17 @@ public class HomePageController extends HomePage {
             initUserView();
         }
         onClicks();
+          tableView.setRowFactory(tv -> {
+            TableRow<FXMLController.Player> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                System.out.println("Clicked row: ");
+                //showSimpleAlert(new Player("here is user name ", 1800));
+                  SendInvitationFormHandler.display(myStage);
+                //Parent root = new SendInvitationFormController();
+                //Main.resetScene(root);
+            });
+            return row;
+        });
     }
 
     private void initGuestView() {
@@ -88,5 +106,51 @@ public class HomePageController extends HomePage {
     private void openSettings() {
         SettingsForm settings = new SettingsForm();
         settings.display(myStage);
+    }
+            private void addOnliePlayer() {
+        ObservableList<Player> data = FXCollections.observableArrayList(
+                new Player("test1", 90),
+                new Player("test2", 85),
+                new Player("test3", 95)
+        );
+
+        tableView.setItems(data);
+
+    }
+        private void showSimpleAlert(Player player) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Send request to "+ player.getPlayerName());
+        alert.setContentText("Are you sure you want to send to user "+player.getPlayerName() +"\n"+" and its score is "+player.getScore()
+                    +"\n"+"  ركز يا حبيبي " );
+        alert.showAndWait();
+    }
+
+    class Player {
+
+        public String playerName;
+        public int score;
+
+        public Player(String playerName, int score) {
+            this.playerName = playerName;
+            this.score = score;
+        }
+
+        public String getPlayerName() {
+            return playerName;
+        }
+
+        public void setPlayerName(String playerName) {
+            this.playerName = playerName;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
+
     }
 }
