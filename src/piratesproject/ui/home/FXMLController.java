@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.ui.xogameboard.XOGameBoard;
+import piratesproject.ui.xogameboard.XOGameController;
 
 public class FXMLController extends HomePage {
 
@@ -42,11 +43,11 @@ public class FXMLController extends HomePage {
         computerImage.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/computer.png").toExternalForm()));
         avatar.setImage(new Image(getClass().getResource("/piratesproject/drawable/icons/avatar.png").toExternalForm()));
         multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home = new XOGameBoard(myStage);
+            Parent home = new XOGameController(myStage);
             Main.resetScene(home);
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home = new XOGameBoard(myStage);
+            Parent home = new XOGameController(myStage);
             Main.resetScene(home);
         });
         tableView.setRowFactory(tv -> {

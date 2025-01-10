@@ -10,7 +10,7 @@ import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.win.WinScreenController;
-import piratesproject.ui.xogameboard.XOGameBoard3;
+import piratesproject.ui.xogameboard.XOGameBoard;
 import piratesproject.ui.xogameboard.XOGameController;
 import piratesproject.utils.SharedModel;
 public class Main extends Application {
@@ -27,9 +27,7 @@ public class Main extends Application {
         user.setUserName("abdokamel8886");
         SharedModel.setUser(user);
         stage.setFullScreen(true);
-        Parent root ;
-        root = new XOGameController(stage) ;
-        //Parent root = new HomePageController(stage);
+        Parent root = new HomePageController(stage);
         scene = new Scene(root,1920,1080);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));

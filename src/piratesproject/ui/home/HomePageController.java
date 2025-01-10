@@ -10,6 +10,7 @@ import piratesproject.drawable.values.Strings;
 import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.ui.login.LoginController;
 import piratesproject.ui.xogameboard.XOGameBoard;
+import piratesproject.ui.xogameboard.XOGameController;
 import piratesproject.utils.SharedModel;
 
 public class HomePageController extends HomePage {
@@ -70,7 +71,7 @@ public class HomePageController extends HomePage {
             goToGame();
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
-            Parent home = new XOGameBoard(myStage);
+            Parent home = new XOGameController(myStage);
             goToGame();
         });
     }
@@ -81,7 +82,7 @@ public class HomePageController extends HomePage {
     }
 
     private void goToGame() {
-        Parent game = new XOGameBoard(myStage);
+        Parent game = new XOGameController(myStage);
         Main.resetScene(game);
     }
 

@@ -1,6 +1,6 @@
 package piratesproject.ui.xogameboard;
 
-import piratesproject.ui.xogameboard.XOGameBoard3;
+import piratesproject.ui.xogameboard.XOGameBoard;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.media.Media;
@@ -19,7 +19,7 @@ import static piratesproject.utils.Consts.GRID_Y_0_0;
  *
  * @author Taj
  */
-public class XOGameController extends XOGameBoard3 {
+public class XOGameController extends XOGameBoard {
 
     public void showWinState() {
         MediaPlayer mediaPlayer = new MediaPlayer(new Media("file:///C:/Users/Taj/Desktop/youWin.mp4"));
