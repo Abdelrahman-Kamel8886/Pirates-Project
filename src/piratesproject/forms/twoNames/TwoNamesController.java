@@ -13,7 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import piratesproject.Main;
-import piratesproject.ui.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 
 /**
  * FXML Controller class
@@ -42,7 +43,7 @@ private final Stage myStage;
     }
      private void goToGame() {
         
-        Parent game = new XOGameBoard(myStage);
+        Parent game = new XOGameOfflineController(myStage);
         Main.resetScene(game);
         TwoNamesForm.closeForm();
     }

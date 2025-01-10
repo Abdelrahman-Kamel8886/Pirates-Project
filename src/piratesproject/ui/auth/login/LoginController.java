@@ -1,4 +1,4 @@
-package piratesproject.ui.login;
+package piratesproject.ui.auth.login;
 
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -15,7 +15,7 @@ import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.forms.draw.DrawBase;
 import piratesproject.ui.home.HomePageController;
-import piratesproject.ui.reg.RegisterController;
+import piratesproject.ui.auth.reg.RegisterController;
 import piratesproject.utils.Consts;
 
 /**

@@ -13,7 +13,8 @@ import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.LevelTypesEnum;
-import piratesproject.ui.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.SharedModel;
 
 /**
@@ -50,7 +51,7 @@ public class LevelController extends LevelsBase {
     }
 
     private void goToXOPage() {
-        Parent XOgame = new XOGameBoard(mystage);
+        Parent XOgame = new XOGameOfflineController(mystage);
         Main.resetScene(XOgame);
 
         LevelForm.closeForm();

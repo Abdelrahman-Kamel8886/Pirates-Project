@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package piratesproject.ui.reg;
+package piratesproject.ui.auth.reg;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,9 +18,8 @@ import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
 
 import piratesproject.ui.home.HomePageController;
-import piratesproject.ui.login.LoginBase;
-
-import piratesproject.ui.login.LoginController;
+import piratesproject.ui.auth.login.LoginBase;
+import piratesproject.ui.auth.login.LoginController;
 import piratesproject.utils.Consts;
 
 public class RegisterController extends RegisterBase {

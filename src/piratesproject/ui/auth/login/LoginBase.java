@@ -1,4 +1,4 @@
-package piratesproject.ui.login;
+package piratesproject.ui.auth.login;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import piratesproject.models.LoginResponseModel;
-import piratesproject.ui.reg.RegisterController;
+import piratesproject.ui.auth.reg.RegisterController;
 
 public class LoginBase extends AnchorPane {
 

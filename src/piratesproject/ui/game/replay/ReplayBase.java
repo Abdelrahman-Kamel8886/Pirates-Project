@@ -1,4 +1,4 @@
-package piratesproject.ui.replay;
+package piratesproject.ui.game.replay;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package piratesproject.ui.reg;
+package piratesproject.ui.auth.reg;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
