@@ -21,6 +21,7 @@
 /* Text fields */
 .textField {
     -fx-background-radius: 40px;
+
     -fx-padding: 20px;
     -fx-font-size: 20px;
     -fx-pref-width: 160px;
@@ -37,7 +38,7 @@
 
 /* Register hyperlink */
 .registerLink {
-    -fx-text-fill: #ffffffde;
+    -fx-text-fill: #ffffffff;
     -fx-font-size: 20px;
 }
 

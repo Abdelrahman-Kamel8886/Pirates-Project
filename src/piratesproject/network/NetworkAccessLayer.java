@@ -5,20 +5,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import javafx.application.Platform;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
-import piratesproject.ui.home.FXMLController;
-
-import piratesproject.ui.reg.RegisterController;
-
 import piratesproject.utils.Consts;
 import piratesproject.utils.JsonUtils;
 
@@ -27,13 +19,13 @@ public class NetworkAccessLayer {
     private static final String SERVER_HOST = "172.16.222.147"; // Change to your server's address
     private static final int SERVER_PORT = 1422; // Change to your server's port
 
+
     public static ResponseModel registerToServer(UserModel u) {
         ResponseModel responseModel = null;
-        try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
+        try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-            // Create a UserModel object and convert it to JSON
             UserModel user = u;
 
             String userJson = JsonUtils.userModelToJson(user);
@@ -58,7 +50,7 @@ public class NetworkAccessLayer {
 
     public static LoginResponseModel loginToServer(LoginRequestModel u) {
         LoginResponseModel responseModel = null;
-        try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
+        try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 

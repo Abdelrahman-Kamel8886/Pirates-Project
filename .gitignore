@@ -4,3 +4,5 @@ build/
 dist/
 private/
 built-jar.properties
+build/built-jar.properties
+nbproject/private/private.properties
