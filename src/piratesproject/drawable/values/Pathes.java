@@ -14,9 +14,9 @@ public class Pathes {
     static public final String PREV_LOGO_PATH = "/piratesproject/drawable/icons/previous.png";
     static public final String NEXT_LOGO_PATH = "/piratesproject/drawable/icons/next.png";
     static public final String STOP_LOGO_PATH = "/piratesproject/drawable/icons/stop.png";
-    static public final String EASY_LOGO_PATH = "/piratesproject/drawable/images/Easy-01.png";
-    static public final String NORMAL_LOGO_PATH = "/piratesproject/drawable/images/Normal-01.png";
-    public static String HARD_LOGO_PATH = "/piratesproject/drawable/images/Hard-01.png";
+    static public final String EASY_LOGO_PATH = "/piratesproject/drawable/images/easy.png";
+    static public final String NORMAL_LOGO_PATH = "/piratesproject/drawable/images/Normal.png";
+    public static String HARD_LOGO_PATH = "/piratesproject/drawable/images/hard.png";
     //styles
     static public final String HOMEPAGE_STYLE_PATH = "/piratesproject/drawable/styles/home_page.css";
     static public final String SETTINGS_STYLE_PATH = "/piratesproject/drawable/styles/settings.css";

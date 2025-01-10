@@ -23,9 +23,9 @@ public class LevelForm {
         window = new Stage();
         window.initOwner(owner);
         window.initModality(Modality.WINDOW_MODAL);
-        window.setTitle("Settings");
+        window.setTitle("Levels");
         window.setResizable(false);
-       // window.getIcons().add(new Image(getClass().getResource(Pathes.SETTINGS_LOGO_PATH).toString()));
+        
 
         Parent root = new LevelController(owner);
 

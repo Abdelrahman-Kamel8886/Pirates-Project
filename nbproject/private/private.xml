@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+<<<<<<< HEAD
+=======
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/home/FXMLController.java</file>
+            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/reg/RegisterController.java</file>
+            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/login/LoginBase.java</file>
+            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
+            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/Main.java</file>
+            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/reg/RegisterBase.java</file>
+=======
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/Main.java</file>
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/login/LoginController.java</file>
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/home/FXMLController.java</file>
+>>>>>>> 4d3ea5596dd80e50914acc8a62458584c63bbcea
+        </group>
+    </open-files>
+>>>>>>> c1ede0a9ee2cae55b8578fa3e64c17751e7b4294
+</project-private>

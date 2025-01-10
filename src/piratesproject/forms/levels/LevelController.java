@@ -45,8 +45,8 @@ public class LevelController extends LevelsBase {
                     setHard();
                     break;
             }
-            image1.setFitHeight(200.0);
-            image1.setFitWidth(200.0);
+            image1.setFitHeight(160.0);
+            image1.setFitWidth(160.0);
         });
     }
 
