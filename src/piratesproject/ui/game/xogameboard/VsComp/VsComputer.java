@@ -97,7 +97,17 @@ public class VsComputer extends XOGameBoard {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
-
+  private List<int[]> getEmptyButtons() {
+        List<int[]> emptyButtons = new ArrayList<>();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (board[i][j].isEmpty()) {
+                    emptyButtons.add(new int[]{i, j});
+                }
+            }
+        }
+        return emptyButtons;
+    }
 
     private String checkWin(int row, int col) {
         String symbol = currentPlayer.getSymbol();
