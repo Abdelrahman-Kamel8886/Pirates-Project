@@ -17,14 +17,16 @@ public class Pathes {
     static public final String EASY_LOGO_PATH = "/piratesproject/drawable/images/easy.png";
     static public final String NORMAL_LOGO_PATH = "/piratesproject/drawable/images/Normal.png";
     public static String HARD_LOGO_PATH = "/piratesproject/drawable/images/hard.png";
+    public static String GAMER_LOGO_PATH = "/piratesproject/drawable/icons/gamer.png";
+    public static String VS_LOGO_PATH = "/piratesproject/drawable/icons/vs.png";
     //styles
     static public final String HOMEPAGE_STYLE_PATH = "/piratesproject/drawable/styles/home_page.css";
     static public final String SETTINGS_STYLE_PATH = "/piratesproject/drawable/styles/settings.css";
     static public final String RECEIVINGINVITIONFORM_STYLE_PATH = "/piratesproject/drawable/styles/receivinginvitationform.css";
 
     //media
-    static public final String SOUNDTRACK1_PATH = "/piratesproject/media/sounds/soundtrack4.mp3";
-    static public final String SOUNDTRACK2_PATH = "/piratesproject/media/sounds/soundtrack1.mp3";
+    static public final String SOUNDTRACK1_PATH = "/piratesproject/media/sounds/soundtrack1.mp3";
+    static public final String SOUNDTRACK2_PATH = "/piratesproject/media/sounds/soundtrack4.mp3";
     static public final String SOUNDTRACK3_PATH = "/piratesproject/media/sounds/soundtrack2.mp3";
     static public final String SOUNDTRACK4_PATH = "/piratesproject/media/sounds/soundtrack3.mp3";
     static public final String DRAW_VEDIO_PATH = "/piratesproject/media/videos/damy.mp4";

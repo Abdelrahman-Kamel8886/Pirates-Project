@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lodinganimation.FXMLDocumentController">
+   <children>
+      <Circle fx:id="c1" fill="#ff000000" layoutX="300.0" layoutY="229.0" radius="129.0" stroke="#0020d7" strokeType="INSIDE" strokeWidth="15.0" style="-fx-stroke-dash-array: 50;" />
+      <Circle fx:id="c2" fill="#ff000000" layoutX="300.0" layoutY="230.0" radius="91.0" stroke="#9bf000" strokeType="INSIDE" strokeWidth="13.0" style="-fx-stroke-dash-array: 50;" />
+      <Circle fx:id="c3" fill="#ff000000" layoutX="301.0" layoutY="229.0" radius="54.0" stroke="#00f0c8" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 50;" />
+      <Label layoutX="82.0" layoutY="34.0" style="-fx-background-color: #436399;;" text="Waiting for a response. . ." textFill="WHITE">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

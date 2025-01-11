@@ -1,31 +1,33 @@
 package piratesproject.ui.home;
 
 import java.util.ArrayList;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import piratesproject.Main;
+import piratesproject.cells.ActivePlayerCell;
+import piratesproject.cells.GameRecordCell;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.SoundTrackStateEnum;
 import piratesproject.forms.Settings.SettingsForm;
-import piratesproject.forms.levels.LevelController;
 import piratesproject.forms.levels.LevelForm;
 import piratesproject.forms.twoNames.TwoNamesForm;
-import piratesproject.ui.login.LoginController;
-import piratesproject.ui.xogameboard.XOGameBoard;
+import piratesproject.models.AvalabilePlayer;
+import piratesproject.models.HistoryModel;
+import piratesproject.models.Player;
+import piratesproject.ui.auth.login.LoginController;
+import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.BackgroundMusic;
 import piratesproject.utils.SharedModel;
 
 public class HomePageController extends HomePage {
 
     private Stage myStage;
-    private ArrayList<String> songs;
+    private final ArrayList<String> songs;
     private int currentSong = 0;
 
     public HomePageController(Stage stage) {
@@ -35,9 +37,38 @@ public class HomePageController extends HomePage {
         songs.add(Pathes.SOUNDTRACK2_PATH);
         songs.add(Pathes.SOUNDTRACK3_PATH);
         songs.add(Pathes.SOUNDTRACK4_PATH);
+        
+        activePlayersListView.getItems().addAll(
+            new AvalabilePlayer("Ahmed", 85),
+            new AvalabilePlayer("Mohmaed", 90),
+            new AvalabilePlayer("Abdo", 75),
+            new AvalabilePlayer("Ahmed", 85),
+            new AvalabilePlayer("Mohmaed", 90),
+            new AvalabilePlayer("Abdo", 75)
+        );
+        
+        activePlayersListView.setCellFactory(param -> new ActivePlayerCell());
+        
+        Player p1=new Player("Abdo", "X");
+        Player p2=new Player("Mohamed", "O");
+        
+        Player p3=new Player("Ahmed", "X");
+        Player p4=new Player("Abdo", "O");
+        
+        recordsListView.getItems().addAll(
+                new HistoryModel(p1, p2, p1, ""),
+                new HistoryModel(p3, p4, p4, ""),
+                new HistoryModel(p1, p2, null, ""),
+                new HistoryModel(p1, p2, p2, ""),
+                new HistoryModel(p1, p2, null, ""),
+                new HistoryModel(p1, p2, null, "")
+                
+        );
+                
+        recordsListView.setCellFactory(param -> new GameRecordCell());
 
         initView();
-        playCurrentSong();
+        //playCurrentSong();
     }
 
     private void initView() {
@@ -94,7 +125,7 @@ public class HomePageController extends HomePage {
         }
 
         multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
-            showTwoNames();
+            goToGame();
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
             showLevels();
@@ -123,24 +154,22 @@ public class HomePageController extends HomePage {
             playCurrentSong();
         }
     }
-    
-    private void playNextSong(){
-        if(currentSong<songs.size()-1){
+
+    private void playNextSong() {
+        if (currentSong < songs.size() - 1) {
             currentSong++;
-        }
-        else{
+        } else {
             currentSong = 0;
         }
         stopSong();
         playCurrentSong();
     }
-    
-    private void playPrevSong(){
-        if(currentSong !=0){
+
+    private void playPrevSong() {
+        if (currentSong != 0) {
             currentSong--;
-        }
-        else{
-            currentSong = songs.size()-1;
+        } else {
+            currentSong = songs.size() - 1;
         }
         stopSong();
         playCurrentSong();
@@ -177,7 +206,7 @@ public class HomePageController extends HomePage {
     }
 
     private void goToGame() {
-        Parent game = new XOGameBoard(myStage);
+        Parent game = new XOGameOfflineController(myStage);
         Main.resetScene(game);
     }
 
@@ -185,14 +214,23 @@ public class HomePageController extends HomePage {
         SettingsForm settings = new SettingsForm();
         settings.display(myStage);
     }
-    private void showLevels()
-    {
+
+    private void showLevels() {
         LevelForm.display(myStage);
-        
+
     }
-        private void showTwoNames()
-    {
+
+    private void showTwoNames() {
         TwoNamesForm.display(myStage);
-        
+
+    }
+    
+    private void showSimpleAlert(AvalabilePlayer player) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Send request to " + player.getPlayerName());
+        alert.setContentText("Are you sure you want to send to user " + player.getPlayerName() + "\n" + " and its score is " + player.getScore()
+                + "\n" + "  ركز يا حبيبي ");
+        alert.showAndWait();
     }
 }
