@@ -137,6 +137,45 @@ public class VsComputer extends XOGameBoard {
         }
     }
 
+    private void drawWinLine(String winCondition) {
+        System.out.println(winCondition);
+        switch (winCondition) {
+            case "ROW-0":
+                line1.setVisible(true);
+                break;
+            case "ROW-1":
+                line3.setVisible(true);
+                break;
+            case "ROW-2":
+                line4.setVisible(true);
+                break;
+            case "COL-0":
+                line5.setVisible(true);
+                break;
+            case "COL-1":
+                line6.setVisible(true);
+                break;
+            case "COL-2":
+                line7.setVisible(true);
+                break;
+            case "DIAG-PRIMARY":
+                line2.setVisible(true);
+                break;
+            case "DIAG-SECONDARY":
+                line8.setVisible(true);
+                break;
+        }
+        disableAllButtons();
 
+    }
+
+    private void disableAllButtons() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                final int row = i, col = j;
+                buttons[i][j].setDisable(true);
+            }
+        }
+    }
 
 }
