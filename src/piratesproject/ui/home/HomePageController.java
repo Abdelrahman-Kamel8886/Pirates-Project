@@ -1,25 +1,22 @@
 package piratesproject.ui.home;
 
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableRow;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.cells.ActivePlayerCell;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.SoundTrackStateEnum;
 import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.forms.levels.LevelForm;
 import piratesproject.forms.twoNames.TwoNamesForm;
-import piratesproject.forms.sendinvitatation.SendInvitationFormHandler;
 import piratesproject.models.AvalabilePlayer;
 import piratesproject.ui.auth.login.LoginController;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.BackgroundMusic;
 import piratesproject.utils.SharedModel;
@@ -27,7 +24,7 @@ import piratesproject.utils.SharedModel;
 public class HomePageController extends HomePage {
 
     private Stage myStage;
-    private ArrayList<String> songs;
+    private final ArrayList<String> songs;
     private int currentSong = 0;
 
     public HomePageController(Stage stage) {
@@ -37,10 +34,17 @@ public class HomePageController extends HomePage {
         songs.add(Pathes.SOUNDTRACK2_PATH);
         songs.add(Pathes.SOUNDTRACK3_PATH);
         songs.add(Pathes.SOUNDTRACK4_PATH);
+        
+        activePlayersListView.getItems().addAll(
+            new AvalabilePlayer("Ahmed", 85),
+            new AvalabilePlayer("Mohmaed", 90),
+            new AvalabilePlayer("Abdo", 75)
+        );
+        
+        activePlayersListView.setCellFactory(param -> new ActivePlayerCell());
 
         initView();
         //playCurrentSong();
-        addOnliePlayer();
     }
 
     private void initView() {
@@ -67,17 +71,6 @@ public class HomePageController extends HomePage {
             initUserView();
         }
         onClicks();
-        tableView.setRowFactory(tv -> {
-            TableRow<AvalabilePlayer> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                System.out.println("Clicked row: ");
-                //showSimpleAlert(new Player("here is user name ", 1800));
-                SendInvitationFormHandler.display(myStage);
-                //Parent root = new SendInvitationFormController();
-                //Main.resetScene(root);
-            });
-            return row;
-        });
     }
 
     private void initGuestView() {
@@ -207,18 +200,7 @@ public class HomePageController extends HomePage {
         TwoNamesForm.display(myStage);
 
     }
-
-    private void addOnliePlayer() {
-        ObservableList<AvalabilePlayer> data = FXCollections.observableArrayList(
-                new AvalabilePlayer("test1", 90),
-                new AvalabilePlayer("test2", 85),
-                new AvalabilePlayer("test3", 95)
-        );
-
-        tableView.setItems(data);
-
-    }
-
+    
     private void showSimpleAlert(AvalabilePlayer player) {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

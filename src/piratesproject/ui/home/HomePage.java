@@ -1,6 +1,7 @@
 package piratesproject.ui.home;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,6 +13,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import piratesproject.models.AvalabilePlayer;
 
 public abstract class HomePage extends GridPane {
 
@@ -46,16 +48,10 @@ public abstract class HomePage extends GridPane {
     protected final RowConstraints rowConstraints1;
     protected final VBox box0;
     protected final Text userNameText1;
-    protected final TableView tableView;
-    protected final TableColumn tableColumn;
-    protected final TableColumn tableColumn0;
+    protected final ListView<AvalabilePlayer> activePlayersListView;
     protected final VBox box1;
     protected final Text userNameText11;
-    protected final TableView tableView0;
-    protected final TableColumn tableColumn1;
-    protected final TableColumn tableColumn2;
-    protected final TableColumn tableColumn3;
-    protected final TableColumn tableColumn4;
+    protected final ListView recordsListView;
 
     public HomePage() {
 
@@ -90,16 +86,10 @@ public abstract class HomePage extends GridPane {
         rowConstraints1 = new RowConstraints();
         box0 = new VBox();
         userNameText1 = new Text();
-        tableView = new TableView();
-        tableColumn = new TableColumn();
-        tableColumn0 = new TableColumn();
+        activePlayersListView = new ListView();
         box1 = new VBox();
         userNameText11 = new Text();
-        tableView0 = new TableView();
-        tableColumn1 = new TableColumn();
-        tableColumn2 = new TableColumn();
-        tableColumn3 = new TableColumn();
-        tableColumn4 = new TableColumn();
+        recordsListView = new ListView();
 
         setHgap(50.0);
         setMaxHeight(USE_PREF_SIZE);
@@ -262,16 +252,10 @@ public abstract class HomePage extends GridPane {
         userNameText1.setWrappingWidth(151.92578125);
         userNameText1.setFont(new Font("Old English Text MT", 24.0));
 
-        tableView.setPrefHeight(200.0);
-        tableView.setPrefWidth(200.0);
+        activePlayersListView.setPrefHeight(200.0);
+        activePlayersListView.setPrefWidth(200.0);
 
-        tableColumn.setPrefWidth(400.0);
-        tableColumn.setText("PlayerName");
-
-        tableColumn0.setMinWidth(0.0);
-        tableColumn0.setPrefWidth(100.0);
-        tableColumn0.setText("Score");
-        VBox.setMargin(tableView, new Insets(20.0));
+        VBox.setMargin(activePlayersListView, new Insets(20.0));
    
         GridPane.setColumnIndex(box1, 1);
         box1.setPrefHeight(210.0);
@@ -284,25 +268,11 @@ public abstract class HomePage extends GridPane {
         userNameText11.setWrappingWidth(151.92578125);
         userNameText11.setFont(new Font("Old English Text MT", 24.0));
 
-        tableView0.setEditable(true);
-        tableView0.setPrefHeight(200.0);
-        tableView0.setPrefWidth(200.0);
+        recordsListView.setEditable(true);
+        recordsListView.setPrefHeight(200.0);
+        recordsListView.setPrefWidth(200.0);
 
-        tableColumn1.setPrefWidth(200.0);
-        tableColumn1.setText("Opponent Name");
-
-        tableColumn2.setMinWidth(0.0);
-        tableColumn2.setPrefWidth(100.0);
-        tableColumn2.setText("Result");
-
-        tableColumn3.setMinWidth(0.0);
-        tableColumn3.setPrefWidth(100.0);
-        tableColumn3.setText("Game Type");
-
-        tableColumn4.setMinWidth(0.0);
-        tableColumn4.setPrefWidth(100.0);
-        tableColumn4.setText("Time");
-        VBox.setMargin(tableView0, new Insets(20.0));
+        VBox.setMargin(recordsListView, new Insets(20.0));
         GridPane.setMargin(gridPane, new Insets(20.0, 50.0, 20.0, 50.0));
 
         getColumnConstraints().add(columnConstraints);
@@ -333,16 +303,10 @@ public abstract class HomePage extends GridPane {
         gridPane.getColumnConstraints().add(columnConstraints1);
         gridPane.getRowConstraints().add(rowConstraints1);
         box0.getChildren().add(userNameText1);
-        tableView.getColumns().add(tableColumn);
-        tableView.getColumns().add(tableColumn0); 
-        box0.getChildren().add(tableView);
+        box0.getChildren().add(activePlayersListView);
         gridPane.getChildren().add(box0);
         box1.getChildren().add(userNameText11);
-        tableView0.getColumns().add(tableColumn1);
-        tableView0.getColumns().add(tableColumn2);
-        tableView0.getColumns().add(tableColumn3);
-        tableView0.getColumns().add(tableColumn4);
-        box1.getChildren().add(tableView0);
+        box1.getChildren().add(recordsListView);
         gridPane.getChildren().add(box1);
         getChildren().add(gridPane);
 
