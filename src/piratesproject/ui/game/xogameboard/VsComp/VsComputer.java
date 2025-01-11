@@ -41,9 +41,21 @@ public class VsComputer extends XOGameBoard {
         currentPlayer = player1;
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
-        //initButtons();
+        initButtons();
        // resetBoard();
        // onClicks();
+    }
+
+    private void initButtons() {
+        buttons[0][0] = btnGrid_0_0;
+        buttons[0][1] = btnGrid_0_1;
+        buttons[0][2] = btnGrid_0_2;
+        buttons[1][0] = btnGrid_1_0;
+        buttons[1][1] = btnGrid_1_1;
+        buttons[1][2] = btnGrid_1_2;
+        buttons[2][0] = btnGrid_2_0;
+        buttons[2][1] = btnGrid_2_1;
+        buttons[2][2] = btnGrid_2_2;
     }
 
 
