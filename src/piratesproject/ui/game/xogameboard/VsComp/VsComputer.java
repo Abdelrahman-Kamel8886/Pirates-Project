@@ -26,14 +26,26 @@ public class VsComputer extends XOGameBoard {
     private String[][] board;
     private Button[][] buttons;
     private Player player1, player2, currentPlayer;
-    private String name1 = "Abram", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
+    private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
 
     private final int SIZE = 3;
 
     public VsComputer(Stage stage) {
         super(stage);
-       // initGame();
+        initGame();
     }
+
+    private void initGame() {
+        player1 = new Player(name1, GameMovesEnum.X.name());
+        player2 = new Player(name2, GameMovesEnum.O.name());
+        currentPlayer = player1;
+        buttons = new Button[SIZE][SIZE];
+        board = new String[SIZE][SIZE];
+        //initButtons();
+       // resetBoard();
+       // onClicks();
+    }
+
+
+
 }
-
-
