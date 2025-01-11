@@ -93,6 +93,50 @@ public class VsComputer extends XOGameBoard {
         }
     }
 
+    private void switchPlayer() {
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    }
+
+
+
+    private String checkWin(int row, int col) {
+        String symbol = currentPlayer.getSymbol();
+
+        if (board[row][0].equals(symbol) && board[row][1].equals(symbol) && board[row][2].equals(symbol)) {
+            return "ROW-" + row;
+        }
+        if (board[0][col].equals(symbol) && board[1][col].equals(symbol) && board[2][col].equals(symbol)) {
+            return "COL-" + col;
+        }
+        if (row == col && board[0][0].equals(symbol) && board[1][1].equals(symbol) && board[2][2].equals(symbol)) {
+            return "DIAG-PRIMARY";
+        }
+        if (row + col == SIZE - 1 && board[0][2].equals(symbol) && board[1][1].equals(symbol) && board[2][0].equals(symbol)) {
+            return "DIAG-SECONDARY";
+        }
+        return null;
+    }
+
+    private boolean isDraw() {
+        for (String[] row : board) {
+            for (String cell : row) {
+                if (cell.isEmpty()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    protected void resetBoard() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                board[i][j] = "";
+                buttons[i][j].setText("");
+            }
+        }
+    }
+
 
 
 }
