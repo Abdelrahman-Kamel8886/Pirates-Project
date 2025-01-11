@@ -66,7 +66,7 @@ public class VsComputer extends XOGameBoard {
                     playerMove(row, col);
                     String winCondition = checkWin(row, col);
                     if (winCondition == null) {
-                       // computerMove();
+                        computerMove();
                         return;
                     }
 
