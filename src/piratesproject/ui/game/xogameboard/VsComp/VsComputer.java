@@ -43,7 +43,7 @@ public class VsComputer extends XOGameBoard {
         board = new String[SIZE][SIZE];
         initButtons();
        // resetBoard();
-       // onClicks();
+        onClicks();
     }
 
     private void initButtons() {
@@ -56,6 +56,23 @@ public class VsComputer extends XOGameBoard {
         buttons[2][0] = btnGrid_2_0;
         buttons[2][1] = btnGrid_2_1;
         buttons[2][2] = btnGrid_2_2;
+    }
+
+    private void onClicks() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                final int row = i, col = j;
+                buttons[i][j].setOnAction((ActionEvent event) -> {
+                    playerMove(row, col);
+                    String winCondition = checkWin(row, col);
+                    if (winCondition == null) {
+                       // computerMove();
+                        return;
+                    }
+
+                });
+            }
+        }
     }
 
 
