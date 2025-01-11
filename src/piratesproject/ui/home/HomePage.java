@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import piratesproject.models.AvalabilePlayer;
+import piratesproject.models.HistoryModel;
 
 public abstract class HomePage extends GridPane {
 
@@ -51,7 +52,7 @@ public abstract class HomePage extends GridPane {
     protected final ListView<AvalabilePlayer> activePlayersListView;
     protected final VBox box1;
     protected final Text userNameText11;
-    protected final ListView recordsListView;
+    protected final ListView<HistoryModel> recordsListView;
 
     public HomePage() {
 
@@ -252,7 +253,7 @@ public abstract class HomePage extends GridPane {
         userNameText1.setWrappingWidth(151.92578125);
         userNameText1.setFont(new Font("Old English Text MT", 24.0));
 
-        activePlayersListView.setPrefHeight(200.0);
+        activePlayersListView.setPrefHeight(300.0);
         activePlayersListView.setPrefWidth(200.0);
 
         VBox.setMargin(activePlayersListView, new Insets(20.0));
@@ -268,8 +269,7 @@ public abstract class HomePage extends GridPane {
         userNameText11.setWrappingWidth(151.92578125);
         userNameText11.setFont(new Font("Old English Text MT", 24.0));
 
-        recordsListView.setEditable(true);
-        recordsListView.setPrefHeight(200.0);
+        recordsListView.setPrefHeight(400.0);
         recordsListView.setPrefWidth(200.0);
 
         VBox.setMargin(recordsListView, new Insets(20.0));

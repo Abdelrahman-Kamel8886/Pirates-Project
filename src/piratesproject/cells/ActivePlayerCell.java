@@ -23,7 +23,7 @@ public class ActivePlayerCell extends ListCell<AvalabilePlayer> {
         avatarView.setFitWidth(50);
         avatarView.setFitHeight(50);
         avatarView.setPreserveRatio(true);
-        avatarView.setImage(new Image(getClass().getResource(Pathes.GUEST_LOGO_PATH).toExternalForm()));
+        avatarView.setImage(new Image(getClass().getResource(Pathes.GAMER_LOGO_PATH).toExternalForm()));
 
         userNameText = new Text();
         userNameText.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
