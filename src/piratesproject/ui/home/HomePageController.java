@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.cells.ActivePlayerCell;
+import piratesproject.cells.GameRecordCell;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.SoundTrackStateEnum;
@@ -16,6 +17,8 @@ import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.forms.levels.LevelForm;
 import piratesproject.forms.twoNames.TwoNamesForm;
 import piratesproject.models.AvalabilePlayer;
+import piratesproject.models.HistoryModel;
+import piratesproject.models.Player;
 import piratesproject.ui.auth.login.LoginController;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.BackgroundMusic;
@@ -38,10 +41,31 @@ public class HomePageController extends HomePage {
         activePlayersListView.getItems().addAll(
             new AvalabilePlayer("Ahmed", 85),
             new AvalabilePlayer("Mohmaed", 90),
+            new AvalabilePlayer("Abdo", 75),
+            new AvalabilePlayer("Ahmed", 85),
+            new AvalabilePlayer("Mohmaed", 90),
             new AvalabilePlayer("Abdo", 75)
         );
         
         activePlayersListView.setCellFactory(param -> new ActivePlayerCell());
+        
+        Player p1=new Player("Abdo", "X");
+        Player p2=new Player("Mohamed", "O");
+        
+        Player p3=new Player("Ahmed", "X");
+        Player p4=new Player("Abdo", "O");
+        
+        recordsListView.getItems().addAll(
+                new HistoryModel(p1, p2, p1, ""),
+                new HistoryModel(p3, p4, p4, ""),
+                new HistoryModel(p1, p2, null, ""),
+                new HistoryModel(p1, p2, p2, ""),
+                new HistoryModel(p1, p2, null, ""),
+                new HistoryModel(p1, p2, null, "")
+                
+        );
+                
+        recordsListView.setCellFactory(param -> new GameRecordCell());
 
         initView();
         //playCurrentSong();
