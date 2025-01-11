@@ -23,8 +23,8 @@ public class Pathes {
     static public final String RECEIVINGINVITIONFORM_STYLE_PATH = "/piratesproject/drawable/styles/receivinginvitationform.css";
 
     //media
-    static public final String SOUNDTRACK1_PATH = "/piratesproject/media/sounds/soundtrack4.mp3";
-    static public final String SOUNDTRACK2_PATH = "/piratesproject/media/sounds/soundtrack1.mp3";
+    static public final String SOUNDTRACK1_PATH = "/piratesproject/media/sounds/soundtrack1.mp3";
+    static public final String SOUNDTRACK2_PATH = "/piratesproject/media/sounds/soundtrack4.mp3";
     static public final String SOUNDTRACK3_PATH = "/piratesproject/media/sounds/soundtrack2.mp3";
     static public final String SOUNDTRACK4_PATH = "/piratesproject/media/sounds/soundtrack3.mp3";
     static public final String DRAW_VEDIO_PATH = "/piratesproject/media/videos/damy.mp4";
