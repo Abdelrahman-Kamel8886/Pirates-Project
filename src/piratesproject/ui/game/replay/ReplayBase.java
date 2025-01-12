@@ -1,5 +1,7 @@
 package piratesproject.ui.game.replay;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -12,7 +14,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class ReplayBase extends AnchorPane {
+public abstract class ReplayBase extends AnchorPane {
 
     protected final ImageView imageView;
     protected final TextArea NameArea;
@@ -43,6 +45,7 @@ public class ReplayBase extends AnchorPane {
     protected final Button Grid_6;
     protected final Button playButton;
     protected final Button pauseButton;
+    protected final Button backButton;
 
     public ReplayBase() {
 
@@ -75,6 +78,7 @@ public class ReplayBase extends AnchorPane {
         Grid_6 = new Button();
         playButton = new Button();
         pauseButton = new Button();
+        backButton = new Button();
 
         setId("AnchorPane");
         setMaxHeight(USE_PREF_SIZE);
@@ -260,6 +264,23 @@ public class ReplayBase extends AnchorPane {
         GridPane.setMargin(pauseButton, new Insets(0.0, 0.0, 0.0, 150.0));
         pauseButton.setFont(new Font("Old English Text MT", 25.0));
 
+        GridPane.setColumnIndex(backButton, 6);
+        GridPane.setRowIndex(backButton, 5);
+        backButton.setMnemonicParsing(false);
+        backButton.setPrefHeight(99.0);
+        backButton.setPrefWidth(102.0);
+        backButton.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
+        backButton.setText("Back");
+        backButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        backButton.setFont(new Font("Old English Text MT", 25.0));
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               
+            }
+        });
+        GridPane.setMargin(backButton, new Insets(0.0, 0.0, 0.0, 150.0));
+
         getChildren().add(imageView);
         getChildren().add(NameArea);
         gridPane.getColumnConstraints().add(columnConstraints);
@@ -287,6 +308,7 @@ public class ReplayBase extends AnchorPane {
         gridPane.getChildren().add(Grid_6);
         gridPane.getChildren().add(playButton);
         gridPane.getChildren().add(pauseButton);
+        gridPane.getChildren().add(backButton);
         vBox.getChildren().add(gridPane);
         getChildren().add(vBox);
 
