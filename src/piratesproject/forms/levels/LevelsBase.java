@@ -51,6 +51,7 @@ public class LevelsBase extends VBox {
         slider.setShowTickLabels(true);
         slider.setMajorTickUnit(1);
         slider.setMinorTickCount(0);
+        slider.setSnapToTicks(true);
         slider.setMaxHeight(USE_PREF_SIZE);
         slider.setMaxWidth(USE_PREF_SIZE);
         slider.setMinHeight(USE_PREF_SIZE);
@@ -68,8 +69,6 @@ public class LevelsBase extends VBox {
         playb.setStyle("-fx-background-radius: 20;");
         playb.setText("Play");
         VBox.setMargin(playb, new Insets(10.0, 0.0, 0.0, 120.0));
-
-
 
         getChildren().add(image1);
         getChildren().add(easy);
