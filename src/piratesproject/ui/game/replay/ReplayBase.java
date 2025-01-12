@@ -3,6 +3,7 @@ package piratesproject.ui.game.replay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -13,6 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import piratesproject.Main;
+import piratesproject.ui.home.HomePageController;
 
 public abstract class ReplayBase extends AnchorPane {
 
@@ -46,9 +50,10 @@ public abstract class ReplayBase extends AnchorPane {
     protected final Button playButton;
     protected final Button pauseButton;
     protected final Button backButton;
+    protected final Stage mystage;
 
-    public ReplayBase() {
-
+    public ReplayBase(Stage stage) {
+        mystage = stage;
         imageView = new ImageView();
         NameArea = new TextArea();
         vBox = new VBox();
@@ -276,7 +281,8 @@ public abstract class ReplayBase extends AnchorPane {
         backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-               
+               Parent homePage = new HomePageController(mystage);
+               Main.resetScene(homePage);
             }
         });
         GridPane.setMargin(backButton, new Insets(0.0, 0.0, 0.0, 150.0));

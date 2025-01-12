@@ -8,13 +8,21 @@ package piratesproject.ui.game.replay;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import piratesproject.Main;
+import piratesproject.ui.home.HomePageController;
 
 /**
  * FXML Controller class
  *
  * @author Abram
  */
-public class ReplayController implements Initializable {
+public class ReplayController extends ReplayBase implements Initializable  {
+
+    public ReplayController(Stage stage) {
+        super(stage);
+    }
 
     /**
      * Initializes the controller class.
@@ -23,5 +31,9 @@ public class ReplayController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+        public void gotoHome() {
+
+        Parent homePage = new HomePageController(mystage);
+        Main.resetScene(homePage);
+    }
 }
