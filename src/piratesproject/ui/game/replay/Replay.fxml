@@ -16,10 +16,10 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true">
          <image>
-            <Image url="@../../drawable/images/play%20cop7y.jpg" />
+            <Image url="@../../../drawable/images/xo_game_board.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="NameArea" layoutX="313.0" layoutY="71.0" prefHeight="119.0" prefWidth="654.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" />
+      <TextArea fx:id="NameArea" layoutX="307.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="656.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30px;" />
       <VBox prefHeight="800.0" prefWidth="1280.0">
          <children>
             <GridPane prefHeight="800.0" prefWidth="1280.0">
@@ -51,7 +51,7 @@
                   <Button fx:id="Grid_8" mnemonicParsing="false" prefHeight="159.0" prefWidth="233.0" style="-fx-background-color: #436399;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <Button fx:id="Grid_9" mnemonicParsing="false" prefHeight="159.0" prefWidth="233.0" style="-fx-background-color: #436399;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
                   <Button fx:id="Grid_6" mnemonicParsing="false" prefHeight="159.0" prefWidth="233.0" style="-fx-background-color: #436399;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Play" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                  <Button fx:id="playButton" mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Play" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
@@ -59,18 +59,7 @@
                         <Font name="Old English Text MT" size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Pause" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="3">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <GridPane.margin>
-                        <Insets left="150.0" />
-                     </GridPane.margin>
-                     <font>
-                        <Font name="Old English Text MT" size="25.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Back" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                  <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Pause" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>

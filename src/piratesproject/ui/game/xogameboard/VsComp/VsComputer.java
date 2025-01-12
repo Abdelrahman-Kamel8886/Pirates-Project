@@ -8,7 +8,6 @@ package piratesproject.ui.game.xogameboard.VSComp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -66,7 +65,7 @@ public class VsComputer extends XOGameBoard {
                     playerMove(row, col);
                     String winCondition = checkWin(row, col);
                     if (winCondition == null) {
-                       // computerMove();
+                       computerMove();
                         return;
                     }
 
@@ -92,7 +91,32 @@ public class VsComputer extends XOGameBoard {
             switchPlayer();
         }
     }
+    private List<int[]> getEmptyButtons() {
+        List<int[]> emptyButtons = new ArrayList<>();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (board[i][j].isEmpty()) {
+                    emptyButtons.add(new int[]{i, j});
+                }
+            }
+        }
+        return emptyButtons;
+    }
 
+    private void computerMove() {
+        List<int[]> emptyButtons = getEmptyButtons();
+        Random move = new Random();
+        move.nextInt(emptyButtons.size());
+        int[] selectedMove = emptyButtons.get(move.nextInt(emptyButtons.size())); // Select a random empty cell.
+        int row = selectedMove[0];
+        int col = selectedMove[1];
+
+        String winCondition = checkWin(row, col);
+        if (winCondition == null) {
+            playerMove(row, col);
+            return;
+        }
+    }
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }

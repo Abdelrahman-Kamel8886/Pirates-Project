@@ -11,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import piratesproject.utils.Consts;
 
 public class ReplayBase extends AnchorPane {
 
@@ -42,9 +41,8 @@ public class ReplayBase extends AnchorPane {
     protected final Button Grid_8;
     protected final Button Grid_9;
     protected final Button Grid_6;
-    protected final Button button;
-    protected final Button button0;
-    protected final Button button1;
+    protected final Button playButton;
+    protected final Button pauseButton;
 
     public ReplayBase() {
 
@@ -75,9 +73,8 @@ public class ReplayBase extends AnchorPane {
         Grid_8 = new Button();
         Grid_9 = new Button();
         Grid_6 = new Button();
-        button = new Button();
-        button0 = new Button();
-        button1 = new Button();
+        playButton = new Button();
+        pauseButton = new Button();
 
         setId("AnchorPane");
         setMaxHeight(USE_PREF_SIZE);
@@ -90,13 +87,17 @@ public class ReplayBase extends AnchorPane {
         imageView.setFitHeight(800.0);
         imageView.setFitWidth(1280.0);
         imageView.setPickOnBounds(true);
-        imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
+        imageView.setImage(new Image(getClass().getResource("../../../drawable/images/xo_game_board.jpg").toExternalForm()));
 
-        NameArea.setLayoutX(313.0);
+        NameArea.setLayoutX(307.0);
         NameArea.setLayoutY(71.0);
+        NameArea.setMaxHeight(USE_PREF_SIZE);
+        NameArea.setMaxWidth(USE_PREF_SIZE);
+        NameArea.setMinHeight(USE_PREF_SIZE);
+        NameArea.setMinWidth(USE_PREF_SIZE);
         NameArea.setPrefHeight(119.0);
-        NameArea.setPrefWidth(654.0);
-        NameArea.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10px;");
+        NameArea.setPrefWidth(656.0);
+        NameArea.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 30px;");
 
         vBox.setPrefHeight(800.0);
         vBox.setPrefWidth(1280.0);
@@ -237,39 +238,27 @@ public class ReplayBase extends AnchorPane {
         Grid_6.setPrefWidth(233.0);
         Grid_6.setStyle("-fx-background-color: #436399;");
 
-        GridPane.setColumnIndex(button, 6);
-        GridPane.setRowIndex(button, 1);
-        button.setMnemonicParsing(false);
-        button.setPrefHeight(99.0);
-        button.setPrefWidth(102.0);
-        button.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
-        button.setText("Play");
-        button.setTextFill(javafx.scene.paint.Color.WHITE);
-        GridPane.setMargin(button, new Insets(0.0, 0.0, 0.0, 150.0));
-        button.setFont(new Font("Old English Text MT", 25.0));
+        GridPane.setColumnIndex(playButton, 6);
+        GridPane.setRowIndex(playButton, 1);
+        playButton.setMnemonicParsing(false);
+        playButton.setPrefHeight(99.0);
+        playButton.setPrefWidth(102.0);
+        playButton.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
+        playButton.setText("Play");
+        playButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        GridPane.setMargin(playButton, new Insets(0.0, 0.0, 0.0, 150.0));
+        playButton.setFont(new Font("Old English Text MT", 25.0));
 
-        GridPane.setColumnIndex(button0, 6);
-        GridPane.setRowIndex(button0, 3);
-        button0.setMnemonicParsing(false);
-        button0.setPrefHeight(99.0);
-        button0.setPrefWidth(102.0);
-        button0.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
-        button0.setText("Pause");
-        button0.setTextFill(javafx.scene.paint.Color.WHITE);
-        button0.setOpaqueInsets(new Insets(0.0));
-        GridPane.setMargin(button0, new Insets(0.0, 0.0, 0.0, 150.0));
-        button0.setFont(new Font("Old English Text MT", 25.0));
-
-        GridPane.setColumnIndex(button1, 6);
-        GridPane.setRowIndex(button1, 5);
-        button1.setMnemonicParsing(false);
-        button1.setPrefHeight(99.0);
-        button1.setPrefWidth(102.0);
-        button1.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
-        button1.setText("Back");
-        button1.setTextFill(javafx.scene.paint.Color.WHITE);
-        GridPane.setMargin(button1, new Insets(0.0, 0.0, 0.0, 150.0));
-        button1.setFont(new Font("Old English Text MT", 25.0));
+        GridPane.setColumnIndex(pauseButton, 6);
+        GridPane.setRowIndex(pauseButton, 3);
+        pauseButton.setMnemonicParsing(false);
+        pauseButton.setPrefHeight(99.0);
+        pauseButton.setPrefWidth(102.0);
+        pauseButton.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
+        pauseButton.setText("Pause");
+        pauseButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        GridPane.setMargin(pauseButton, new Insets(0.0, 0.0, 0.0, 150.0));
+        pauseButton.setFont(new Font("Old English Text MT", 25.0));
 
         getChildren().add(imageView);
         getChildren().add(NameArea);
@@ -296,9 +285,8 @@ public class ReplayBase extends AnchorPane {
         gridPane.getChildren().add(Grid_8);
         gridPane.getChildren().add(Grid_9);
         gridPane.getChildren().add(Grid_6);
-        gridPane.getChildren().add(button);
-        gridPane.getChildren().add(button0);
-        gridPane.getChildren().add(button1);
+        gridPane.getChildren().add(playButton);
+        gridPane.getChildren().add(pauseButton);
         vBox.getChildren().add(gridPane);
         getChildren().add(vBox);
 
