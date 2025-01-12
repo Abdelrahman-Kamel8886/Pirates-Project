@@ -27,6 +27,7 @@ public class Main extends Application {
         SharedModel.setUser(user);
         
         stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
 
         Parent root = new SplashController(stage);
         scene = new Scene(root);
