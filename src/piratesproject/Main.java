@@ -9,9 +9,8 @@ import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;
-import piratesproject.ui.win.WinScreenController;
-import piratesproject.ui.xogameboard.XOGameBoard;
-import piratesproject.ui.xogameboard.XOGameController;
+import piratesproject.utils.BackgroundMusic;
+
 import piratesproject.utils.SharedModel;
 public class Main extends Application {
 
@@ -26,9 +25,12 @@ public class Main extends Application {
         user.setScore(10);
         user.setUserName("abdokamel8886");
         SharedModel.setUser(user);
+        
         stage.setFullScreen(true);
+
+
         Parent root = new HomePageController(stage);
-        scene = new Scene(root,1920,1080);
+        scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
         stage.setScene(scene);
@@ -36,6 +38,14 @@ public class Main extends Application {
         stage.show();
 
     }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        BackgroundMusic.stopMusic();
+    }
+    
+    
     
     public static void resetScene(Parent p){
         scene.setRoot(p);

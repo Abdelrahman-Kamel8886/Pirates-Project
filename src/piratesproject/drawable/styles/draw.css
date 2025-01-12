@@ -1,0 +1,11 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.button {
+    -fx-background-radius: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: #F44336;
+}
+
+

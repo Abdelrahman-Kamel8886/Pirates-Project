@@ -1,0 +1,68 @@
+/* style.css */
+
+/* Style for the VBox with a background image */
+.vbox {
+    -fx-background-image: url("/piratesproject/drawable/images/levelsbg.png"); /* Path to your background image */
+    -fx-background-size: cover; /* Cover the entire area */
+    -fx-background-position: center; /* Center the image */
+    -fx-padding: 20; /* Padding */
+    -fx-background-radius: 10; /* Rounded thumb */
+
+}
+
+/* Style for the ImageView */
+.image-view {
+    -fx-fit-height: 150px; /* Fit height */
+    -fx-fit-width: 200px; /* Fit width */
+    -fx-preserve-ratio: true; /* Preserve aspect ratio */
+}
+
+/* Style for the Slider */
+.slider {
+/*    -fx-pref-width: 50px;  Decrease width 
+    -fx-pref-height: 30px;  Increase height */
+    -fx-background-color: transparent; /* Make background transparent */
+}
+
+/* Style for the track */
+.slider .track {
+    -fx-background-color: black; /* Set the track color to black */
+    -fx-background-insets: 0; /* No insets */
+    -fx-background-radius: 5; /* Rounded corners */
+}
+
+/* Style for the thumb */
+.slider .thumb {
+    -fx-background-color: #0078d7; /* Color of the thumb */
+    -fx-background-radius: 10; /* Rounded thumb */
+    -fx-pref-width: 20px; /* Width of the thumb */
+    -fx-pref-height: 20px; /* Height of the thumb */
+}
+
+/* Style for the tick marks */
+.slider .tick-mark {
+    -fx-background-color: transparent; /* Make tick marks transparent */
+}
+
+/* Style for the tick labels */
+.slider .tick-label {
+    -fx-font-size: 12px; /* Font size for tick labels */
+}
+
+/* Optional: Style for the slider when it is hovered */
+.slider:hover .thumb {
+    -fx-background-color: #0056a3; /* Darker color on hover */
+}
+
+/* Style for the Label */
+.label {
+    -fx-text-fill: white; /* Text color */
+    -fx-font-size: 20px; /* Font size */
+}
+
+/* Style for the Button */
+.button {
+    -fx-text-fill: white; /* Text color for button */
+    -fx-background-color: #0056a3;
+    -fx-background-radius: 20; /* Rounded thumb */
+}

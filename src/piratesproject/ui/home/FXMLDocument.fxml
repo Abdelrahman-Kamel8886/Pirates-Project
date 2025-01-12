@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -27,11 +28,48 @@
             <Insets bottom="100.0" left="40.0" right="40.0" top="40.0" />
          </GridPane.margin>
          <children>
-            <ImageView fx:id="logoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../drawable/images/app_logo.png" />
-               </image>
-            </ImageView>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <ImageView fx:id="logoImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../drawable/images/app_logo.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="sountrackText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sound Track" textAlignment="CENTER" wrappingWidth="151.92578125">
+                     <font>
+                        <Font name="Old English Text MT" size="24.0" />
+                     </font>
+                  </Text>
+                  <ProgressBar fx:id="soundBar" prefWidth="200.0" progress="0.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="prevBtn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../drawable/icons/previous.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="playBtn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../drawable/icons/pause.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="stopBtn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../drawable/icons/stop.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="nextBtn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../drawable/icons/next.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0">
