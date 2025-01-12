@@ -1,0 +1,6 @@
+.root {
+    -fx-background-image: url("../images/splash.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}

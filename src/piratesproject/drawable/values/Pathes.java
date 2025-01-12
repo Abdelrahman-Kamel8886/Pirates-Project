@@ -3,6 +3,7 @@ package piratesproject.drawable.values;
 public class Pathes {
 
     //Logos
+    static public final String SPLASH_LOGO_PATH = "/piratesproject/drawable/images/splash_logo.png";
     static public final String APP_LOGO_PATH = "/piratesproject/drawable/images/app_logo.png";
     static public final String MULTIPLAYER_LOGO_PATH = "/piratesproject/drawable/icons/multi.png";
     static public final String COMPUTER_LOGO_PATH = "/piratesproject/drawable/icons/computer.png";
@@ -20,6 +21,7 @@ public class Pathes {
     public static String GAMER_LOGO_PATH = "/piratesproject/drawable/icons/gamer.png";
     public static String VS_LOGO_PATH = "/piratesproject/drawable/icons/vs.png";
     //styles
+    static public final String SPLASH_STYLE_PATH = "/piratesproject/drawable/styles/splash.css";
     static public final String HOMEPAGE_STYLE_PATH = "/piratesproject/drawable/styles/home_page.css";
     static public final String SETTINGS_STYLE_PATH = "/piratesproject/drawable/styles/settings.css";
     static public final String RECEIVINGINVITIONFORM_STYLE_PATH = "/piratesproject/drawable/styles/receivinginvitationform.css";
