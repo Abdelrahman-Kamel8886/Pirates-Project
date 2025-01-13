@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
+import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.splash.SplashController;
 import piratesproject.utils.BackgroundMusic;
@@ -31,7 +32,7 @@ public class Main extends Application {
         stage.setFullScreenExitHint("");
 
 
-        Parent root = new SplashController(stage);
+        Parent root = new XOGameOfflineController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
