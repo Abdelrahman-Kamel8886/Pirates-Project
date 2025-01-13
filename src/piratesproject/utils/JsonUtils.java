@@ -1,8 +1,11 @@
 package piratesproject.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
+import piratesproject.models.MoveModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
@@ -55,5 +58,12 @@ public class JsonUtils {
     // Convert JSON string to ResponseModel
     public static LoginResponseModel jsonToLoginResponseModel(String json) {
         return gson.fromJson(json, LoginResponseModel.class);
+    }
+    public static String movesArrayToJson(ArrayList<MoveModel> moves ) {
+        return gson.toJson(moves);
+    }
+    public static ArrayList<MoveModel> jsonToMovesArray(String json) {
+        ArrayList<MoveModel> moveModels = gson.fromJson(json, new TypeToken<ArrayList<MoveModel>>(){}.getType());
+        return moveModels;
     }
 }
