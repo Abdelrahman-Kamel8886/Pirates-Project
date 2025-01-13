@@ -18,6 +18,7 @@ import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
 import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
@@ -99,9 +100,6 @@ public class XOGameOfflineController extends XOGameBoard {
                 });
             }
         }
-        avatarIcon.setOnMouseClicked((MouseEvent event) -> {
-            goToReplay();
-        });
     }
 
     public void makeMove(int row, int col) {
@@ -114,12 +112,13 @@ public class XOGameOfflineController extends XOGameBoard {
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
-
+                saveRecordToFile();
                 return;
             }
             if (isDraw()) {
                 currentPlayer = null;
                 disableAllButtons();
+                saveRecordToFile();
                 return;
             }
             switchPlayer();
@@ -216,6 +215,12 @@ public class XOGameOfflineController extends XOGameBoard {
         gameRecord.setLine(line);
         SharedModel.setSelectedRecord(gameRecord);
         System.out.println(gameRecord.toString());
+    }
+    
+    private void saveRecordToFile(){
+        String record = JsonUtils.recordModelToJson(gameRecord);
+        FileHandler.appendToFile(record);
+        
     }
 
     private void goToReplay() {

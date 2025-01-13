@@ -57,7 +57,7 @@ public class Main extends Application {
     public static void resetScene(Parent p){
         scene.setRoot(p);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) {      
         launch(args);
     }
 
