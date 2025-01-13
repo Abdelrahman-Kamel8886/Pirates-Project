@@ -121,7 +121,32 @@ public class VsComputer extends XOGameBoard {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
+  private List<int[]> getEmptyButtons() {
+        List<int[]> emptyButtons = new ArrayList<>();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (board[i][j].isEmpty()) {
+                    emptyButtons.add(new int[]{i, j});
+                }
+            }
+        }
+        return emptyButtons;
+    }
+  
+      private void computerMove() {
+        List<int[]> emptyButtons = getEmptyButtons();
+        Random move = new Random();
+        move.nextInt(emptyButtons.size());
+        int[] selectedMove = emptyButtons.get(move.nextInt(emptyButtons.size())); // Select a random empty cell.
+        int row = selectedMove[0];
+        int col = selectedMove[1];
 
+        String winCondition = checkWin(row, col);
+        if (winCondition == null) {
+            playerMove(row, col);
+            return;
+        }
+    }
 
     private String checkWin(int row, int col) {
         String symbol = currentPlayer.getSymbol();

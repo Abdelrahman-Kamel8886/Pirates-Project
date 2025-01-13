@@ -68,7 +68,7 @@ public class HomePageController extends HomePage {
         recordsListView.setCellFactory(param -> new GameRecordCell());
 
         initView();
-        //playCurrentSong();
+        playCurrentSong();
     }
 
     private void initView() {
