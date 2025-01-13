@@ -1,23 +1,22 @@
 package piratesproject.ui.game.xogameboard.offline;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.concurrent.Task;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
+import javafx.scene.Parent;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import minmaxalgorithim.State;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
+import piratesproject.models.RecordModel;
+import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
-import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 
@@ -25,47 +24,51 @@ public class XOGameOfflineController extends XOGameBoard {
 
     private Player player1, player2, currentPlayer;
     private String name1, name2;
+    private String movesSequnce;
+    private RecordModel gameRecord;
+    private ArrayList<MoveModel> moves;
     
     private String[][] board;
     private Button[][] buttons;
 
     private final int SIZE = 3;
-
+  
+  private Stage stage;
     Thread minMaxthread ; 
     public XOGameOfflineController(Stage stage) {
         super(stage);
         initView();
-
-        btnGrid_0_0.setOnAction((ActionEvent event) -> {
-            drawSuccesslines();
-            getChildren().add(mediaView);
-            //showWinState();
-        });
-        backIcon.addEventHandler(EventType.ROOT,new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                Main.resetScene(new HomePageController(stage));
-                minMaxthread.stop();
-                
-            }
-        });
-        
-       retryIcon.addEventHandler(EventType.ROOT,new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                resetBoard();
-                minMaxthread.stop();
-            }
-        });
-        
-         minMaxthread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                minMax();
-
-            }
-        });
-        minMaxthread.start();
+        this.stage= stage;
+//        btnGrid_0_0.setOnAction((ActionEvent event) -> {
+//            drawSuccesslines();
+//            getChildren().add(mediaView);
+//            //showWinState();
+//        });
+//        backIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+//            @Override
+//            public void handle(Event event) {
+//                Main.resetScene(new HomePageController(stage));
+//                minMaxthread.stop();
+//                
+//            }
+//        });
+//        
+//       retryIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+//            @Override
+//            public void handle(Event event) {
+//                resetBoard();
+//                minMaxthread.stop();
+//            }
+//        });
+//        
+//         minMaxthread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                minMax();
+//
+//            }
+//        });
+//        minMaxthread.start();
 
     
 }
@@ -142,6 +145,7 @@ public class XOGameOfflineController extends XOGameBoard {
     private void initView() {
         name1 = SharedModel.getPlayerName1();
         name2 = SharedModel.getPlayerName2();
+        drawSuccesslines();
         initGame();
     }
 
@@ -150,7 +154,9 @@ public class XOGameOfflineController extends XOGameBoard {
         player2 = new Player(name2, GameMovesEnum.O.name());
         currentPlayer = player1;
         buttons = new Button[SIZE][SIZE];
-        board = new String[SIZE][SIZE];;
+        board = new String[SIZE][SIZE];
+        moves = new ArrayList();
+        gameRecord= new RecordModel(player1,player2);
         initButtons();
         resetBoard();
         onClicks();
@@ -179,13 +185,15 @@ public class XOGameOfflineController extends XOGameBoard {
         }
     }
 
-    public void makeMove(int row, int col) {
+   public void makeMove(int row, int col) {
         if (board[row][col].isEmpty()) {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
+            moves.add(new MoveModel(row,col,currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
             if (winCondition != null) {
                 drawWinLine(winCondition);
+                saveRecord();
                 return;
             }
             if (isDraw()) {
@@ -278,6 +286,18 @@ public class XOGameOfflineController extends XOGameBoard {
                 buttons[i][j].setDisable(true);
             }
         }
+    }
+    private void saveRecord(){
+        movesSequnce = JsonUtils.movesArrayToJson(moves);
+        gameRecord.setWinner(currentPlayer);
+        gameRecord.setGameSequance(movesSequnce);
+        SharedModel.setSelectedRecord(gameRecord);
+        System.out.println(gameRecord.toString());
+    }
+    
+    private void goToReplay() {
+        Parent replay = new ReplayController(stage);
+        Main.resetScene(replay);
     }
 
 }
