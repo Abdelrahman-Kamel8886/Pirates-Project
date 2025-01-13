@@ -142,10 +142,9 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_2_0.setMnemonicParsing(false);
         btnGrid_2_0.setPrefHeight(200.0);
         btnGrid_2_0.setPrefWidth(320.0);
-        btnGrid_2_0.setStyle("-fx-background-color: transparent;  -fx-background-insets: 0;-fx-border-color: transparent; ");
+        btnGrid_2_0.setStyle("-fx-background-color: transparent; ");
         btnGrid_2_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_0.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnGrid_2_0.setTextOverrun(javafx.scene.control.OverrunStyle.CLIP);
         btnGrid_2_0.setWrapText(true);
         btnGrid_2_0.setFont(new Font(96.0));
         btnGrid_2_0.setCursor(Cursor.NONE);
@@ -153,8 +152,7 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_0_0.setMnemonicParsing(false);
         btnGrid_0_0.setPrefHeight(230.0);
         btnGrid_0_0.setPrefWidth(345.0);
-        btnGrid_0_0.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_0_0.setText("X");
+        btnGrid_0_0.setStyle("-fx-background-color: transparent;");
         btnGrid_0_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_0.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_0_0.setWrapText(true);
@@ -165,8 +163,7 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_0_1.setMnemonicParsing(false);
         btnGrid_0_1.setPrefHeight(213.0);
         btnGrid_0_1.setPrefWidth(345.0);
-        btnGrid_0_1.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_0_1.setText("X");
+        btnGrid_0_1.setStyle("-fx-background-color: transparent;");
         btnGrid_0_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_1.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_0_1.setWrapText(true);
@@ -176,43 +173,39 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_0_2.setMnemonicParsing(false);
         btnGrid_0_2.setPrefHeight(241.0);
         btnGrid_0_2.setPrefWidth(345.0);
-        btnGrid_0_2.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_0_2.setText("O");
+        btnGrid_0_2.setStyle("-fx-background-color: transparent;");
         btnGrid_0_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_0_2.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_0_2.setWrapText(true);
         btnGrid_0_2.setFont(new Font(96.0));
-
-        btnGrid_0_2.setEffect(blend);
 
         GridPane.setColumnIndex(btnGrid_1_2, 2);
         GridPane.setRowIndex(btnGrid_1_2, 1);
         btnGrid_1_2.setMnemonicParsing(false);
         btnGrid_1_2.setPrefHeight(230.0);
         btnGrid_1_2.setPrefWidth(345.0);
-        btnGrid_1_2.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_1_2.setText("X");
+        btnGrid_1_2.setStyle("-fx-background-color: transparent;");
         btnGrid_1_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_2.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_1_2.setWrapText(true);
         btnGrid_1_2.setFont(new Font(96.0));
 
-        btnGrid_1_2.setEffect(blend0);
-        btnGrid_1_2.setCursor(Cursor.NONE);
+//        btnGrid_1_2.setEffect(blend0);
+//        btnGrid_1_2.setCursor(Cursor.NONE);
 
         GridPane.setColumnIndex(btnGrid_2_2, 2);
         GridPane.setRowIndex(btnGrid_2_2, 2);
         btnGrid_2_2.setMnemonicParsing(false);
         btnGrid_2_2.setPrefHeight(230.0);
         btnGrid_2_2.setPrefWidth(345.0);
-        btnGrid_2_2.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_2_2.setText("X");
+        btnGrid_2_2.setStyle("-fx-background-color: transparent;");
+        
         btnGrid_2_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_2.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_2_2.setWrapText(true);
         btnGrid_2_2.setFont(new Font(96.0));
 
-        btnGrid_2_2.setEffect(blend1);
+        //btnGrid_2_2.setEffect(blend1);
 
         GridPane.setColumnIndex(btnGrid_1_1, 1);
         GridPane.setHalignment(btnGrid_1_1, javafx.geometry.HPos.CENTER);
@@ -220,8 +213,8 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_1_1.setMnemonicParsing(false);
         btnGrid_1_1.setPrefHeight(230.0);
         btnGrid_1_1.setPrefWidth(345.0);
-        btnGrid_1_1.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_1_1.setText("O");
+        btnGrid_1_1.setStyle("-fx-background-color: transparent;");
+        
         btnGrid_1_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_1.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_1_1.setWrapText(true);
@@ -231,8 +224,7 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_1_0.setMnemonicParsing(false);
         btnGrid_1_0.setPrefHeight(230.0);
         btnGrid_1_0.setPrefWidth(345.0);
-        btnGrid_1_0.setStyle("-fx-background-color: transparent;-fx-padding: 200;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_1_0.setText("O");
+        btnGrid_1_0.setStyle("-fx-background-color: transparent;");
         btnGrid_1_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_0.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_1_0.setWrapText(true);
@@ -245,7 +237,6 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_2_1.setPrefHeight(230.0);
         btnGrid_2_1.setPrefWidth(345.0);
         btnGrid_2_1.setStyle("-fx-background-color: transparent;-fx-padding: 10; -fx-cursor: default;  -fx-background-insets: 0;-fx-border-color: transparent; ");
-        btnGrid_2_1.setText("O");
         btnGrid_2_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_1.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_2_1.setWrapText(true);
