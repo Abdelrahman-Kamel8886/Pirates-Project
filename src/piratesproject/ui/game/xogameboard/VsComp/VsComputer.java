@@ -8,13 +8,22 @@ package piratesproject.ui.game.xogameboard.VSComp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import minmaxalgorithim.State;
+import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
 import piratesproject.models.Player;
+import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
+import piratesproject.ui.home.HomePageController;
 
 /**
  *
@@ -26,7 +35,8 @@ public class VsComputer extends XOGameBoard {
     private Button[][] buttons;
     private Player player1, player2, currentPlayer;
     private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
-
+    Thread minMaxthread ; 
+    Stage stage ; 
     private final int SIZE = 3;
 
     public VsComputer(Stage stage) {
@@ -40,9 +50,104 @@ public class VsComputer extends XOGameBoard {
         currentPlayer = player1;
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
+        
         initButtons();
         resetBoard();
         onClicks();
+                backIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                Main.resetScene(new HomePageController(stage));
+                minMaxthread.stop();
+                
+            }
+        });
+        
+       retryIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                resetBoard();
+                minMaxthread.stop();
+            }
+        });
+       
+        minMaxthread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                minMax();
+
+            }
+        });
+        minMaxthread.start();
+    }
+        void minMax() {
+    AdversarialSearchTicTacToe adsTicTacToe = new AdversarialSearchTicTacToe();
+
+    String[] board = {"", "", "", "", "", "", "", "", ""};
+
+    State state = new State(0, board);
+
+    Scanner scanner = new Scanner(System.in);
+
+    
+    while (!adsTicTacToe.isTerminal(state)) {
+        drawBoard(state);
+
+        
+        int aiMove = adsTicTacToe.minMaxDecision(state);
+        state.changeState(aiMove, "X");
+        System.out.println("AI chose position: " + aiMove);
+
+        if (adsTicTacToe.isTerminal(state)) {
+            break;
+        }
+
+        drawBoard(state);
+        System.out.print("Your move (0-8): ");
+        int userInput;
+        while (true) {
+            userInput = Integer.parseInt(scanner.nextLine());
+            if (userInput >= 0 && userInput < 9 && state.getStateIndex(userInput).isEmpty()) {
+                break; 
+            }
+            System.out.print("Invalid move! Try again (0-8): ");
+        }
+        state.changeState(userInput, "O");
+    }
+
+    drawBoard(state);
+    System.out.println("Game is over");
+    int result = adsTicTacToe.utilityOf(state);
+    if (result == 1) {
+        System.out.println("AI wins!");
+    } else if (result == -1) {
+        System.out.println("You win!");
+    } else {
+        System.out.println("It's a draw!");
+    }
+}
+
+    public void drawBoard(State state) {
+        for (int i = 0; i < 7; i += 3) {
+            System.out.println(state.getStateIndex(i) + " "
+                    + state.getStateIndex(i + 1) + " " + state.getStateIndex(i + 2));
+        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                btnGrid_0_0.setText(state.getStateIndex(0));
+                btnGrid_0_1.setText(state.getStateIndex(1));
+                btnGrid_0_2.setText(state.getStateIndex(2));
+                btnGrid_1_0.setText(state.getStateIndex(3));
+                btnGrid_1_1.setText(state.getStateIndex(4));
+                btnGrid_1_2.setText(state.getStateIndex(5));
+                btnGrid_2_0.setText(state.getStateIndex(6));
+                btnGrid_2_1.setText(state.getStateIndex(7));
+                btnGrid_2_2.setText(state.getStateIndex(8));
+            }
+        });
+
     }
 
     private void initButtons() {
@@ -66,7 +171,7 @@ public class VsComputer extends XOGameBoard {
                     String winCondition = checkWin(row, col);
                     if (winCondition == null) {
                        computerMove();
-                        return;
+                        return ;
                     }
 
                 });
@@ -91,32 +196,32 @@ public class VsComputer extends XOGameBoard {
             switchPlayer();
         }
     }
-    private List<int[]> getEmptyButtons() {
-        List<int[]> emptyButtons = new ArrayList<>();
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                if (board[i][j].isEmpty()) {
-                    emptyButtons.add(new int[]{i, j});
-                }
-            }
-        }
-        return emptyButtons;
-    }
+//    private List<int[]> getEmptyButtons() {
+//        List<int[]> emptyButtons = new ArrayList<>();
+//        for (int i = 0; i < SIZE; i++) {
+//            for (int j = 0; j < SIZE; j++) {
+//                if (board[i][j].isEmpty()) {
+//                    emptyButtons.add(new int[]{i, j});
+//                }
+//            }
+//        }
+//        return emptyButtons;
+//    }
 
-    private void computerMove() {
-        List<int[]> emptyButtons = getEmptyButtons();
-        Random move = new Random();
-        move.nextInt(emptyButtons.size());
-        int[] selectedMove = emptyButtons.get(move.nextInt(emptyButtons.size())); // Select a random empty cell.
-        int row = selectedMove[0];
-        int col = selectedMove[1];
-
-        String winCondition = checkWin(row, col);
-        if (winCondition == null) {
-            playerMove(row, col);
-            return;
-        }
-    }
+//    private void computerMove() {
+//        List<int[]> emptyButtons = getEmptyButtons();
+//        Random move = new Random();
+//        //move.nextInt(emptyButtons.size());
+//        int[] selectedMove = emptyButtons.get(move.nextInt(emptyButtons.size())); // Select a random empty cell.
+//        int row = selectedMove[0];
+//        int col = selectedMove[1];
+//
+//        String winCondition = checkWin(row, col);
+//        if (winCondition == null) {
+//            playerMove(row, col);
+//            return;
+//        }
+//    }
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
