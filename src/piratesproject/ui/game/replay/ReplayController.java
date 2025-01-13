@@ -26,10 +26,6 @@ public class ReplayController extends ReplayBase  {
         super(stage);
         initView();
     }
-
-    /**
-     * Initializes the controller class.
-     */
     public void initView()
     {
         onClick();
