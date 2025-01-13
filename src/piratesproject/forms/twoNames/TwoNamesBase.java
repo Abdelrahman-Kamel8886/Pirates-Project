@@ -103,14 +103,15 @@ public abstract class TwoNamesBase extends AnchorPane {
         playerOneTextField.setPrefHeight(100.0);
         playerOneTextField.setPrefWidth(200.0);
         playerOneTextField.setStyle("-fx-background-radius: 20px;");
-        playerOneTextField.setFont(new Font(46.0));
+        playerOneTextField.setFont(new Font(24.0));
 
         GridPane.setColumnIndex(playerTwoTextField, 3);
         GridPane.setRowIndex(playerTwoTextField, 1);
         playerTwoTextField.setPrefHeight(100.0);
         playerTwoTextField.setPrefWidth(255.0);
         playerTwoTextField.setStyle("-fx-background-radius: 20px;");
-        playerTwoTextField.setFont(new Font(46.0));
+        playerTwoTextField.setFont(new Font(24.0));
+        playerTwoTextField.setPromptText("2nd Player Name");
 
         button.setLayoutX(231.0);
         button.setLayoutY(307.0);
