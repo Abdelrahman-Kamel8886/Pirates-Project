@@ -24,8 +24,8 @@ import piratesproject.utils.SharedModel;
 public class XOGameOfflineController extends XOGameBoard {
 
     private Player player1, player2, currentPlayer;
-    private String name1, name2 , firstPlayer , secondPlayer;
-    private String movesSequnce;
+    private String name1, name2, firstPlayer, secondPlayer;
+    private String movesSequnce, line;
     private RecordModel gameRecord;
     private ArrayList<MoveModel> moves;
 
@@ -46,10 +46,11 @@ public class XOGameOfflineController extends XOGameBoard {
     private void initView() {
         name1 = SharedModel.getPlayerName1();
         name2 = SharedModel.getPlayerName2();
+        line = "none";
         setPlayersRandomly();
         drawSuccesslines();
         initGame();
-        
+
     }
 
     private void setPlayersRandomly() {
@@ -60,8 +61,8 @@ public class XOGameOfflineController extends XOGameBoard {
             firstPlayer = name2;
             secondPlayer = name1;
         }
-        playerOneLabel.setText(firstPlayer+" : ( X )");
-        playerTwoLabel.setText(secondPlayer+" ( O )");
+        playerOneLabel.setText(firstPlayer + " : ( X )");
+        playerTwoLabel.setText(secondPlayer + " ( O )");
     }
 
     private void initGame() {
@@ -109,10 +110,11 @@ public class XOGameOfflineController extends XOGameBoard {
             buttons[row][col].setText(currentPlayer.getSymbol());
             moves.add(new MoveModel(row, col, currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
+            line = winCondition != null?winCondition:"none";
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
-                
+
                 return;
             }
             if (isDraw()) {
@@ -211,6 +213,7 @@ public class XOGameOfflineController extends XOGameBoard {
         movesSequnce = JsonUtils.movesArrayToJson(moves);
         gameRecord.setWinner(currentPlayer);
         gameRecord.setGameSequance(movesSequnce);
+        gameRecord.setLine(line);
         SharedModel.setSelectedRecord(gameRecord);
         System.out.println(gameRecord.toString());
     }

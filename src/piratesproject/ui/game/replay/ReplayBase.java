@@ -11,8 +11,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import static piratesproject.utils.Consts.GRID_BTN_HEIGTH;
+import static piratesproject.utils.Consts.GRID_BTN_WIGTH;
+import static piratesproject.utils.Consts.GRID_X_0_0;
+import static piratesproject.utils.Consts.GRID_Y_0_0;
 
 public class ReplayBase extends AnchorPane {
 
@@ -51,6 +57,7 @@ public class ReplayBase extends AnchorPane {
     protected final Label label;
     protected final Label label0;
     protected final Stage mystage;
+    protected Line line1 ,line2,line3,line4,line5,line6,line7,line8;
 
     public ReplayBase(Stage stage) {
         mystage = stage;
@@ -283,14 +290,14 @@ public class ReplayBase extends AnchorPane {
         Player1Label.setPrefWidth(239.0);
         Player1Label.setText("Player1");
         GridPane.setMargin(Player1Label, new Insets(30.0, 0.0, 0.0, 30.0));
-        Player1Label.setFont(new Font("Old English Text MT", 60.0));
+        Player1Label.setFont(new Font("Old English Text MT", 24.0));
 
         GridPane.setColumnIndex(Player2Label, 5);
         Player2Label.setPrefHeight(148.0);
         Player2Label.setPrefWidth(291.0);
         Player2Label.setText("Player2");
         GridPane.setMargin(Player2Label, new Insets(30.0, 0.0, 0.0, 40.0));
-        Player2Label.setFont(new Font("Old English Text MT", 60.0));
+        Player2Label.setFont(new Font("Old English Text MT", 24.0));
 
         GridPane.setColumnIndex(hBox, 3);
         hBox.setPrefHeight(217.0);
@@ -298,15 +305,17 @@ public class ReplayBase extends AnchorPane {
 
         label.setPrefHeight(92.0);
         label.setPrefWidth(85.0);
-        label.setText("W");
+        label.setText("D");
+        label.setStyle("-fx-text-fill: gray;");
         HBox.setMargin(label, new Insets(130.0, 0.0, 80.0, 0.0));
         label.setFont(new Font("Old English Text MT", 50.0));
 
         label0.setPrefHeight(93.0);
         label0.setPrefWidth(84.0);
-        label0.setText("L");
+        label0.setText("D");
+        label0.setStyle("-fx-text-fill: gray;");
         HBox.setMargin(label0, new Insets(130.0, 0.0, 80.0, 220.0));
-        label0.setFont(new Font("Old English Text MT", 80.0));
+        label0.setFont(new Font("Old English Text MT", 50.0));
         
         
         Grid_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
@@ -389,5 +398,56 @@ public class ReplayBase extends AnchorPane {
         vBox.getChildren().add(gridPane);
         getChildren().add(vBox);
 
+    }
+    public void drawSuccesslines() {
+
+        line1 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH) / 2, GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH) / 2);
+        line1.setStrokeWidth(20);
+        line1.setStroke(Color.GREEN);
+        getChildren().add(line1);
+
+        line2 = new Line(GRID_X_0_0, GRID_Y_0_0, GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line2.setStrokeWidth(20);
+        line2.setStroke(Color.GREEN);
+        getChildren().add(line2);
+
+        line3 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH * 1.6), GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 1.6));
+        line3.setStrokeWidth(20);
+        line3.setStroke(Color.GREEN);
+        getChildren().add(line3);
+
+        line4 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH * 2.6), GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 2.6));
+        line4.setStrokeWidth(20);
+        line4.setStroke(Color.GREEN);
+        getChildren().add(line4);
+
+        line5 = new Line(GRID_X_0_0 + (.5 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0 + (.5 * GRID_BTN_WIGTH), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line5.setStrokeWidth(20);
+        line5.setStroke(Color.GREEN);
+        getChildren().add(line5);
+
+        line6 = new Line(GRID_X_0_0 + (1.5 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0 + (1.5 * GRID_BTN_WIGTH), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line6.setStrokeWidth(20);
+        line6.setStroke(Color.GREEN);
+        getChildren().add(line6);
+
+        line7 = new Line(GRID_X_0_0 + (2.5 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0 + (2.5 * GRID_BTN_WIGTH), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line7.setStrokeWidth(20);
+        line7.setStroke(Color.GREEN);
+        getChildren().add(line7);
+
+        line8 = new Line(GRID_X_0_0 + (3 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line8.setStrokeWidth(20);
+        line8.setStroke(Color.GREEN);
+        getChildren().add(line8);
+        
+        line1.setVisible(false);
+        line2.setVisible(false);
+        line3.setVisible(false);
+        line4.setVisible(false);
+        line5.setVisible(false);
+        line6.setVisible(false);
+        line7.setVisible(false);
+        line8.setVisible(false);
     }
 }

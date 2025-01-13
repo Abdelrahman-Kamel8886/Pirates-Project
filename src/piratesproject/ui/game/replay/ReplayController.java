@@ -30,6 +30,28 @@ public class ReplayController extends ReplayBase {
         moves = JsonUtils.jsonToMovesArray(record.getGameSequance());
         buttons = new Button[SIZE][SIZE];
         currentIndex = -1;
+        String name1 = SharedModel.getSelectedRecord().getPlayer1().getName();
+        String name2 = SharedModel.getSelectedRecord().getPlayer2().getName();
+
+        Player1Label.setText(name1 + " ( X )");
+        Player2Label.setText(name2 + " ( O )");
+
+        if (SharedModel.getSelectedRecord().getWinner() != null) {
+            if (SharedModel.getSelectedRecord().getWinner()
+                    == SharedModel.getSelectedRecord().getPlayer1()) {
+                label.setText("W");
+                label0.setText("L");
+                label.setStyle("-fx-text-fill: green;");
+                label0.setStyle("-fx-text-fill: red;");
+            }
+            else{
+                label0.setText("W");
+                label.setText("L");
+                label0.setStyle("-fx-text-fill: green;");
+                label.setStyle("-fx-text-fill: red;");
+            }
+        }
+        drawSuccesslines();
         initButtons();
         onClicks();
     }
@@ -63,6 +85,7 @@ public class ReplayController extends ReplayBase {
             currentIndex++;
             drawMove();
         }
+        
     }
 
     private void previous() {
@@ -77,7 +100,11 @@ public class ReplayController extends ReplayBase {
         int col = currentMove.getCol();
         String symbol = currentMove.getSymbol();
         buttons[row][col].setText(symbol);
-
+        if(currentIndex == moves.size() - 1){
+            System.out.println("line "+SharedModel.getSelectedRecord().getLine());
+            drawWinLine(SharedModel.getSelectedRecord().getLine());
+            disableAllButtons();
+        }
     }
 
     private void EraseMove() {
@@ -87,6 +114,48 @@ public class ReplayController extends ReplayBase {
         buttons[row][col].setText("");
         currentIndex--;
 
+    }
+    
+        private void drawWinLine(String winCondition) {
+        switch (winCondition) {
+            case "ROW-0":
+                line1.setVisible(true);
+                break;
+            case "ROW-1":
+                line3.setVisible(true);
+                break;
+            case "ROW-2":
+                line4.setVisible(true);
+                break;
+            case "COL-0":
+                line5.setVisible(true);
+                break;
+            case "COL-1":
+                line6.setVisible(true);
+                break;
+            case "COL-2":
+                line7.setVisible(true);
+                break;
+            case "DIAG-PRIMARY":
+                line2.setVisible(true);
+                break;
+            case "DIAG-SECONDARY":
+                line8.setVisible(true);
+                break;
+        }
+        
+
+    }
+
+    private void disableAllButtons() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                final int row = i, col = j;
+                buttons[i][j].setDisable(true);
+            }
+        }
+        pauseButton.setDisable(true);
+        playButton.setDisable(true);
     }
 
     public void gotoHome() {
