@@ -8,7 +8,11 @@ import javafx.stage.Stage;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
+
+import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
+
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
+
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.splash.SplashController;
 import piratesproject.utils.BackgroundMusic;
@@ -30,6 +34,7 @@ public class Main extends Application {
         
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
+
 
 
         Parent root = new XOGameOfflineController(stage);
