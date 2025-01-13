@@ -2,12 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -16,21 +17,20 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true">
          <image>
-            <Image url="@../../drawable/images/play%20cop7y.jpg" />
+            <Image url="@../../../drawable/images/xo_game_board.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="NameArea" layoutX="313.0" layoutY="71.0" prefHeight="119.0" prefWidth="654.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" />
       <VBox prefHeight="800.0" prefWidth="1280.0">
          <children>
             <GridPane prefHeight="800.0" prefWidth="1280.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="293.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="203.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="1.0" prefWidth="21.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="225.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="22.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="220.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="311.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="294.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="197.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="1.0" prefWidth="23.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="222.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="26.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="239.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="280.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="218.0" vgrow="SOMETIMES" />
@@ -51,7 +51,7 @@
                   <Button fx:id="Grid_8" mnemonicParsing="false" prefHeight="159.0" prefWidth="233.0" style="-fx-background-color: #436399;" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <Button fx:id="Grid_9" mnemonicParsing="false" prefHeight="159.0" prefWidth="233.0" style="-fx-background-color: #436399;" GridPane.columnIndex="5" GridPane.rowIndex="5" />
                   <Button fx:id="Grid_6" mnemonicParsing="false" prefHeight="159.0" prefWidth="233.0" style="-fx-background-color: #436399;" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Play" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                  <Button fx:id="playButton" mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Next" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
@@ -59,25 +59,58 @@
                         <Font name="Old English Text MT" size="25.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Pause" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="3">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Previes" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="150.0" />
                      </GridPane.margin>
                      <font>
-                        <Font name="Old English Text MT" size="25.0" />
+                        <Font name="Old English Text MT" size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #436399; -fx-background-radius: 100px;" text="Back" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="5">
-                     <GridPane.margin>
-                        <Insets left="150.0" />
-                     </GridPane.margin>
+                  <Button fx:id="backButton" mnemonicParsing="false" prefHeight="99.0" prefWidth="102.0" style="-fx-background-color: #1bd41b; -fx-background-radius: 100px;" text="Back" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="5">
                      <font>
                         <Font name="Old English Text MT" size="25.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets left="150.0" />
+                     </GridPane.margin>
                   </Button>
+                  <Label fx:id="Player1Label" prefHeight="129.0" prefWidth="210.0" text="Player1" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets top="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Old English Text MT" size="57.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Player2Label" prefHeight="100.0" prefWidth="217.0" text="Player2" GridPane.columnIndex="5">
+                     <GridPane.margin>
+                        <Insets top="30.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Old English Text MT" size="57.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="217.0" prefWidth="279.0" GridPane.columnIndex="3">
+                     <children>
+                        <Label prefHeight="66.0" prefWidth="57.0" text="W">
+                           <HBox.margin>
+                              <Insets bottom="80.0" top="120.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Old English Text MT" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="45.0" prefWidth="60.0" text="L">
+                           <HBox.margin>
+                              <Insets bottom="80.0" left="130.0" top="120.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Old English Text MT" size="50.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children></VBox>

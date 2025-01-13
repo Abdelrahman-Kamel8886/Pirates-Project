@@ -2,21 +2,21 @@ package piratesproject.ui.game.replay;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import piratesproject.utils.Consts;
+import javafx.stage.Stage;
 
-public class ReplayBase extends AnchorPane {
+public abstract class ReplayBase extends AnchorPane {
 
     protected final ImageView imageView;
-    protected final TextArea NameArea;
     protected final VBox vBox;
     protected final GridPane gridPane;
     protected final ColumnConstraints columnConstraints;
@@ -42,14 +42,20 @@ public class ReplayBase extends AnchorPane {
     protected final Button Grid_8;
     protected final Button Grid_9;
     protected final Button Grid_6;
-    protected final Button button;
-    protected final Button button0;
-    protected final Button button1;
+    protected final Button playButton;
+    protected final Button pauseButton;
+    protected final Button backButton;
+    protected final Label Player1Label;
+    protected final Label Player2Label;
+    protected final HBox hBox;
+    protected final Label label;
+    protected final Label label0;
+    protected final Stage mystage;
 
-    public ReplayBase() {
+    public ReplayBase(Stage stage) {
 
+        mystage =stage;
         imageView = new ImageView();
-        NameArea = new TextArea();
         vBox = new VBox();
         gridPane = new GridPane();
         columnConstraints = new ColumnConstraints();
@@ -75,10 +81,15 @@ public class ReplayBase extends AnchorPane {
         Grid_8 = new Button();
         Grid_9 = new Button();
         Grid_6 = new Button();
-        button = new Button();
-        button0 = new Button();
-        button1 = new Button();
-
+        playButton = new Button();
+        pauseButton = new Button();
+        backButton = new Button();
+        Player1Label = new Label();
+        Player2Label = new Label();
+        hBox = new HBox();
+        label = new Label();
+        label0 = new Label();
+        
         setId("AnchorPane");
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -90,13 +101,7 @@ public class ReplayBase extends AnchorPane {
         imageView.setFitHeight(800.0);
         imageView.setFitWidth(1280.0);
         imageView.setPickOnBounds(true);
-        imageView.setImage(new Image(getClass().getResource(Consts.XO_GAME_Board).toExternalForm()));
-
-        NameArea.setLayoutX(313.0);
-        NameArea.setLayoutY(71.0);
-        NameArea.setPrefHeight(119.0);
-        NameArea.setPrefWidth(654.0);
-        NameArea.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10px;");
+        imageView.setImage(new Image(getClass().getResource("../../../drawable/images/xo_game_board.jpg").toExternalForm()));
 
         vBox.setPrefHeight(800.0);
         vBox.setPrefWidth(1280.0);
@@ -105,39 +110,39 @@ public class ReplayBase extends AnchorPane {
         gridPane.setPrefWidth(1280.0);
 
         columnConstraints.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
-        columnConstraints.setMaxWidth(295.0);
+        columnConstraints.setMaxWidth(297.0);
         columnConstraints.setMinWidth(10.0);
-        columnConstraints.setPrefWidth(293.0);
+        columnConstraints.setPrefWidth(294.0);
 
         columnConstraints0.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints0.setMaxWidth(483.0);
         columnConstraints0.setMinWidth(10.0);
-        columnConstraints0.setPrefWidth(203.0);
+        columnConstraints0.setPrefWidth(197.0);
 
         columnConstraints1.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints1.setMaxWidth(483.0);
         columnConstraints1.setMinWidth(1.0);
-        columnConstraints1.setPrefWidth(21.0);
+        columnConstraints1.setPrefWidth(23.0);
 
         columnConstraints2.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints2.setMaxWidth(483.0);
         columnConstraints2.setMinWidth(10.0);
-        columnConstraints2.setPrefWidth(225.0);
+        columnConstraints2.setPrefWidth(222.0);
 
         columnConstraints3.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints3.setMaxWidth(483.0);
         columnConstraints3.setMinWidth(10.0);
-        columnConstraints3.setPrefWidth(22.0);
+        columnConstraints3.setPrefWidth(26.0);
 
         columnConstraints4.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints4.setMaxWidth(483.0);
         columnConstraints4.setMinWidth(10.0);
-        columnConstraints4.setPrefWidth(220.0);
+        columnConstraints4.setPrefWidth(239.0);
 
         columnConstraints5.setHgrow(javafx.scene.layout.Priority.SOMETIMES);
         columnConstraints5.setMaxWidth(483.0);
         columnConstraints5.setMinWidth(10.0);
-        columnConstraints5.setPrefWidth(311.0);
+        columnConstraints5.setPrefWidth(280.0);
 
         rowConstraints.setMaxHeight(218.0);
         rowConstraints.setMinHeight(10.0);
@@ -237,42 +242,70 @@ public class ReplayBase extends AnchorPane {
         Grid_6.setPrefWidth(233.0);
         Grid_6.setStyle("-fx-background-color: #436399;");
 
-        GridPane.setColumnIndex(button, 6);
-        GridPane.setRowIndex(button, 1);
-        button.setMnemonicParsing(false);
-        button.setPrefHeight(99.0);
-        button.setPrefWidth(102.0);
-        button.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
-        button.setText("Play");
-        button.setTextFill(javafx.scene.paint.Color.WHITE);
-        GridPane.setMargin(button, new Insets(0.0, 0.0, 0.0, 150.0));
-        button.setFont(new Font("Old English Text MT", 25.0));
+        GridPane.setColumnIndex(playButton, 6);
+        GridPane.setRowIndex(playButton, 1);
+        playButton.setMnemonicParsing(false);
+        playButton.setPrefHeight(99.0);
+        playButton.setPrefWidth(102.0);
+        playButton.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
+        playButton.setText("Next");
+        playButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        GridPane.setMargin(playButton, new Insets(0.0, 0.0, 0.0, 150.0));
+        playButton.setFont(new Font("Old English Text MT", 25.0));
 
-        GridPane.setColumnIndex(button0, 6);
-        GridPane.setRowIndex(button0, 3);
-        button0.setMnemonicParsing(false);
-        button0.setPrefHeight(99.0);
-        button0.setPrefWidth(102.0);
-        button0.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
-        button0.setText("Pause");
-        button0.setTextFill(javafx.scene.paint.Color.WHITE);
-        button0.setOpaqueInsets(new Insets(0.0));
-        GridPane.setMargin(button0, new Insets(0.0, 0.0, 0.0, 150.0));
-        button0.setFont(new Font("Old English Text MT", 25.0));
+        GridPane.setColumnIndex(pauseButton, 6);
+        GridPane.setRowIndex(pauseButton, 3);
+        pauseButton.setMnemonicParsing(false);
+        pauseButton.setPrefHeight(99.0);
+        pauseButton.setPrefWidth(102.0);
+        pauseButton.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
+        pauseButton.setText("Previes");
+        pauseButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        GridPane.setMargin(pauseButton, new Insets(0.0, 0.0, 0.0, 150.0));
+        pauseButton.setFont(new Font("Old English Text MT", 20.0));
 
-        GridPane.setColumnIndex(button1, 6);
-        GridPane.setRowIndex(button1, 5);
-        button1.setMnemonicParsing(false);
-        button1.setPrefHeight(99.0);
-        button1.setPrefWidth(102.0);
-        button1.setStyle("-fx-background-color: #436399; -fx-background-radius: 100px;");
-        button1.setText("Back");
-        button1.setTextFill(javafx.scene.paint.Color.WHITE);
-        GridPane.setMargin(button1, new Insets(0.0, 0.0, 0.0, 150.0));
-        button1.setFont(new Font("Old English Text MT", 25.0));
+        GridPane.setColumnIndex(backButton, 6);
+        GridPane.setRowIndex(backButton, 5);
+        backButton.setMnemonicParsing(false);
+        backButton.setPrefHeight(99.0);
+        backButton.setPrefWidth(102.0);
+        backButton.setStyle("-fx-background-color: #1bd41b; -fx-background-radius: 100px;");
+        backButton.setText("Back");
+        backButton.setTextFill(javafx.scene.paint.Color.WHITE);
+        backButton.setFont(new Font("Old English Text MT", 25.0));
+        GridPane.setMargin(backButton, new Insets(0.0, 0.0, 0.0, 150.0));
+
+        GridPane.setColumnIndex(Player1Label, 1);
+        Player1Label.setPrefHeight(129.0);
+        Player1Label.setPrefWidth(210.0);
+        Player1Label.setText("Player1");
+        GridPane.setMargin(Player1Label, new Insets(30.0, 0.0, 0.0, 0.0));
+        Player1Label.setFont(new Font("Old English Text MT", 57.0));
+
+        GridPane.setColumnIndex(Player2Label, 5);
+        Player2Label.setPrefHeight(100.0);
+        Player2Label.setPrefWidth(217.0);
+        Player2Label.setText("Player2");
+        GridPane.setMargin(Player2Label, new Insets(30.0, 0.0, 0.0, 0.0));
+        Player2Label.setFont(new Font("Old English Text MT", 57.0));
+
+        GridPane.setColumnIndex(hBox, 3);
+        hBox.setPrefHeight(217.0);
+        hBox.setPrefWidth(279.0);
+
+        label.setPrefHeight(66.0);
+        label.setPrefWidth(57.0);
+        label.setText("W");
+        HBox.setMargin(label, new Insets(120.0, 0.0, 80.0, 0.0));
+        label.setFont(new Font("Old English Text MT", 40.0));
+
+        label0.setPrefHeight(45.0);
+        label0.setPrefWidth(60.0);
+        label0.setText("L");
+        HBox.setMargin(label0, new Insets(120.0, 0.0, 80.0, 130.0));
+        label0.setFont(new Font("Old English Text MT", 50.0));
 
         getChildren().add(imageView);
-        getChildren().add(NameArea);
         gridPane.getColumnConstraints().add(columnConstraints);
         gridPane.getColumnConstraints().add(columnConstraints0);
         gridPane.getColumnConstraints().add(columnConstraints1);
@@ -296,9 +329,14 @@ public class ReplayBase extends AnchorPane {
         gridPane.getChildren().add(Grid_8);
         gridPane.getChildren().add(Grid_9);
         gridPane.getChildren().add(Grid_6);
-        gridPane.getChildren().add(button);
-        gridPane.getChildren().add(button0);
-        gridPane.getChildren().add(button1);
+        gridPane.getChildren().add(playButton);
+        gridPane.getChildren().add(pauseButton);
+        gridPane.getChildren().add(backButton);
+        gridPane.getChildren().add(Player1Label);
+        gridPane.getChildren().add(Player2Label);
+        hBox.getChildren().add(label);
+        hBox.getChildren().add(label0);
+        gridPane.getChildren().add(hBox);
         vBox.getChildren().add(gridPane);
         getChildren().add(vBox);
 
