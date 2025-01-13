@@ -1,79 +1,86 @@
-package piratesproject.ui.game.xogameboard.offline;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package piratesproject.ui.game.xogameboard.VSComp;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.Parent;
-import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
-import minmaxalgorithim.State;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
-import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
-import piratesproject.models.RecordModel;
-import piratesproject.ui.game.replay.ReplayController;
+import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
-import piratesproject.utils.JsonUtils;
-import piratesproject.utils.SharedModel;
+import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
+import piratesproject.ui.home.HomePageController;
 
+/**
+ *
+ * @author Admin
+ */
+public class VsComputer extends XOGameBoard {
 
-public class XOGameOfflineController extends XOGameBoard {
-
-    private Player player1, player2, currentPlayer;
-    private String name1, name2;
-    private String movesSequnce;
-    private RecordModel gameRecord;
-    private ArrayList<MoveModel> moves;
-    
     private String[][] board;
     private Button[][] buttons;
-
-    private final int SIZE = 3;
-  
-  private Stage stage;
+    private Player player1, player2, currentPlayer;
+    private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
     Thread minMaxthread ; 
-    public XOGameOfflineController(Stage stage) {
-        super(stage);
-        initView();
-        this.stage= stage;
-//        btnGrid_0_0.setOnAction((ActionEvent event) -> {
-//            drawSuccesslines();
-//            getChildren().add(mediaView);
-//            //showWinState();
-//        });
-//        backIcon.addEventHandler(EventType.ROOT,new EventHandler() {
-//            @Override
-//            public void handle(Event event) {
-//                Main.resetScene(new HomePageController(stage));
-//                minMaxthread.stop();
-//                
-//            }
-//        });
-//        
-//       retryIcon.addEventHandler(EventType.ROOT,new EventHandler() {
-//            @Override
-//            public void handle(Event event) {
-//                resetBoard();
-//                minMaxthread.stop();
-//            }
-//        });
-//        
-//         minMaxthread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                minMax();
-//
-//            }
-//        });
-//        minMaxthread.start();
+    Stage stage ; 
+    private final int SIZE = 3;
 
-    
-}
-    
-    void minMax() {
+    public VsComputer(Stage stage) {
+        super(stage);
+        initGame();
+    }
+
+    private void initGame() {
+        player1 = new Player(name1, GameMovesEnum.X.name());
+        player2 = new Player(name2, GameMovesEnum.O.name());
+        currentPlayer = player1;
+        buttons = new Button[SIZE][SIZE];
+        board = new String[SIZE][SIZE];
+        
+        initButtons();
+        resetBoard();
+        onClicks();
+                backIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                Main.resetScene(new HomePageController(stage));
+                minMaxthread.stop();
+                
+            }
+        });
+        
+       retryIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                resetBoard();
+                minMaxthread.stop();
+            }
+        });
+       
+        minMaxthread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                minMax();
+
+            }
+        });
+        minMaxthread.start();
+    }
+        void minMax() {
     AdversarialSearchTicTacToe adsTicTacToe = new AdversarialSearchTicTacToe();
 
     String[] board = {"", "", "", "", "", "", "", "", ""};
@@ -142,25 +149,6 @@ public class XOGameOfflineController extends XOGameBoard {
         });
 
     }
-    private void initView() {
-        name1 = SharedModel.getPlayerName1();
-        name2 = SharedModel.getPlayerName2();
-        drawSuccesslines();
-        initGame();
-    }
-
-    private void initGame() {
-        player1 = new Player(name1, GameMovesEnum.X.name());
-        player2 = new Player(name2, GameMovesEnum.O.name());
-        currentPlayer = player1;
-        buttons = new Button[SIZE][SIZE];
-        board = new String[SIZE][SIZE];
-        moves = new ArrayList();
-        gameRecord= new RecordModel(player1,player2);
-        initButtons();
-        resetBoard();
-        onClicks();
-    }
 
     private void initButtons() {
         buttons[0][0] = btnGrid_0_0;
@@ -179,21 +167,25 @@ public class XOGameOfflineController extends XOGameBoard {
             for (int j = 0; j < SIZE; j++) {
                 final int row = i, col = j;
                 buttons[i][j].setOnAction((ActionEvent event) -> {
-                    makeMove(row, col);
+                    playerMove(row, col);
+                    String winCondition = checkWin(row, col);
+                    if (winCondition == null) {
+                       computerMove();
+                        return ;
+                    }
+
                 });
             }
         }
     }
 
-   public void makeMove(int row, int col) {
+    private void playerMove(int row, int col) {
         if (board[row][col].isEmpty()) {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
-            moves.add(new MoveModel(row,col,currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
             if (winCondition != null) {
                 drawWinLine(winCondition);
-                saveRecord();
                 return;
             }
             if (isDraw()) {
@@ -204,9 +196,61 @@ public class XOGameOfflineController extends XOGameBoard {
             switchPlayer();
         }
     }
+//    private List<int[]> getEmptyButtons() {
+//        List<int[]> emptyButtons = new ArrayList<>();
+//        for (int i = 0; i < SIZE; i++) {
+//            for (int j = 0; j < SIZE; j++) {
+//                if (board[i][j].isEmpty()) {
+//                    emptyButtons.add(new int[]{i, j});
+//                }
+//            }
+//        }
+//        return emptyButtons;
+//    }
 
+//    private void computerMove() {
+//        List<int[]> emptyButtons = getEmptyButtons();
+//        Random move = new Random();
+//        //move.nextInt(emptyButtons.size());
+//        int[] selectedMove = emptyButtons.get(move.nextInt(emptyButtons.size())); // Select a random empty cell.
+//        int row = selectedMove[0];
+//        int col = selectedMove[1];
+//
+//        String winCondition = checkWin(row, col);
+//        if (winCondition == null) {
+//            playerMove(row, col);
+//            return;
+//        }
+//    }
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    }
+
+  private List<int[]> getEmptyButtons() {
+        List<int[]> emptyButtons = new ArrayList<>();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if (board[i][j].isEmpty()) {
+                    emptyButtons.add(new int[]{i, j});
+                }
+            }
+        }
+        return emptyButtons;
+    }
+  
+      private void computerMove() {
+        List<int[]> emptyButtons = getEmptyButtons();
+        Random move = new Random();
+        move.nextInt(emptyButtons.size());
+        int[] selectedMove = emptyButtons.get(move.nextInt(emptyButtons.size())); // Select a random empty cell.
+        int row = selectedMove[0];
+        int col = selectedMove[1];
+
+        String winCondition = checkWin(row, col);
+        if (winCondition == null) {
+            playerMove(row, col);
+            return;
+        }
     }
 
     private String checkWin(int row, int col) {
@@ -238,7 +282,7 @@ public class XOGameOfflineController extends XOGameBoard {
         return true;
     }
 
-    private void resetBoard() {
+    protected void resetBoard() {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 board[i][j] = "";
@@ -286,18 +330,6 @@ public class XOGameOfflineController extends XOGameBoard {
                 buttons[i][j].setDisable(true);
             }
         }
-    }
-    private void saveRecord(){
-        movesSequnce = JsonUtils.movesArrayToJson(moves);
-        gameRecord.setWinner(currentPlayer);
-        gameRecord.setGameSequance(movesSequnce);
-        SharedModel.setSelectedRecord(gameRecord);
-        System.out.println(gameRecord.toString());
-    }
-    
-    private void goToReplay() {
-        Parent replay = new ReplayController(stage);
-        Main.resetScene(replay);
     }
 
 }
