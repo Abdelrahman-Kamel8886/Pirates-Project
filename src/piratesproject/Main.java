@@ -9,6 +9,7 @@ import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.ui.splash.SplashController;
 import piratesproject.utils.BackgroundMusic;
 
 import piratesproject.utils.SharedModel;
@@ -27,9 +28,10 @@ public class Main extends Application {
         SharedModel.setUser(user);
         
         stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
 
 
-        Parent root = new HomePageController(stage);
+        Parent root = new SplashController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));

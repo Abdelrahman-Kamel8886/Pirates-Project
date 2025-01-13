@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,7 +22,7 @@
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" smooth="false" AnchorPane.leftAnchor="0.0">
          <image>
-            <Image url="@../../drawable/images/xo_game_board.jpg" />
+            <Image url="@../../../drawable/images/xo_game_board.jpg" />
          </image>
       </ImageView>
       <GridPane layoutX="428.0" layoutY="286.0" prefHeight="716.0" prefWidth="1057.0">
@@ -36,6 +37,14 @@
           <RowConstraints maxHeight="245.0" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <Button fx:id="btnGrid_2_0" mnemonicParsing="false" prefHeight="200.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-border-color: rent;" text="X" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="2">
+               <font>
+                  <Font size="96.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="NONE" />
+               </cursor>
+            </Button>
             <Button fx:id="btnGrid_0_0" mnemonicParsing="false" prefHeight="230.0" prefWidth="345.0" style="-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;" text="X" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font size="96.0" />
@@ -83,23 +92,18 @@
                   <Font size="96.0" />
                </font>
             </Button>
-            <Button fx:id="btnGrid_2_0" mnemonicParsing="false" prefHeight="230.0" prefWidth="345.0" style="-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;" text="X" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.rowIndex="2">
-               <font>
-                  <Font size="96.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnGrid_2_1" mnemonicParsing="false" prefHeight="230.0" prefWidth="345.0" style="-fx-background-color: private String userFirstName; private String userLastName: ; private String userName: ; private String userPassword: ; private Boolean userIsOnline: ; private Boolean userIsplayingnow: ; private int userTotalGamePlayed: ; private int userTotalScore: ;" text="O" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="btnGrid_2_1" mnemonicParsing="false" prefHeight="230.0" prefWidth="345.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="O" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <font>
                   <Font size="96.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <Text fx:id="playerOneScore" layoutX="828.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99" textAlignment="CENTER" wrappingWidth="115.0">
+      <Text fx:id="playerOneScore" fill="#5ebc66" layoutX="828.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99" textAlignment="CENTER" wrappingWidth="115.0">
          <font>
             <Font size="64.0" />
          </font></Text>
-      <Text fx:id="playerTowScore" layoutX="917.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22" textAlignment="CENTER" wrappingWidth="115.0">
+      <Text fx:id="playerTowScore" fill="#d72626" layoutX="917.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22" textAlignment="CENTER" wrappingWidth="115.0">
          <font>
             <Font size="64.0" />
          </font>
@@ -109,6 +113,31 @@
             <Font size="64.0" />
          </font>
       </Text>
-      <MediaView fitHeight="700.0" fitWidth="1000.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="460.0" AnchorPane.topAnchor="200.0" />
+      <Label fx:id="playerTwoLabel" layoutX="1023.0" layoutY="122.0" prefHeight="125.0" prefWidth="376.0" text="Player TWO">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerOneLabel" layoutX="464.0" layoutY="122.0" prefHeight="125.0" prefWidth="376.0" text="Player One">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+      <MediaView fitHeight="700.0" fitWidth="1000.0" layoutX="397.0" layoutY="229.0" />
+      <ImageView fx:id="backIcon" fitHeight="134.0" fitWidth="173.0" layoutX="34.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../drawable/images/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="avatarIcon" fitHeight="150.0" fitWidth="200.0" layoutX="1748.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../drawable/icons/avatar.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="retryIcon" fitHeight="138.0" fitWidth="136.0" layoutX="1762.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../drawable/images/retry.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
