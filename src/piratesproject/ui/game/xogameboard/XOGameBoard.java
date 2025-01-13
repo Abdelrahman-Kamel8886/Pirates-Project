@@ -18,6 +18,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import piratesproject.drawable.values.Pathes;
 import piratesproject.utils.Consts;
 import static piratesproject.utils.Consts.GRID_BTN_HEIGTH;
 import static piratesproject.utils.Consts.GRID_BTN_WIGTH;
@@ -312,7 +313,7 @@ public abstract class XOGameBoard extends AnchorPane {
         avatarIcon.setLayoutY(19.0);
         avatarIcon.setPickOnBounds(true);
         avatarIcon.setPreserveRatio(true);
-        avatarIcon.setImage(new Image(getClass().getResource(Consts.BACK_ICON).toExternalForm()));
+        avatarIcon.setImage(new Image(getClass().getResource(Pathes.AVATAR_LOGO_PATH).toExternalForm()));
 
         retryIcon.setFitHeight(138.0);
         retryIcon.setFitWidth(136.0);

@@ -31,12 +31,10 @@ public class XOGameOfflineController extends XOGameBoard {
 
     private final int SIZE = 3;
 
-    
+    Thread minMaxthread ; 
     public XOGameOfflineController(Stage stage) {
         super(stage);
         initView();
-    
-
 
         btnGrid_0_0.setOnAction((ActionEvent event) -> {
             drawSuccesslines();
@@ -47,6 +45,8 @@ public class XOGameOfflineController extends XOGameBoard {
             @Override
             public void handle(Event event) {
                 Main.resetScene(new HomePageController(stage));
+                minMaxthread.stop();
+                
             }
         });
         
@@ -54,17 +54,18 @@ public class XOGameOfflineController extends XOGameBoard {
             @Override
             public void handle(Event event) {
                 resetBoard();
+                minMaxthread.stop();
             }
         });
         
-        Thread thread = new Thread(new Runnable() {
+         minMaxthread = new Thread(new Runnable() {
             @Override
             public void run() {
                 minMax();
 
             }
         });
-        thread.start();
+        minMaxthread.start();
 
     
 }
