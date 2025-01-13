@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
-import minmaxalgorithim.State;
+import piratesproject.ui.game.minmaxalgorithim.State;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -21,45 +21,58 @@ import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-
 public class XOGameOfflineController extends XOGameBoard {
 
     private Player player1, player2, currentPlayer;
-    private String name1, name2;
-    private String movesSequnce;
+    private String name1, name2, firstPlayer, secondPlayer;
+    private String movesSequnce, line;
     private RecordModel gameRecord;
     private ArrayList<MoveModel> moves;
-    
+
     private String[][] board;
     private Button[][] buttons;
 
     private final int SIZE = 3;
-  
-  private Stage stage;
-    Thread minMaxthread ; 
+
+    private Stage stage;
+    Thread minMaxthread;
+
     public XOGameOfflineController(Stage stage) {
         super(stage);
-        this.stage= stage;
-        initView();     
-}
-    
+        this.stage = stage;
+        initView();
+    }
+
     private void initView() {
         name1 = SharedModel.getPlayerName1();
         name2 = SharedModel.getPlayerName2();
-        playerOneLabel.setText(name1);
-        playerTwoLabel.setText(name2); 
+        line = "none";
+        setPlayersRandomly();
         drawSuccesslines();
         initGame();
+
+    }
+
+    private void setPlayersRandomly() {
+        if (Math.random() < 0.5) {
+            firstPlayer = name1;
+            secondPlayer = name2;
+        } else {
+            firstPlayer = name2;
+            secondPlayer = name1;
+        }
+        playerOneLabel.setText(firstPlayer + " : ( X )");
+        playerTwoLabel.setText(secondPlayer + " ( O )");
     }
 
     private void initGame() {
-        player1 = new Player(name1, GameMovesEnum.X.name());
-        player2 = new Player(name2, GameMovesEnum.O.name());
+        player1 = new Player(firstPlayer, GameMovesEnum.X.name());
+        player2 = new Player(secondPlayer, GameMovesEnum.O.name());
         currentPlayer = player1;
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
         moves = new ArrayList();
-        gameRecord= new RecordModel(player1,player2);
+        gameRecord = new RecordModel(player1, player2);
         initButtons();
         resetBoard();
         onClicks();
@@ -91,15 +104,17 @@ public class XOGameOfflineController extends XOGameBoard {
         });
     }
 
-   public void makeMove(int row, int col) {
+    public void makeMove(int row, int col) {
         if (board[row][col].isEmpty()) {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
-            moves.add(new MoveModel(row,col,currentPlayer.getSymbol()));
+            moves.add(new MoveModel(row, col, currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
+            line = winCondition != null?winCondition:"none";
+            saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
-                saveRecord();
+
                 return;
             }
             if (isDraw()) {
@@ -193,14 +208,16 @@ public class XOGameOfflineController extends XOGameBoard {
             }
         }
     }
-    private void saveRecord(){
+
+    private void saveRecord() {
         movesSequnce = JsonUtils.movesArrayToJson(moves);
         gameRecord.setWinner(currentPlayer);
         gameRecord.setGameSequance(movesSequnce);
+        gameRecord.setLine(line);
         SharedModel.setSelectedRecord(gameRecord);
         System.out.println(gameRecord.toString());
     }
-    
+
     private void goToReplay() {
         Parent replay = new ReplayController(stage);
         Main.resetScene(replay);

@@ -2,7 +2,7 @@
 package piratesproject.ui.game.minmaxalgorithim;
 
 import java.util.ArrayList;
-import minmaxalgorithim.State;
+import piratesproject.ui.game.minmaxalgorithim.State;
 
 public class AdversarialSearchTicTacToe {
 
@@ -112,7 +112,6 @@ public class AdversarialSearchTicTacToe {
 }
 
 
-//
 //import java.util.ArrayList;
 //
 //public class AdversarialSearchTicTacToe {

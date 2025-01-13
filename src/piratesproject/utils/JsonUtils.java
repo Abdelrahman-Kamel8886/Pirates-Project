@@ -66,4 +66,11 @@ public class JsonUtils {
         ArrayList<MoveModel> moveModels = gson.fromJson(json, new TypeToken<ArrayList<MoveModel>>(){}.getType());
         return moveModels;
     }
+     public static String usersArrayToJson(ArrayList<UserModel> users ) {
+        return gson.toJson(users);
+    }
+    public static ArrayList<UserModel> jsonToUsersArray(String json) {
+        ArrayList<UserModel> users = gson.fromJson(json, new TypeToken<ArrayList<UserModel>>(){}.getType());
+        return users;
+    }
 }
