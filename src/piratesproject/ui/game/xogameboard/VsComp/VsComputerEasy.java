@@ -3,34 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package piratesproject.ui.game.xogameboard.VSComputer;
+package piratesproject.ui.game.xogameboard.VSComp;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import minmaxalgorithim.State;
+import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
 import piratesproject.models.Player;
+import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
+import piratesproject.ui.home.HomePageController;
 
 /**
  *
  * @author Admin
  */
-public class VsComputer extends XOGameBoard {
+public class VsComputerEasy extends XOGameBoard {
 
     private String[][] board;
     private Button[][] buttons;
     private Player player1, player2, currentPlayer;
     private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
-
+    Thread minMaxthread;
+    Stage stage;
     private final int SIZE = 3;
 
-    public VsComputer(Stage stage) {
+    public VsComputerEasy(Stage stage) {
         super(stage);
         initGame();
     }
@@ -45,6 +54,8 @@ public class VsComputer extends XOGameBoard {
         initButtons();
         resetBoard();
         onClicks();
+        drawSuccesslines();
+
     }
 
     private void initButtons() {
@@ -69,6 +80,8 @@ public class VsComputer extends XOGameBoard {
                     if (winCondition == null) {
                         computerMove();
                         return;
+                    } else {
+                        drawWinLine(winCondition);
                     }
 
                 });
@@ -81,7 +94,9 @@ public class VsComputer extends XOGameBoard {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
             String winCondition = checkWin(row, col);
+            
             if (winCondition != null) {
+                
                 drawWinLine(winCondition);
                 return;
             }
@@ -123,6 +138,7 @@ public class VsComputer extends XOGameBoard {
             playerMove(row, col);
             return;
         }
+
     }
 
     private String checkWin(int row, int col) {
@@ -164,7 +180,6 @@ public class VsComputer extends XOGameBoard {
     }
 
     private void drawWinLine(String winCondition) {
-        System.out.println(winCondition);
         switch (winCondition) {
             case "ROW-0":
                 line1.setVisible(true);
