@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package piratesproject.ui.game.xogameboard.VSComp;
+package piratesproject.ui.game.xogameboard.VSComputer;
 
 import java.util.ArrayList;
 import java.util.List;
