@@ -36,7 +36,6 @@ public class Main extends Application {
         stage.setFullScreenExitHint("");
 
 
-
         Parent root = new HomePageController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
