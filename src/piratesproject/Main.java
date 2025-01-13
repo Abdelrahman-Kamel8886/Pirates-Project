@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.models.UserModel;
-<<<<<<< HEAD
+
 import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
-=======
+
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
->>>>>>> 0e3052ab486e835dc67ab24377455402a9817199
+
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.splash.SplashController;
 import piratesproject.utils.BackgroundMusic;
