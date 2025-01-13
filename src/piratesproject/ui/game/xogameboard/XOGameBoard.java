@@ -145,9 +145,9 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_2_0.setStyle("-fx-background-color: transparent; ");
         btnGrid_2_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_0.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnGrid_2_0.setWrapText(true);
         btnGrid_2_0.setFont(new Font(96.0));
-        btnGrid_2_0.setCursor(Cursor.NONE);
+        btnGrid_2_0.setWrapText(true);
+        
 
         btnGrid_0_0.setMnemonicParsing(false);
         btnGrid_0_0.setPrefHeight(230.0);
@@ -273,14 +273,14 @@ public abstract class XOGameBoard extends AnchorPane {
         playerTwoLabel.setPrefHeight(125.0);
         playerTwoLabel.setPrefWidth(376.0);
         playerTwoLabel.setText("Player TWO");
-        playerTwoLabel.setFont(new Font(72.0));
+        playerTwoLabel.setFont(new Font(36.0));
 
         playerOneLabel.setLayoutX(464.0);
         playerOneLabel.setLayoutY(122.0);
         playerOneLabel.setPrefHeight(125.0);
         playerOneLabel.setPrefWidth(376.0);
         playerOneLabel.setText("Player One");
-        playerOneLabel.setFont(new Font(72.0));
+        playerOneLabel.setFont(new Font(36.0));
 
         mediaView.setFitHeight(700.0);
         mediaView.setFitWidth(1000.0);

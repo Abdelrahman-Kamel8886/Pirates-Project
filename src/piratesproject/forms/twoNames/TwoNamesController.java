@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
+import piratesproject.utils.SharedModel;
 
 /**
  * FXML Controller class
@@ -22,30 +23,44 @@ import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
  * @author Abram
  */
 public class TwoNamesController extends TwoNamesBase {
-private final Stage myStage;
+
+    private final Stage myStage;
+
     public TwoNamesController(Stage stage) {
         this.myStage = stage;
-        listen();
-        
+        initView();
+
     }
-    
-    /**
-     * Initializes the controller class.
-     */
-    private void listen()
-    {
-                button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            goToGame();
-            }
+
+    private void initView() {
+        String name = "Guest";
+        if (SharedModel.getUser() != null) {
+            name = SharedModel.getUser().getUserName();
+        }
+        playerOneTextField.setText(name);
+        SharedModel.setPlayerName1(name);
+        playerOneTextField.setDisable(true);
+        listen();
+    }
+
+    private void listen() {
+        button.setOnAction((ActionEvent event) -> {
+            validation();
         });
     }
-     private void goToGame() {
-        
+    
+    private void validation(){
+        if(!playerTwoTextField.getText().isEmpty()){
+            SharedModel.setPlayerName2(playerTwoTextField.getText());
+            goToGame();
+        }
+    }
+
+    private void goToGame() {
+
         Parent game = new XOGameOfflineController(myStage);
         Main.resetScene(game);
         TwoNamesForm.closeForm();
     }
-    
+
 }

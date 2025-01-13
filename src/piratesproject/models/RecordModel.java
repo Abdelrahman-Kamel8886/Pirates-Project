@@ -5,15 +5,18 @@ public class RecordModel {
     private Player player2;
     private Player winner;
     private String gameSequance;
+    private String line;
     
     public RecordModel(){
         this.gameSequance = "";
+        this.line ="";
     }
 
     public RecordModel(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
         this.gameSequance = "";
+        this.line ="";
     }
     
     
@@ -49,6 +52,16 @@ public class RecordModel {
     public void setGameSequance(String gameSequance) {
         this.gameSequance = gameSequance;
     }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
+    
+    
     
      @Override
     public String toString() {
@@ -59,6 +72,8 @@ public class RecordModel {
                 ", gameSequance='" + gameSequance + '\'' +
                 '}';
     }
+    
+    
     
     
     

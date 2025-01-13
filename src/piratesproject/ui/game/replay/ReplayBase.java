@@ -11,8 +11,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import static piratesproject.utils.Consts.GRID_BTN_HEIGTH;
+import static piratesproject.utils.Consts.GRID_BTN_WIGTH;
+import static piratesproject.utils.Consts.GRID_X_0_0;
+import static piratesproject.utils.Consts.GRID_Y_0_0;
 
 public class ReplayBase extends AnchorPane {
 
@@ -51,6 +57,7 @@ public class ReplayBase extends AnchorPane {
     protected final Label label;
     protected final Label label0;
     protected final Stage mystage;
+    protected Line line1 ,line2,line3,line4,line5,line6,line7,line8;
 
     public ReplayBase(Stage stage) {
         mystage = stage;
@@ -185,63 +192,65 @@ public class ReplayBase extends AnchorPane {
         Grid_2.setMnemonicParsing(false);
         Grid_2.setPrefHeight(208.0);
         Grid_2.setPrefWidth(332.0);
-        Grid_2.setStyle("-fx-background-color: #436399;");
+        Grid_2.setStyle("-fx-background-color: transparent;");
 
         GridPane.setColumnIndex(Grid_1, 1);
         GridPane.setRowIndex(Grid_1, 1);
         Grid_1.setMnemonicParsing(false);
         Grid_1.setPrefHeight(200.0);
         Grid_1.setPrefWidth(276.0);
-        Grid_1.setStyle("-fx-background-color: #436399;");
+        Grid_1.setStyle("-fx-background-color: transparent;")
 
         GridPane.setColumnIndex(Grid_4, 1);
         GridPane.setRowIndex(Grid_4, 3);
         Grid_4.setMnemonicParsing(false);
         Grid_4.setPrefHeight(211.0);
         Grid_4.setPrefWidth(282.0);
-        Grid_4.setStyle("-fx-background-color: #436399;");
+        Grid_4.setStyle("-fx-background-color: transparent;");
 
         GridPane.setColumnIndex(Grid_5, 3);
         GridPane.setRowIndex(Grid_5, 3);
         Grid_5.setMnemonicParsing(false);
         Grid_5.setPrefHeight(159.0);
-        Grid_5.setPrefWidth(233.0);
-        Grid_5.setStyle("-fx-background-color: #436399;");
+        Grid_5.setPrefWidth(332.0);
+        Grid_5.setStyle("-fx-background-color: transparent;");
 
         GridPane.setColumnIndex(Grid_3, 5);
         GridPane.setRowIndex(Grid_3, 1);
         Grid_3.setMnemonicParsing(false);
         Grid_3.setPrefHeight(190.0);
         Grid_3.setPrefWidth(342.0);
-        Grid_3.setStyle("-fx-background-color: #436399;");
+        Grid_3.setStyle("-fx-background-color: transparent;");
 
         GridPane.setColumnIndex(Grid_7, 1);
         GridPane.setRowIndex(Grid_7, 5);
         Grid_7.setMnemonicParsing(false);
         Grid_7.setPrefHeight(181.0);
         Grid_7.setPrefWidth(276.0);
-        Grid_7.setStyle("-fx-background-color: #436399;");
+        Grid_7.setStyle("-fx-background-color: transparent; ");
 
         GridPane.setColumnIndex(Grid_8, 3);
         GridPane.setRowIndex(Grid_8, 5);
         Grid_8.setMnemonicParsing(false);
         Grid_8.setPrefHeight(184.0);
         Grid_8.setPrefWidth(338.0);
-        Grid_8.setStyle("-fx-background-color: #436399;");
+        Grid_8.setStyle("-fx-background-color: transparent;");
+
 
         GridPane.setColumnIndex(Grid_9, 5);
         GridPane.setRowIndex(Grid_9, 5);
         Grid_9.setMnemonicParsing(false);
         Grid_9.setPrefHeight(197.0);
         Grid_9.setPrefWidth(302.0);
-        Grid_9.setStyle("-fx-background-color: #436399;");
+        Grid_9.setStyle("-fx-background-color: transparent;");
 
         GridPane.setColumnIndex(Grid_6, 5);
         GridPane.setRowIndex(Grid_6, 3);
         Grid_6.setMnemonicParsing(false);
         Grid_6.setPrefHeight(208.0);
         Grid_6.setPrefWidth(334.0);
-        Grid_6.setStyle("-fx-background-color: #436399;");
+        Grid_6.setStyle("-fx-background-color: transparent;");
+
 
         GridPane.setColumnIndex(playButton, 6);
         GridPane.setRowIndex(playButton, 1);
@@ -281,14 +290,14 @@ public class ReplayBase extends AnchorPane {
         Player1Label.setPrefWidth(239.0);
         Player1Label.setText("Player1");
         GridPane.setMargin(Player1Label, new Insets(30.0, 0.0, 0.0, 30.0));
-        Player1Label.setFont(new Font("Old English Text MT", 60.0));
+        Player1Label.setFont(new Font("Old English Text MT", 24.0));
 
         GridPane.setColumnIndex(Player2Label, 5);
         Player2Label.setPrefHeight(148.0);
         Player2Label.setPrefWidth(291.0);
         Player2Label.setText("Player2");
         GridPane.setMargin(Player2Label, new Insets(30.0, 0.0, 0.0, 40.0));
-        Player2Label.setFont(new Font("Old English Text MT", 60.0));
+        Player2Label.setFont(new Font("Old English Text MT", 24.0));
 
         GridPane.setColumnIndex(hBox, 3);
         hBox.setPrefHeight(217.0);
@@ -296,12 +305,64 @@ public class ReplayBase extends AnchorPane {
 
         label.setPrefHeight(92.0);
         label.setPrefWidth(85.0);
-        label.setText("W");
+        label.setText("D");
+        label.setStyle("-fx-text-fill: gray;");
         HBox.setMargin(label, new Insets(130.0, 0.0, 80.0, 0.0));
         label.setFont(new Font("Old English Text MT", 50.0));
 
         label0.setPrefHeight(93.0);
         label0.setPrefWidth(84.0);
+        label0.setText("D");
+        label0.setStyle("-fx-text-fill: gray;");
+        HBox.setMargin(label0, new Insets(130.0, 0.0, 80.0, 220.0));
+        label0.setFont(new Font("Old English Text MT", 50.0));
+        
+        
+        Grid_1.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_1.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_1.setFont(new Font(96.0));
+        Grid_1.setWrapText(true);
+        
+        Grid_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_2.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_2.setFont(new Font(96.0));
+        Grid_2.setWrapText(true);
+        
+        Grid_3.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_3.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_3.setFont(new Font(96.0));
+        Grid_3.setWrapText(true);
+        
+        Grid_4.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_4.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_4.setFont(new Font(96.0));
+        Grid_4.setWrapText(true);
+        
+        Grid_5.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_5.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_5.setFont(new Font(96.0));
+        Grid_5.setWrapText(true);
+        
+        Grid_6.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_6.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_6.setFont(new Font(96.0));
+        Grid_6.setWrapText(true);
+        
+        Grid_7.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_7.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_7.setFont(new Font(96.0));
+        Grid_7.setWrapText(true);
+        
+        Grid_8.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_8.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_8.setFont(new Font(96.0));
+        Grid_8.setWrapText(true);
+        
+        Grid_9.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        Grid_9.setTextFill(javafx.scene.paint.Color.WHITE);
+        Grid_9.setFont(new Font(96.0));
+        Grid_9.setWrapText(true);
+      
         label0.setText("L");
         HBox.setMargin(label0, new Insets(130.0, 0.0, 80.0, 220.0));
         label0.setFont(new Font("Old English Text MT", 80.0));
@@ -341,5 +402,56 @@ public class ReplayBase extends AnchorPane {
         vBox.getChildren().add(gridPane);
         getChildren().add(vBox);
 
+    }
+    public void drawSuccesslines() {
+
+        line1 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH) / 2, GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH) / 2);
+        line1.setStrokeWidth(20);
+        line1.setStroke(Color.GREEN);
+        getChildren().add(line1);
+
+        line2 = new Line(GRID_X_0_0, GRID_Y_0_0, GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line2.setStrokeWidth(20);
+        line2.setStroke(Color.GREEN);
+        getChildren().add(line2);
+
+        line3 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH * 1.6), GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 1.6));
+        line3.setStrokeWidth(20);
+        line3.setStroke(Color.GREEN);
+        getChildren().add(line3);
+
+        line4 = new Line(GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH * 2.6), GRID_X_0_0 + (GRID_BTN_WIGTH * 3), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 2.6));
+        line4.setStrokeWidth(20);
+        line4.setStroke(Color.GREEN);
+        getChildren().add(line4);
+
+        line5 = new Line(GRID_X_0_0 + (.5 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0 + (.5 * GRID_BTN_WIGTH), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line5.setStrokeWidth(20);
+        line5.setStroke(Color.GREEN);
+        getChildren().add(line5);
+
+        line6 = new Line(GRID_X_0_0 + (1.5 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0 + (1.5 * GRID_BTN_WIGTH), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line6.setStrokeWidth(20);
+        line6.setStroke(Color.GREEN);
+        getChildren().add(line6);
+
+        line7 = new Line(GRID_X_0_0 + (2.5 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0 + (2.5 * GRID_BTN_WIGTH), GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line7.setStrokeWidth(20);
+        line7.setStroke(Color.GREEN);
+        getChildren().add(line7);
+
+        line8 = new Line(GRID_X_0_0 + (3 * GRID_BTN_WIGTH), GRID_Y_0_0, GRID_X_0_0, GRID_Y_0_0 + (GRID_BTN_HEIGTH * 3));
+        line8.setStrokeWidth(20);
+        line8.setStroke(Color.GREEN);
+        getChildren().add(line8);
+        
+        line1.setVisible(false);
+        line2.setVisible(false);
+        line3.setVisible(false);
+        line4.setVisible(false);
+        line5.setVisible(false);
+        line6.setVisible(false);
+        line7.setVisible(false);
+        line8.setVisible(false);
     }
 }

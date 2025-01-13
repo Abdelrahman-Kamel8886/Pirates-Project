@@ -69,7 +69,7 @@ public class HomePageController extends HomePage {
         recordsListView.setCellFactory(param -> new GameRecordCell());
 
         initView();
-        playCurrentSong();
+        //playCurrentSong();
     }
 
     private void initView() {
@@ -126,7 +126,7 @@ public class HomePageController extends HomePage {
         }
 
         multiPlayersImage.setOnMouseClicked((MouseEvent event) -> {
-            goToGame();
+            showTwoNames();
         });
         computerImage.setOnMouseClicked((MouseEvent event) -> {
             showLevels();
@@ -225,7 +225,6 @@ public class HomePageController extends HomePage {
 
     private void showTwoNames() {
         TwoNamesForm.display(myStage);
-
     }
     
     private void showSimpleAlert(AvalabilePlayer player) {
