@@ -15,7 +15,8 @@ import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.LevelTypesEnum;
-import piratesproject.ui.game.xogameboard.VSComp.VsComputer;
+import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
+import piratesproject.ui.game.xogameboard.VsCompHard.VsCompHard;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.SharedModel;
@@ -27,6 +28,7 @@ import piratesproject.utils.SharedModel;
 public class LevelController extends LevelsBase {
 
     private final Stage mystage;
+    private LevelTypesEnum level;
 
     public LevelController(Stage stage) {
         mystage = stage;
@@ -34,7 +36,18 @@ public class LevelController extends LevelsBase {
     }
 
     private void listenToAllEvents() {
-        playb.setOnAction(event -> goToXOPage());
+        playb.setOnAction(event -> {
+            if(level==LevelTypesEnum.Easy){
+                goToXOPageEasy();
+            }
+            else if(level==LevelTypesEnum.Normal){
+                goToXOPageEasy();
+            }
+            else{
+                goToXOPageHard();
+            }
+             LevelForm.closeForm();
+        });
         slider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
             // Snap to the nearest integer
             double roundedValue = Math.round(newValue.doubleValue());
@@ -59,28 +72,31 @@ public class LevelController extends LevelsBase {
 
     }
 
-    private void goToXOPage() {
-        Parent XOgame = new VsComputer(mystage);
+    private void goToXOPageEasy() {
+        Parent XOgame = new VsComputerEasy(mystage);
         Main.resetScene(XOgame);
-
-        LevelForm.closeForm();
+    }
+    
+        private void goToXOPageHard() {
+        Parent XOgame = new VsCompHard(mystage);
+        Main.resetScene(XOgame);
     }
 
     private void setEasy() {
         easy.setText(Strings.DIFFICULTY_EASY_TEXT);
         image1.setImage(new Image(getClass().getResource(Pathes.EASY_LOGO_PATH).toExternalForm())); // Easy image
-        SharedModel.setSelectedLevel(LevelTypesEnum.Easy);
+        level = LevelTypesEnum.Easy;
     }
 
     private void setNormal() {
         easy.setText(Strings.DIFFICULTY_NORMAL_TEXT);
         image1.setImage(new Image(getClass().getResource(Pathes.NORMAL_LOGO_PATH).toExternalForm())); // Normal image
-        SharedModel.setSelectedLevel(LevelTypesEnum.Normal);
+        level = LevelTypesEnum.Normal;
     }
 
     private void setHard() {
         easy.setText(Strings.DIFFICULTY_HARD_TEXT);
         image1.setImage(new Image(getClass().getResource(Pathes.HARD_LOGO_PATH).toExternalForm())); // Hard image
-        SharedModel.setSelectedLevel(LevelTypesEnum.Hard);
+        level = LevelTypesEnum.Hard;
     }
 }
