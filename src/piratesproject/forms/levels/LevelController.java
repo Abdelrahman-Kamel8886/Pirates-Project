@@ -5,6 +5,8 @@
  */
 package piratesproject.forms.levels;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -13,6 +15,7 @@ import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.LevelTypesEnum;
+import piratesproject.ui.game.xogameboard.VSComp.VsComputer;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.SharedModel;
@@ -32,9 +35,13 @@ public class LevelController extends LevelsBase {
 
     private void listenToAllEvents() {
         playb.setOnAction(event -> goToXOPage());
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            int value = newValue.intValue();
-            switch (value) {
+        slider.valueProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+            // Snap to the nearest integer
+            double roundedValue = Math.round(newValue.doubleValue());
+            slider.setValue(roundedValue);
+
+            // Update the label based on slider value
+            switch ((int) roundedValue) {
                 case 0:
                     setEasy();
                     break;
@@ -45,13 +52,15 @@ public class LevelController extends LevelsBase {
                     setHard();
                     break;
             }
-            image1.setFitHeight(160.0);
-            image1.setFitWidth(160.0);
         });
+
+        image1.setFitHeight(200.0);
+        image1.setFitWidth(200.0);
+
     }
 
     private void goToXOPage() {
-        Parent XOgame = new XOGameOfflineController(mystage);
+        Parent XOgame = new VsComputer(mystage);
         Main.resetScene(XOgame);
 
         LevelForm.closeForm();
