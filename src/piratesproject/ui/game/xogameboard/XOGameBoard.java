@@ -190,8 +190,6 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_1_2.setWrapText(true);
         btnGrid_1_2.setFont(new Font(96.0));
 
-//        btnGrid_1_2.setEffect(blend0);
-//        btnGrid_1_2.setCursor(Cursor.NONE);
 
         GridPane.setColumnIndex(btnGrid_2_2, 2);
         GridPane.setRowIndex(btnGrid_2_2, 2);
@@ -204,8 +202,7 @@ public abstract class XOGameBoard extends AnchorPane {
         btnGrid_2_2.setTextFill(javafx.scene.paint.Color.WHITE);
         btnGrid_2_2.setWrapText(true);
         btnGrid_2_2.setFont(new Font(96.0));
-
-        //btnGrid_2_2.setEffect(blend1);
+        
 
         GridPane.setColumnIndex(btnGrid_1_1, 1);
         GridPane.setHalignment(btnGrid_1_1, javafx.geometry.HPos.CENTER);
