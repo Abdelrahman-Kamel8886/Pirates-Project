@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import minmaxalgorithim.State;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
@@ -44,6 +46,8 @@ public class XOGameOfflineController extends XOGameBoard {
     private void initView() {
         name1 = SharedModel.getPlayerName1();
         name2 = SharedModel.getPlayerName2();
+        playerOneLabel.setText(name1);
+        playerTwoLabel.setText(name2); 
         drawSuccesslines();
         initGame();
     }
@@ -82,6 +86,9 @@ public class XOGameOfflineController extends XOGameBoard {
                 });
             }
         }
+        avatarIcon.setOnMouseClicked((MouseEvent event) -> {
+            goToReplay();
+        });
     }
 
    public void makeMove(int row, int col) {
