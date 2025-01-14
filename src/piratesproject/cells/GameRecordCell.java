@@ -12,8 +12,9 @@ import javafx.scene.transform.Scale;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameResultEnum;
 import piratesproject.models.HistoryModel;
+import piratesproject.models.RecordModel;
 
-public class GameRecordCell extends ListCell<HistoryModel> {
+public class GameRecordCell extends ListCell<RecordModel> {
 
     private final HBox content;
     private final ImageView player1AvatarView;
@@ -66,7 +67,7 @@ public class GameRecordCell extends ListCell<HistoryModel> {
     }
 
     @Override
-    protected void updateItem(HistoryModel match, boolean empty) {
+    protected void updateItem(RecordModel match, boolean empty) {
         super.updateItem(match, empty);
         if (empty || match == null) {
             setText(null);

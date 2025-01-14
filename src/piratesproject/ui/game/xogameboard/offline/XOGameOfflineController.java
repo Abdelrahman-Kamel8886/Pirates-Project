@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
@@ -18,13 +20,14 @@ import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
 import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.home.HomePageController;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 public class XOGameOfflineController extends XOGameBoard {
 
-    private Player player1, player2, currentPlayer;
+    private Player player1, player2, currentPlayer , winner;
     private String name1, name2, firstPlayer, secondPlayer;
     private String movesSequnce, line;
     private RecordModel gameRecord;
@@ -100,6 +103,11 @@ public class XOGameOfflineController extends XOGameBoard {
                 });
             }
         }
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.BACK_SPACE) {
+                gotoHome();
+            }
+        });
     }
 
     public void makeMove(int row, int col) {
@@ -109,6 +117,7 @@ public class XOGameOfflineController extends XOGameBoard {
             moves.add(new MoveModel(row, col, currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
             line = winCondition != null?winCondition:"none";
+            winner = winCondition != null?currentPlayer:null;
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
@@ -168,7 +177,6 @@ public class XOGameOfflineController extends XOGameBoard {
     }
 
     private void drawWinLine(String winCondition) {
-        System.out.println(winCondition);
         switch (winCondition) {
             case "ROW-0":
                 line1.setVisible(true);
@@ -210,11 +218,10 @@ public class XOGameOfflineController extends XOGameBoard {
 
     private void saveRecord() {
         movesSequnce = JsonUtils.movesArrayToJson(moves);
-        gameRecord.setWinner(currentPlayer);
+        gameRecord.setWinner(winner);
         gameRecord.setGameSequance(movesSequnce);
         gameRecord.setLine(line);
         SharedModel.setSelectedRecord(gameRecord);
-        System.out.println(gameRecord.toString());
     }
     
     private void saveRecordToFile(){
@@ -226,6 +233,10 @@ public class XOGameOfflineController extends XOGameBoard {
     private void goToReplay() {
         Parent replay = new ReplayController(stage);
         Main.resetScene(replay);
+    }
+    public void gotoHome() {
+        Parent homePage = new HomePageController(stage);
+        Main.resetScene(homePage);
     }
 
 }

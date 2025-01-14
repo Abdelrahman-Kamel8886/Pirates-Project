@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import piratesproject.models.AvalabilePlayer;
 import piratesproject.models.HistoryModel;
+import piratesproject.models.RecordModel;
 import piratesproject.models.UserModel;
 
 public abstract class HomePage extends GridPane {
@@ -53,7 +54,7 @@ public abstract class HomePage extends GridPane {
     protected final ListView<UserModel> activePlayersListView;
     protected final VBox box1;
     protected final Text userNameText11;
-    protected final ListView<HistoryModel> recordsListView;
+    protected final ListView<RecordModel> recordsListView;
 
     public HomePage() {
 
