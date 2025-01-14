@@ -78,7 +78,31 @@ public class NetworkAccessLayer {
         }
         return responseModel;
     }
-<<<<<<< HEAD
+ public static ArrayList<UserModel> getOnlineUsers(){
+        ArrayList<UserModel> list = null ;
+        try (
+                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+
+            RequestModel myReq = new RequestModel(RequestTypesEnum.USERSTABLE,"");
+            String reqJson = JsonUtils.requestModelToJson(myReq);
+            out.println(reqJson); // Send JSON string to the server
+
+            // Listen for a response from the server
+            String responseJson = in.readLine();
+            if (responseJson != null) {
+                // Convert JSON string to ResponseModel
+                list = JsonUtils.jsonToUsersArray(responseJson);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return list;
+
+    }
 //    public static void sendMove(GameModel gameMove){
 //         try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
 //                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
@@ -105,30 +129,6 @@ public class NetworkAccessLayer {
 //    }
     class GameHandler extends Thread{
         
-=======
-    public static ArrayList<UserModel> getOnlineUsers(){
-        ArrayList<UserModel> list = null ;
-        try (
-                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-
-            RequestModel myReq = new RequestModel(RequestTypesEnum.USERSTABLE,"");
-            String reqJson = JsonUtils.requestModelToJson(myReq);
-            out.println(reqJson); // Send JSON string to the server
-
-            // Listen for a response from the server
-            String responseJson = in.readLine();
-            if (responseJson != null) {
-                // Convert JSON string to ResponseModel
-                list = JsonUtils.jsonToUsersArray(responseJson);
-            }
-
-        } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-        return list;
->>>>>>> 0a2a1af23679e0d2377256b35e7b79190126ab46
-    }
-}
+   
+}}

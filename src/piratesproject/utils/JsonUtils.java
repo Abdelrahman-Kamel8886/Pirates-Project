@@ -3,6 +3,7 @@ package piratesproject.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import piratesproject.models.GameModel;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.MoveModel;
@@ -82,5 +83,13 @@ public class JsonUtils {
 
     public static RecordModel jsonToRecordModel(String json) {
         return gson.fromJson(json, RecordModel.class);
+    }
+    public static String gameModelToJson(GameModel gameModel) {
+        return gson.toJson(gameModel);
+    }
+
+    // Convert JSON string to UserModel
+    public static GameModel jsonToGameModel(String json) {
+        return gson.fromJson(json, GameModel.class);
     }
 }
