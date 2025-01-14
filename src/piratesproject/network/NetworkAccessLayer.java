@@ -77,7 +77,7 @@ public class NetworkAccessLayer {
         }
         return responseModel;
     }
-    private ArrayList<UserModel> getOnlineUsers(){
+    public static ArrayList<UserModel> getOnlineUsers(){
         ArrayList<UserModel> list = null ;
         try (
                 Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
