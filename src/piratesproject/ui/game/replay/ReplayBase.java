@@ -362,11 +362,7 @@ public class ReplayBase extends AnchorPane {
         Grid_9.setTextFill(javafx.scene.paint.Color.WHITE);
         Grid_9.setFont(new Font(96.0));
         Grid_9.setWrapText(true);
-      
-        label0.setText("L");
-        HBox.setMargin(label0, new Insets(130.0, 0.0, 80.0, 220.0));
-        label0.setFont(new Font("Old English Text MT", 80.0));
-
+    
         getChildren().add(imageView);
         gridPane.getColumnConstraints().add(columnConstraints);
         gridPane.getColumnConstraints().add(columnConstraints0);

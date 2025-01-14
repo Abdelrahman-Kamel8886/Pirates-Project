@@ -1,6 +1,7 @@
 package piratesproject.ui.home;
 
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
@@ -19,9 +20,14 @@ import piratesproject.forms.twoNames.TwoNamesForm;
 import piratesproject.models.AvalabilePlayer;
 import piratesproject.models.HistoryModel;
 import piratesproject.models.Player;
+import piratesproject.models.RecordModel;
+import piratesproject.models.UserModel;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.auth.login.LoginController;
+import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.BackgroundMusic;
+import piratesproject.utils.FileHandler;
 
 import piratesproject.utils.SharedModel;
 
@@ -38,35 +44,6 @@ public class HomePageController extends HomePage {
         songs.add(Pathes.SOUNDTRACK2_PATH);
         songs.add(Pathes.SOUNDTRACK3_PATH);
         songs.add(Pathes.SOUNDTRACK4_PATH);
-        
-        activePlayersListView.getItems().addAll(
-            new AvalabilePlayer("Ahmed", 85),
-            new AvalabilePlayer("Mohmaed", 90),
-            new AvalabilePlayer("Abdo", 75),
-            new AvalabilePlayer("Ahmed", 85),
-            new AvalabilePlayer("Mohmaed", 90),
-            new AvalabilePlayer("Abdo", 75)
-        );
-        
-        activePlayersListView.setCellFactory(param -> new ActivePlayerCell());
-        
-        Player p1=new Player("Abdo", "X");
-        Player p2=new Player("Mohamed", "O");
-        
-        Player p3=new Player("Ahmed", "X");
-        Player p4=new Player("Abdo", "O");
-        
-        recordsListView.getItems().addAll(
-                new HistoryModel(p1, p2, p1, ""),
-                new HistoryModel(p3, p4, p4, ""),
-                new HistoryModel(p1, p2, null, ""),
-                new HistoryModel(p1, p2, p2, ""),
-                new HistoryModel(p1, p2, null, ""),
-                new HistoryModel(p1, p2, null, "")
-                
-        );
-                
-        recordsListView.setCellFactory(param -> new GameRecordCell());
 
         initView();
         //playCurrentSong();
@@ -95,6 +72,7 @@ public class HomePageController extends HomePage {
         } else {
             initUserView();
         }
+        setRecordsData();
         onClicks();
     }
 
@@ -111,6 +89,44 @@ public class HomePageController extends HomePage {
         userNameText.setText(SharedModel.getUser().getUserName());
         scoreText.setText("Score : " + SharedModel.getUser().getScore());
         avatar.setImage(new Image(getClass().getResource(Pathes.AVATAR_LOGO_PATH).toExternalForm()));
+        setPlayersData();
+    }
+
+    private void setPlayersData() {
+        ArrayList<UserModel> users = loadPlayers();
+        if (users != null && !users.isEmpty()) {
+            activePlayersListView.setItems(FXCollections.observableArrayList(users));
+            activePlayersListView.setCellFactory(param -> new ActivePlayerCell());
+        }
+
+    }
+
+    private ArrayList<UserModel> loadPlayers() {
+        return NetworkAccessLayer.getOnlineUsers();
+    }
+
+    private void setRecordsData() {
+        ArrayList<RecordModel> records = loadRecords();
+        ArrayList<RecordModel> myRecords = new ArrayList();
+        String username = SharedModel.getUser().getUserName();
+        if (records != null && !records.isEmpty()) {
+            for (RecordModel record : records) {
+                if (record.getPlayer1().getName().equals(username)
+                        || record.getPlayer2().getName().equals(username)) {
+                    myRecords.add(record);
+                }
+            }
+        }
+        if (myRecords != null && !myRecords.isEmpty()) {
+
+            recordsListView.setItems(FXCollections.observableArrayList(myRecords));
+            recordsListView.setCellFactory(param -> new GameRecordCell());
+        }
+
+    }
+
+    private ArrayList<RecordModel> loadRecords() {
+        return FileHandler.getAllRecords();
     }
 
     private void onClicks() {
@@ -144,6 +160,14 @@ public class HomePageController extends HomePage {
         nextBtn.setOnMouseClicked((MouseEvent event) -> {
             playNextSong();
 
+        });
+        recordsListView.setOnMouseClicked(event -> {
+            RecordModel selectedItem = recordsListView.getSelectionModel().getSelectedItem();
+
+            if (selectedItem != null) {
+                SharedModel.setSelectedRecord(selectedItem);
+                goToReplay();
+            }
         });
     }
 
@@ -213,6 +237,11 @@ public class HomePageController extends HomePage {
         Main.resetScene(game);
     }
 
+    private void goToReplay() {
+        Parent replay = new ReplayController(myStage);
+        Main.resetScene(replay);
+    }
+
     private void openSettings() {
         SettingsForm settings = new SettingsForm();
         settings.display(myStage);
@@ -226,7 +255,7 @@ public class HomePageController extends HomePage {
     private void showTwoNames() {
         TwoNamesForm.display(myStage);
     }
-    
+
     private void showSimpleAlert(AvalabilePlayer player) {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

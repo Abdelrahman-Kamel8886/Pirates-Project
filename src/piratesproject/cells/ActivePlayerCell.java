@@ -8,9 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import piratesproject.drawable.values.Pathes;
-import piratesproject.models.AvalabilePlayer;
+import piratesproject.models.UserModel;
 
-public class ActivePlayerCell extends ListCell<AvalabilePlayer> {
+public class ActivePlayerCell extends ListCell<UserModel> {
     
     private final HBox content;
     private final ImageView avatarView;
@@ -39,13 +39,13 @@ public class ActivePlayerCell extends ListCell<AvalabilePlayer> {
     }
 
     @Override
-    protected void updateItem(AvalabilePlayer user, boolean empty) {
+    protected void updateItem(UserModel user, boolean empty) {
         super.updateItem(user, empty);
         if (empty || user == null) {
             setText(null);
             setGraphic(null);
         } else {
-            userNameText.setText(user.getPlayerName());
+            userNameText.setText(user.getUserName());
             scoreText.setText("Score: " + user.getScore());
             setGraphic(content);
         }
