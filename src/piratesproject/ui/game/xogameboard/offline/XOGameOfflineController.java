@@ -229,11 +229,6 @@ public class XOGameOfflineController extends XOGameBoard {
         FileHandler.appendToFile(record);
         
     }
-
-    private void goToReplay() {
-        Parent replay = new ReplayController(stage);
-        Main.resetScene(replay);
-    }
     public void gotoHome() {
         Parent homePage = new HomePageController(stage);
         Main.resetScene(homePage);

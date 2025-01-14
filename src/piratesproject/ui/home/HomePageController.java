@@ -24,6 +24,7 @@ import piratesproject.models.RecordModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.auth.login.LoginController;
+import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.BackgroundMusic;
 import piratesproject.utils.FileHandler;
@@ -160,6 +161,14 @@ public class HomePageController extends HomePage {
             playNextSong();
 
         });
+        recordsListView.setOnMouseClicked(event -> {
+            RecordModel selectedItem = recordsListView.getSelectionModel().getSelectedItem();
+
+            if (selectedItem != null) {
+                SharedModel.setSelectedRecord(selectedItem);
+                goToReplay();
+            }
+        });
     }
 
     private void checkSound() {
@@ -226,6 +235,11 @@ public class HomePageController extends HomePage {
 
         Parent game = new XOGameOfflineController(myStage);
         Main.resetScene(game);
+    }
+
+    private void goToReplay() {
+        Parent replay = new ReplayController(myStage);
+        Main.resetScene(replay);
     }
 
     private void openSettings() {
