@@ -36,8 +36,7 @@ public class Main extends Application {
         stage.setFullScreenExitHint("");
 
 
-
-        Parent root = new XOGameOfflineController(stage);
+        Parent root = new HomePageController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
@@ -58,7 +57,7 @@ public class Main extends Application {
     public static void resetScene(Parent p){
         scene.setRoot(p);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) {      
         launch(args);
     }
 

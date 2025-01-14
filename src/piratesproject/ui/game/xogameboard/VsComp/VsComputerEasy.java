@@ -16,7 +16,7 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import minmaxalgorithim.State;
+import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
 import piratesproject.models.Player;

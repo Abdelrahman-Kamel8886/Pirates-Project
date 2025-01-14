@@ -1,13 +1,13 @@
 package piratesproject.models;
 
-public class UserModel  {
+public class UserModel {
     
-   private String firstName; 
+    private String firstName; 
     private String lastName;
     private String userName; 
     private String password; 
-    private Boolean isOnline; 
-    private Boolean isplayingnow; 
+    private Integer isOnline; 
+    private Integer isplayingnow; 
     private Integer GamesPlayed; 
     private Integer score;
     
@@ -23,7 +23,7 @@ public class UserModel  {
         this.password = password;
     }
 
-    public UserModel(String firstName, String lastName, String userName, String password, Boolean isOnline, Boolean isplayingnow, Integer GamesPlayed, Integer score) {
+    public UserModel(String firstName, String lastName, String userName, String password, Integer isOnline, Integer isplayingnow, Integer GamesPlayed, Integer score) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -66,19 +66,19 @@ public class UserModel  {
         this.password = password;
     }
 
-    public Boolean getIsOnline() {
+    public Integer getIsOnline() {
         return isOnline;
     }
 
-    public void setIsOnline(Boolean isOnline) {
+    public void setIsOnline(Integer isOnline) {
         this.isOnline = isOnline;
     }
 
-    public Boolean getIsplayingnow() {
+    public Integer getIsplayingnow() {
         return isplayingnow;
     }
 
-    public void setIsplayingnow(Boolean isplayingnow) {
+    public void setIsplayingnow(Integer isplayingnow) {
         this.isplayingnow = isplayingnow;
     }
 
@@ -98,5 +98,25 @@ public class UserModel  {
         this.score = score;
     }
     
+    @Override
+public String toString() {
+    return "UserModel{" +
+            "firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", userName='" + userName + '\'' +
+            ", password='" + password + '\'' +
+            ", isOnline=" + isOnline +
+            ", isplayingnow=" + isplayingnow +
+            ", GamesPlayed=" + GamesPlayed +
+            ", score=" + score +
+            '}';
+}
 
+
+
+    
+    
+    
+    
+    
 }
