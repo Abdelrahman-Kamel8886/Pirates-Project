@@ -92,4 +92,11 @@ public class JsonUtils {
     public static GameModel jsonToGameModel(String json) {
         return gson.fromJson(json, GameModel.class);
     }
+    public static String gameMoveToJson(MoveModel gameMove) {
+        return gson.toJson(gameMove);
+    }
+
+    public static MoveModel jsonToGameMove(String json) {
+        return gson.fromJson(json, MoveModel.class);
+    }
 }

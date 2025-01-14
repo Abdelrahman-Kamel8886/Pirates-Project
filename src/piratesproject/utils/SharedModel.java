@@ -13,7 +13,7 @@ public class SharedModel {
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
-
+    private static String OponnentName = "abdo";
     public static UserModel getUser() {
         return user;
     }

@@ -1,15 +1,22 @@
 package piratesproject.network;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import piratesproject.enums.RequestTypesEnum;
+import piratesproject.models.GameModel;
 //import piratesproject.models.GameModel;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
+import piratesproject.models.MoveModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
@@ -21,10 +28,10 @@ public class NetworkAccessLayer {
     private static final String SERVER_HOST = "172.16.222.147"; // Change to your server's address
     private static final int SERVER_PORT = 1422; // Change to your server's port
 
-
     public static ResponseModel registerToServer(UserModel u) {
         ResponseModel responseModel = null;
-        try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+        try (
+                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
@@ -52,7 +59,8 @@ public class NetworkAccessLayer {
 
     public static LoginResponseModel loginToServer(LoginRequestModel u) {
         LoginResponseModel responseModel = null;
-        try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+        try (
+                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
@@ -78,15 +86,15 @@ public class NetworkAccessLayer {
         }
         return responseModel;
     }
- public static ArrayList<UserModel> getOnlineUsers(){
-        ArrayList<UserModel> list = null ;
+
+    public static ArrayList<UserModel> getOnlineUsers() {
+        ArrayList<UserModel> list = null;
         try (
                 Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-
-            RequestModel myReq = new RequestModel(RequestTypesEnum.USERSTABLE,"");
+            RequestModel myReq = new RequestModel(RequestTypesEnum.USERSTABLE, "");
             String reqJson = JsonUtils.requestModelToJson(myReq);
             out.println(reqJson); // Send JSON string to the server
 
@@ -103,32 +111,37 @@ public class NetworkAccessLayer {
         return list;
 
     }
-//    public static void sendMove(GameModel gameMove){
-//         try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-//                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-//                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-//
-//            // Create a UserModel object and convert it to JSON
-//         
-//
-//           String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
-//            RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, gameMoveJson);
-//            String reqJson = JsonUtils.requestModelToJson(myReq);
-//            out.println(reqJson); // Send JSON string to the server
-//          
-//            String responseJson = in.readLine();
-//            if (responseJson != null) {
-//                // Convert JSON string to ResponseModel
-//                
-//            }
-//
-//        } catch (Exception e) {
-//            System.err.println("Error: " + e.getMessage());
-//        }
-//        
-//    }
-    class GameHandler extends Thread{
-        
 
-   
-}}
+    public static void sendMove(GameModel gameMove) {
+        try (
+                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
+            // Create a UserModel object and convert it to JSON
+            String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
+            RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
+            String reqJson = JsonUtils.requestModelToJson(myReq);
+            out.println(reqJson); // Send JSON string to the server
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static MoveModel getMove() {
+        MoveModel gameMove = null;
+        try (
+                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+            String gameMovejson = in.readLine();
+            gameMove = JsonUtils.jsonToGameMove(gameMovejson);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gameMove;
+    }
+
+}
