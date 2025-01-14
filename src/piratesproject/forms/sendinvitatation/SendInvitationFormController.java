@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.forms.lodinanimation.LodingAnimationController;
 import piratesproject.forms.lodinanimation.LodingAnimationHandler;
+import piratesproject.models.InvitationModel;
+import piratesproject.network.NetworkAccessLayer;
 
 /**
  * FXML Controller class
@@ -42,7 +44,8 @@ public class SendInvitationFormController extends SendInvitationForm {
                 System.out.println("test");
                 //Parent root = new LodingAnimationController();
                 //SendInvitationFormHandler.resetScene(root);   
-                SendInvitationToServer();
+                 InvitationModel invitationModel = new InvitationModel("Dataj", "nono");
+                NetworkAccessLayer.sentInvitation(invitationModel) ; 
             }
         });
     }
