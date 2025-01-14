@@ -16,6 +16,7 @@ import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.enums.LevelTypesEnum;
 import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
+import piratesproject.ui.game.xogameboard.VsCompHard.VsCompHard;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.SharedModel;
@@ -77,7 +78,7 @@ public class LevelController extends LevelsBase {
     }
     
         private void goToXOPageHard() {
-        Parent XOgame = new VsComputerEasy(mystage);
+        Parent XOgame = new VsCompHard(mystage);
         Main.resetScene(XOgame);
     }
 

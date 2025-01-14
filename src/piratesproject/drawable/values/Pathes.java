@@ -32,6 +32,9 @@ public class Pathes {
     static public final String SOUNDTRACK3_PATH = "/piratesproject/media/sounds/soundtrack2.mp3";
     static public final String SOUNDTRACK4_PATH = "/piratesproject/media/sounds/soundtrack3.mp3";
     static public final String DRAW_VEDIO_PATH = "/piratesproject/media/videos/damy.mp4";
+    
+    //Files
+    public static final String RECORDS_FILE_PATH = "./database/records.txt"; 
 
 
 }

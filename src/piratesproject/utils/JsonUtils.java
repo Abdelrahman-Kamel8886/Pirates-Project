@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.MoveModel;
+import piratesproject.models.RecordModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
@@ -65,5 +66,21 @@ public class JsonUtils {
     public static ArrayList<MoveModel> jsonToMovesArray(String json) {
         ArrayList<MoveModel> moveModels = gson.fromJson(json, new TypeToken<ArrayList<MoveModel>>(){}.getType());
         return moveModels;
+    }
+     public static String usersArrayToJson(ArrayList<UserModel> users ) {
+        return gson.toJson(users);
+    }
+    public static ArrayList<UserModel> jsonToUsersArray(String json) {
+        ArrayList<UserModel> users = gson.fromJson(json, new TypeToken<ArrayList<UserModel>>(){}.getType());
+        return users;
+    }
+    
+    
+    public static String recordModelToJson(RecordModel recordModel) {
+        return gson.toJson(recordModel);
+    }
+
+    public static RecordModel jsonToRecordModel(String json) {
+        return gson.fromJson(json, RecordModel.class);
     }
 }

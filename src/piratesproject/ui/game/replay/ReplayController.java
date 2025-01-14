@@ -52,6 +52,7 @@ public class ReplayController extends ReplayBase {
             }
         }
         drawSuccesslines();
+
         initButtons();
         onClicks();
     }
@@ -85,7 +86,6 @@ public class ReplayController extends ReplayBase {
             currentIndex++;
             drawMove();
         }
-        
     }
 
     private void previous() {
@@ -105,6 +105,7 @@ public class ReplayController extends ReplayBase {
             drawWinLine(SharedModel.getSelectedRecord().getLine());
             disableAllButtons();
         }
+
     }
 
     private void EraseMove() {
@@ -157,6 +158,7 @@ public class ReplayController extends ReplayBase {
         pauseButton.setDisable(true);
         playButton.setDisable(true);
     }
+
 
     public void gotoHome() {
         Parent homePage = new HomePageController(mystage);
