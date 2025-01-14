@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import piratesproject.enums.RequestTypesEnum;
+//import piratesproject.models.GameModel;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.RequestModel;
@@ -75,5 +76,32 @@ public class NetworkAccessLayer {
             System.err.println("Error: " + e.getMessage());
         }
         return responseModel;
+    }
+//    public static void sendMove(GameModel gameMove){
+//         try (Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+//                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+//                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+//
+//            // Create a UserModel object and convert it to JSON
+//         
+//
+//           String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
+//            RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, gameMoveJson);
+//            String reqJson = JsonUtils.requestModelToJson(myReq);
+//            out.println(reqJson); // Send JSON string to the server
+//          
+//            String responseJson = in.readLine();
+//            if (responseJson != null) {
+//                // Convert JSON string to ResponseModel
+//                
+//            }
+//
+//        } catch (Exception e) {
+//            System.err.println("Error: " + e.getMessage());
+//        }
+//        
+//    }
+    class GameHandler extends Thread{
+        
     }
 }
