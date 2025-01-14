@@ -12,7 +12,7 @@ import piratesproject.drawable.values.Pathes;
 
 
 public class SendInvitationFormHandler {
-    
+
     private static Stage window;
     private static Scene scene ; 
     

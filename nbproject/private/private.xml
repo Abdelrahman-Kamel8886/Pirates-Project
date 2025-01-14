@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/piratesproject/ui/game/xogameboard/XOGameBoard.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>303</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/Main.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/replay/ReplayBase.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/drawable/styles/settings.css</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/replay/ReplayController.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/offline/XOGameOfflineController.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/models/RecordModel.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/XOGameBoard.java</file>
+            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/Main.java</file>
+            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/models/UserModel.java</file>
+            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
+            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/ui/home/HomePageController.java</file>
         </group>
     </open-files>
 </project-private>
