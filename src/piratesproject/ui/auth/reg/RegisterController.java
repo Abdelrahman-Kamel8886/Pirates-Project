@@ -23,9 +23,10 @@ import piratesproject.ui.auth.login.LoginController;
 import piratesproject.utils.Consts;
 
 public class RegisterController extends RegisterBase {
-
+     NetworkAccessLayer n;
     public RegisterController(Stage s) {
         super(s);
+         n = new NetworkAccessLayer();
         listenToAllEvents();
     }
 
@@ -70,7 +71,7 @@ public class RegisterController extends RegisterBase {
                             passwordTF.getText());
                     
                     Thread th = new Thread(() -> {
-                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+                        ResponseModel responseModel = n.registerToServer(user);
                         checkRegisterState(responseModel);
 
                     });

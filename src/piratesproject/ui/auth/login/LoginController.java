@@ -16,6 +16,7 @@ import piratesproject.network.NetworkAccessLayer;
 import piratesproject.forms.draw.DrawBase;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.auth.reg.RegisterController;
+import piratesproject.ui.game.xogameboard.online.OnlineGame;
 import piratesproject.utils.Consts;
 
 /**
@@ -129,7 +130,7 @@ public class LoginController extends LoginBase {
 
     public void gotoHome() {
 
-        Parent homePage = new HomePageController(mystage);
+        Parent homePage = new OnlineGame(mystage);
         Main.resetScene(homePage);
     }
 }

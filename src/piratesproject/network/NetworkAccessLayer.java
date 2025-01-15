@@ -25,17 +25,18 @@ import piratesproject.utils.JsonUtils;
 
 public class NetworkAccessLayer {
 
-    private static final String SERVER_HOST = "172.16.222.147"; // Change to your server's address
+    private static final String SERVER_HOST = "10.191.210.111"; // Change to your server's address
     private static final int SERVER_PORT = 1422; // Change to your server's port
-
-    public static ResponseModel registerToServer(UserModel u) {
+    static   Socket socket;
+   static PrintWriter out;
+    static BufferedReader in;
+    public  static ResponseModel registerToServer(UserModel u) {
         ResponseModel responseModel = null;
-        try (
-                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
-            UserModel user = u;
+        try  {
+             socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+                 out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+              UserModel user = u;
 
             String userJson = JsonUtils.userModelToJson(user);
             RequestModel myReq = new RequestModel(RequestTypesEnum.REGISTER, userJson);
@@ -57,13 +58,13 @@ public class NetworkAccessLayer {
         return responseModel;
     }
 
-    public static LoginResponseModel loginToServer(LoginRequestModel u) {
+    public static   LoginResponseModel loginToServer(LoginRequestModel u) {
         LoginResponseModel responseModel = null;
-        try (
-                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
+        try  {
+            socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
+                 out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
             // Create a UserModel object and convert it to JSON
             LoginRequestModel user = u;
 
@@ -87,13 +88,12 @@ public class NetworkAccessLayer {
         return responseModel;
     }
 
-    public static ArrayList<UserModel> getOnlineUsers() {
+    public static  ArrayList<UserModel> getOnlineUsers() {
         ArrayList<UserModel> list = null;
-        try (
-                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
+        try  {
+            
+                 out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             RequestModel myReq = new RequestModel(RequestTypesEnum.USERSTABLE, "");
             String reqJson = JsonUtils.requestModelToJson(myReq);
             out.println(reqJson); // Send JSON string to the server
@@ -112,13 +112,12 @@ public class NetworkAccessLayer {
 
     }
 
-    public static void sendMove(GameModel gameMove) {
-        try (
-                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
+    public static  void sendMove(GameModel gameMove) {
+        try  {
+//           socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
             // Create a UserModel object and convert it to JSON
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
             RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
             String reqJson = JsonUtils.requestModelToJson(myReq);
@@ -130,15 +129,19 @@ public class NetworkAccessLayer {
 
     }
 
-    public static MoveModel getMove() {
+    public static  MoveModel getMove() {
+        
         MoveModel gameMove = null;
-        try (
-                Socket socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-            String gameMovejson = in.readLine();
-            gameMove = JsonUtils.jsonToGameMove(gameMovejson);
-        } catch (Exception e) {
+        try  {
+           
+            // Create a UserModel object and convert it to JSON
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
+            String gameMovejson;
+            gameMovejson= in.readLine();
+            System.out.println(gameMovejson);
+            gameMove = JsonUtils.jsonToGameMove(gameMovejson);          
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
         return gameMove;

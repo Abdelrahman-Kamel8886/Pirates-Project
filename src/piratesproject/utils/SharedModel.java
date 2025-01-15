@@ -13,9 +13,17 @@ public class SharedModel {
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
-    private static String OponnentName = "abdo";
+    private static String OponnentName = "nono";
     public static UserModel getUser() {
         return user;
+    }
+
+    public static String getOponnentName() {
+        return OponnentName;
+    }
+
+    public static void setOponnentName(String OponnentName) {
+        SharedModel.OponnentName = OponnentName;
     }
 
     public static void setUser(UserModel user) {

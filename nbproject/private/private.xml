@@ -3,20 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/SharedModel.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/models/RequestModel.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/Consts.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/models/Player.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/Main.java</file>
             <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/JsonUtils.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/game/xogameboard/online/OnlineGame.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/auth/login/LoginController.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/models/ResponseModel.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterController.java</file>
             <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/enums/RequestTypesEnum.java</file>
-=======
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/Main.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/replay/ReplayBase.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/drawable/styles/settings.css</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/replay/ReplayController.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/offline/XOGameOfflineController.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/models/RecordModel.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/XOGameBoard.java</file>
->>>>>>> 0a2a1af23679e0d2377256b35e7b79190126ab46
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
         </group>
     </open-files>
 </project-private>

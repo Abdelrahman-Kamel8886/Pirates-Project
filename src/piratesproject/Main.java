@@ -24,13 +24,13 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        UserModel user = new UserModel();
-        user.setFirstName("Abdelrahman");
-        user.setLastName("Kamel");
-        user.setGamesPlayed(16);
-        user.setScore(10);
-        user.setUserName("abdokamel8886");
-        SharedModel.setUser(user);
+//        UserModel user = new UserModel();
+//        user.setFirstName("Abdelrahman");
+//        user.setLastName("Kamel");
+//        user.setGamesPlayed(16);
+//        user.setScore(10);
+//        user.setUserName("abdokamel8886");
+//        SharedModel.setUser(user);
         
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
