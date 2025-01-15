@@ -21,7 +21,7 @@ import piratesproject.utils.JsonUtils;
 
 public class NetworkAccessLayer {
 
-    private static final String SERVER_HOST = "172.16.222.147"; // Change to your server's address
+    private static final String SERVER_HOST = "10.191.210.112"; // Change to your server's address
     private static final int SERVER_PORT = 1422; // Change to your server's port
 
     public static ResponseModel registerToServer(UserModel u) {
@@ -108,9 +108,13 @@ public class NetworkAccessLayer {
     public static ResponseModel sentInvitation(InvitationModel invitationModel) {
 
         try {
+            
             String invitationDataString = JsonUtils.invitationModelToJson(invitationModel) ; 
             
             RequestModel requestModel = new RequestModel(RequestTypesEnum.INVITATION, invitationDataString);
+            String invitationModelString = JsonUtils.requestModelToJson(requestModel);
+            
+            
             
             Socket mySocket;
             DataInputStream dis;
@@ -120,7 +124,7 @@ public class NetworkAccessLayer {
             dis = new DataInputStream(mySocket.getInputStream());
             ps = new PrintStream(mySocket.getOutputStream());
             
-            ps.println(requestModel);
+            ps.println(invitationModelString);
             String replyMsg = dis.readLine();
             System.out.println("this is the replyMsg " +replyMsg);
             
