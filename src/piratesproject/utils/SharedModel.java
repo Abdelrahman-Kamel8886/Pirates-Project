@@ -7,12 +7,24 @@ import piratesproject.models.RecordModel;
 import piratesproject.models.UserModel;
 
 public class SharedModel {
-    private static LevelTypesEnum selectedLevel=LevelTypesEnum.Normal;
+
+    private static LevelTypesEnum selectedLevel = LevelTypesEnum.Normal;
     private static UserModel user;
+    private static UserModel selectedUser;
     private static SoundTrackStateEnum soundTrackState;
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
+
+    private static String challenger;
+
+    public static String getChallenger() {
+        return challenger;
+    }
+
+    public static void setChallenger(String challenger) {
+        SharedModel.challenger = challenger;
+    }
 
     public static UserModel getUser() {
         return user;
@@ -20,6 +32,14 @@ public class SharedModel {
 
     public static void setUser(UserModel user) {
         SharedModel.user = user;
+    }
+
+    public static UserModel getSelectedUser() {
+        return selectedUser;
+    }
+
+    public static void setSelectedUser(UserModel selectedUser) {
+        SharedModel.selectedUser = selectedUser;
     }
 
     public static SoundTrackStateEnum getSoundTrackState() {
@@ -61,11 +81,5 @@ public class SharedModel {
     public static void setSelectedRecord(RecordModel selectedRecord) {
         SharedModel.selectedRecord = selectedRecord;
     }
-    
-    
-    
-    
-    
-    
-    
+
 }

@@ -8,7 +8,6 @@ public class LoginResponseModel extends ResponseModel{
     }
   
     public LoginResponseModel(int status, String message , UserModel user) {
-        super(status, message);
         this.userModel = user;
     }
 

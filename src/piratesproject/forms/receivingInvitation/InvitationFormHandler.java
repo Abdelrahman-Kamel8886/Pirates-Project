@@ -21,12 +21,15 @@ public class InvitationFormHandler {
         window.setResizable(false);
        // window.getIcons().add(new Image(getClass().getResource(Pathes.SETTINGS_LOGO_PATH).toString()));
 
-        Parent root = new ReceivingInvitationFormController();
+        Parent root = new ReceivingInvitationFormController(owner);
         
         Scene scene = new Scene(root);
         window.setScene(scene);
         
         window.show();     
+    }
+    public static void closeForm(){
+        window.close();
     }
          
 }

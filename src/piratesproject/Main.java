@@ -7,7 +7,12 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
+import piratesproject.interfaces.NetworkResponseHandler;
+import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
+import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.auth.login.LoginController;
+import piratesproject.ui.auth.reg.RegisterController;
 
 import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
 
@@ -18,32 +23,26 @@ import piratesproject.ui.splash.SplashController;
 import piratesproject.utils.BackgroundMusic;
 
 import piratesproject.utils.SharedModel;
-public class Main extends Application {
 
-    private static Scene scene ;
-    
+public class Main extends Application implements NetworkResponseHandler {
+
+    private static Scene scene;
+    private NetworkAccessLayer networkAccessLayer;
+
     @Override
     public void start(Stage stage) throws Exception {
-        UserModel user = new UserModel();
-        user.setFirstName("Abdelrahman");
-        user.setLastName("Kamel");
-        user.setGamesPlayed(16);
-        user.setScore(10);
-        user.setUserName("abdokamel8886");
-        SharedModel.setUser(user);
-        
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
 
-
-        Parent root = new HomePageController(stage);
+        Parent root = new LoginController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
         stage.setScene(scene);
 
         stage.show();
-
     }
 
     @Override
@@ -51,14 +50,18 @@ public class Main extends Application {
         super.stop();
         BackgroundMusic.stopMusic();
     }
-    
-    
-    
-    public static void resetScene(Parent p){
+
+    public static void resetScene(Parent p) {
         scene.setRoot(p);
     }
-    public static void main(String[] args) {      
+
+    public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

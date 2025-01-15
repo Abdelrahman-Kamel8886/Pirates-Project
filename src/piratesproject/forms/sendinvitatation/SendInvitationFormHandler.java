@@ -31,6 +31,9 @@ public class SendInvitationFormHandler {
         
         window.show();     
     }
+    public static void closeForm(){
+        window.close();
+    }
     public static void  resetScene(Parent p ){
         scene.setRoot(p);
     }

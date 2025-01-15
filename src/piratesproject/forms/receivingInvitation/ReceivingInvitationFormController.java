@@ -1,24 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package piratesproject.forms.receivingInvitation;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.event.ActionEvent;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+import piratesproject.Main;
+import piratesproject.enums.RequestTypesEnum;
+import piratesproject.interfaces.NetworkResponseHandler;
+import piratesproject.models.InvitationModel;
+import piratesproject.models.ResponseModel;
+import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.game.xogameboard.online.OnlineGameController;
+import piratesproject.utils.SharedModel;
 
-/**
- * FXML Controller class
- *
- * @author jaila
- */
-public class ReceivingInvitationFormController extends ReceivingInvitationFormBase {
+public class ReceivingInvitationFormController extends ReceivingInvitationFormBase implements NetworkResponseHandler {
+private NetworkAccessLayer networkAccessLayer;
+    private Stage myStage;
+    public ReceivingInvitationFormController(Stage stage) {
+        myStage = stage;
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer.setResponseHandler(this);
+        initView();
+    }
 
-    /**
-     * Initializes the controller class.
-     */
-    
-    
+    private void initView(){
+        nameText.setText(SharedModel.getChallenger());
+        onClicks();
+    }
+    private void onClicks(){
+        acceptButton.setOnAction((ActionEvent event) -> {
+            InvitationModel invitationModel = new InvitationModel(
+                    SharedModel.getChallenger(),
+                    SharedModel.getUser().getUserName());
+            networkAccessLayer.confirmInvitation(invitationModel);
+
+        });
+
+        declineButton.setOnAction((ActionEvent event) -> {
+            InvitationFormHandler.closeForm();
+        });
+    }
+
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        if(response.getType() == RequestTypesEnum.CREATE_ROOM){
+             InvitationFormHandler.closeForm();
+             goToGame();
+             
+        }
+    }
+    private void goToGame() {
+        Parent game = new OnlineGameController(myStage);
+        Main.resetScene(game);
+    }
 }

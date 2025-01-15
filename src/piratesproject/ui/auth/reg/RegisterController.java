@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
@@ -21,12 +22,17 @@ import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.auth.login.LoginBase;
 import piratesproject.ui.auth.login.LoginController;
 import piratesproject.utils.Consts;
+import piratesproject.utils.SharedModel;
 
-public class RegisterController extends RegisterBase {
+public class RegisterController extends RegisterBase implements NetworkResponseHandler {
+
+    private NetworkAccessLayer networkAccessLayer;
 
     public RegisterController(Stage s) {
         super(s);
         listenToAllEvents();
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer.setResponseHandler(this);
     }
 
     void listenToAllEvents() {
@@ -40,7 +46,7 @@ public class RegisterController extends RegisterBase {
         loginText.setOnAction(event -> {
             goToLogin();
         });
-        AsAGuestText.setOnAction(event->{
+        AsAGuestText.setOnAction(event -> {
             gotoHome();
         });
     }
@@ -68,13 +74,16 @@ public class RegisterController extends RegisterBase {
                             lastNameTF.getText(),
                             usernameTF.getText(),
                             passwordTF.getText());
-                    
-                    Thread th = new Thread(() -> {
-                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
-                        checkRegisterState(responseModel);
 
-                    });
-                    th.start();
+//                    Thread th = new Thread(() -> {
+//                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+//                        checkRegisterState(responseModel);
+//
+//                    });
+//                    th.start();
+                    SharedModel.setUser(user);
+                    networkAccessLayer.sendRegisteration(user);
+
                 }
 
             }
@@ -83,8 +92,8 @@ public class RegisterController extends RegisterBase {
 
         return logged;
     }
-    
-    public void showErrorAlert(String msg){
+
+    public void showErrorAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(stage);
         alert.initModality(Modality.APPLICATION_MODAL);
@@ -93,8 +102,8 @@ public class RegisterController extends RegisterBase {
         alert.setContentText(null);
         alert.showAndWait();
     }
-    
-    public void showConfirmationAlert(String msg){
+
+    public void showConfirmationAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(stage);
         alert.initModality(Modality.APPLICATION_MODAL);
@@ -108,28 +117,27 @@ public class RegisterController extends RegisterBase {
     private void checkRegisterState(ResponseModel responseModel) {
         if (responseModel != null) {
             if (responseModel.getStatus() == Consts.CONNECTION_SUCCESS) {
-                 if (Platform.isFxApplicationThread()) {
-                        showConfirmationAlert(responseModel.getMessage());
-                    } else {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                showConfirmationAlert(responseModel.getMessage());
-                            }
-                        });
-                    }
-            }
-            else{
                 if (Platform.isFxApplicationThread()) {
-                        showErrorAlert(responseModel.getMessage());
-                    } else {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                showErrorAlert(responseModel.getMessage());
-                            }
-                        });
-                    }
+                    gotoHome();
+                } else {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            gotoHome();
+                        }
+                    });
+                }
+            } else {
+                if (Platform.isFxApplicationThread()) {
+                    showErrorAlert(responseModel.getMessage());
+                } else {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            showErrorAlert(responseModel.getMessage());
+                        }
+                    });
+                }
             }
         }
     }
@@ -178,6 +186,11 @@ public class RegisterController extends RegisterBase {
     public void gotoHome() {
         Parent homePage = new HomePageController(stage);
         Main.resetScene(homePage);
+    }
+
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        checkRegisterState(response);
     }
 
 }

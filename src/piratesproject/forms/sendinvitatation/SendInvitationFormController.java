@@ -1,65 +1,65 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package piratesproject.forms.sendinvitatation;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.enums.RequestTypesEnum;
 import piratesproject.forms.lodinanimation.LodingAnimationController;
-import piratesproject.forms.lodinanimation.LodingAnimationHandler;
+import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.InvitationModel;
+import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.game.xogameboard.online.OnlineGameController;
+import piratesproject.utils.SharedModel;
 
-/**
- * FXML Controller class
- *
- * @author jaila
- */
-public class SendInvitationFormController extends SendInvitationForm {
+public class SendInvitationFormController extends SendInvitationForm implements NetworkResponseHandler {
 
-    Socket mySocket;
-    DataInputStream dis;
-    PrintStream ps;
-
+    private NetworkAccessLayer networkAccessLayer;
+    private Stage myStage;
+    
     public SendInvitationFormController(Stage stage) {
-        acceptButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("test");
-                //Parent root = new LodingAnimationController();
-                //SendInvitationFormHandler.resetScene(root);   
-                 InvitationModel invitationModel = new InvitationModel("Dataj", "nono");
-                NetworkAccessLayer.sentInvitation(invitationModel) ; 
-            }
+        myStage = stage;
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer.setResponseHandler(this);
+
+        initView();
+    }
+
+    private void initView() {
+        nameText.setText(SharedModel.getSelectedUser().getUserName());
+        scoreText.setText("" + SharedModel.getSelectedUser().getScore());
+        onClicks();
+    }
+
+    private void onClicks() {
+        acceptButton.setOnAction((ActionEvent event) -> {
+            InvitationModel invitationModel = new InvitationModel(
+                    SharedModel.getUser().getUserName(),
+                    SharedModel.getSelectedUser().getUserName());
+            networkAccessLayer.sentInvitation(invitationModel);
+
+        });
+
+        declineButton.setOnAction((ActionEvent event) -> {
+            SendInvitationFormHandler.closeForm();
         });
     }
 
-    void SendInvitationToServer() {
-        try {
-            mySocket = new Socket("127.0.0.1", 5005);
-            dis = new DataInputStream(mySocket.getInputStream());
-            ps = new PrintStream(mySocket.getOutputStream());
-            ps.println("Test Test");
-            String replyMsg = dis.readLine();
-            System.out.println(replyMsg);
-        } catch (IOException ex) {
-            System.out.println(ex);
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        if (response.getType() == RequestTypesEnum.START_SENDING) {
+            Parent root = new LodingAnimationController();
+            SendInvitationFormHandler.resetScene(root);
         }
+        else if(response.getType() == RequestTypesEnum.CREATE_ROOM){
+             SendInvitationFormHandler.closeForm();
+             goToGame();
+             
+        }
+    }
+    private void goToGame() {
+        Parent game = new OnlineGameController(myStage);
+        Main.resetScene(game);
     }
 }
