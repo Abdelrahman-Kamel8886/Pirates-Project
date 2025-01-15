@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -36,4 +37,48 @@ public class GameModel {
     public void setMove(MoveModel move) {
         this.move = move;
     }
+=======
+package piratesproject.models;
+
+public class GameModel {
+    private String id;
+    private Player player1;
+    private Player player2;
+
+    public GameModel() {
+    }
+
+    public GameModel(String id, Player player1, Player player2) {
+        this.id = id;
+        this.player1 = player1;
+        this.player2 = player2;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+    
+    
+    
+>>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
 }

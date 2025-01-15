@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -13,51 +12,45 @@ import piratesproject.cells.ActivePlayerCell;
 import piratesproject.cells.GameRecordCell;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
+import piratesproject.enums.RequestTypesEnum;
 import piratesproject.enums.SoundTrackStateEnum;
 import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.forms.levels.LevelForm;
+import piratesproject.forms.receivingInvitation.InvitationFormHandler;
+import piratesproject.forms.sendinvitatation.SendInvitationFormHandler;
 import piratesproject.forms.twoNames.TwoNamesForm;
+import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.AvalabilePlayer;
-import piratesproject.models.HistoryModel;
-import piratesproject.models.Player;
+import piratesproject.models.RecordModel;
+import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.auth.login.LoginController;
+import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.BackgroundMusic;
+import piratesproject.utils.FileHandler;
+import piratesproject.utils.JsonUtils;
 
 import piratesproject.utils.SharedModel;
 
-public class HomePageController extends HomePage {
+public class HomePageController extends HomePage implements NetworkResponseHandler {
 
     private Stage myStage;
     private final ArrayList<String> songs;
     private int currentSong = 0;
 
+    private NetworkAccessLayer networkAccessLayer;
+
     public HomePageController(Stage stage) {
         myStage = stage;
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer.setResponseHandler(this);
         songs = new ArrayList<>();
         songs.add(Pathes.SOUNDTRACK1_PATH);
         songs.add(Pathes.SOUNDTRACK2_PATH);
         songs.add(Pathes.SOUNDTRACK3_PATH);
         songs.add(Pathes.SOUNDTRACK4_PATH);
-
-        Player p1 = new Player("Abdo", "X");
-        Player p2 = new Player("Mohamed", "O");
-
-        Player p3 = new Player("Ahmed", "X");
-        Player p4 = new Player("Abdo", "O");
-
-        recordsListView.getItems().addAll(
-                new HistoryModel(p1, p2, p1, ""),
-                new HistoryModel(p3, p4, p4, ""),
-                new HistoryModel(p1, p2, null, ""),
-                new HistoryModel(p1, p2, p2, ""),
-                new HistoryModel(p1, p2, null, ""),
-                new HistoryModel(p1, p2, null, "")
-        );
-
-        recordsListView.setCellFactory(param -> new GameRecordCell());
 
         initView();
         //playCurrentSong();
@@ -86,6 +79,7 @@ public class HomePageController extends HomePage {
         } else {
             initUserView();
         }
+        //setRecordsData();
         onClicks();
     }
 
@@ -102,11 +96,10 @@ public class HomePageController extends HomePage {
         userNameText.setText(SharedModel.getUser().getUserName());
         scoreText.setText("Score : " + SharedModel.getUser().getScore());
         avatar.setImage(new Image(getClass().getResource(Pathes.AVATAR_LOGO_PATH).toExternalForm()));
-        setPlayersData();
+        networkAccessLayer.getOnlineUsers();
     }
 
-    private void setPlayersData() {
-        ArrayList<UserModel> users = loadPlayers();
+    private void setPlayersData(ArrayList<UserModel> users) {
         if (users != null && !users.isEmpty()) {
             activePlayersListView.setItems(FXCollections.observableArrayList(users));
             activePlayersListView.setCellFactory(param -> new ActivePlayerCell());
@@ -114,8 +107,28 @@ public class HomePageController extends HomePage {
 
     }
 
-    private ArrayList<UserModel> loadPlayers() {
-        return NetworkAccessLayer.getOnlineUsers();
+    private void setRecordsData() {
+        ArrayList<RecordModel> records = loadRecords();
+        ArrayList<RecordModel> myRecords = new ArrayList();
+        String username = SharedModel.getUser().getUserName();
+        if (records != null && !records.isEmpty()) {
+            for (RecordModel record : records) {
+                if (record.getPlayer1().getName().equals(username)
+                        || record.getPlayer2().getName().equals(username)) {
+                    myRecords.add(record);
+                }
+            }
+        }
+        if (myRecords != null && !myRecords.isEmpty()) {
+
+            recordsListView.setItems(FXCollections.observableArrayList(myRecords));
+            recordsListView.setCellFactory(param -> new GameRecordCell());
+        }
+
+    }
+
+    private ArrayList<RecordModel> loadRecords() {
+        return FileHandler.getAllRecords();
     }
 
     private void onClicks() {
@@ -150,6 +163,22 @@ public class HomePageController extends HomePage {
             playNextSong();
 
         });
+        recordsListView.setOnMouseClicked(event -> {
+            RecordModel selectedItem = recordsListView.getSelectionModel().getSelectedItem();
+
+            if (selectedItem != null) {
+                SharedModel.setSelectedRecord(selectedItem);
+                goToReplay();
+            }
+        });
+        
+        activePlayersListView.setOnMouseClicked(event -> {
+            UserModel selectedItem = activePlayersListView.getSelectionModel().getSelectedItem();
+            SharedModel.setSelectedUser(selectedItem);
+            SendInvitationFormHandler.display(myStage);
+        });
+        
+        
     }
 
     private void checkSound() {
@@ -218,6 +247,11 @@ public class HomePageController extends HomePage {
         Main.resetScene(game);
     }
 
+    private void goToReplay() {
+        Parent replay = new ReplayController(myStage);
+        Main.resetScene(replay);
+    }
+
     private void openSettings() {
         SettingsForm settings = new SettingsForm();
         settings.display(myStage);
@@ -239,5 +273,18 @@ public class HomePageController extends HomePage {
         alert.setContentText("Are you sure you want to send to user " + player.getPlayerName() + "\n" + " and its score is " + player.getScore()
                 + "\n" + "  ركز يا حبيبي ");
         alert.showAndWait();
+    }
+
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        if (response.getType() == RequestTypesEnum.USERSTABLE) {
+            ArrayList<UserModel> users = JsonUtils.jsonToUsersArray(response.getData());
+            setPlayersData(users);
+        }
+        else if(response.getType() == RequestTypesEnum.RECIEVE_INVITATION){
+            SharedModel.setChallenger(response.getData());
+            InvitationFormHandler.display(myStage);
+        }
+
     }
 }

@@ -12,7 +12,7 @@ import piratesproject.drawable.values.Pathes;
 
 
 public class SendInvitationFormHandler {
-    
+
     private static Stage window;
     private static Scene scene ; 
     
@@ -30,6 +30,9 @@ public class SendInvitationFormHandler {
         window.setScene(scene);
         
         window.show();     
+    }
+    public static void closeForm(){
+        window.close();
     }
     public static void  resetScene(Parent p ){
         scene.setRoot(p);

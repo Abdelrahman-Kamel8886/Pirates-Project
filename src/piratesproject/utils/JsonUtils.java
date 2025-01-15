@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import piratesproject.models.GameModel;
+<<<<<<< HEAD
+=======
+import piratesproject.models.InvitationModel;
+>>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.MoveModel;
@@ -84,6 +88,7 @@ public class JsonUtils {
     public static RecordModel jsonToRecordModel(String json) {
         return gson.fromJson(json, RecordModel.class);
     }
+<<<<<<< HEAD
     public static String gameModelToJson(GameModel gameModel) {
         return gson.toJson(gameModel);
     }
@@ -98,5 +103,22 @@ public class JsonUtils {
 
     public static MoveModel jsonToGameMove(String json) {
         return gson.fromJson(json, MoveModel.class);
+=======
+    
+    public static String invitationModelToJson(InvitationModel invitationModel){
+        return gson.toJson(invitationModel); 
+    }
+    
+    public static InvitationModel jsonToInvitationModel (String invitationJson){
+        return gson.fromJson(invitationJson, InvitationModel.class);
+    }
+    
+    public static String gameModelToJson(GameModel model){
+        return gson.toJson(model); 
+    }
+    
+    public static GameModel jsonToGameModel (String game){
+        return gson.fromJson(game, GameModel.class);
+>>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
     }
 }

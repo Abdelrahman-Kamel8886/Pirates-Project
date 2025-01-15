@@ -8,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import piratesproject.drawable.values.Pathes;
-import piratesproject.models.AvalabilePlayer;
 import piratesproject.models.UserModel;
 
 public class ActivePlayerCell extends ListCell<UserModel> {

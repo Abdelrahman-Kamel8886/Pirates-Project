@@ -3,17 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/SharedModel.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/models/RequestModel.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/Consts.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/models/Player.java</file>
+            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/network/NetworkAccessLayer1.java</file>
             <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/Main.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/JsonUtils.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/game/xogameboard/online/OnlineGame.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/auth/login/LoginController.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/models/ResponseModel.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterController.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/enums/RequestTypesEnum.java</file>
             <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
         </group>
     </open-files>
