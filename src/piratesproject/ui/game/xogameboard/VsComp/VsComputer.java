@@ -19,11 +19,15 @@ import javafx.stage.Stage;
 import minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
+import piratesproject.models.RecordModel;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.JsonUtils;
+import piratesproject.utils.SharedModel;
 
 /**
  *
@@ -35,9 +39,12 @@ public class VsComputer extends XOGameBoard {
     private Button[][] buttons;
     private Player player1, player2, currentPlayer;
     private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
-    Thread minMaxthread ; 
-    Stage stage ; 
+    Thread minMaxthread;
+    private String movesSequnce;
+    Stage stage;
     private final int SIZE = 3;
+    private RecordModel gameRecord;
+    private ArrayList<MoveModel> moves;
 
     public VsComputer(Stage stage) {
         super(stage);
@@ -50,27 +57,28 @@ public class VsComputer extends XOGameBoard {
         currentPlayer = player1;
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
-        
+        moves = new ArrayList();
+        gameRecord = new RecordModel(player1, player2);
         initButtons();
         resetBoard();
         onClicks();
-                backIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+        backIcon.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
             public void handle(Event event) {
                 Main.resetScene(new HomePageController(stage));
                 minMaxthread.stop();
-                
+
             }
         });
-        
-       retryIcon.addEventHandler(EventType.ROOT,new EventHandler() {
+
+        retryIcon.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
             public void handle(Event event) {
                 resetBoard();
                 minMaxthread.stop();
             }
         });
-       
+
         minMaxthread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -80,52 +88,51 @@ public class VsComputer extends XOGameBoard {
         });
         minMaxthread.start();
     }
-        void minMax() {
-    AdversarialSearchTicTacToe adsTicTacToe = new AdversarialSearchTicTacToe();
 
-    String[] board = {"", "", "", "", "", "", "", "", ""};
+    void minMax() {
+        AdversarialSearchTicTacToe adsTicTacToe = new AdversarialSearchTicTacToe();
 
-    State state = new State(0, board);
+        String[] board = {"", "", "", "", "", "", "", "", ""};
 
-    Scanner scanner = new Scanner(System.in);
+        State state = new State(0, board);
 
-    
-    while (!adsTicTacToe.isTerminal(state)) {
-        drawBoard(state);
+        Scanner scanner = new Scanner(System.in);
 
-        
-        int aiMove = adsTicTacToe.minMaxDecision(state);
-        state.changeState(aiMove, "X");
-        System.out.println("AI chose position: " + aiMove);
+        while (!adsTicTacToe.isTerminal(state)) {
+            drawBoard(state);
 
-        if (adsTicTacToe.isTerminal(state)) {
-            break;
-        }
+            int aiMove = adsTicTacToe.minMaxDecision(state);
+            state.changeState(aiMove, "X");
+            System.out.println("AI chose position: " + aiMove);
 
-        drawBoard(state);
-        System.out.print("Your move (0-8): ");
-        int userInput;
-        while (true) {
-            userInput = Integer.parseInt(scanner.nextLine());
-            if (userInput >= 0 && userInput < 9 && state.getStateIndex(userInput).isEmpty()) {
-                break; 
+            if (adsTicTacToe.isTerminal(state)) {
+                break;
             }
-            System.out.print("Invalid move! Try again (0-8): ");
-        }
-        state.changeState(userInput, "O");
-    }
 
-    drawBoard(state);
-    System.out.println("Game is over");
-    int result = adsTicTacToe.utilityOf(state);
-    if (result == 1) {
-        System.out.println("AI wins!");
-    } else if (result == -1) {
-        System.out.println("You win!");
-    } else {
-        System.out.println("It's a draw!");
+            drawBoard(state);
+            System.out.print("Your move (0-8): ");
+            int userInput;
+            while (true) {
+                userInput = Integer.parseInt(scanner.nextLine());
+                if (userInput >= 0 && userInput < 9 && state.getStateIndex(userInput).isEmpty()) {
+                    break;
+                }
+                System.out.print("Invalid move! Try again (0-8): ");
+            }
+            state.changeState(userInput, "O");
+        }
+
+        drawBoard(state);
+        System.out.println("Game is over");
+        int result = adsTicTacToe.utilityOf(state);
+        if (result == 1) {
+            System.out.println("AI wins!");
+        } else if (result == -1) {
+            System.out.println("You win!");
+        } else {
+            System.out.println("It's a draw!");
+        }
     }
-}
 
     public void drawBoard(State state) {
         for (int i = 0; i < 7; i += 3) {
@@ -170,8 +177,8 @@ public class VsComputer extends XOGameBoard {
                     playerMove(row, col);
                     String winCondition = checkWin(row, col);
                     if (winCondition == null) {
-                       computerMove();
-                        return ;
+                        computerMove();
+                        return;
                     }
 
                 });
@@ -184,8 +191,10 @@ public class VsComputer extends XOGameBoard {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
             String winCondition = checkWin(row, col);
+            moves.add(new MoveModel(row,col,currentPlayer.getSymbol()));
             if (winCondition != null) {
                 drawWinLine(winCondition);
+                saveRecord();
                 return;
             }
             if (isDraw()) {
@@ -195,6 +204,13 @@ public class VsComputer extends XOGameBoard {
             }
             switchPlayer();
         }
+    }
+        private void saveRecord(){
+        movesSequnce = JsonUtils.movesArrayToJson(moves);
+        gameRecord.setWinner(currentPlayer);
+        gameRecord.setGameSequance(movesSequnce);
+        SharedModel.setSelectedRecord(gameRecord);
+        System.out.println(gameRecord.toString());
     }
 //    private List<int[]> getEmptyButtons() {
 //        List<int[]> emptyButtons = new ArrayList<>();
@@ -226,7 +242,7 @@ public class VsComputer extends XOGameBoard {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
-  private List<int[]> getEmptyButtons() {
+    private List<int[]> getEmptyButtons() {
         List<int[]> emptyButtons = new ArrayList<>();
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -237,8 +253,8 @@ public class VsComputer extends XOGameBoard {
         }
         return emptyButtons;
     }
-  
-      private void computerMove() {
+
+    private void computerMove() {
         List<int[]> emptyButtons = getEmptyButtons();
         Random move = new Random();
         move.nextInt(emptyButtons.size());
