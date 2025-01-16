@@ -11,6 +11,7 @@ import piratesproject.models.RecordModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
+import piratesproject.ui.game.xogameboard.VsCompHard.HardRecord;
 
 public class JsonUtils {
     
@@ -91,5 +92,9 @@ public class JsonUtils {
     
     public static InvitationModel jsonToInvitationModel (String invitationJson){
         return gson.fromJson(invitationJson, InvitationModel.class);
+    }
+    
+    public static String hardRecordTojson(HardRecord hardRecord ){
+        return gson.toJson(hardRecord);
     }
 }
