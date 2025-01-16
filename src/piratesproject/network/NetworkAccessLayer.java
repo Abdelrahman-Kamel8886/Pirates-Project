@@ -102,7 +102,6 @@ public class NetworkAccessLayer {
     }
 
     public void sendMove(GameModel gameMove) {
-
         String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
         RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
         String reqJson = JsonUtils.requestModelToJson(myReq);

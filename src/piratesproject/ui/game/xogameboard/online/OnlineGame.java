@@ -41,16 +41,11 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     public OnlineGame(Stage stage) {
         super(stage);
         this.stage = stage;
-//        Thread th = new Thread(() -> {
-//
-//            while (true) {
-//                 getMove();
-//                
-//            }
-//        });
-//        th.start();
+         buttons = new Button[SIZE][SIZE];
+        board = new String[SIZE][SIZE];
+        moves = new ArrayList();
         networkAccessLayer = NetworkAccessLayer.getInstance(this);
-        oponnetUserName = SharedModel.getOponnentName();
+        
         initView();
     }
 
@@ -58,43 +53,32 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         name1 = SharedModel.getPlayerName1();
         name2 = SharedModel.getPlayerName2();
         line = "none";
-        setPlayersRandomly();
         drawSuccesslines();
+        initButtons();
         initGame();
 
     }
 
-    private void setPlayersRandomly() {
-        if (Math.random() < 0.5) {
-            opponent = name1;
-            secondPlayer = name2;
-        } else {
-            opponent = name2;
-            secondPlayer = name1;
-        }
-        playerOneLabel.setText(opponent + " : ( X )");
-        playerTwoLabel.setText(secondPlayer + " ( O )");
-    }
 
     private void initGame() {
         player1 =SharedModel.getGameRoom().getPlayer1();
-        player2 = SharedModel.getGameRoom().getPlayer1();
+        player2 = SharedModel.getGameRoom().getPlayer2();
+        System.out.println(player1.getName()+" : "+player2.getName());
         currentPlayer = player1;
-        
+        playerOneLabel.setText(player1.getName() + " : ( X )");
+        playerTwoLabel.setText(player2.getName() + " ( O )");
         if(player1.getName().equals(SharedModel.getUser().getUserName())){
             me = player1;
+            oponnetUserName = player2.getName();
             enableAllButtons();
         }
         else{
            me = player2; 
+           oponnetUserName = player1.getName();
            disableAllButtons();
         }
         
-        buttons = new Button[SIZE][SIZE];
-        board = new String[SIZE][SIZE];
-        moves = new ArrayList();
         gameRecord = new RecordModel(player1, player2);
-        initButtons();
         resetBoard();
         onClicks();
     }
@@ -120,7 +104,6 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
                 buttons[i][j].setOnAction((ActionEvent event) -> {
                     MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
                     GameModel gameModel = new GameModel(oponnetUserName, move);
-                    
                     networkAccessLayer.sendMove(gameModel);
                     makeMove(row, col);
 
