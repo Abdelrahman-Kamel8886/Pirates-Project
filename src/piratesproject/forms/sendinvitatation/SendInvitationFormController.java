@@ -10,6 +10,7 @@ import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.InvitationModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.game.xogameboard.online.OnlineGame;
 import piratesproject.ui.game.xogameboard.online.OnlineGameController;
 import piratesproject.utils.SharedModel;
 
@@ -59,7 +60,7 @@ public class SendInvitationFormController extends SendInvitationForm implements 
         }
     }
     private void goToGame() {
-        Parent game = new OnlineGameController(myStage);
+        Parent game = new OnlineGame(myStage);
         Main.resetScene(game);
     }
 }

@@ -1,24 +1,19 @@
 package piratesproject.ui.game.xogameboard.online;
 
-import piratesproject.ui.game.xogameboard.offline.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
-import piratesproject.ui.game.minmaxalgorithim.State;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.enums.RequestTypesEnum;
+import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.GameModel;
 import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
-import piratesproject.models.RequestModel;
+import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
@@ -26,7 +21,7 @@ import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-public class OnlineGame extends XOGameBoard {
+public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
     private Player player1, player2, currentPlayer;
     private String name1, name2, opponent, secondPlayer;
@@ -36,6 +31,7 @@ public class OnlineGame extends XOGameBoard {
     private String oponnetUserName;
     private String[][] board;
     private Button[][] buttons;
+    private NetworkAccessLayer networkAccessLayer;
 
     private final int SIZE = 3;
 
@@ -45,14 +41,15 @@ public class OnlineGame extends XOGameBoard {
     public OnlineGame(Stage stage) {
         super(stage);
         this.stage = stage;
-        Thread th = new Thread(() -> {
-
-            while (true) {
-                 getMove();
-                
-            }
-        });
-        th.start();
+//        Thread th = new Thread(() -> {
+//
+//            while (true) {
+//                 getMove();
+//                
+//            }
+//        });
+//        th.start();
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
         oponnetUserName = SharedModel.getOponnentName();
         initView();
     }
@@ -111,7 +108,8 @@ public class OnlineGame extends XOGameBoard {
                 buttons[i][j].setOnAction((ActionEvent event) -> {
                     MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
                     GameModel gameModel = new GameModel(oponnetUserName, move);
-                    //NetworkAccessLayer.sendMove(gameModel);
+                    
+                    networkAccessLayer.sendMove(gameModel);
                     makeMove(row, col);
 
                 });
@@ -145,15 +143,15 @@ public class OnlineGame extends XOGameBoard {
         }
     }
 
-    public void getMove() {
-
+//    public void getMove() {
+//
 //        MoveModel move = NetworkAccessLayer.getMove();
 //        if (move != null) {
 //            makeMove(move.getRow(), move.getCol());
 //        }
-       
-
-    }
+//       
+//
+//    }
 
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
@@ -256,6 +254,20 @@ public class OnlineGame extends XOGameBoard {
     private void goToReplay() {
         Parent replay = new ReplayController(stage);
         Main.resetScene(replay);
+    }
+
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        if(response.getType()==RequestTypesEnum.GAMEMOVE){
+            String gameMovejson= response.getData();
+            MoveModel move = JsonUtils.jsonToGameMove(gameMovejson); 
+             if (move != null) {
+            makeMove(move.getRow(), move.getCol());
+        }
+           
+            
+        }
+  
     }
 
 }

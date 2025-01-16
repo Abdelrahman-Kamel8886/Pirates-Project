@@ -1,6 +1,5 @@
 package piratesproject.network;
 
-
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import piratesproject.models.GameModel;
 //import piratesproject.models.GameModel;
@@ -35,7 +33,6 @@ import piratesproject.utils.Consts;
 import piratesproject.utils.JsonUtils;
 
 public class NetworkAccessLayer {
-
 
     private static NetworkAccessLayer instance; // Singleton instance
     private BufferedReader in;
@@ -58,8 +55,6 @@ public class NetworkAccessLayer {
         }
     }
 
-
-    
     // Public method to get the singleton instance
     public static NetworkAccessLayer getInstance(NetworkResponseHandler responseHandler) {
         if (instance == null) {
@@ -68,7 +63,6 @@ public class NetworkAccessLayer {
         }
         return instance;
     }
-
 
     private void receive() {
         th = new Thread(this::listenFromServer);
@@ -107,6 +101,15 @@ public class NetworkAccessLayer {
         out.println(reqJson);
     }
 
+    public void sendMove(GameModel gameMove) {
+
+        String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
+        RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
+        String reqJson = JsonUtils.requestModelToJson(myReq);
+        out.println(reqJson); // Send JSON string to the server
+
+    }
+
     public void getOnlineUsers() {
         RequestModel myReq = new RequestModel(RequestTypesEnum.USERSTABLE, "none");
         String reqJson = JsonUtils.requestModelToJson(myReq);
@@ -120,7 +123,7 @@ public class NetworkAccessLayer {
         String reqJson = JsonUtils.requestModelToJson(requestModel);
         out.println(reqJson);
     }
-    
+
     public void confirmInvitation(InvitationModel invitationModel) {
         String invitationDataString = JsonUtils.invitationModelToJson(invitationModel);
         RequestModel requestModel = new RequestModel(RequestTypesEnum.CONFIRM_INVITATION, invitationDataString);
@@ -144,42 +147,5 @@ public class NetworkAccessLayer {
             Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Error closing connection", ex);
         }
 
-       
-
     }
-
-    public  void sendMove(GameModel gameMove) {
-        try  {
-//           socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
-            // Create a UserModel object and convert it to JSON
-            
-            String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
-            RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
-            String reqJson = JsonUtils.requestModelToJson(myReq);
-            out.println(reqJson); // Send JSON string to the server
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public   MoveModel getMove() {
-        
-        MoveModel gameMove = null;
-        try  {
-           
-            // Create a UserModel object and convert it to JSON
-          
-            String gameMovejson;
-            gameMovejson= in.readLine();
-            System.out.println(gameMovejson);
-            gameMove = JsonUtils.jsonToGameMove(gameMovejson);          
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return gameMove;
-    }
-
 }

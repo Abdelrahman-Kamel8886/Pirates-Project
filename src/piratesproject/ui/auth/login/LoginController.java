@@ -99,7 +99,7 @@ public class LoginController extends LoginBase implements NetworkResponseHandler
 
     public void gotoHome() {
 
-        Parent homePage = new OnlineGame(mystage);
+        Parent homePage = new HomePageController(mystage);
         Main.resetScene(homePage);
     }
 
