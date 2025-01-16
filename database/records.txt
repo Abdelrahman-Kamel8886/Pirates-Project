@@ -5,3 +5,4 @@
 =======
 {"player1":{"name":"abdokamel8886","symbol":"X"},"player2":{"name":"ffff","symbol":"O"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":1,\"col\":1,\"symbol\":\"O\"},{\"row\":1,\"col\":0,\"symbol\":\"X\"},{\"row\":2,\"col\":0,\"symbol\":\"O\"},{\"row\":0,\"col\":2,\"symbol\":\"X\"},{\"row\":0,\"col\":1,\"symbol\":\"O\"},{\"row\":2,\"col\":1,\"symbol\":\"X\"},{\"row\":1,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":2,\"symbol\":\"X\"}]","line":"none"}
 >>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
+{"player1":{"name":"tag","symbol":"X"},"player2":{"name":"abdo","symbol":"O"},"winner":{"name":"tag","symbol":"X"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":0,\"col\":1,\"symbol\":\"O\"},{\"row\":1,\"col\":1,\"symbol\":\"X\"},{\"row\":1,\"col\":0,\"symbol\":\"O\"},{\"row\":0,\"col\":2,\"symbol\":\"X\"},{\"row\":1,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":2,\"symbol\":\"X\"}]","line":"DIAG-PRIMARY"}

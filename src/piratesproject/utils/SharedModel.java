@@ -15,9 +15,9 @@ public class SharedModel {
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
-<<<<<<< HEAD
+
     private static String OponnentName = "nono";
-=======
+
 
     private static String challenger;
 
@@ -29,7 +29,6 @@ public class SharedModel {
         SharedModel.challenger = challenger;
     }
 
->>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
     public static UserModel getUser() {
         return user;
     }

@@ -24,18 +24,14 @@ import piratesproject.ui.auth.login.LoginController;
 import piratesproject.utils.Consts;
 import piratesproject.utils.SharedModel;
 
-<<<<<<< HEAD
-public class RegisterController extends RegisterBase {
-     NetworkAccessLayer n;
-=======
+
 public class RegisterController extends RegisterBase implements NetworkResponseHandler {
 
     private NetworkAccessLayer networkAccessLayer;
 
->>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
     public RegisterController(Stage s) {
         super(s);
-         n = new NetworkAccessLayer();
+        
         listenToAllEvents();
         networkAccessLayer = NetworkAccessLayer.getInstance(this);
         networkAccessLayer.setResponseHandler(this);
@@ -80,24 +76,24 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
                             lastNameTF.getText(),
                             usernameTF.getText(),
                             passwordTF.getText());
-<<<<<<< HEAD
-                    
-                    Thread th = new Thread(() -> {
-                        ResponseModel responseModel = n.registerToServer(user);
-                        checkRegisterState(responseModel);
-=======
->>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
 
+                    
 //                    Thread th = new Thread(() -> {
-//                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+//                        ResponseModel responseModel = NetworkAccessLayer .registerToServer(user);
 //                        checkRegisterState(responseModel);
 //
-//                    });
-//                    th.start();
-                    SharedModel.setUser(user);
-                    networkAccessLayer.sendRegisteration(user);
-
-                }
+//
+////                    Thread th = new Thread(() -> {
+////                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+////                        checkRegisterState(responseModel);
+////
+////                    });
+////                    th.start();
+//                    SharedModel.setUser(user);
+//                    networkAccessLayer.sendRegisteration(user);
+//
+//                }
+                            }
 
             }
 

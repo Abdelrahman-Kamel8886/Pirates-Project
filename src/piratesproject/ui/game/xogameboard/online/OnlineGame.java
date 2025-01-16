@@ -111,7 +111,7 @@ public class OnlineGame extends XOGameBoard {
                 buttons[i][j].setOnAction((ActionEvent event) -> {
                     MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
                     GameModel gameModel = new GameModel(oponnetUserName, move);
-                    NetworkAccessLayer.sendMove(gameModel);
+                    //NetworkAccessLayer.sendMove(gameModel);
                     makeMove(row, col);
 
                 });
@@ -147,10 +147,10 @@ public class OnlineGame extends XOGameBoard {
 
     public void getMove() {
 
-        MoveModel move = NetworkAccessLayer.getMove();
-        if (move != null) {
-            makeMove(move.getRow(), move.getCol());
-        }
+//        MoveModel move = NetworkAccessLayer.getMove();
+//        if (move != null) {
+//            makeMove(move.getRow(), move.getCol());
+//        }
        
 
     }

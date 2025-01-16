@@ -31,19 +31,9 @@ public class Main extends Application implements NetworkResponseHandler {
 
     @Override
     public void start(Stage stage) throws Exception {
-<<<<<<< HEAD
-//        UserModel user = new UserModel();
-//        user.setFirstName("Abdelrahman");
-//        user.setLastName("Kamel");
-//        user.setGamesPlayed(16);
-//        user.setScore(10);
-//        user.setUserName("abdokamel8886");
-//        SharedModel.setUser(user);
-        
-=======
+
         networkAccessLayer = NetworkAccessLayer.getInstance(this);
 
->>>>>>> 03f0ddf0c1647090456c30098709cc49843289f4
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
 
