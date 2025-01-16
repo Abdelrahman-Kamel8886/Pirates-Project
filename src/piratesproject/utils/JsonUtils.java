@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import piratesproject.models.GameModel;
+import piratesproject.models.GameRoomModel;
 import piratesproject.models.InvitationModel;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
@@ -107,6 +108,12 @@ public class JsonUtils {
     public static InvitationModel jsonToInvitationModel (String invitationJson){
         return gson.fromJson(invitationJson, InvitationModel.class);
     }
+    public static String gameRoomModelToJson(GameRoomModel model){
+        return gson.toJson(model); 
+    }
     
+    public static GameRoomModel jsonToGameRoomModel(String game){
+        return gson.fromJson(game, GameRoomModel.class);
+    }
 
 }

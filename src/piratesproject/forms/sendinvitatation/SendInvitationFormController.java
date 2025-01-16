@@ -12,6 +12,7 @@ import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.xogameboard.online.OnlineGame;
 import piratesproject.ui.game.xogameboard.online.OnlineGameController;
+import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 public class SendInvitationFormController extends SendInvitationForm implements NetworkResponseHandler {
@@ -54,6 +55,7 @@ public class SendInvitationFormController extends SendInvitationForm implements 
             SendInvitationFormHandler.resetScene(root);
         }
         else if(response.getType() == RequestTypesEnum.CREATE_ROOM){
+            SharedModel.setGameRoom(JsonUtils.jsonToGameRoomModel(response.getData()));
              SendInvitationFormHandler.closeForm();
              goToGame();
              

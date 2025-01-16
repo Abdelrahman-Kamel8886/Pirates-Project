@@ -23,7 +23,7 @@ import piratesproject.utils.SharedModel;
 
 public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
-    private Player player1, player2, currentPlayer;
+    private Player player1, player2, currentPlayer , me;
     private String name1, name2, opponent, secondPlayer;
     private String movesSequnce, line;
     private RecordModel gameRecord;
@@ -77,9 +77,19 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     }
 
     private void initGame() {
-        player1 = new Player(opponent, GameMovesEnum.X.name());
-        player2 = new Player(secondPlayer, GameMovesEnum.O.name());
+        player1 =SharedModel.getGameRoom().getPlayer1();
+        player2 = SharedModel.getGameRoom().getPlayer1();
         currentPlayer = player1;
+        
+        if(player1.getName().equals(SharedModel.getUser().getUserName())){
+            me = player1;
+            enableAllButtons();
+        }
+        else{
+           me = player2; 
+           disableAllButtons();
+        }
+        
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
         moves = new ArrayList();
@@ -88,6 +98,8 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         resetBoard();
         onClicks();
     }
+    
+    
 
     private void initButtons() {
         buttons[0][0] = btnGrid_0_0;
@@ -155,6 +167,12 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
+        if(currentPlayer==me){
+            enableAllButtons();
+        }
+        else{
+            disableAllButtons();
+        }
     }
 
     private String checkWin(int row, int col) {
@@ -235,6 +253,14 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
             }
         }
     }
+    private void enableAllButtons() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                final int row = i, col = j;
+                buttons[i][j].setDisable(false);
+            }
+        }
+    }
 
     private void saveRecord() {
         movesSequnce = JsonUtils.movesArrayToJson(moves);
@@ -263,6 +289,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
             MoveModel move = JsonUtils.jsonToGameMove(gameMovejson); 
              if (move != null) {
             makeMove(move.getRow(), move.getCol());
+            enableAllButtons();
         }
            
             

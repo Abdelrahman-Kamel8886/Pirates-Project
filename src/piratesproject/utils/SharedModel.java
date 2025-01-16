@@ -3,6 +3,7 @@ package piratesproject.utils;
 import java.util.ArrayList;
 import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.SoundTrackStateEnum;
+import piratesproject.models.GameRoomModel;
 import piratesproject.models.RecordModel;
 import piratesproject.models.UserModel;
 
@@ -15,11 +16,11 @@ public class SharedModel {
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
-
     private static String OponnentName = "nono";
 
-
     private static String challenger;
+    
+    private static GameRoomModel gameRoom;
 
     public static String getChallenger() {
         return challenger;
@@ -91,6 +92,14 @@ public class SharedModel {
 
     public static void setSelectedRecord(RecordModel selectedRecord) {
         SharedModel.selectedRecord = selectedRecord;
+    }
+
+    public static GameRoomModel getGameRoom() {
+        return gameRoom;
+    }
+
+    public static void setGameRoom(GameRoomModel gameRoom) {
+        SharedModel.gameRoom = gameRoom;
     }
 
 }
