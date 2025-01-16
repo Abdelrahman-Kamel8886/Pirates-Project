@@ -79,7 +79,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         } else {
             initUserView();
         }
-        //setRecordsData();
+        
         onClicks();
     }
 
@@ -97,6 +97,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         scoreText.setText("Score : " + SharedModel.getUser().getScore());
         avatar.setImage(new Image(getClass().getResource(Pathes.AVATAR_LOGO_PATH).toExternalForm()));
         networkAccessLayer.getOnlineUsers();
+        setRecordsData();
     }
 
     private void setPlayersData(ArrayList<UserModel> users) {

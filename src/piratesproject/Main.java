@@ -1,10 +1,16 @@
 package piratesproject;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.drawable.values.Strings;
 import piratesproject.interfaces.NetworkResponseHandler;
@@ -58,7 +64,7 @@ public class Main extends Application implements NetworkResponseHandler {
     public static void main(String[] args) {
         launch(args);
     }
-
+    
     @Override
     public void onResponseReceived(ResponseModel response) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

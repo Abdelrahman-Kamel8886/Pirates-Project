@@ -91,12 +91,26 @@ public class NetworkAccessLayer {
         String reqJson = JsonUtils.requestModelToJson(requestModel);
         out.println(reqJson);
     }
-    
+
     public void confirmInvitation(InvitationModel invitationModel) {
         String invitationDataString = JsonUtils.invitationModelToJson(invitationModel);
         RequestModel requestModel = new RequestModel(RequestTypesEnum.CONFIRM_INVITATION, invitationDataString);
         String reqJson = JsonUtils.requestModelToJson(requestModel);
         out.println(reqJson);
+    }
+
+    public void exitApplication() {
+
+        try {
+            RequestModel requestModel = new RequestModel(RequestTypesEnum.EXIT, "");
+            String reqJson = JsonUtils.requestModelToJson(requestModel);
+            out.println(reqJson);
+            th.stop();
+            out.close();
+            in.close();
+            socket.close();
+        } catch (IOException ex) {
+        }
     }
 
     public void setResponseHandler(NetworkResponseHandler responseHandler) {
@@ -107,6 +121,7 @@ public class NetworkAccessLayer {
         try {
             if (socket != null && !socket.isClosed()) {
                 socket.close();
+                th.stop();
             }
             if (th != null && th.isAlive()) {
                 th.interrupt();
