@@ -41,7 +41,7 @@ public class VsComputerEasy extends XOGameBoard {
     private ArrayList<MoveModel> moves;
     private String[][] board;
     private Button[][] buttons;
-    private Player player1, player2, currentPlayer,winner;
+    private Player player1, player2, currentPlayer, winner;
     private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
     Thread minMaxthread;
     Stage stage;
@@ -110,7 +110,10 @@ public class VsComputerEasy extends XOGameBoard {
         if (board[row][col].isEmpty()) {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
+            moves.add(new MoveModel(row, col, currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
+            line = winCondition != null ? winCondition : "none";
+            winner = winCondition != null ? currentPlayer : null;
             saveRecord();
             if (winCondition != null) {
 
