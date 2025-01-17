@@ -55,6 +55,10 @@ public abstract class HomePage extends GridPane {
     protected final VBox box1;
     protected final Text userNameText11;
     protected final ListView<RecordModel> recordsListView;
+    
+    protected final VBox vBoxSnake;
+    protected final ImageView snakeImage;
+    protected final Text textSnake;
 
     public HomePage() {
 
@@ -78,6 +82,9 @@ public abstract class HomePage extends GridPane {
         scoreText = new Text();
         hBox1 = new HBox();
         vBox1 = new VBox();
+        vBoxSnake = new VBox();
+        snakeImage = new ImageView();
+        textSnake = new Text("Snake Game");
         computerImage = new ImageView();
         text = new Text();
         vBox2 = new VBox();
@@ -93,6 +100,11 @@ public abstract class HomePage extends GridPane {
         box1 = new VBox();
         userNameText11 = new Text();
         recordsListView = new ListView();
+        
+        snakeImage.setFitHeight(150.0);
+        snakeImage.setFitWidth(200.0);
+        snakeImage.setPickOnBounds(true);
+        snakeImage.setPreserveRatio(true);
 
         setHgap(50.0);
         setMaxHeight(USE_PREF_SIZE);
@@ -229,6 +241,13 @@ public abstract class HomePage extends GridPane {
         text0.setUnderline(true);
         text0.setWrappingWidth(154.48828125);
         text0.setFont(new Font("Old English Text MT", 24.0));
+        
+        textSnake.setFill(javafx.scene.paint.Color.WHITE);
+        textSnake.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
+        textSnake.setStrokeWidth(0.0);
+        textSnake.setUnderline(true);
+        textSnake.setWrappingWidth(180);
+        textSnake.setFont(new Font("Old English Text MT", 24.0));
 
         GridPane.setRowIndex(gridPane, 1);
         gridPane.setHgap(20.0);
@@ -292,8 +311,10 @@ public abstract class HomePage extends GridPane {
         hBox0.getChildren().add(userNameText);
         hBox0.getChildren().add(scoreText);
         vBox0.getChildren().add(hBox0);
+        vBoxSnake.getChildren().addAll(snakeImage,textSnake);
         vBox1.getChildren().add(computerImage);
         vBox1.getChildren().add(text);
+        hBox1.getChildren().add(vBoxSnake);
         hBox1.getChildren().add(vBox1);
         vBox2.getChildren().add(multiPlayersImage);
         vBox2.getChildren().add(text0);

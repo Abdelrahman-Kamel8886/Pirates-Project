@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import piratesproject.Main;
-import piratesproject.enums.GameMovesEnum;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.GameModel;
@@ -34,6 +33,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     private Button[][] buttons;
 
     private NetworkAccessLayer networkAccessLayer;
+    private boolean gameOver;
 
     private final int SIZE = 3;
 
@@ -43,10 +43,12 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     public OnlineGame(Stage stage) {
         super(stage);
         this.stage = stage;
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
         moves = new ArrayList();
+        gameOver = false;
+        networkAccessLayer = NetworkAccessLayer.getInstance();
+        networkAccessLayer.setResponseHandler(this);
         initView();
 
     }
@@ -80,7 +82,6 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         } else {
             me = player2;
             oponnetUserName = player1.getName();
-
             disableAllButtons();
         }
 
@@ -106,7 +107,6 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
             for (int j = 0; j < SIZE; j++) {
                 final int row = i, col = j;
                 buttons[i][j].setOnAction((ActionEvent event) -> {
-
                     MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
                     GameModel gameModel = new GameModel(oponnetUserName, move);
 
@@ -125,7 +125,12 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
             MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
             moves.add(move);
-
+            
+            if(currentPlayer.equals(me)){
+                GameModel gameModel = new GameModel(oponnetUserName, move);
+                networkAccessLayer.sendMove(gameModel);
+            }
+           
             String winCondition = checkWin(row, col);
             line = winCondition != null ? winCondition : "none";
             saveRecord();
@@ -144,15 +149,6 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         }
     }
 
-//    public void getMove() {
-//
-//        MoveModel move = NetworkAccessLayer.getMove();
-//        if (move != null) {
-//            makeMove(move.getRow(), move.getCol());
-//        }
-//       
-//
-//    }
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
         if (currentPlayer == me) {
@@ -188,6 +184,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
                 }
             }
         }
+        gameOver = true;
         return true;
     }
 
@@ -201,7 +198,6 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     }
 
     private void drawWinLine(String winCondition) {
-        System.out.println(winCondition);
         switch (winCondition) {
             case "ROW-0":
                 line1.setVisible(true);
@@ -228,6 +224,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
                 line8.setVisible(true);
                 break;
         }
+        gameOver = true;
         disableAllButtons();
 
     }
@@ -273,11 +270,17 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     @Override
     public void onResponseReceived(ResponseModel response) {
         if (response.getType() == RequestTypesEnum.GAMEMOVE) {
+
+            System.out.println("44444444444");
             String gameMovejson = response.getData();
             MoveModel move = JsonUtils.jsonToGameMove(gameMovejson);
+            System.out.println(gameMovejson);
             if (move != null) {
                 makeMove(move.getRow(), move.getCol());
-                enableAllButtons();
+                if(!gameOver){
+                    enableAllButtons();
+                }
+                
             }
 
         }

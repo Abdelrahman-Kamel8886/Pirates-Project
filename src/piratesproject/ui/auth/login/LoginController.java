@@ -34,7 +34,7 @@ public class LoginController extends LoginBase implements NetworkResponseHandler
     public LoginController(Stage stage) {
         super(stage);
         listenToAllEvents();
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
 
     }

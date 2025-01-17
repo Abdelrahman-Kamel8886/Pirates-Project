@@ -18,6 +18,7 @@ import piratesproject.forms.Settings.SettingsForm;
 import piratesproject.forms.levels.LevelForm;
 import piratesproject.forms.receivingInvitation.InvitationFormHandler;
 import piratesproject.forms.sendinvitatation.SendInvitationFormHandler;
+import piratesproject.forms.snakeGame.SnakeGameForm;
 import piratesproject.forms.twoNames.TwoNamesForm;
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.AvalabilePlayer;
@@ -44,7 +45,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
 
     public HomePageController(Stage stage) {
         myStage = stage;
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
         songs = new ArrayList<>();
         songs.add(Pathes.SOUNDTRACK1_PATH);
@@ -53,7 +54,13 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         songs.add(Pathes.SOUNDTRACK4_PATH);
 
         initView();
-        //playCurrentSong();
+        if (!SharedModel.isSoundTrackStarted()) {
+           // playCurrentSong();
+            SharedModel.setSoundTrackStarted(true);
+        }
+        if(SharedModel.getSoundTrackState() == SoundTrackStateEnum.paused){
+            playBtn.setImage(new Image(getClass().getResource(Pathes.PLAY_LOGO_PATH).toExternalForm()));
+        }
     }
 
     private void initView() {
@@ -65,12 +72,14 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         prevBtn.setImage(new Image(getClass().getResource(Pathes.PREV_LOGO_PATH).toExternalForm()));
         stopBtn.setImage(new Image(getClass().getResource(Pathes.STOP_LOGO_PATH).toExternalForm()));
         nextBtn.setImage(new Image(getClass().getResource(Pathes.NEXT_LOGO_PATH).toExternalForm()));
+        snakeImage.setImage(new Image(getClass().getResource(Pathes.SNAKE_LOGO_PATH).toExternalForm()));
+
 
         box.setId("box");
         box0.setId("box");
         box1.setId("box");
 
-        box.setSpacing(1100.0);
+        box.setSpacing(1000.0);
         hBox.setSpacing(5.0);
         getStylesheets().add(Pathes.HOMEPAGE_STYLE_PATH);
 
@@ -79,7 +88,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         } else {
             initUserView();
         }
-        //setRecordsData();
+        
         onClicks();
     }
 
@@ -97,6 +106,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         scoreText.setText("Score : " + SharedModel.getUser().getScore());
         avatar.setImage(new Image(getClass().getResource(Pathes.AVATAR_LOGO_PATH).toExternalForm()));
         networkAccessLayer.getOnlineUsers();
+        setRecordsData();
     }
 
     private void setPlayersData(ArrayList<UserModel> users) {
@@ -149,6 +159,13 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         computerImage.setOnMouseClicked((MouseEvent event) -> {
             showLevels();
         });
+        
+        snakeImage.setOnMouseClicked((MouseEvent event) -> {
+            SnakeGameForm form = new SnakeGameForm();
+            form.display(myStage);
+        });
+        
+        
 
         playBtn.setOnMouseClicked((MouseEvent event) -> {
             checkSound();
@@ -279,9 +296,17 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
     public void onResponseReceived(ResponseModel response) {
         if (response.getType() == RequestTypesEnum.USERSTABLE) {
             ArrayList<UserModel> users = JsonUtils.jsonToUsersArray(response.getData());
-            setPlayersData(users);
+            ArrayList<UserModel> newUsers = new ArrayList();
+            //users.remove(SharedModel.getUser());
+            for(UserModel user : users){
+                if(!user.getUserName().equals(SharedModel.getUser().getUserName())){
+                    newUsers.add(user);
+                }
+            }
+            setPlayersData(newUsers);
         }
         else if(response.getType() == RequestTypesEnum.RECIEVE_INVITATION){
+            System.out.println("8888888888");
             SharedModel.setChallenger(response.getData());
             InvitationFormHandler.display(myStage);
         }

@@ -1,11 +1,19 @@
 package piratesproject.forms.Settings;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import piratesproject.Main;
 import piratesproject.drawable.values.Strings;
+import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.auth.login.LoginController;
+import piratesproject.utils.BackgroundMusic;
 import piratesproject.utils.SharedModel;
 
 public class ProfileController extends ProfileBase {
+    private NetworkAccessLayer networkAccessLayer;
 
     public ProfileController() {
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         initView();
     }
 
@@ -25,6 +33,14 @@ public class ProfileController extends ProfileBase {
             confirmErrorLabel.setVisible(false);
             doneLabel.setVisible(false);
             validation();
+        });
+        
+        logout.setOnMouseClicked((MouseEvent event) -> {
+            SettingsForm.closeForm();
+            BackgroundMusic.stopMusic();
+            SharedModel.setSoundTrackStarted(false);
+            networkAccessLayer.exitApplication();
+            goToLogin();
         });
     }
 
@@ -61,6 +77,10 @@ public class ProfileController extends ProfileBase {
         }
         doneLabel.setVisible(true);
 
+    }
+    private void goToLogin() {
+        LoginController loginPage = new LoginController(SettingsForm.owner);
+        Main.resetScene(loginPage);
     }
 
 }

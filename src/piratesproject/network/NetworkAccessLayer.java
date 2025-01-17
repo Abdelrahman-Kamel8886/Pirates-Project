@@ -1,34 +1,22 @@
 package piratesproject.network;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
-
-import java.io.*;
-
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import piratesproject.models.GameModel;
-//import piratesproject.models.GameModel;
 import piratesproject.models.LoginRequestModel;
-import piratesproject.models.LoginResponseModel;
-import piratesproject.models.MoveModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.models.UserModel;
-
 import javafx.application.Platform;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.*;
-
 import piratesproject.utils.Consts;
 import piratesproject.utils.JsonUtils;
 
@@ -41,24 +29,21 @@ public class NetworkAccessLayer {
     private Thread th;
     private NetworkResponseHandler responseHandler;
 
-    // Private constructor to prevent direct instantiation
-    private NetworkAccessLayer(NetworkResponseHandler responseHandler) {
-        this.responseHandler = responseHandler;
+    private NetworkAccessLayer() {
         try {
             socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
             receive();
         } catch (IOException ex) {
-            Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Connection failed", ex);
+           // Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Connection failed", ex);
 
         }
     }
 
-    // Public method to get the singleton instance
-    public static NetworkAccessLayer getInstance(NetworkResponseHandler responseHandler) {
+    public static NetworkAccessLayer getInstance() {
         if (instance == null) {
-            instance = new NetworkAccessLayer(responseHandler);
+            instance = new NetworkAccessLayer();
 
         }
         return instance;
@@ -66,7 +51,7 @@ public class NetworkAccessLayer {
 
     private void receive() {
         th = new Thread(this::listenFromServer);
-        th.setDaemon(true); // Ensure the thread stops when the application exits
+        th.setDaemon(true);
         th.start();
     }
 
@@ -109,11 +94,11 @@ public class NetworkAccessLayer {
     }
 
     public void sendMove(GameModel gameMove) {
-
         String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
         RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
         String reqJson = JsonUtils.requestModelToJson(myReq);
-        out.println(reqJson); // Send JSON string to the server
+        out.println(reqJson);
+        System.out.println("55555555555");
 
     }
 
@@ -138,14 +123,35 @@ public class NetworkAccessLayer {
         out.println(reqJson);
     }
 
+    public void exitApplication() {
+
+        try {
+            RequestModel requestModel = new RequestModel(RequestTypesEnum.EXIT, "");
+            String reqJson = JsonUtils.requestModelToJson(requestModel);
+            if(out!=null){
+                out.println(reqJson);
+                out.close();
+            }
+            if(th!=null){th.stop();}
+            if(in!=null){in.close();}
+            if(socket!=null){socket.close();}
+            removeInstance();
+        } catch (IOException ex) {
+        }
+    }
+
     public void setResponseHandler(NetworkResponseHandler responseHandler) {
         this.responseHandler = responseHandler;
+    }
+    private static void removeInstance(){
+        instance = null;
     }
 
     public void closeConnection() {
         try {
             if (socket != null && !socket.isClosed()) {
                 socket.close();
+                th.stop();
             }
             if (th != null && th.isAlive()) {
                 th.interrupt();

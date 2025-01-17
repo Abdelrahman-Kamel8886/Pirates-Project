@@ -21,7 +21,7 @@ public class SendInvitationFormController extends SendInvitationForm implements 
     
     public SendInvitationFormController(Stage stage) {
         myStage = stage;
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
 
         initView();

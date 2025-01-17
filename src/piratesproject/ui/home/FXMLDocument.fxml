@@ -103,6 +103,20 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
+                              <ImageView fx:id="computerImage1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../drawable/icons/snake.png" />
+                                 </image>
+                              </ImageView>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SnakeGame" underline="true" wrappingWidth="154.48828125">
+                                 <font>
+                                    <Font name="Old English Text MT" size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
                               <ImageView fx:id="computerImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../drawable/icons/computer.png" />

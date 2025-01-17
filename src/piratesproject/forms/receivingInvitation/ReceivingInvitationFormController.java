@@ -21,7 +21,7 @@ public class ReceivingInvitationFormController extends ReceivingInvitationFormBa
 
     public ReceivingInvitationFormController(Stage stage) {
         myStage = stage;
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
         initView();
     }
@@ -47,11 +47,12 @@ public class ReceivingInvitationFormController extends ReceivingInvitationFormBa
 
     @Override
     public void onResponseReceived(ResponseModel response) {
-        if (response.getType() == RequestTypesEnum.CREATE_ROOM) {
-            SharedModel.setGameRoom(JsonUtils.jsonToGameRoomModel(response.getData()));
-            InvitationFormHandler.closeForm();
-            goToGame();
 
+        if(response.getType() == RequestTypesEnum.CREATE_ROOM){
+            SharedModel.setGameRoom(JsonUtils.jsonToGameRoomModel(response.getData()));
+             InvitationFormHandler.closeForm();
+             goToGame();
+             
         }
     }
 

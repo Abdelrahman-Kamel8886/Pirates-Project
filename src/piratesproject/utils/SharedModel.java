@@ -13,6 +13,7 @@ public class SharedModel {
     private static UserModel user;
     private static UserModel selectedUser;
     private static SoundTrackStateEnum soundTrackState;
+    private static boolean soundTrackStarted = false;
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
@@ -101,5 +102,15 @@ public class SharedModel {
     public static void setGameRoom(GameRoomModel gameRoom) {
         SharedModel.gameRoom = gameRoom;
     }
+
+    public static boolean isSoundTrackStarted() {
+        return soundTrackStarted;
+    }
+
+    public static void setSoundTrackStarted(boolean soundTrackStarted) {
+        SharedModel.soundTrackStarted = soundTrackStarted;
+    }
+    
+    
 
 }

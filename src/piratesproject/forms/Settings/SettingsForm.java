@@ -5,15 +5,18 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
+import piratesproject.ui.auth.login.LoginController;
 
 
 public class SettingsForm {
     
     private static Stage window;
+    public static Stage owner;
     
     public void display(Stage owner){
-        
+        SettingsForm.owner = owner;
         window = new Stage();
         window.initOwner(owner);
         window.initModality(Modality.WINDOW_MODAL);
@@ -28,5 +31,8 @@ public class SettingsForm {
         
         window.show();     
     }
-         
+
+    public static void closeForm(){
+        window.close();
+    }         
 }

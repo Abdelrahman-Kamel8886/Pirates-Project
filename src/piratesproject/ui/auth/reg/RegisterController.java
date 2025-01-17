@@ -33,7 +33,7 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
         super(s);
         
         listenToAllEvents();
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
     }
 

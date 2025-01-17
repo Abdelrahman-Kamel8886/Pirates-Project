@@ -22,6 +22,7 @@ public abstract class ProfileBase extends VBox {
     protected final HBox gamesDetailsLayout;
     protected final Label scoreText;
     protected final Label gamesPlayedText;
+    protected final Label logout;
     protected final VBox editPasswordLayout;
     protected final VBox titleLayout;
     protected final Line line;
@@ -58,6 +59,7 @@ public abstract class ProfileBase extends VBox {
         gamesDetailsLayout = new HBox();
         scoreText = new Label();
         gamesPlayedText = new Label();
+        logout = new Label("Logout");
         editPasswordLayout = new VBox();
         titleLayout = new VBox();
         line = new Line();
@@ -153,6 +155,7 @@ public abstract class ProfileBase extends VBox {
         userName.setId("userName");
         scoreText.setId("cardText");
         gamesPlayedText.setId("cardText");
+        logout.setId("logout");
         titleLayout.setId("titleLayout");
         editPasswordLayout.setId("editPasswordLayout");
         hBox.setId("entry");
@@ -177,6 +180,7 @@ public abstract class ProfileBase extends VBox {
         personalDetailsLayout.getChildren().add(userName);
         gamesDetailsLayout.getChildren().add(scoreText);
         gamesDetailsLayout.getChildren().add(gamesPlayedText);
+        gamesDetailsLayout.getChildren().add(logout);
         personalDetailsLayout.getChildren().add(gamesDetailsLayout);
         titleLayout.getChildren().add(line);
         titleLayout.getChildren().add(label);
