@@ -6,13 +6,13 @@
 package piratesproject.ui.game.xogameboard.online;
 
 import javafx.stage.Stage;
-import piratesproject.ui.game.xogameboard.XOGameBoard1111;
+import piratesproject.ui.game.xogameboard.XOGameBoard;
 
 /**
  *
  * @author Abdelrahman
  */
-public class OnlineGameController extends XOGameBoard1111{
+public class OnlineGameController extends XOGameBoard{
     
     public OnlineGameController(Stage stage) {
         super(stage);
