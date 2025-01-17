@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
+import piratesproject.ui.auth.login.LoginController;
 import piratesproject.ui.home.HomePageController;
 
 public class SplashController extends SplashPage {
@@ -26,7 +27,7 @@ public class SplashController extends SplashPage {
 
         new Thread(task).start();
 
-        task.setOnSucceeded(event -> gotoHome());
+        task.setOnSucceeded(event -> gotoLogin());
     }
 
     private Task<Void> taskWorker(int seconds) {
@@ -49,9 +50,9 @@ public class SplashController extends SplashPage {
         };
     }
 
-    public void gotoHome() {
+    public void gotoLogin() {
         task.cancel();
-        Parent homePage = new HomePageController(mystage);
-        Main.resetScene(homePage);
+        Parent loginPage = new LoginController(mystage);
+        Main.resetScene(loginPage);
     }
 }

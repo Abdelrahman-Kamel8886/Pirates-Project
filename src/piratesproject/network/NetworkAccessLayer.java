@@ -1,10 +1,18 @@
 package piratesproject.network;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import piratesproject.models.GameModel;
+import piratesproject.models.LoginRequestModel;
+import piratesproject.models.RequestModel;
+import piratesproject.models.ResponseModel;
+import piratesproject.models.UserModel;
 import javafx.application.Platform;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.interfaces.NetworkResponseHandler;
@@ -21,30 +29,29 @@ public class NetworkAccessLayer {
     private Thread th;
     private NetworkResponseHandler responseHandler;
 
-    // Private constructor to prevent direct instantiation
-    private NetworkAccessLayer(NetworkResponseHandler responseHandler) {
-        this.responseHandler = responseHandler;
+    private NetworkAccessLayer() {
         try {
             socket = new Socket(Consts.SERVER_HOST, Consts.SERVER_PORT);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
             receive();
         } catch (IOException ex) {
-            Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Connection failed", ex);
+           // Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Connection failed", ex);
+
         }
     }
 
-    // Public method to get the singleton instance
-    public static NetworkAccessLayer getInstance(NetworkResponseHandler responseHandler) {
+    public static NetworkAccessLayer getInstance() {
         if (instance == null) {
-            instance = new NetworkAccessLayer(responseHandler);
+            instance = new NetworkAccessLayer();
+
         }
         return instance;
     }
 
     private void receive() {
         th = new Thread(this::listenFromServer);
-        th.setDaemon(true); // Ensure the thread stops when the application exits
+        th.setDaemon(true);
         th.start();
     }
 
@@ -58,6 +65,7 @@ public class NetworkAccessLayer {
                         Platform.runLater(() -> responseHandler.onResponseReceived(responseModel));
                     }
                 }
+
             }
         } catch (IOException ex) {
             Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Error receiving data", ex);
@@ -76,6 +84,15 @@ public class NetworkAccessLayer {
         RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, userJson);
         String reqJson = JsonUtils.requestModelToJson(myReq);
         out.println(reqJson);
+    }
+
+    public void sendMove(GameModel gameMove) {
+        String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
+        RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
+        String reqJson = JsonUtils.requestModelToJson(myReq);
+        out.println(reqJson);
+        System.out.println("55555555555");
+
     }
 
     public void getOnlineUsers() {
@@ -104,17 +121,23 @@ public class NetworkAccessLayer {
         try {
             RequestModel requestModel = new RequestModel(RequestTypesEnum.EXIT, "");
             String reqJson = JsonUtils.requestModelToJson(requestModel);
-            out.println(reqJson);
-            th.stop();
-            out.close();
-            in.close();
-            socket.close();
+            if(out!=null){
+                out.println(reqJson);
+                out.close();
+            }
+            if(th!=null){th.stop();}
+            if(in!=null){in.close();}
+            if(socket!=null){socket.close();}
+            removeInstance();
         } catch (IOException ex) {
         }
     }
 
     public void setResponseHandler(NetworkResponseHandler responseHandler) {
         this.responseHandler = responseHandler;
+    }
+    private static void removeInstance(){
+        instance = null;
     }
 
     public void closeConnection() {
@@ -129,5 +152,6 @@ public class NetworkAccessLayer {
         } catch (IOException ex) {
             Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Error closing connection", ex);
         }
+
     }
 }

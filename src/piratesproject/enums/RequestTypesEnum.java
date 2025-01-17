@@ -4,6 +4,7 @@ public enum RequestTypesEnum {
     USERSTABLE,
     REGISTER,
     LOGIN,
+    GAMEMOVE,
     INVITATION,
     START_SENDING,
     RECIEVE_INVITATION,

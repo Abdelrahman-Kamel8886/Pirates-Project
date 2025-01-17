@@ -18,6 +18,7 @@ import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.auth.reg.RegisterController;
+import piratesproject.ui.game.xogameboard.online.OnlineGame;
 import piratesproject.utils.Consts;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
@@ -33,7 +34,7 @@ public class LoginController extends LoginBase implements NetworkResponseHandler
     public LoginController(Stage stage) {
         super(stage);
         listenToAllEvents();
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
 
     }

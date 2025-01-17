@@ -10,7 +10,9 @@ import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.InvitationModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
+import piratesproject.ui.game.xogameboard.online.OnlineGame;
 import piratesproject.ui.game.xogameboard.online.OnlineGameController;
+import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 public class SendInvitationFormController extends SendInvitationForm implements NetworkResponseHandler {
@@ -20,7 +22,7 @@ public class SendInvitationFormController extends SendInvitationForm implements 
     
     public SendInvitationFormController(Stage stage) {
         myStage = stage;
-        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
 
         initView();
@@ -53,13 +55,14 @@ public class SendInvitationFormController extends SendInvitationForm implements 
             SendInvitationFormHandler.resetScene(root);
         }
         else if(response.getType() == RequestTypesEnum.CREATE_ROOM){
+            SharedModel.setGameRoom(JsonUtils.jsonToGameRoomModel(response.getData()));
              SendInvitationFormHandler.closeForm();
              goToGame();
              
         }
     }
     private void goToGame() {
-        Parent game = new OnlineGameController(myStage);
+        Parent game = new OnlineGame(myStage);
         Main.resetScene(game);
     }
 }
