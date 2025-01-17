@@ -20,6 +20,7 @@ public class DrawController extends DrawBase {
         super(path);
         this.mystage = myStage;
         listenToAllEvent();
+        
     }
 
     private void listenToAllEvent() {
@@ -28,12 +29,14 @@ public class DrawController extends DrawBase {
     }
 
     private void goToXOPageToPlayAgin() {
+         getMediaPlayer().stop();
         mediaPlayer.stop();
         Parent XOgame = new XOGameOfflineController(mystage);
         Main.resetScene(XOgame);
     }
 
     private void exitToHome() {
+         getMediaPlayer().stop();
         mediaPlayer.stop();
         Parent homePage = new HomePageController(mystage);
         Main.resetScene(homePage);

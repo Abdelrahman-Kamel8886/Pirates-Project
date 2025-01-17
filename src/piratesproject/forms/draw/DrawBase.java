@@ -19,6 +19,9 @@ public class DrawBase extends StackPane {
     protected final MediaPlayer mediaPlayer;
 
     public DrawBase(String path) {
+        if (path == null || getClass().getResource(path) == null) {
+            throw new IllegalArgumentException("Invalid video path: " + path);
+        }
         
         String videoPath = getClass().getResource(path).toExternalForm();
         Media media = new Media(videoPath);
@@ -63,5 +66,8 @@ public class DrawBase extends StackPane {
 
         getChildren().addAll(mediaViewPlay, vBox);
         getStylesheets().add(getClass().getResource("/piratesproject/drawable/styles/draw.css").toExternalForm());
+    }
+     public MediaPlayer getMediaPlayer() {
+        return mediaPlayer; // Expose the MediaPlayer
     }
 }

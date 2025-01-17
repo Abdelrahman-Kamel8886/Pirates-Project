@@ -32,10 +32,11 @@ public class Pathes {
     static public final String SOUNDTRACK2_PATH = "/piratesproject/media/sounds/soundtrack4.mp3";
     static public final String SOUNDTRACK3_PATH = "/piratesproject/media/sounds/soundtrack2.mp3";
     static public final String SOUNDTRACK4_PATH = "/piratesproject/media/sounds/soundtrack3.mp3";
-    static public final String DRAW_VEDIO_PATH = "/piratesproject/media/videos/damy.mp4";
-    
-    //Files
-    public static final String RECORDS_FILE_PATH = "./database/records.txt"; 
+    static public final String DRAW_VEDIO_PATH = "/piratesproject/media/videos/draw.mp4";
+    static public final String WIN_VEDIO_PATH = "/piratesproject/media/videos/win.mp4";
+    static public final String LOSS_VEDIO_PATH = "/piratesproject/media/videos/loss.mp4";
 
+    //Files
+    public static final String RECORDS_FILE_PATH = "./database/records.txt";
 
 }
