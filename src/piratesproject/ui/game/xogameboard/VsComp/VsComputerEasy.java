@@ -21,7 +21,7 @@ import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
 import piratesproject.models.Player;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
 
@@ -29,7 +29,7 @@ import piratesproject.ui.home.HomePageController;
  *
  * @author Admin
  */
-public class VsComputerEasy extends XOGameBoard {
+public class VsComputerEasy extends XOGameBoard1111 {
 
     private String[][] board;
     private Button[][] buttons;

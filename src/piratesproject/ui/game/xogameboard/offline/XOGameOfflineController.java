@@ -19,13 +19,13 @@ import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
 import piratesproject.ui.game.replay.ReplayController;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-public class XOGameOfflineController extends XOGameBoard {
+public class XOGameOfflineController extends XOGameBoard1111 {
 
     private Player player1, player2, currentPlayer , winner;
     private String name1, name2, firstPlayer, secondPlayer;

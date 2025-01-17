@@ -11,11 +11,11 @@ import javafx.stage.Stage;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.ui.home.HomePageController;
 
 
-public class VsCompHard extends XOGameBoard {
+public class VsCompHard extends XOGameBoard1111 {
 
     Thread minMaxthread;
     Stage stage;

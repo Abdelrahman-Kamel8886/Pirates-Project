@@ -15,12 +15,12 @@ import piratesproject.models.RecordModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.replay.ReplayController;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
+public class OnlineGame extends XOGameBoard1111 implements NetworkResponseHandler {
 
     private Player player1, player2, currentPlayer, me;
     private String name1, name2, opponent, secondPlayer;
