@@ -18,9 +18,9 @@ public class DrawBase extends StackPane {
     protected final MediaView mediaViewPlay;
     protected final MediaPlayer mediaPlayer;
 
-    public DrawBase() {
-
-        String videoPath = getClass().getResource(Pathes.DRAW_VEDIO_PATH).toExternalForm();
+    public DrawBase(String path) {
+        
+        String videoPath = getClass().getResource(path).toExternalForm();
         Media media = new Media(videoPath);
         mediaPlayer = new MediaPlayer(media);
         mediaViewPlay = new MediaView(mediaPlayer);

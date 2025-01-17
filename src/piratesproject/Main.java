@@ -12,6 +12,7 @@ import piratesproject.drawable.values.Strings;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.auth.login.LoginController;
 import piratesproject.ui.game.replay.ReplayController;
+import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.ui.splash.SplashController;
 import piratesproject.utils.BackgroundMusic;
@@ -28,7 +29,7 @@ public class Main extends Application{
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
 
-        Parent root = new SplashController(stage);
+        Parent root = new VsComputerEasy(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));

@@ -9,16 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.forms.draw.DrawBase;
+import piratesproject.forms.draw.DrawForm;
 import piratesproject.models.Player;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
@@ -94,9 +100,9 @@ public class VsComputerEasy extends XOGameBoard {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
             String winCondition = checkWin(row, col);
-            
+
             if (winCondition != null) {
-                
+
                 drawWinLine(winCondition);
                 return;
             }
@@ -207,6 +213,16 @@ public class VsComputerEasy extends XOGameBoard {
                 break;
         }
         disableAllButtons();
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(event -> showVideo()); // Show the video after the pause
+        pause.play(); // Start the pause
+    }
+
+    private void showVideo() {
+        // Create a new instance of DrawBase
+        DrawForm drawBase = new DrawForm();
+        drawBase.display(stage, Pathes.DRAW_VEDIO_PATH);
 
     }
 

@@ -16,7 +16,8 @@ public class DrawController extends DrawBase {
 
     private final Stage mystage;
 
-    public DrawController(Stage myStage) {
+    public DrawController(Stage myStage,String path) {
+        super(path);
         this.mystage = myStage;
         listenToAllEvent();
     }
