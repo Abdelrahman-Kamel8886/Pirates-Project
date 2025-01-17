@@ -9,3 +9,14 @@
 {"player1":{"name":"abdokamel8886","symbol":"X"},"player2":{"name":"nono","symbol":"O"},"winner":{"name":"abdokamel8886","symbol":"X"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":1,\"col\":1,\"symbol\":\"O\"},{\"row\":0,\"col\":1,\"symbol\":\"X\"},{\"row\":0,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":0,\"symbol\":\"X\"},{\"row\":1,\"col\":2,\"symbol\":\"O\"},{\"row\":1,\"col\":0,\"symbol\":\"X\"}]","line":"COL-0"}
 {"player1":{"name":"abdokamel8886","symbol":"X"},"player2":{"name":"nono","symbol":"O"},"winner":{"name":"abdokamel8886","symbol":"X"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":0,\"col\":1,\"symbol\":\"O\"},{\"row\":1,\"col\":0,\"symbol\":\"X\"},{\"row\":0,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":0,\"symbol\":\"X\"}]","line":"COL-0"}
 {"player1":{"name":"abdokamel8886","symbol":"X"},"player2":{"name":"nono","symbol":"O"},"winner":{"name":"abdokamel8886","symbol":"X"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":0,\"col\":1,\"symbol\":\"O\"},{\"row\":1,\"col\":0,\"symbol\":\"X\"},{\"row\":0,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":0,\"symbol\":\"X\"}]","line":"COL-0"}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"nour","symbol":"X"},"player2":{"name":"computer","symbol":"O"},"gameSequance":"","line":""}
+{"player1":{"name":"Guest","symbol":"X"},"player2":{"name":"hhhh","symbol":"O"},"winner":{"name":"Guest","symbol":"X"},"gameSequance":"[{\"row\":1,\"col\":1,\"symbol\":\"X\"},{\"row\":0,\"col\":1,\"symbol\":\"O\"},{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":1,\"col\":0,\"symbol\":\"O\"},{\"row\":1,\"col\":2,\"symbol\":\"X\"},{\"row\":0,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":2,\"symbol\":\"X\"}]","line":"DIAG-PRIMARY"}
