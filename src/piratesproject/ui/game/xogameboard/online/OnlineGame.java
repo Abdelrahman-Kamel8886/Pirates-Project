@@ -1,24 +1,20 @@
 package piratesproject.ui.game.xogameboard.online;
 
-import piratesproject.ui.game.xogameboard.offline.*;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
-import piratesproject.ui.game.minmaxalgorithim.State;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.enums.RequestTypesEnum;
+import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.GameModel;
 import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
-import piratesproject.models.RequestModel;
+
+import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
@@ -26,9 +22,9 @@ import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-public class OnlineGame extends XOGameBoard {
+public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
-    private Player player1, player2, currentPlayer;
+    private Player player1, player2, currentPlayer, me;
     private String name1, name2, opponent, secondPlayer;
     private String movesSequnce, line;
     private RecordModel gameRecord;
@@ -36,6 +32,8 @@ public class OnlineGame extends XOGameBoard {
     private String oponnetUserName;
     private String[][] board;
     private Button[][] buttons;
+
+    private NetworkAccessLayer networkAccessLayer;
 
     private final int SIZE = 3;
 
@@ -45,41 +43,48 @@ public class OnlineGame extends XOGameBoard {
     public OnlineGame(Stage stage) {
         super(stage);
         this.stage = stage;
-        oponnetUserName="" /*SharedModel.getOponnentName()*/;
+        networkAccessLayer = NetworkAccessLayer.getInstance(this);
+        buttons = new Button[SIZE][SIZE];
+        board = new String[SIZE][SIZE];
+        moves = new ArrayList();
         initView();
+
     }
 
     private void initView() {
         name1 = SharedModel.getPlayerName1();
         name2 = SharedModel.getPlayerName2();
         line = "none";
-        setPlayersRandomly();
         drawSuccesslines();
+        initButtons();
         initGame();
 
     }
 
-    private void setPlayersRandomly() {
-        if (Math.random() < 0.5) {
-            opponent = name1;
-            secondPlayer = name2;
-        } else {
-            opponent = name2;
-            secondPlayer = name1;
-        }
-        playerOneLabel.setText(opponent + " : ( X )");
-        playerTwoLabel.setText(secondPlayer + " ( O )");
-    }
-
     private void initGame() {
-        player1 = new Player(opponent, GameMovesEnum.X.name());
-        player2 = new Player(secondPlayer, GameMovesEnum.O.name());
+
+        player1 = SharedModel.getGameRoom().getPlayer1();
+        player2 = SharedModel.getGameRoom().getPlayer2();
+        System.out.println(player1.getName());
+        System.out.println(player2.getName());
+
         currentPlayer = player1;
-        buttons = new Button[SIZE][SIZE];
-        board = new String[SIZE][SIZE];
-        moves = new ArrayList();
+        playerOneLabel.setText(player1.getName() + " : ( X )");
+        playerTwoLabel.setText(player2.getName() + " ( O )");
+
+        if (player1.getName().equals(SharedModel.getUser().getUserName())) {
+            me = player1;
+            // enableAllButtons();
+            oponnetUserName = player2.getName();
+
+        } else {
+            me = player2;
+            oponnetUserName = player1.getName();
+
+            disableAllButtons();
+        }
+
         gameRecord = new RecordModel(player1, player2);
-        initButtons();
         resetBoard();
         onClicks();
     }
@@ -101,26 +106,28 @@ public class OnlineGame extends XOGameBoard {
             for (int j = 0; j < SIZE; j++) {
                 final int row = i, col = j;
                 buttons[i][j].setOnAction((ActionEvent event) -> {
-                                MoveModel move=new MoveModel(row, col, currentPlayer.getSymbol());
-                               // GameModel gameModel = new GameModel(oponnetUserName,move);
-                               // NetworkAccessLayer.sendMove(gameModel);
-                                makeMove(row, col);
-                                getMove();
+
+                    MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
+                    GameModel gameModel = new GameModel(oponnetUserName, move);
+
+                    networkAccessLayer.sendMove(gameModel);
+                    makeMove(row, col);
+
                 });
             }
         }
     }
 
-public void makeMove(int row, int col) {
+    public void makeMove(int row, int col) {
         if (board[row][col].isEmpty()) {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
-          
-            MoveModel move=new MoveModel(row, col, currentPlayer.getSymbol());
+
+            MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
             moves.add(move);
-            
+
             String winCondition = checkWin(row, col);
-            line = winCondition != null?winCondition:"none";
+            line = winCondition != null ? winCondition : "none";
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
@@ -136,20 +143,23 @@ public void makeMove(int row, int col) {
             switchPlayer();
         }
     }
-    public void getMove(){
-        Thread th = new Thread(() -> {
-                        
-//         MoveModel move= NetworkAccessLayer.getMove();
-        // makeMove(move.getRow(), move.getCol());
-                    });
-                    th.start();
-        
-        
-        
-    }
 
+//    public void getMove() {
+//
+//        MoveModel move = NetworkAccessLayer.getMove();
+//        if (move != null) {
+//            makeMove(move.getRow(), move.getCol());
+//        }
+//       
+//
+//    }
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
+        if (currentPlayer == me) {
+            enableAllButtons();
+        } else {
+            disableAllButtons();
+        }
     }
 
     private String checkWin(int row, int col) {
@@ -231,7 +241,16 @@ public void makeMove(int row, int col) {
         }
     }
 
-private void saveRecord() {
+    private void enableAllButtons() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                final int row = i, col = j;
+                buttons[i][j].setDisable(false);
+            }
+        }
+    }
+
+    private void saveRecord() {
         movesSequnce = JsonUtils.movesArrayToJson(moves);
         gameRecord.setWinner(currentPlayer);
         gameRecord.setGameSequance(movesSequnce);
@@ -239,16 +258,30 @@ private void saveRecord() {
         SharedModel.setSelectedRecord(gameRecord);
         System.out.println(gameRecord.toString());
     }
-    
-    private void saveRecordToFile(){
+
+    private void saveRecordToFile() {
         String record = JsonUtils.recordModelToJson(gameRecord);
         FileHandler.appendToFile(record);
-        
+
     }
 
     private void goToReplay() {
         Parent replay = new ReplayController(stage);
         Main.resetScene(replay);
+    }
+
+    @Override
+    public void onResponseReceived(ResponseModel response) {
+        if (response.getType() == RequestTypesEnum.GAMEMOVE) {
+            String gameMovejson = response.getData();
+            MoveModel move = JsonUtils.jsonToGameMove(gameMovejson);
+            if (move != null) {
+                makeMove(move.getRow(), move.getCol());
+                enableAllButtons();
+            }
+
+        }
+
     }
 
 }

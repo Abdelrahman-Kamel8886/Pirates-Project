@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import piratesproject.models.GameModel;
+import piratesproject.models.GameRoomModel;
 import piratesproject.models.InvitationModel;
 import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
@@ -85,7 +86,21 @@ public class JsonUtils {
     public static RecordModel jsonToRecordModel(String json) {
         return gson.fromJson(json, RecordModel.class);
     }
-    
+    public static String gameModelToJson(GameModel gameModel) {
+        return gson.toJson(gameModel);
+    }
+
+    // Convert JSON string to UserModel
+    public static GameModel jsonToGameModel(String json) {
+        return gson.fromJson(json, GameModel.class);
+    }
+    public static String gameMoveToJson(MoveModel gameMove) {
+        return gson.toJson(gameMove);
+    }
+
+    public static MoveModel jsonToGameMove(String json) {
+        return gson.fromJson(json, MoveModel.class);
+    }
     public static String invitationModelToJson(InvitationModel invitationModel){
         return gson.toJson(invitationModel); 
     }
@@ -93,12 +108,12 @@ public class JsonUtils {
     public static InvitationModel jsonToInvitationModel (String invitationJson){
         return gson.fromJson(invitationJson, InvitationModel.class);
     }
-    
-    public static String gameModelToJson(GameModel model){
+    public static String gameRoomModelToJson(GameRoomModel model){
         return gson.toJson(model); 
     }
     
-    public static GameModel jsonToGameModel (String game){
-        return gson.fromJson(game, GameModel.class);
+    public static GameRoomModel jsonToGameRoomModel(String game){
+        return gson.fromJson(game, GameRoomModel.class);
     }
+
 }

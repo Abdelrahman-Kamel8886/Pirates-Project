@@ -24,12 +24,14 @@ import piratesproject.ui.auth.login.LoginController;
 import piratesproject.utils.Consts;
 import piratesproject.utils.SharedModel;
 
+
 public class RegisterController extends RegisterBase implements NetworkResponseHandler {
 
     private NetworkAccessLayer networkAccessLayer;
 
     public RegisterController(Stage s) {
         super(s);
+        
         listenToAllEvents();
         networkAccessLayer = NetworkAccessLayer.getInstance(this);
         networkAccessLayer.setResponseHandler(this);
@@ -75,16 +77,23 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
                             usernameTF.getText(),
                             passwordTF.getText());
 
+                    
 //                    Thread th = new Thread(() -> {
-//                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+//                        ResponseModel responseModel = NetworkAccessLayer .registerToServer(user);
 //                        checkRegisterState(responseModel);
 //
-//                    });
-//                    th.start();
-                    SharedModel.setUser(user);
-                    networkAccessLayer.sendRegisteration(user);
-
-                }
+//
+////                    Thread th = new Thread(() -> {
+////                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
+////                        checkRegisterState(responseModel);
+////
+////                    });
+////                    th.start();
+//                    SharedModel.setUser(user);
+//                    networkAccessLayer.sendRegisteration(user);
+//
+//                }
+                            }
 
             }
 

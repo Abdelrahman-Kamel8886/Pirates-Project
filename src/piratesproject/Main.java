@@ -31,6 +31,7 @@ public class Main extends Application implements NetworkResponseHandler {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         networkAccessLayer = NetworkAccessLayer.getInstance(this);
 
         stage.setFullScreen(true);

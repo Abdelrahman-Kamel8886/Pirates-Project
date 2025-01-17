@@ -1,5 +1,15 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package piratesproject.models;
 
+/**
+ *
+ * @author Admin
+ */
 public class GameModel {
     private String username;
     private MoveModel move;
@@ -27,6 +37,10 @@ public class GameModel {
     public void setMove(MoveModel move) {
         this.move = move;
     }
+
+
+
+//public class GameModel {
 //    private String id;
 //    private Player player1;
 //    private Player player2;
@@ -66,4 +80,5 @@ public class GameModel {
 //    
 //    
 //    
+
 }

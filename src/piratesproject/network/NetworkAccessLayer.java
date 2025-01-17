@@ -1,14 +1,34 @@
 package piratesproject.network;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+
 import java.io.*;
+
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import piratesproject.models.GameModel;
+//import piratesproject.models.GameModel;
+import piratesproject.models.LoginRequestModel;
+import piratesproject.models.LoginResponseModel;
+import piratesproject.models.MoveModel;
+import piratesproject.models.RequestModel;
+import piratesproject.models.ResponseModel;
+import piratesproject.models.UserModel;
+
 import javafx.application.Platform;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.*;
+
 import piratesproject.utils.Consts;
 import piratesproject.utils.JsonUtils;
 
@@ -31,6 +51,7 @@ public class NetworkAccessLayer {
             receive();
         } catch (IOException ex) {
             Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Connection failed", ex);
+
         }
     }
 
@@ -38,6 +59,7 @@ public class NetworkAccessLayer {
     public static NetworkAccessLayer getInstance(NetworkResponseHandler responseHandler) {
         if (instance == null) {
             instance = new NetworkAccessLayer(responseHandler);
+
         }
         return instance;
     }
@@ -58,6 +80,7 @@ public class NetworkAccessLayer {
                         Platform.runLater(() -> responseHandler.onResponseReceived(responseModel));
                     }
                 }
+
             }
         } catch (IOException ex) {
             Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Error receiving data", ex);
@@ -83,6 +106,15 @@ public class NetworkAccessLayer {
         RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, userJson);
         String reqJson = JsonUtils.requestModelToJson(myReq);
         out.println(reqJson);
+    }
+
+    public void sendMove(GameModel gameMove) {
+
+        String gameMoveJson = JsonUtils.gameModelToJson(gameMove);
+        RequestModel myReq = new RequestModel(RequestTypesEnum.GAMEMOVE, gameMoveJson);
+        String reqJson = JsonUtils.requestModelToJson(myReq);
+        out.println(reqJson); // Send JSON string to the server
+
     }
 
     public void getOnlineUsers() {
@@ -121,5 +153,6 @@ public class NetworkAccessLayer {
         } catch (IOException ex) {
             Logger.getLogger(NetworkAccessLayer.class.getName()).log(Level.SEVERE, "Error closing connection", ex);
         }
+
     }
 }
