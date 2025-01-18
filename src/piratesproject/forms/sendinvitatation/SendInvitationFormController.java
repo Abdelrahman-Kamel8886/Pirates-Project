@@ -29,7 +29,7 @@ public class SendInvitationFormController extends SendInvitationForm implements 
 
     private void initView() {
         nameText.setText(SharedModel.getSelectedUser().getUserName());
-        scoreText.setText("" + SharedModel.getSelectedUser().getScore());
+        scoreText.setVisible(false);
         onClicks();
     }
 
@@ -56,8 +56,10 @@ public class SendInvitationFormController extends SendInvitationForm implements 
         else if(response.getType() == RequestTypesEnum.CREATE_ROOM){
             SharedModel.setGameRoom(JsonUtils.jsonToGameRoomModel(response.getData()));
              SendInvitationFormHandler.closeForm();
-             goToGame();
-             
+             goToGame();  
+        }
+        else if(response.getType() == RequestTypesEnum.SEND_CANCEL_INVITATION){
+             SendInvitationFormHandler.closeForm();
         }
     }
     private void goToGame() {

@@ -61,7 +61,7 @@ public class FileHandler {
         ArrayList<RecordModel> records = new ArrayList();
         List<String> lines = retrieveFromFile();
         for (String line : lines) {
-           // records.add(JsonUtils.jsonToRecordModel(line));
+            records.add(JsonUtils.jsonToRecordModel(line));
         }
         return records;
     }

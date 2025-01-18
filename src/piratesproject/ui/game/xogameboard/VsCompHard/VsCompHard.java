@@ -186,7 +186,7 @@ public class VsCompHard extends XOGameBoard {
 
         });
 
-        record.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        recordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 playRecord();
@@ -236,7 +236,7 @@ public class VsCompHard extends XOGameBoard {
     }
 
     private void showVideo(VideoTypeEnum videoType) {
-        if (record.getState()) {
+        if (recordButton.getState()) {
             saveRecordToFile(hardrecord);
         }
         DrawForm drawBase = new DrawForm(LevelTypesEnum.Hard);

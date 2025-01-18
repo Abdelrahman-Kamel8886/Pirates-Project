@@ -1,2 +1,3 @@
 {"moveRecord":[],"currentPostion":0}
 {"moveRecord":[{"postion":0,"Symbol":"X"},{"postion":4,"Symbol":"O"},{"postion":1,"Symbol":"X"},{"postion":3,"Symbol":"O"},{"postion":2,"Symbol":"X"}],"currentPostion":0}
+{"moveRecord":[{"postion":0,"Symbol":"X"},{"postion":4,"Symbol":"O"},{"postion":1,"Symbol":"X"},{"postion":3,"Symbol":"O"},{"postion":2,"Symbol":"X"}],"currentPostion":0}

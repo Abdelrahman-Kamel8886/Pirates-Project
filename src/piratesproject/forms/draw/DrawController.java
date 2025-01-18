@@ -18,7 +18,7 @@ public class DrawController extends DrawBase {
 
     private final Stage mystage;
     LevelTypesEnum level ; 
-    public DrawController(Stage myStage, String path , LevelTypesEnum level) {
+    public DrawController(Stage myStage, String path) {
         super(path);
         this.level = level;
         this.mystage = myStage;

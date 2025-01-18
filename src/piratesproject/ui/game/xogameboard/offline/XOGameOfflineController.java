@@ -1,6 +1,7 @@
 package piratesproject.ui.game.xogameboard.offline;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,11 +9,14 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
@@ -30,7 +34,7 @@ import piratesproject.utils.SharedModel;
 
 public class XOGameOfflineController extends XOGameBoard {
 
-    private Player player1, player2, currentPlayer , winner;
+    private Player player1, player2, currentPlayer, winner;
     private String name1, name2, firstPlayer, secondPlayer;
     private String movesSequnce, line;
     private RecordModel gameRecord;
@@ -49,7 +53,7 @@ public class XOGameOfflineController extends XOGameBoard {
         super(stage);
         this.stage = stage;
         networkAccessLayer = NetworkAccessLayer.getInstance();
-        if(SharedModel.getUser()!=null){
+        if (SharedModel.getUser() != null) {
             networkAccessLayer.sentAvilableState(1);
         }
         initView();
@@ -116,12 +120,9 @@ public class XOGameOfflineController extends XOGameBoard {
                 gotoHome();
             }
         });
-      backIcon.setOnMouseClicked((Event event) -> {
-          gotoHome();
+        backIcon.setOnMouseClicked((Event event) -> {
+            gotoHome();
         });
-//      record.setOnAction((ActionEvent event) -> {
-//          saveRecordToFile();
-//        });
     }
 
     public void makeMove(int row, int col) {
@@ -130,18 +131,16 @@ public class XOGameOfflineController extends XOGameBoard {
             buttons[row][col].setText(currentPlayer.getSymbol());
             moves.add(new MoveModel(row, col, currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
-            line = winCondition != null?winCondition:"none";
-            winner = winCondition != null?currentPlayer:null;
+            line = winCondition != null ? winCondition : "none";
+            
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
-                if(record.getState()){
-                saveRecordToFile();}
+                saveRecordToFile();
                 return;
             }
             if (isDraw()) {
-                if(record.getState()){
-                saveRecordToFile();}
+                saveRecordToFile();
                 currentPlayer = null;
                 disableAllButtons();
                 
@@ -157,20 +156,23 @@ public class XOGameOfflineController extends XOGameBoard {
 
     private String checkWin(int row, int col) {
         String symbol = currentPlayer.getSymbol();
+        String result = null;
+        
 
         if (board[row][0].equals(symbol) && board[row][1].equals(symbol) && board[row][2].equals(symbol)) {
-            return "ROW-" + row;
+            result= "ROW-" + row;
         }
         if (board[0][col].equals(symbol) && board[1][col].equals(symbol) && board[2][col].equals(symbol)) {
-            return "COL-" + col;
+            result= "COL-" + col;
         }
         if (row == col && board[0][0].equals(symbol) && board[1][1].equals(symbol) && board[2][2].equals(symbol)) {
-            return "DIAG-PRIMARY";
+            result= "DIAG-PRIMARY";
         }
         if (row + col == SIZE - 1 && board[0][2].equals(symbol) && board[1][1].equals(symbol) && board[2][0].equals(symbol)) {
-            return "DIAG-SECONDARY";
+            result= "DIAG-SECONDARY";
         }
-        return null;
+        winner = result != null ? currentPlayer : null;
+        return result;
     }
 
     private boolean isDraw() {
@@ -231,6 +233,22 @@ public class XOGameOfflineController extends XOGameBoard {
                 buttons[i][j].setDisable(true);
             }
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(stage);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setTitle("Game Over");
+        if (winner != null) {
+            alert.setHeaderText("Wineeeeer is : " + winner.getName());
+
+        } else {
+            alert.setHeaderText("Game Over in Draw");
+        }
+        alert.setContentText(null);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            gotoHome();
+        }
+
     }
 
     private void saveRecord() {
@@ -240,12 +258,16 @@ public class XOGameOfflineController extends XOGameBoard {
         gameRecord.setLine(line);
         SharedModel.setSelectedRecord(gameRecord);
     }
-    
-    private void saveRecordToFile(){
-        String record = JsonUtils.recordModelToJson(gameRecord);
-        FileHandler.appendToFile(record);
+
+    private void saveRecordToFile() {  
+        if(recordButton.getState()){
+           String record = JsonUtils.recordModelToJson(gameRecord);
+           FileHandler.appendToFile(record); 
+        }
         
+
     }
+
     public void gotoHome() {
         Parent homePage = new HomePageController(stage);
         Main.resetScene(homePage);
