@@ -29,7 +29,8 @@ public class Main extends Application{
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
 
-        Parent root = new VsComputerEasy(stage);
+
+        Parent root = new LoginController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));

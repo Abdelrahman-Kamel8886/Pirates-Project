@@ -19,6 +19,7 @@ import piratesproject.enums.GameMovesEnum;
 import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.game.xogameboard.XOGameBoard1111;
@@ -42,10 +43,15 @@ public class XOGameOfflineController extends XOGameBoard {
 
     private Stage stage;
     Thread minMaxthread;
+    private NetworkAccessLayer networkAccessLayer;
 
     public XOGameOfflineController(Stage stage) {
         super(stage);
         this.stage = stage;
+        networkAccessLayer = NetworkAccessLayer.getInstance();
+        if(SharedModel.getUser()!=null){
+            networkAccessLayer.sentAvilableState(1);
+        }
         initView();
     }
 

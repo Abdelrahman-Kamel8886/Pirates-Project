@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
+import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.enums.VideoTypeEnum;
 import piratesproject.forms.draw.DrawForm;
@@ -19,12 +20,12 @@ import piratesproject.models.RecordModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.replay.ReplayController;
-import piratesproject.ui.game.xogameboard.XOGameBoard1111;
+import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-public class OnlineGame extends XOGameBoard1111 implements NetworkResponseHandler {
+public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
     private Player player1, player2, currentPlayer, me;
     private String name1, name2, opponent, secondPlayer;
@@ -299,9 +300,13 @@ public class OnlineGame extends XOGameBoard1111 implements NetworkResponseHandle
 
     private void showVideo(VideoTypeEnum videoType, Player player) {
         if (player.equals(me)) {
-            DrawForm drawBase = new DrawForm();
+            DrawForm drawBase = new DrawForm(LevelTypesEnum.Normal);
             switch (videoType) {
                 case WIN:
+                    Integer score = SharedModel.getUser().getScore();
+                    int newScore = score!=null?score+10:10;
+                    SharedModel.getUser().setScore(score);
+                    networkAccessLayer.sendScore(newScore);
                     drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
                     break;
                 case LOSS:

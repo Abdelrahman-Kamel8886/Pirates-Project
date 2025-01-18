@@ -52,6 +52,10 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         songs.add(Pathes.SOUNDTRACK2_PATH);
         songs.add(Pathes.SOUNDTRACK3_PATH);
         songs.add(Pathes.SOUNDTRACK4_PATH);
+        
+        if(SharedModel.getUser()!=null){
+            networkAccessLayer.sentAvilableState(0);
+        }
 
         initView();
         if (!SharedModel.isSoundTrackStarted()) {

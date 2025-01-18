@@ -19,10 +19,11 @@ import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.VideoTypeEnum;
 import piratesproject.forms.draw.DrawForm;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.home.HomePageController;
-import piratesproject.utils.JsonUtils;
+import piratesproject.utils.SharedModel;
 
 public class VsCompHard extends XOGameBoard {
     
@@ -33,10 +34,19 @@ public class VsCompHard extends XOGameBoard {
     String globalBoard[] = {"", "", "", "", "", "", "", "", ""};
     String recordBoard[] = {"", "", "", "", "", "", "", "", ""};
     AdversarialSearchTicTacToe AiTicTacToe;
-    
+    private NetworkAccessLayer networkAccessLayer;
     public VsCompHard(Stage stage) {
         super(stage);        
         initGame();
+        State state = new State(0, globalBoard);
+        //make ai start playing. 
+        int aiMove = AiTicTacToe.minMaxDecision(state);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
+        globalBoard[aiMove] = "X";
+        drawBoard(globalBoard);
+        if(SharedModel.getUser()!=null){
+            networkAccessLayer.sentAvilableState(1);
+        }
         listenToAllEvents();
     }
 

@@ -115,6 +115,16 @@ public class NetworkAccessLayer {
         String reqJson = JsonUtils.requestModelToJson(requestModel);
         out.println(reqJson);
     }
+    public void sentAvilableState(int value) {
+        RequestModel requestModel = new RequestModel(RequestTypesEnum.AVALIBALE,String.valueOf(value) );
+        String reqJson = JsonUtils.requestModelToJson(requestModel);
+        out.println(reqJson);
+    }
+    public void sendScore(int value) {
+        RequestModel requestModel = new RequestModel(RequestTypesEnum.UPDATESCORE,String.valueOf(value) );
+        String reqJson = JsonUtils.requestModelToJson(requestModel);
+        out.println(reqJson);
+    }
 
     public void confirmInvitation(InvitationModel invitationModel) {
         String invitationDataString = JsonUtils.invitationModelToJson(invitationModel);

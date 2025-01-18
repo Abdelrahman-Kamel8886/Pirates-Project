@@ -30,18 +30,13 @@ import piratesproject.forms.draw.DrawForm;
 import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
-import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
-import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-/**
- *
- * @author Admin
- */
 public class VsComputerEasy extends XOGameBoard {
 
     private RecordModel gameRecord;
@@ -49,14 +44,19 @@ public class VsComputerEasy extends XOGameBoard {
     private String[][] board;
     private Button[][] buttons;
     private Player player1, player2, currentPlayer, winner;
-    private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
+    private String name1 = "nour", name2 = "computer";
     Thread minMaxthread;
     Stage stage;
     private final int SIZE = 3;
     private String movesSequnce, line;
+    private NetworkAccessLayer networkAccessLayer;
 
     public VsComputerEasy(Stage stage) {
         super(stage);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
+        if(SharedModel.getUser()!=null){
+            networkAccessLayer.sentAvilableState(1);
+        }
         initGame();
     }
 
