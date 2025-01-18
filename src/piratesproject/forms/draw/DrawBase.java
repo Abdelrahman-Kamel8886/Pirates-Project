@@ -2,7 +2,6 @@ package piratesproject.forms.draw;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -48,6 +47,7 @@ public abstract class DrawBase extends AnchorPane {
         setMinWidth(USE_PREF_SIZE);
         setPrefHeight(1000.0);
         setPrefWidth(1300.0);
+        setStyle("-fx-background-color: #436399;");
 
         AnchorPane.setBottomAnchor(imageView, 0.0);
         AnchorPane.setLeftAnchor(imageView, 0.0);
@@ -58,7 +58,7 @@ public abstract class DrawBase extends AnchorPane {
         imageView.setLayoutX(444.0);
         imageView.setLayoutY(244.0);
         imageView.setPickOnBounds(true);
-        imageView.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/splash.png").toExternalForm()));
+        //imageView.setImage(new Image(getClass().getResource("/piratesproject/drawable/images/levelsbg.png").toExternalForm()));
 
         AnchorPane.setBottomAnchor(borderPane, 100.0);
         AnchorPane.setLeftAnchor(borderPane, 100.0);
@@ -83,7 +83,7 @@ public abstract class DrawBase extends AnchorPane {
         playAgainB.setMnemonicParsing(false);
         playAgainB.setPrefHeight(147.0);
         playAgainB.setPrefWidth(152.0);
-        playAgainB.setStyle("-fx-background-radius: 100px; -fx-background-color: #436399;");
+        playAgainB.setStyle("-fx-background-radius: 100px; -fx-background-color: #1bd41b;");
         playAgainB.setText("PlayAgain");
         playAgainB.setTextFill(javafx.scene.paint.Color.valueOf("#fffefe"));
         VBox.setMargin(playAgainB, new Insets(200.0, 0.0, 0.0, 40.0));
@@ -109,6 +109,7 @@ public abstract class DrawBase extends AnchorPane {
         anchorPane.setPrefWidth(200.0);
         // anchorPane.setStyle("-fx-background-color: #436399;");
         anchorPane.getChildren().add(mediaViewPlay);
+        anchorPane.setStyle("-fx-background-color: #436399;");
 
         borderPane.setCenter(anchorPane);
 
