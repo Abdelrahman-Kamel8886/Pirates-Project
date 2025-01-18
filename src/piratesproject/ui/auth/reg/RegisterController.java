@@ -42,6 +42,9 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
             @Override
             public void handle(ActionEvent event) {
                 boolean b = register();
+                if(b){
+                    gotoHome();
+                }
             }
 
         });

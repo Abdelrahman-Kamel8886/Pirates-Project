@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import piratesproject.drawable.values.Pathes;
 
 
+
 public class SnakeGameForm {
     private static final int TILE_SIZE = 30;
     private static final int WIDTH = 30;

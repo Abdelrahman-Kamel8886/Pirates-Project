@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Parent;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.enums.GameMovesEnum;
@@ -20,6 +21,7 @@ import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
 import piratesproject.ui.game.replay.ReplayController;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.ui.home.HomePageController;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
@@ -107,6 +109,12 @@ public class XOGameOfflineController extends XOGameBoard {
             if (event.getCode() == KeyCode.BACK_SPACE) {
                 gotoHome();
             }
+        });
+      backIcon.setOnMouseClicked((Event event) -> {
+          gotoHome();
+        });
+      record.setOnAction((ActionEvent event) -> {
+          saveRecordToFile();
         });
     }
 
