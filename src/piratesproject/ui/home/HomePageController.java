@@ -63,7 +63,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         System.out.println("asjncja ncasj");
         setRecordsData();
         if (!SharedModel.isSoundTrackStarted()) {
-           // playCurrentSong();
+            playCurrentSong();
             SharedModel.setSoundTrackStarted(true);
         }
         if(SharedModel.getSoundTrackState() == SoundTrackStateEnum.paused){

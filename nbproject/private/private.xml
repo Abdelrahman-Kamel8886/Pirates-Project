@@ -3,49 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/utils/SharedModel.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/game/xogameboard/offline/XOGameOfflineController.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/forms/receivingInvitation/ReceivingInvitationFormController.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/game/xogameboard/XOGameBoard.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/game/xogameboard/online/OnlineGame.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterController.java</file>
-            <file>file:/D:/java/gpProject2/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 6e92839669c28e979166465d7937d614a59cc0e7
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/Main.java</file>
             <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/home/HomePageController.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/utils/BackgroundMusic.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/auth/reg/RegisterController.java</file>
-            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/splash/SplashController.java</file>
-<<<<<<< HEAD
-=======
-            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/game/xogameboard/VsComp/VsComputerEasy.java</file>
-            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/game/xogameboard/offline/XOGameOfflineController.java</file>
-            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/drawable/styles/registerStyle.css</file>
-            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterController.java</file>
-            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterBase.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/ui/auth/login/LoginController.java</file>
-            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/local/DataAccsessLayer.java</file>
-            <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
->>>>>>> f6eee355fc6b4b5f014f96c50b56d493f5bf3e7d
-=======
-            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/game/xogameboard/VsCompHard/VsCompHard.java</file>
-            <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/game/xogameboard/VsComp/VsComputerEasy.java</file>
->>>>>>> d2f391ac93fba63009b59a6e0336c4358df21761
-<<<<<<< HEAD
-=======
->>>>>>> 5b1742213c97287b82d4f651b9ce50543c9ba61a
->>>>>>> f6eee355fc6b4b5f014f96c50b56d493f5bf3e7d
->>>>>>> 864b945f9cc0fa7a3ac82084b7ceaaf61f77fa19
-=======
->>>>>>> 6e92839669c28e979166465d7937d614a59cc0e7
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/Main.java</file>
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/database/records.txt</file>
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/VsCompHard/VsCompHard.java</file>
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/online/OnlineGame.java</file>
+            <file>file:/D:/disk2/%23170/ITI/JavaProject/PiratesProject/src/piratesproject/ui/game/xogameboard/XOGameBoard.java</file>
         </group>
     </open-files>
 </project-private>
