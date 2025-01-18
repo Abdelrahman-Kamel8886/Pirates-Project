@@ -39,11 +39,7 @@ public class VsCompHard extends XOGameBoard {
         super(stage);        
         initGame();
         State state = new State(0, globalBoard);
-        //make ai start playing. 
-        int aiMove = AiTicTacToe.minMaxDecision(state);
         networkAccessLayer = NetworkAccessLayer.getInstance();
-        globalBoard[aiMove] = "X";
-        drawBoard(globalBoard);
         if(SharedModel.getUser()!=null){
             networkAccessLayer.sentAvilableState(1);
         }
