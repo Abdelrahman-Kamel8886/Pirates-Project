@@ -13,4 +13,5 @@ public enum RequestTypesEnum {
     EXIT,
     AVALIBALE
     ,UPDATESCORE
+    ,UPDATEGAMEPLAYED
 }

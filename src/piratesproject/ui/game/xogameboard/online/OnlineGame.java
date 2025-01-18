@@ -300,11 +300,15 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     private void showVideo(VideoTypeEnum videoType, Player player) {
         if (player.equals(me)) {
             DrawForm drawBase = new DrawForm();
+            Integer gp = SharedModel.getUser().getGamesPlayed();
+            int newGp = gp!=null?gp+1:1;
+            SharedModel.getUser().setGamesPlayed(newGp);
+            networkAccessLayer.sendGamesPlayes(newGp);
             switch (videoType) {
                 case WIN:
                     Integer score = SharedModel.getUser().getScore();
                     int newScore = score!=null?score+10:10;
-                    SharedModel.getUser().setScore(score);
+                    SharedModel.getUser().setScore(newScore);
                     networkAccessLayer.sendScore(newScore);
                     drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
                     break;
