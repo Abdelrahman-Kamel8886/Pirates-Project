@@ -258,7 +258,7 @@ public class VsCompHard extends XOGameBoard {
             return 0 ; 
         }
         else if (Arrays.equals(line, new int[]{3, 4, 5})) {
-            return 2 ; 
+            return 3 ; 
         }
         else if (Arrays.equals(line, new int[]{6, 7, 8})) {
             return 4 ; 
@@ -276,7 +276,7 @@ public class VsCompHard extends XOGameBoard {
             return 8 ; 
         }
         else if (Arrays.equals(line, new int[]{0, 4, 8})) {
-            return 3 ; 
+            return 1 ; 
         }
        return 1 ;
     }
@@ -290,11 +290,11 @@ public class VsCompHard extends XOGameBoard {
                 break;
             case 7:
                 System.out.println(3);
-                line3.setVisible(true);
+                line7.setVisible(true);
                 break;
             case 3:
                 System.out.println(4);
-                line4.setVisible(true);
+                line3.setVisible(true);
                 break;
             case 5:
                 System.out.println(5);
@@ -306,7 +306,7 @@ public class VsCompHard extends XOGameBoard {
                 break;
             case 2:
                 System.out.println(7);
-                line7.setVisible(true);
+                line8.setVisible(true);
                 break;
             case 6:
                 System.out.println(2);
