@@ -172,7 +172,7 @@ public class VsCompHard extends XOGameBoard {
             }
         });
 
-        retryIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        retryIcon0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 //                record.print();
@@ -258,7 +258,7 @@ public class VsCompHard extends XOGameBoard {
             return 0 ; 
         }
         else if (Arrays.equals(line, new int[]{3, 4, 5})) {
-            return 3 ; 
+            return 2 ; 
         }
         else if (Arrays.equals(line, new int[]{6, 7, 8})) {
             return 4 ; 
@@ -276,36 +276,44 @@ public class VsCompHard extends XOGameBoard {
             return 8 ; 
         }
         else if (Arrays.equals(line, new int[]{0, 4, 8})) {
-            return 2 ; 
+            return 3 ; 
         }
-       return 0 ;
+       return 1 ;
     }
 
     private void drawWinLine(int winCondition) {
         
         switch (winCondition) {
             case 0:
+                System.out.println(1);
                 line1.setVisible(true);
                 break;
-            case 1:
+            case 7:
+                System.out.println(3);
                 line3.setVisible(true);
                 break;
-            case 2:
+            case 3:
+                System.out.println(4);
                 line4.setVisible(true);
                 break;
             case 5:
+                System.out.println(5);
                 line5.setVisible(true);
                 break;
             case 4:
+                System.out.println(6);
                 line6.setVisible(true);
                 break;
-            case 3:
+            case 2:
+                System.out.println(7);
                 line7.setVisible(true);
                 break;
             case 6:
+                System.out.println(2);
                 line2.setVisible(true);
                 break;
-            case 7:
+            case 1:
+                System.out.println(8);
                 line8.setVisible(true);
                 break;
         }
