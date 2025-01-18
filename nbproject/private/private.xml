@@ -13,6 +13,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/game/xogameboard/VsComp/VsComputerEasy.java</file>
+            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/game/xogameboard/offline/XOGameOfflineController.java</file>
+            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/drawable/styles/registerStyle.css</file>
+            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterController.java</file>
+            <file>file:/G:/Java%20Project/Pirates-Project/src/piratesproject/ui/auth/reg/RegisterBase.java</file>
+=======
+<<<<<<< HEAD
             <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/ui/auth/login/LoginController.java</file>
             <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/local/DataAccsessLayer.java</file>
             <file>file:/E:/javaCourse/javaProject/Pirates-Project/src/piratesproject/network/NetworkAccessLayer.java</file>
@@ -20,6 +27,7 @@
             <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/game/xogameboard/VsCompHard/VsCompHard.java</file>
             <file>file:/C:/Users/abdulla/Documents/javalabs/Pirates-Project/src/piratesproject/ui/game/xogameboard/VsComp/VsComputerEasy.java</file>
 >>>>>>> d2f391ac93fba63009b59a6e0336c4358df21761
+>>>>>>> 5b1742213c97287b82d4f651b9ce50543c9ba61a
         </group>
     </open-files>
 </project-private>
