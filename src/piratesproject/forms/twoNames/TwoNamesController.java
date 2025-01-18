@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import piratesproject.Main;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.SharedModel;
 

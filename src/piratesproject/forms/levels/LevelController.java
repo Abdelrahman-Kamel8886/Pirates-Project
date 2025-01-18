@@ -17,7 +17,7 @@ import piratesproject.drawable.values.Strings;
 import piratesproject.enums.LevelTypesEnum;
 import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
 import piratesproject.ui.game.xogameboard.VsCompHard.VsCompHard;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.utils.SharedModel;
 

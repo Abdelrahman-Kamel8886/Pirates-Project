@@ -6,21 +6,25 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.RequestTypesEnum;
+import piratesproject.enums.VideoTypeEnum;
+import piratesproject.forms.draw.DrawForm;
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.GameModel;
 import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
+
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.replay.ReplayController;
-import piratesproject.ui.game.xogameboard.XOGameBoard;
+import piratesproject.ui.game.xogameboard.XOGameBoard1111;
 import piratesproject.utils.FileHandler;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
-public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
+public class OnlineGame extends XOGameBoard1111 implements NetworkResponseHandler {
 
     private Player player1, player2, currentPlayer, me;
     private String name1, name2, opponent, secondPlayer;
@@ -30,6 +34,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     private String oponnetUserName;
     private String[][] board;
     private Button[][] buttons;
+
     private NetworkAccessLayer networkAccessLayer;
     private boolean gameOver;
 
@@ -47,8 +52,8 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         gameOver = false;
         networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
-
         initView();
+
     }
 
     private void initView() {
@@ -62,16 +67,21 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     }
 
     private void initGame() {
+
         player1 = SharedModel.getGameRoom().getPlayer1();
         player2 = SharedModel.getGameRoom().getPlayer2();
-        System.out.println(player1.getName() + " : " + player2.getName());
+        System.out.println(player1.getName());
+        System.out.println(player2.getName());
+
         currentPlayer = player1;
         playerOneLabel.setText(player1.getName() + " : ( X )");
         playerTwoLabel.setText(player2.getName() + " ( O )");
+
         if (player1.getName().equals(SharedModel.getUser().getUserName())) {
             me = player1;
+            // enableAllButtons();
             oponnetUserName = player2.getName();
-            enableAllButtons();
+
         } else {
             me = player2;
             oponnetUserName = player1.getName();
@@ -100,6 +110,10 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
             for (int j = 0; j < SIZE; j++) {
                 final int row = i, col = j;
                 buttons[i][j].setOnAction((ActionEvent event) -> {
+                    MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
+                    GameModel gameModel = new GameModel(oponnetUserName, move);
+
+                    networkAccessLayer.sendMove(gameModel);
                     makeMove(row, col);
 
                 });
@@ -114,39 +128,37 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
             MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
             moves.add(move);
-            
-            if(currentPlayer.equals(me)){
+
+            if (currentPlayer.equals(me)) {
                 GameModel gameModel = new GameModel(oponnetUserName, move);
                 networkAccessLayer.sendMove(gameModel);
             }
-           
+
             String winCondition = checkWin(row, col);
             line = winCondition != null ? winCondition : "none";
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
                 saveRecordToFile();
+                Player winner = currentPlayer;
+                Player loser = (winner == player1) ? player2 : player1;
+
+                // Show videos based on the winner and loser
+                showVideo(VideoTypeEnum.WIN, winner);
+                showVideo(VideoTypeEnum.LOSS, loser);
                 return;
             }
             if (isDraw()) {
                 currentPlayer = null;
                 disableAllButtons();
                 saveRecordToFile();
+                showVideo(VideoTypeEnum.DRAW, me); // Show draw video to both players
                 return;
             }
             switchPlayer();
         }
     }
 
-//    public void getMove() {
-//
-//        MoveModel move = NetworkAccessLayer.getMove();
-//        if (move != null) {
-//            makeMove(move.getRow(), move.getCol());
-//        }
-//       
-//
-//    }
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
         if (currentPlayer == me) {
@@ -268,20 +280,41 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
     @Override
     public void onResponseReceived(ResponseModel response) {
         if (response.getType() == RequestTypesEnum.GAMEMOVE) {
+
             System.out.println("44444444444");
             String gameMovejson = response.getData();
             MoveModel move = JsonUtils.jsonToGameMove(gameMovejson);
             System.out.println(gameMovejson);
             if (move != null) {
                 makeMove(move.getRow(), move.getCol());
-                if(!gameOver){
+                if (!gameOver) {
                     enableAllButtons();
                 }
-                
+
             }
 
         }
 
     }
 
+    private void showVideo(VideoTypeEnum videoType, Player player) {
+        if (player.equals(me)) {
+            DrawForm drawBase = new DrawForm();
+            switch (videoType) {
+                case WIN:
+                    Integer score = SharedModel.getUser().getScore();
+                    int newScore = score!=null?score+10:10;
+                    SharedModel.getUser().setScore(score);
+                    networkAccessLayer.sendScore(newScore);
+                    drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
+                    break;
+                case LOSS:
+                    drawBase.display(stage, Pathes.LOSS_VEDIO_PATH); // Use the correct path for the loss video
+                    break;
+                case DRAW:
+                    drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
+                    break;
+            }
+        }
+    }
 }

@@ -8,17 +8,19 @@ package piratesproject.forms.draw;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
-
 
 public class DrawController extends DrawBase {
 
     private final Stage mystage;
 
-    public DrawController(Stage myStage) {
+    public DrawController(Stage myStage, String path) {
+        super(path);
         this.mystage = myStage;
         listenToAllEvent();
+
     }
 
     private void listenToAllEvent() {
@@ -27,14 +29,19 @@ public class DrawController extends DrawBase {
     }
 
     private void goToXOPageToPlayAgin() {
+        getMediaPlayer().stop();
         mediaPlayer.stop();
-        Parent XOgame = new XOGameOfflineController(mystage);
+        Parent XOgame = new VsComputerEasy(mystage);
         Main.resetScene(XOgame);
+        DrawForm.closeForm();
+
     }
 
     private void exitToHome() {
+        getMediaPlayer().stop();
         mediaPlayer.stop();
         Parent homePage = new HomePageController(mystage);
         Main.resetScene(homePage);
+        DrawForm.closeForm();
     }
 }

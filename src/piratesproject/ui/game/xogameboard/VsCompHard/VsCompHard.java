@@ -1,6 +1,7 @@
 package piratesproject.ui.game.xogameboard.VsCompHard;
 
 import java.util.Scanner;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -8,11 +9,17 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
+import piratesproject.enums.VideoTypeEnum;
+import piratesproject.forms.draw.DrawForm;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.SharedModel;
 
 
 public class VsCompHard extends XOGameBoard {
@@ -22,6 +29,7 @@ public class VsCompHard extends XOGameBoard {
     State Mystate;
     String globalBoard[] = {"", "", "", "", "", "", "", "", ""};
     AdversarialSearchTicTacToe AiTicTacToe;
+    private NetworkAccessLayer networkAccessLayer;
 
     public VsCompHard(Stage stage) {
         super(stage);
@@ -29,20 +37,31 @@ public class VsCompHard extends XOGameBoard {
         State state = new State(0, globalBoard);
         //make ai start playing. 
         int aiMove = AiTicTacToe.minMaxDecision(state);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
         globalBoard[aiMove] = "X";
         drawBoard(globalBoard);
+        if(SharedModel.getUser()!=null){
+            networkAccessLayer.sentAvilableState(1);
+        }
     }
-
+       
     public void checkWin(State state) {
         
         int result = AiTicTacToe.utilityOf(state);
         if (result == 1) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.LOSS)); // Show the video after the pause
+            pause.play();
         changeButtonDiableEnable(true);
         System.out.println("AI wins!");
         } else if (result == -1) {
+             PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.WIN)); // Show the video after the pause
+            pause.play(); 
             changeButtonDiableEnable(true);
             System.out.println("You win!");
         } else {
+            // add draw video
             System.out.println("It's a draw!");
         }
     }
@@ -171,5 +190,21 @@ public class VsCompHard extends XOGameBoard {
         btnGrid_2_0.setDisable(flag);
         btnGrid_2_1.setDisable(flag);
         btnGrid_2_2.setDisable(flag);
+    }
+        
+          private void showVideo(VideoTypeEnum videoType) {
+        
+        DrawForm drawBase = new DrawForm();
+        switch (videoType) {
+            case WIN:
+                drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
+                break;
+            case LOSS:
+                drawBase.display(stage, Pathes.LOSS_VEDIO_PATH); // Use the correct path for the loss video
+                break;
+            case DRAW:
+                drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
+                break;
+        }
     }
 }
