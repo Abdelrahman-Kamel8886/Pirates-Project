@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
@@ -58,6 +60,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         }
 
         initView();
+        System.out.println("asjncja ncasj");
+        setRecordsData();
         if (!SharedModel.isSoundTrackStarted()) {
            // playCurrentSong();
             SharedModel.setSoundTrackStarted(true);
@@ -85,6 +89,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
 
         box.setSpacing(1000.0);
         hBox.setSpacing(5.0);
+        hBox0.setSpacing(10.0);
         getStylesheets().add(Pathes.HOMEPAGE_STYLE_PATH);
 
         if (SharedModel.getUser() == null) {
@@ -101,7 +106,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         userNameText.setText(Strings.SIGNIN_TEXT);
         userNameText.setUnderline(true);
         scoreText.setVisible(false);
-        gridPane.setVisible(false);
+        box0.setVisible(false);
 
     }
 
@@ -110,7 +115,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         scoreText.setText("Score : " + SharedModel.getUser().getScore());
         avatar.setImage(new Image(getClass().getResource(Pathes.AVATAR_LOGO_PATH).toExternalForm()));
         networkAccessLayer.getOnlineUsers();
-        setRecordsData();
+        
     }
 
     private void setPlayersData(ArrayList<UserModel> users) {
@@ -123,8 +128,16 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
 
     private void setRecordsData() {
         ArrayList<RecordModel> records = loadRecords();
+        System.out.println("Records : "+records.size());
         ArrayList<RecordModel> myRecords = new ArrayList();
-        String username = SharedModel.getUser().getUserName();
+        String username ;
+        if(SharedModel.getUser()!=null){
+            username =SharedModel.getUser().getUserName();
+        }
+        else{
+            username ="Guest";
+        }
+         
         if (records != null && !records.isEmpty()) {
             for (RecordModel record : records) {
                 if (record.getPlayer1().getName().equals(username)
@@ -134,7 +147,6 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
             }
         }
         if (myRecords != null && !myRecords.isEmpty()) {
-
             recordsListView.setItems(FXCollections.observableArrayList(myRecords));
             recordsListView.setCellFactory(param -> new GameRecordCell());
         }
@@ -197,6 +209,11 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
             UserModel selectedItem = activePlayersListView.getSelectionModel().getSelectedItem();
             SharedModel.setSelectedUser(selectedItem);
             SendInvitationFormHandler.display(myStage);
+        });
+        myStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.R) {
+                setRecordsData();
+            }
         });
         
         

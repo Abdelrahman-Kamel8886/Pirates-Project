@@ -83,9 +83,9 @@ public class JsonUtils {
         return gson.toJson(recordModel);
     }
 
-//    public static RecordModel jsonToRecordModel(String json) {
-//        return gson.fromJson(json, RecordModel.class);
-//    }
+    public static RecordModel jsonToRecordModel(String json) {
+        return gson.fromJson(json, RecordModel.class);
+    }
     public static String gameModelToJson(GameModel gameModel) {
         return gson.toJson(gameModel);
     }

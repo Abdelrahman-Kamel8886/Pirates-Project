@@ -17,6 +17,8 @@ public class SharedModel {
     private static RecordModel selectedRecord;
     private static String playerName1 = "abdo";
     private static String playerName2 = "tag";
+    private static int score1;
+    private static int score2;
     private static String OponnentName = "nono";
 
     private static String challenger;
@@ -110,6 +112,24 @@ public class SharedModel {
     public static void setSoundTrackStarted(boolean soundTrackStarted) {
         SharedModel.soundTrackStarted = soundTrackStarted;
     }
+
+    public static int getScore1() {
+        return score1;
+    }
+
+    public static void setScore1(int score1) {
+        SharedModel.score1 = score1;
+    }
+
+    public static int getScore2() {
+        return score2;
+    }
+
+    public static void setScore2(int score2) {
+        SharedModel.score2 = score2;
+    }
+    
+    
     
     
 
