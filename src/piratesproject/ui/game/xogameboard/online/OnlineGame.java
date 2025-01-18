@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
+import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.RequestTypesEnum;
 import piratesproject.enums.VideoTypeEnum;
 import piratesproject.forms.draw.DrawForm;
@@ -52,6 +53,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         gameOver = false;
         networkAccessLayer = NetworkAccessLayer.getInstance();
         networkAccessLayer.setResponseHandler(this);
+        networkAccessLayer.sentAvilableState(1);
         initView();
 
     }
@@ -299,11 +301,13 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
     private void showVideo(VideoTypeEnum videoType, Player player) {
         if (player.equals(me)) {
-            DrawForm drawBase = new DrawForm();
+
+            DrawForm drawBase = new DrawForm(LevelTypesEnum.Normal);
             Integer gp = SharedModel.getUser().getGamesPlayed();
             int newGp = gp!=null?gp+1:1;
             SharedModel.getUser().setGamesPlayed(newGp);
             networkAccessLayer.sendGamesPlayes(newGp);
+
             switch (videoType) {
                 case WIN:
                     Integer score = SharedModel.getUser().getScore();

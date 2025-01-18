@@ -24,6 +24,7 @@ import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.VideoTypeEnum;
 import piratesproject.forms.draw.DrawForm;
 import piratesproject.models.MoveModel;
@@ -260,7 +261,7 @@ public class VsComputerEasy extends XOGameBoard {
 
     private void showVideo(VideoTypeEnum videoType) {
         
-        DrawForm drawBase = new DrawForm();
+        DrawForm drawBase = new DrawForm(LevelTypesEnum.Easy);
         switch (videoType) {
             case WIN:
                 drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video

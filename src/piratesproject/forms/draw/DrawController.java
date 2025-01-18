@@ -8,16 +8,19 @@ package piratesproject.forms.draw;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.enums.LevelTypesEnum;
 import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
+import piratesproject.ui.game.xogameboard.VsCompHard.VsCompHard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
 
 public class DrawController extends DrawBase {
 
     private final Stage mystage;
-
-    public DrawController(Stage myStage, String path) {
+    LevelTypesEnum level ; 
+    public DrawController(Stage myStage, String path , LevelTypesEnum level) {
         super(path);
+        this.level = level;
         this.mystage = myStage;
         listenToAllEvent();
 
@@ -31,8 +34,15 @@ public class DrawController extends DrawBase {
     private void goToXOPageToPlayAgin() {
         getMediaPlayer().stop();
         mediaPlayer.stop();
-        Parent XOgame = new VsComputerEasy(mystage);
-        Main.resetScene(XOgame);
+         
+        if(level == LevelTypesEnum.Easy){
+            Parent XOgame = new VsComputerEasy(mystage);
+            Main.resetScene(XOgame);
+        }
+        else if(level == LevelTypesEnum.Hard){
+            Parent XOgame = new VsCompHard(mystage);
+            Main.resetScene(XOgame);
+        } 
         DrawForm.closeForm();
 
     }
