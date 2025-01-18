@@ -301,7 +301,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         if (player.equals(me)) {
             DrawForm drawBase = new DrawForm();
             Integer gp = SharedModel.getUser().getGamesPlayed();
-            int newGp = gp!=null?gp+10:10;
+            int newGp = gp!=null?gp+1:1;
             SharedModel.getUser().setGamesPlayed(newGp);
             networkAccessLayer.sendGamesPlayes(newGp);
             switch (videoType) {
