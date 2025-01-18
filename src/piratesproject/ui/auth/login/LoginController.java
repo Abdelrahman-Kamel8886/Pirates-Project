@@ -13,7 +13,7 @@ import piratesproject.models.LoginRequestModel;
 import piratesproject.models.LoginResponseModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
-import piratesproject.forms.draw.DrawBase;
+
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.UserModel;
 import piratesproject.ui.home.HomePageController;

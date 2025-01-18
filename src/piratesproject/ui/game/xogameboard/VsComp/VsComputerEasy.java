@@ -24,7 +24,6 @@ import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameMovesEnum;
 import piratesproject.enums.VideoTypeEnum;
-import piratesproject.forms.draw.DrawBase;
 import piratesproject.forms.draw.DrawForm;
 import piratesproject.models.Player;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
@@ -227,6 +226,7 @@ public class VsComputerEasy extends XOGameBoard {
     }
 
     private void showVideo(VideoTypeEnum videoType) {
+        
         DrawForm drawBase = new DrawForm();
         switch (videoType) {
             case WIN:

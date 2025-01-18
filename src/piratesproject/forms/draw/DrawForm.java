@@ -24,7 +24,7 @@ public class DrawForm {
         DrawController drawController = new DrawController(owner, path);
         Parent root = drawController;
 
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, 1100, 1000);
         window.setScene(scene);
 
         // Add a listener to stop the video when the window is closed

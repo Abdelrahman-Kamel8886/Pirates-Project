@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.RequestTypesEnum;
+import piratesproject.enums.VideoTypeEnum;
+import piratesproject.forms.draw.DrawForm;
 import piratesproject.interfaces.NetworkResponseHandler;
 import piratesproject.models.GameModel;
 import piratesproject.models.MoveModel;
@@ -125,24 +128,31 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
             MoveModel move = new MoveModel(row, col, currentPlayer.getSymbol());
             moves.add(move);
-            
-            if(currentPlayer.equals(me)){
+
+            if (currentPlayer.equals(me)) {
                 GameModel gameModel = new GameModel(oponnetUserName, move);
                 networkAccessLayer.sendMove(gameModel);
             }
-           
+
             String winCondition = checkWin(row, col);
             line = winCondition != null ? winCondition : "none";
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
                 saveRecordToFile();
+                Player winner = currentPlayer;
+                Player loser = (winner == player1) ? player2 : player1;
+
+                // Show videos based on the winner and loser
+                showVideo(VideoTypeEnum.WIN, winner);
+                showVideo(VideoTypeEnum.LOSS, loser);
                 return;
             }
             if (isDraw()) {
                 currentPlayer = null;
                 disableAllButtons();
                 saveRecordToFile();
+                showVideo(VideoTypeEnum.DRAW, me); // Show draw video to both players
                 return;
             }
             switchPlayer();
@@ -277,14 +287,30 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
             System.out.println(gameMovejson);
             if (move != null) {
                 makeMove(move.getRow(), move.getCol());
-                if(!gameOver){
+                if (!gameOver) {
                     enableAllButtons();
                 }
-                
+
             }
 
         }
 
     }
 
+    private void showVideo(VideoTypeEnum videoType, Player player) {
+        if (player.equals(me)) {
+            DrawForm drawBase = new DrawForm();
+            switch (videoType) {
+                case WIN:
+                    drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
+                    break;
+                case LOSS:
+                    drawBase.display(stage, Pathes.LOSS_VEDIO_PATH); // Use the correct path for the loss video
+                    break;
+                case DRAW:
+                    drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
+                    break;
+            }
+        }
+    }
 }
