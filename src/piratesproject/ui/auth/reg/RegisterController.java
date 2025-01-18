@@ -89,8 +89,8 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
 ////
 ////                    });
 ////                    th.start();
-//                    SharedModel.setUser(user);
-//                    networkAccessLayer.sendRegisteration(user);
+                    SharedModel.setUser(user);
+                    networkAccessLayer.sendRegisteration(user);
 //
 //                }
                             }
