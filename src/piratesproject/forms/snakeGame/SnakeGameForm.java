@@ -18,7 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import piratesproject.drawable.values.Pathes;
-//import piratesproject.ui.snakegame.SnakeGame;
 
 
 public class SnakeGameForm {
