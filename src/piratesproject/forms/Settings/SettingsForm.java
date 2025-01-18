@@ -19,7 +19,7 @@ public class SettingsForm {
         SettingsForm.owner = owner;
         window = new Stage();
         window.initOwner(owner);
-        window.initModality(Modality.WINDOW_MODAL);
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Settings");
         window.setResizable(false);
         window.getIcons().add(new Image(getClass().getResource(Pathes.SETTINGS_LOGO_PATH).toString()));

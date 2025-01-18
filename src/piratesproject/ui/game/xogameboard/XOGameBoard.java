@@ -319,6 +319,9 @@ public class XOGameBoard extends AnchorPane {
         recordContainer.setLayoutY(217.0);
         
         recordContainer.setSpacing(10.0);
+        
+        backIcon.setVisible(false);
+        retryIcon0.setVisible(false);
 
         getChildren().add(retryIcon);
         gridPane.getColumnConstraints().add(columnConstraints);

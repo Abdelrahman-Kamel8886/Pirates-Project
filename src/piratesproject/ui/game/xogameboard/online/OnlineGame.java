@@ -259,18 +259,20 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         }
     }
 
-//    private void saveRecord() {
-//        movesSequnce = JsonUtils.movesArrayToJson(moves);
-//        gameRecord.setWinner(currentPlayer);
-//        gameRecord.setGameSequance(movesSequnce);
-//        gameRecord.setLine(line);
-//        SharedModel.setSelectedRecord(gameRecord);
-//        System.out.println(gameRecord.toString());
-//    }
+    private void saveRecord() {
+        movesSequnce = JsonUtils.movesArrayToJson(moves);
+        gameRecord.setWinner(currentPlayer);
+        gameRecord.setGameSequance(movesSequnce);
+        gameRecord.setLine(line);
+        SharedModel.setSelectedRecord(gameRecord);
+        System.out.println(gameRecord.toString());
+    }
 
     private void saveRecordToFile() {
-        String record = JsonUtils.recordModelToJson(gameRecord);
-        FileHandler.appendToFile(record);
+        if(recordButton.getState()){
+           String record = JsonUtils.recordModelToJson(gameRecord);
+           FileHandler.appendToFile(record); 
+        }
 
     }
 
