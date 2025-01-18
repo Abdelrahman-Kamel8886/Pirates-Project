@@ -24,6 +24,7 @@ import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.VideoTypeEnum;
 import piratesproject.forms.draw.DrawForm;
 import piratesproject.models.MoveModel;
@@ -43,12 +44,14 @@ public class VsComputerEasy extends XOGameBoard {
     private String[][] board;
     private Button[][] buttons;
     private Player player1, player2, currentPlayer, winner;
-    private String name1 = "nour", name2 = "computer";
+    private String name1, name2 = "computer(EASY)";
+    private String firstPlayer, secondPlayer;
     Thread minMaxthread;
     Stage stage;
     private final int SIZE = 3;
     private String movesSequnce, line;
     private NetworkAccessLayer networkAccessLayer;
+    boolean recordFlag = false;
 
     public VsComputerEasy(Stage stage) {
         super(stage);
@@ -56,10 +59,20 @@ public class VsComputerEasy extends XOGameBoard {
         if(SharedModel.getUser()!=null){
             networkAccessLayer.sentAvilableState(1);
         }
+        if(SharedModel.getUser()==null){
+            name1 = "Guest";
+        }
+        else{
+           name1 = SharedModel.getUser().getUserName(); 
+        }
         initGame();
     }
+    
+
 
     private void initGame() {
+        playerOneLabel.setText(name1 + " : ( X )");
+        playerTwoLabel.setText(name2 + " ( O )");
         player1 = new Player(name1, GameMovesEnum.X.name());
         player2 = new Player(name2, GameMovesEnum.O.name());
         currentPlayer = player1;
@@ -74,6 +87,8 @@ public class VsComputerEasy extends XOGameBoard {
         drawSuccesslines();
 
     }
+    
+    
 
     private void initButtons() {
         buttons[0][0] = btnGrid_0_0;
@@ -107,9 +122,15 @@ public class VsComputerEasy extends XOGameBoard {
         backIcon.setOnMouseClicked((Event event) -> {
             gotoHome();
         });
-        record.setOnAction((ActionEvent event) -> {
-            saveRecordToFile();
-        });
+//        record.setOnAction((ActionEvent event) -> {
+//            //saveRecordToFile();
+//            if(recordFlag){
+//                recordFlag=false;
+//            }
+//            else{
+//                recordFlag=true;
+//            }
+//        });
     }
 
     private void playerMove(int row, int col) {
@@ -122,14 +143,14 @@ public class VsComputerEasy extends XOGameBoard {
             winner = winCondition != null ? currentPlayer : null;
             saveRecord();
             if (winCondition != null) {
-
                 drawWinLine(winCondition);
-
+                saveRecordToFile();
                 return;
             }
             if (isDraw()) {
                 currentPlayer = null;
                 disableAllButtons();
+                saveRecordToFile();
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 pause.setOnFinished(event -> showVideo(VideoTypeEnum.DRAW)); // Show the video after the pause
                 pause.play(); // Start the pause
@@ -248,7 +269,7 @@ public class VsComputerEasy extends XOGameBoard {
 
     private void showVideo(VideoTypeEnum videoType) {
         
-        DrawForm drawBase = new DrawForm();
+        DrawForm drawBase = new DrawForm(LevelTypesEnum.Easy);
         switch (videoType) {
             case WIN:
                 drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
@@ -285,8 +306,10 @@ public class VsComputerEasy extends XOGameBoard {
     }
 
     private void saveRecordToFile() {
-        String record = JsonUtils.recordModelToJson(gameRecord);
-        FileHandler.appendToFile(record);
+        if(recordButton.getState()){
+           String record = JsonUtils.recordModelToJson(gameRecord);
+           FileHandler.appendToFile(record); 
+        }
 
     }
 }

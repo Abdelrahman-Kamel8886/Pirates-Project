@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -25,6 +26,7 @@ import static piratesproject.utils.Consts.GRID_X_0_0;
 import static piratesproject.utils.Consts.GRID_Y_0_0;
 import static piratesproject.utils.Consts.REPLAY;
 import static piratesproject.utils.Consts.RETRY_ICON;
+import piratesproject.models.SwitchButton;
 
 public class XOGameBoard extends AnchorPane {
 
@@ -51,18 +53,21 @@ public class XOGameBoard extends AnchorPane {
     protected final Text playerOneScore;
     protected final Text playerTowScore;
     protected final Label playerTwoLabel;
-    protected final Label playerOneLabel;
+    protected final Label playerOneLabel , recordLabel;
     protected final MediaView mediaView;
     protected final ImageView backIcon;
     protected final ImageView avatarIcon;
     protected final ImageView retryIcon0;
-    protected final ToggleButton record;
+    protected final SwitchButton recordButton;
     protected Line line1, line2, line3, line4, line5, line6, line7, line8;
+    protected VBox recordContainer;
 
     public XOGameBoard(Stage stage) {
 
         retryIcon = new ImageView();
         gridPane = new GridPane();
+        recordContainer = new VBox();
+        recordLabel = new Label("Record");
         columnConstraints = new ColumnConstraints();
         columnConstraints0 = new ColumnConstraints();
         columnConstraints1 = new ColumnConstraints();
@@ -89,7 +94,7 @@ public class XOGameBoard extends AnchorPane {
         backIcon = new ImageView();
         avatarIcon = new ImageView();
         retryIcon0 = new ImageView();
-        record = new ToggleButton();
+        recordButton = new SwitchButton();
 
         setId("AnchorPane");
         setPrefHeight(1080.0);
@@ -148,10 +153,10 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_0.setText("X");
         btnGrid_2_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_0.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnGrid_2_0.setTextOverrun(javafx.scene.control.OverrunStyle.CLIP);
+        //btnGrid_2_0.setTextOverrun(javafx.scene.control.OverrunStyle.CLIP);
         btnGrid_2_0.setWrapText(true);
         btnGrid_2_0.setFont(new Font(96.0));
-        btnGrid_2_0.setCursor(Cursor.NONE);
+        
 
         btnGrid_0_0.setMnemonicParsing(false);
         btnGrid_0_0.setPrefHeight(230.0);
@@ -196,12 +201,9 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_2.setText("X");
         btnGrid_1_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_2.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnGrid_1_2.setWrapText(true);
         btnGrid_1_2.setFont(new Font(96.0));
 
-        btnGrid_1_2.setEffect(blend0);
-        btnGrid_1_2.setCursor(Cursor.NONE);
-
+        
         GridPane.setColumnIndex(btnGrid_2_2, 2);
         GridPane.setRowIndex(btnGrid_2_2, 2);
         btnGrid_2_2.setMnemonicParsing(false);
@@ -307,15 +309,16 @@ public class XOGameBoard extends AnchorPane {
         retryIcon0.setPickOnBounds(true);
         retryIcon0.setPreserveRatio(true);
         retryIcon0.setImage(new Image(getClass().getResource(REPLAY).toExternalForm()));
+        
+        recordLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+        recordLabel.setTextFill(javafx.scene.paint.Color.WHITE);
+        recordLabel.setWrapText(true);
+        recordLabel.setFont(new Font(36.0));
 
-        record.setLayoutX(1655.0);
-        record.setLayoutY(217.0);
-        record.setMnemonicParsing(false);
-        record.setPrefHeight(119.0);
-        record.setPrefWidth(133.0);
-        record.setStyle("-fx-background-radius: 100px;");
-        record.setText("Record");
-        record.setFont(new Font("Old English Text MT", 27.0));
+        recordContainer.setLayoutX(1655.0);
+        recordContainer.setLayoutY(217.0);
+        
+        recordContainer.setSpacing(10.0);
 
         getChildren().add(retryIcon);
         gridPane.getColumnConstraints().add(columnConstraints);
@@ -341,7 +344,8 @@ public class XOGameBoard extends AnchorPane {
         //getChildren().add(mediaView);
         getChildren().add(backIcon);
         getChildren().add(retryIcon0);
-        getChildren().add(record);
+        recordContainer.getChildren().addAll(recordLabel,recordButton);
+        getChildren().add(recordContainer);
 
     }
 

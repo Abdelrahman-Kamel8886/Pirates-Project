@@ -123,9 +123,6 @@ public class XOGameOfflineController extends XOGameBoard {
         backIcon.setOnMouseClicked((Event event) -> {
             gotoHome();
         });
-        record.setOnAction((ActionEvent event) -> {
-            saveRecordToFile();
-        });
     }
 
     public void makeMove(int row, int col) {
@@ -143,9 +140,10 @@ public class XOGameOfflineController extends XOGameBoard {
                 return;
             }
             if (isDraw()) {
+                saveRecordToFile();
                 currentPlayer = null;
                 disableAllButtons();
-                saveRecordToFile();
+                
                 return;
             }
             switchPlayer();
@@ -261,9 +259,12 @@ public class XOGameOfflineController extends XOGameBoard {
         SharedModel.setSelectedRecord(gameRecord);
     }
 
-    private void saveRecordToFile() {
-        String record = JsonUtils.recordModelToJson(gameRecord);
-        FileHandler.appendToFile(record);
+    private void saveRecordToFile() {  
+        if(recordButton.getState()){
+           String record = JsonUtils.recordModelToJson(gameRecord);
+           FileHandler.appendToFile(record); 
+        }
+        
 
     }
 

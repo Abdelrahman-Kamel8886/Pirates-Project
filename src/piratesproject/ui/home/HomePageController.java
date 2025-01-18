@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import piratesproject.Main;
@@ -58,6 +60,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         }
 
         initView();
+        System.out.println("asjncja ncasj");
+        setRecordsData();
         if (!SharedModel.isSoundTrackStarted()) {
            // playCurrentSong();
             SharedModel.setSoundTrackStarted(true);
@@ -93,7 +97,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         } else {
             initUserView();
         }
-        setRecordsData();
+        
         onClicks();
     }
 
@@ -205,6 +209,11 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
             UserModel selectedItem = activePlayersListView.getSelectionModel().getSelectedItem();
             SharedModel.setSelectedUser(selectedItem);
             SendInvitationFormHandler.display(myStage);
+        });
+        myStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.R) {
+                setRecordsData();
+            }
         });
         
         

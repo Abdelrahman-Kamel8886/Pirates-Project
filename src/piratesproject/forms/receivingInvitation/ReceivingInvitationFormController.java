@@ -28,6 +28,7 @@ public class ReceivingInvitationFormController extends ReceivingInvitationFormBa
 
     private void initView() {
         nameText.setText(SharedModel.getChallenger());
+        scoreText.setVisible(false);
         onClicks();
     }
 
@@ -41,6 +42,7 @@ public class ReceivingInvitationFormController extends ReceivingInvitationFormBa
         });
 
         declineButton.setOnAction((ActionEvent event) -> {
+            networkAccessLayer.cancelInvitaion(SharedModel.getChallenger());
             InvitationFormHandler.closeForm();
         });
     }

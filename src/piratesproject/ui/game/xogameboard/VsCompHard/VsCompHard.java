@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
+import piratesproject.enums.LevelTypesEnum;
 import piratesproject.enums.VideoTypeEnum;
 import piratesproject.forms.draw.DrawForm;
 import piratesproject.network.NetworkAccessLayer;
@@ -38,11 +39,7 @@ public class VsCompHard extends XOGameBoard {
         super(stage);        
         initGame();
         State state = new State(0, globalBoard);
-        //make ai start playing. 
-        int aiMove = AiTicTacToe.minMaxDecision(state);
         networkAccessLayer = NetworkAccessLayer.getInstance();
-        globalBoard[aiMove] = "X";
-        drawBoard(globalBoard);
         if(SharedModel.getUser()!=null){
             networkAccessLayer.sentAvilableState(1);
         }
@@ -183,7 +180,7 @@ public class VsCompHard extends XOGameBoard {
             
         });
         
-        record.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        recordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 playRecord();
@@ -235,7 +232,7 @@ public class VsCompHard extends XOGameBoard {
         
           private void showVideo(VideoTypeEnum videoType) {
         
-        DrawForm drawBase = new DrawForm();
+        DrawForm drawBase = new DrawForm(LevelTypesEnum.Hard);
         switch (videoType) {
             case WIN:
                 drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
