@@ -43,7 +43,9 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
             public void handle(ActionEvent event) {
                 boolean b = register();
                 if(b){
+
                         gotoHome();
+
                 }
             }
 
@@ -79,7 +81,14 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
                             lastNameTF.getText(),
                             usernameTF.getText(),
                             passwordTF.getText());
+
                             networkAccessLayer.sendRegisteration(user);
+
+
+                    
+
+                    SharedModel.setUser(user);
+              
                             }
     
 

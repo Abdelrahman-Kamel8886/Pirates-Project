@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,7 +21,7 @@
         <URL value="@/piratesproject/drawable/styles/xogameboard.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" smooth="false" AnchorPane.leftAnchor="0.0">
+      <ImageView fx:id="retryIcon" fitHeight="1080.0" fitWidth="1920.0" layoutX="-1.0" pickOnBounds="true" smooth="false" AnchorPane.leftAnchor="-1.0">
          <image>
             <Image url="@../../../drawable/images/xo_game_board.jpg" />
          </image>
@@ -99,16 +100,11 @@
             </Button>
          </children>
       </GridPane>
-      <Text fx:id="playerOneScore" fill="#5ebc66" layoutX="828.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99" textAlignment="CENTER" wrappingWidth="115.0">
+      <Text fx:id="playerOneScore" fill="#5ebc66" layoutX="775.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="99" textAlignment="CENTER" wrappingWidth="115.0">
          <font>
             <Font size="64.0" />
          </font></Text>
-      <Text fx:id="playerTowScore" fill="#d72626" layoutX="917.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22" textAlignment="CENTER" wrappingWidth="115.0">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Text>
-      <Text fx:id="column" layoutX="870.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" textAlignment="CENTER" wrappingWidth="115.0">
+      <Text fx:id="playerTowScore" fill="#d72626" layoutX="997.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="22" textAlignment="CENTER" wrappingWidth="115.0">
          <font>
             <Font size="64.0" />
          </font>
@@ -124,7 +120,7 @@
          </font>
       </Label>
       <MediaView fitHeight="700.0" fitWidth="1000.0" layoutX="397.0" layoutY="229.0" />
-      <ImageView fx:id="backIcon" fitHeight="134.0" fitWidth="173.0" layoutX="34.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backIcon" fitHeight="312.0" fitWidth="444.0" layoutX="1499.0" layoutY="706.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../drawable/images/back.png" />
          </image>
@@ -134,10 +130,14 @@
             <Image url="@../../../drawable/icons/avatar.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="retryIcon" fitHeight="138.0" fitWidth="136.0" layoutX="1762.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="retryIcon" fitHeight="119.0" fitWidth="196.0" layoutX="1632.0" layoutY="481.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../drawable/images/retry.png" />
+            <Image url="@../../../drawable/images/replay.png" />
          </image>
       </ImageView>
+      <ToggleButton fx:id="record" layoutX="1655.0" layoutY="217.0" mnemonicParsing="false" prefHeight="119.0" prefWidth="133.0" style="-fx-background-radius: 100px; -fx-background-color: red;" text="Record">
+         <font>
+            <Font name="Old English Text MT" size="27.0" />
+         </font></ToggleButton>
    </children>
 </AnchorPane>

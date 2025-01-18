@@ -77,6 +77,18 @@ public class AdversarialSearchTicTacToe {
         }
         return 0; // Draw or ongoing
     }
+    public int[] getLine(State state) {
+        for (int[] line : WIN_LINES) {
+            String a = state.getStateIndex(line[0]);
+            String b = state.getStateIndex(line[1]);
+            String c = state.getStateIndex(line[2]);
+            if (a.equals(b) && b.equals(c)) {
+                if (a.equals("X")) return line;  // X wins
+                if (a.equals("O")) return line; // O wins
+            }
+        }
+        return null; // Draw or ongoing
+    }
 
     private boolean allSpotsTaken(State state) {
         for (String spot : state.getState()) {
@@ -112,7 +124,7 @@ public class AdversarialSearchTicTacToe {
 }
 
 
-//import java.util.ArrayList;
+//import java.util.Arra yList;
 //
 //public class AdversarialSearchTicTacToe {
 //

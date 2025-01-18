@@ -79,6 +79,13 @@ public class NetworkAccessLayer {
         out.println(reqJson);
     }
 
+    public void sendGameMove(GameModel game) {
+        String gameJson = JsonUtils.gameModelToJson(game);
+        RequestModel myReq = new RequestModel(RequestTypesEnum.CONFIRM_INVITATION, gameJson);
+        String reqJson = JsonUtils.requestModelToJson(myReq);
+        out.println(reqJson);
+    }
+
     public void sendLogin(LoginRequestModel user) {
         String userJson = JsonUtils.LoginRequstModelToJson(user);
         RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, userJson);
@@ -105,6 +112,21 @@ public class NetworkAccessLayer {
         System.out.println("ssssdsd");
         String invitationDataString = JsonUtils.invitationModelToJson(invitationModel);
         RequestModel requestModel = new RequestModel(RequestTypesEnum.INVITATION, invitationDataString);
+        String reqJson = JsonUtils.requestModelToJson(requestModel);
+        out.println(reqJson);
+    }
+    public void sentAvilableState(int value) {
+        RequestModel requestModel = new RequestModel(RequestTypesEnum.AVALIBALE,String.valueOf(value) );
+        String reqJson = JsonUtils.requestModelToJson(requestModel);
+        out.println(reqJson);
+    }
+    public void sendScore(int value) {
+        RequestModel requestModel = new RequestModel(RequestTypesEnum.UPDATESCORE,String.valueOf(value) );
+        String reqJson = JsonUtils.requestModelToJson(requestModel);
+        out.println(reqJson);
+    }
+    public void sendGamesPlayes(int value) {
+        RequestModel requestModel = new RequestModel(RequestTypesEnum.UPDATEGAMEPLAYED,String.valueOf(value) );
         String reqJson = JsonUtils.requestModelToJson(requestModel);
         out.println(reqJson);
     }

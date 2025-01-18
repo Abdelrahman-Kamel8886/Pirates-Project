@@ -9,38 +9,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.enums.LevelTypesEnum;
+import piratesproject.enums.VideoTypeEnum;
+import piratesproject.forms.draw.DrawForm;
+import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
-import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
+import piratesproject.models.RecordModel;
+import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
-import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.FileHandler;
+import piratesproject.utils.JsonUtils;
+import piratesproject.utils.SharedModel;
 
-/**
- *
- * @author Admin
- */
 public class VsComputerEasy extends XOGameBoard {
 
+    private RecordModel gameRecord;
+    private ArrayList<MoveModel> moves;
     private String[][] board;
     private Button[][] buttons;
-    private Player player1, player2, currentPlayer;
-    private String name1 = "nour", name2 = "computer";    //private String playerSymbol = "x", computerSymbol = "o";
+    private Player player1, player2, currentPlayer, winner;
+    private String name1 = "nour", name2 = "computer";
     Thread minMaxthread;
     Stage stage;
     private final int SIZE = 3;
+    private String movesSequnce, line;
+    private NetworkAccessLayer networkAccessLayer;
+    boolean recordFlag = false;
 
     public VsComputerEasy(Stage stage) {
         super(stage);
+        networkAccessLayer = NetworkAccessLayer.getInstance();
+        if(SharedModel.getUser()!=null){
+            networkAccessLayer.sentAvilableState(1);
+        }
         initGame();
     }
 
@@ -50,6 +67,8 @@ public class VsComputerEasy extends XOGameBoard {
         currentPlayer = player1;
         buttons = new Button[SIZE][SIZE];
         board = new String[SIZE][SIZE];
+        moves = new ArrayList();
+        gameRecord = new RecordModel(player1, player2);
 
         initButtons();
         resetBoard();
@@ -87,22 +106,46 @@ public class VsComputerEasy extends XOGameBoard {
                 });
             }
         }
+        backIcon.setOnMouseClicked((Event event) -> {
+            gotoHome();
+        });
+//        record.setOnAction((ActionEvent event) -> {
+//            //saveRecordToFile();
+//            if(recordFlag){
+//                recordFlag=false;
+//            }
+//            else{
+//                recordFlag=true;
+//            }
+//        });
     }
 
     private void playerMove(int row, int col) {
         if (board[row][col].isEmpty()) {
             board[row][col] = currentPlayer.getSymbol();
             buttons[row][col].setText(currentPlayer.getSymbol());
+            moves.add(new MoveModel(row, col, currentPlayer.getSymbol()));
             String winCondition = checkWin(row, col);
-            
+            line = winCondition != null ? winCondition : "none";
+            winner = winCondition != null ? currentPlayer : null;
+            saveRecord();
             if (winCondition != null) {
-                
+                 if(recordFlag){
+                     saveRecordToFile();
+                 }
                 drawWinLine(winCondition);
+
                 return;
             }
             if (isDraw()) {
+                if(recordFlag){
+                     saveRecordToFile();
+                 }
                 currentPlayer = null;
                 disableAllButtons();
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(event -> showVideo(VideoTypeEnum.DRAW)); // Show the video after the pause
+                pause.play(); // Start the pause
                 return;
             }
             switchPlayer();
@@ -133,12 +176,9 @@ public class VsComputerEasy extends XOGameBoard {
         int row = selectedMove[0];
         int col = selectedMove[1];
 
-        String winCondition = checkWin(row, col);
-        if (winCondition == null) {
             playerMove(row, col);
             return;
-        }
-
+        
     }
 
     private String checkWin(int row, int col) {
@@ -207,7 +247,32 @@ public class VsComputerEasy extends XOGameBoard {
                 break;
         }
         disableAllButtons();
+        if (currentPlayer==player2) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.LOSS)); // Show the video after the pause
+            pause.play(); // Start the pause
+        } else {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.WIN)); // Show the video after the pause
+            pause.play(); // Start the pause
+        }
 
+    }
+
+    private void showVideo(VideoTypeEnum videoType) {
+        
+        DrawForm drawBase = new DrawForm(LevelTypesEnum.Easy);
+        switch (videoType) {
+            case WIN:
+                drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
+                break;
+            case LOSS:
+                drawBase.display(stage, Pathes.LOSS_VEDIO_PATH); // Use the correct path for the loss video
+                break;
+            case DRAW:
+                drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
+                break;
+        }
     }
 
     private void disableAllButtons() {
@@ -219,4 +284,22 @@ public class VsComputerEasy extends XOGameBoard {
         }
     }
 
+    private void saveRecord() {
+        movesSequnce = JsonUtils.movesArrayToJson(moves);
+        gameRecord.setWinner(winner);
+        gameRecord.setGameSequance(movesSequnce);
+        gameRecord.setLine(line);
+        SharedModel.setSelectedRecord(gameRecord);
+    }
+
+    public void gotoHome() {
+        Parent homePage = new HomePageController(stage);
+        Main.resetScene(homePage);
+    }
+
+    private void saveRecordToFile() {
+        String record = JsonUtils.recordModelToJson(gameRecord);
+        FileHandler.appendToFile(record);
+
+    }
 }
