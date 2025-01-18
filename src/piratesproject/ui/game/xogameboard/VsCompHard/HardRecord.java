@@ -51,21 +51,4 @@ public class HardRecord {
    
    
    
-//    Map<Integer, String> recordMap = new HashMap<Integer, String>();
-//    
-//
-//    public HardRecord() {
-//    }
-//    
-//    void add(int postion , String c ){
-//        recordMap.put(postion, c) ; 
-//    }
-//    
-//    public String[] mapTOSteingArray(){
-//        String[] Board = new String[9] ; 
-//        for(Map.Entry<Integer ,String> i : recordMap.entrySet()){
-//            Board[i.getKey()] = i.getValue();
-//        }
-//        return Board ; 
-//    }
 }
