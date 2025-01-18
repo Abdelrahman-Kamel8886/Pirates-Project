@@ -125,6 +125,11 @@ public class NetworkAccessLayer {
         String reqJson = JsonUtils.requestModelToJson(requestModel);
         out.println(reqJson);
     }
+    public void sendGamesPlayes(int value) {
+        RequestModel requestModel = new RequestModel(RequestTypesEnum.UPDATEGAMEPLAYED,String.valueOf(value) );
+        String reqJson = JsonUtils.requestModelToJson(requestModel);
+        out.println(reqJson);
+    }
 
     public void confirmInvitation(InvitationModel invitationModel) {
         String invitationDataString = JsonUtils.invitationModelToJson(invitationModel);
