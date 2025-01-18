@@ -23,7 +23,7 @@ public class VsCompHard extends XOGameBoard {
     Thread minMaxthread;
     Stage stage;
     State Mystate;
-    HardRecord record;    
+    HardRecord hardrecord;    
     String globalBoard[] = {"", "", "", "", "", "", "", "", ""};
     String recordBoard[] = {"", "", "", "", "", "", "", "", ""};
     AdversarialSearchTicTacToe AiTicTacToe;
@@ -52,20 +52,20 @@ public class VsCompHard extends XOGameBoard {
         //check if ""
         if (globalBoard[postion] == "") {
             globalBoard[postion] = "O";
-            record.add(postion, "O");
+            hardrecord.add(postion, "O");
             State state = new State(postion, globalBoard);
             int aiMove = AiTicTacToe.minMaxDecision(state);
             if (aiMove != -1) {
                 globalBoard[aiMove] = "X";
                 button.setText("o");
-                record.add(aiMove, "X");
+                hardrecord.add(aiMove, "X");
                 checkWin(state);
                 drawBoard(globalBoard);
             }
         }
     }
     public void playRecord() {
-        Move move = record.next();
+        Move move = hardrecord.next();
         if (move != null) {
             recordBoard[move.postion] = move.Symbol;
             drawBoard(recordBoard);
@@ -148,15 +148,15 @@ public class VsCompHard extends XOGameBoard {
 //                record.print();
 //                String data = JsonUtils.hardRecordTojson(record);
 //                System.out.println(data);
-                record.clear();
-                record.currentPostion = 0 ; 
+                hardrecord.clear();
+                hardrecord.currentPostion = 0 ; 
                 initGame();
                 changeButtonDiableEnable(false);
             }
             
         });
         
-        avatarIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        record.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 playRecord();
@@ -171,12 +171,10 @@ public class VsCompHard extends XOGameBoard {
         recordBoard = new String[]{"", "", "", "", "", "", "", "", ""};
         drawBoard(globalBoard);
         State state = new State(0, globalBoard);
-        record = new HardRecord();
+        hardrecord = new HardRecord();
         int aiMove = AiTicTacToe.minMaxDecision(state);
         globalBoard[aiMove] = "X";
-        record.add(aiMove, "X");
-        System.out.println("this is the record "+ record.moveRecord.get(0).postion);
-        System.out.println("this is the record "+ record.moveRecord.get(0).Symbol);
+        hardrecord.add(aiMove, "X");
         drawBoard(globalBoard);
     }
 
