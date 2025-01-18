@@ -67,15 +67,18 @@ public class ProfileController extends ProfileBase {
     }
 
     private void changePassword() {
-
-        if (oldPassword.getText().equals("123456")) {
-            doneLabel.setText(Strings.PASSWORD_CHANGED_TEXT);
-            doneLabel.setStyle("-fx-text-fill: green");
-        } else {
-            doneLabel.setText("!! Old password is wrong");
-            doneLabel.setStyle("-fx-text-fill: red");
-        }
-        doneLabel.setVisible(true);
+        networkAccessLayer.updatePassword(newPassword.getText());
+        doneLabel.setText(Strings.PASSWORD_CHANGED_TEXT);
+         doneLabel.setText(Strings.PASSWORD_CHANGED_TEXT);
+//            doneLabel.setStyle("-fx-text-fill: green");
+//        if (oldPassword.getText().equals("123456")) {
+//            doneLabel.setText(Strings.PASSWORD_CHANGED_TEXT);
+//            doneLabel.setStyle("-fx-text-fill: green");
+//        } else {
+//            doneLabel.setText("!! Old password is wrong");
+//            doneLabel.setStyle("-fx-text-fill: red");
+//        }
+//        doneLabel.setVisible(true);
 
     }
     private void goToLogin() {
