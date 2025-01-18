@@ -24,6 +24,7 @@ import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 public class VsCompHard extends XOGameBoard {
@@ -175,9 +176,9 @@ public class VsCompHard extends XOGameBoard {
         retryIcon0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                record.print();
-//                String data = JsonUtils.hardRecordTojson(record);
-//                System.out.println(data);
+                
+                String data = JsonUtils.hardRecordTojson(hardrecord);
+                System.out.println(data);
                 hardrecord.clear();
                 hardrecord.currentPostion = 0;
                 initGame();
