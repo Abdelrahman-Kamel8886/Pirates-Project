@@ -79,6 +79,13 @@ public class NetworkAccessLayer {
         out.println(reqJson);
     }
 
+    public void sendGameMove(GameModel game) {
+        String gameJson = JsonUtils.gameModelToJson(game);
+        RequestModel myReq = new RequestModel(RequestTypesEnum.CONFIRM_INVITATION, gameJson);
+        String reqJson = JsonUtils.requestModelToJson(myReq);
+        out.println(reqJson);
+    }
+
     public void sendLogin(LoginRequestModel user) {
         String userJson = JsonUtils.LoginRequstModelToJson(user);
         RequestModel myReq = new RequestModel(RequestTypesEnum.LOGIN, userJson);

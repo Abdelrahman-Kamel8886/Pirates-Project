@@ -3,6 +3,7 @@ package piratesproject.ui.game.xogameboard.VsCompHard;
 import com.google.gson.Gson;
 
 import java.util.Scanner;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -11,8 +12,12 @@ import javafx.event.EventType;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
+import piratesproject.enums.VideoTypeEnum;
+import piratesproject.forms.draw.DrawForm;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.home.HomePageController;
@@ -33,17 +38,29 @@ public class VsCompHard extends XOGameBoard {
         initGame();
         listenToAllEvents();
     }
-    
+
     public void checkWin(State state) {
         
         int result = AiTicTacToe.utilityOf(state);
         if (result == 1) {
+
             changeButtonDiableEnable(true);
             System.out.println("AI wins!");
+            
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.LOSS)); // Show the video after the pause
+            pause.play();
+        changeButtonDiableEnable(true);
+        System.out.println("AI wins!");
+        
         } else if (result == -1) {
+             PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.WIN)); // Show the video after the pause
+            pause.play(); 
             changeButtonDiableEnable(true);
             System.out.println("You win!");
         } else {
+            // add draw video
             System.out.println("It's a draw!");
         }
     }
@@ -204,5 +221,21 @@ public class VsCompHard extends XOGameBoard {
         btnGrid_2_0.setDisable(flag);
         btnGrid_2_1.setDisable(flag);
         btnGrid_2_2.setDisable(flag);
+    }
+        
+          private void showVideo(VideoTypeEnum videoType) {
+        
+        DrawForm drawBase = new DrawForm();
+        switch (videoType) {
+            case WIN:
+                drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
+                break;
+            case LOSS:
+                drawBase.display(stage, Pathes.LOSS_VEDIO_PATH); // Use the correct path for the loss video
+                break;
+            case DRAW:
+                drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
+                break;
+        }
     }
 }
