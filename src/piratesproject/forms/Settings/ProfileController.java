@@ -10,6 +10,7 @@ import piratesproject.utils.BackgroundMusic;
 import piratesproject.utils.SharedModel;
 
 public class ProfileController extends ProfileBase {
+
     private NetworkAccessLayer networkAccessLayer;
 
     public ProfileController() {
@@ -34,7 +35,7 @@ public class ProfileController extends ProfileBase {
             doneLabel.setVisible(false);
             validation();
         });
-        
+
         logout.setOnMouseClicked((MouseEvent event) -> {
             SettingsForm.closeForm();
             BackgroundMusic.stopMusic();
@@ -67,8 +68,8 @@ public class ProfileController extends ProfileBase {
     }
 
     private void changePassword() {
-
-        if (oldPassword.getText().equals("123456")) {
+        if (oldPassword.getText().equals(SharedModel.getUser().getPassword())) {
+            networkAccessLayer.updatePassword(newPassword.getText());
             doneLabel.setText(Strings.PASSWORD_CHANGED_TEXT);
             doneLabel.setStyle("-fx-text-fill: green");
         } else {
@@ -78,6 +79,7 @@ public class ProfileController extends ProfileBase {
         doneLabel.setVisible(true);
 
     }
+
     private void goToLogin() {
         LoginController loginPage = new LoginController(SettingsForm.owner);
         Main.resetScene(loginPage);
