@@ -12,7 +12,9 @@ import piratesproject.models.MoveModel;
 import piratesproject.models.RecordModel;
 import piratesproject.models.RequestModel;
 import piratesproject.models.ResponseModel;
+import piratesproject.models.SwitchButton;
 import piratesproject.models.UserModel;
+import piratesproject.ui.game.xogameboard.VsCompHard.HardRecord;
 
 public class JsonUtils {
     
@@ -114,6 +116,10 @@ public class JsonUtils {
     
     public static GameRoomModel jsonToGameRoomModel(String game){
         return gson.fromJson(game, GameRoomModel.class);
+    }
+
+    public static String hardRecordTojson(HardRecord hardRecord) {
+       return gson.toJson(hardRecord);
     }
 
 }

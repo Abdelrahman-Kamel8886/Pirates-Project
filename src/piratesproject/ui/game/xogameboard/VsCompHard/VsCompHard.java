@@ -24,6 +24,8 @@ import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.FileHandler;
+import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 public class VsCompHard extends XOGameBoard {
@@ -172,14 +174,12 @@ public class VsCompHard extends XOGameBoard {
             }
         });
 
-        retryIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        retryIcon0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                record.print();
-//                String data = JsonUtils.hardRecordTojson(record);
-//                System.out.println(data);
                 hardrecord.clear();
                 hardrecord.currentPostion = 0;
+
                 initGame();
                 changeButtonDiableEnable(false);
             }
@@ -236,7 +236,9 @@ public class VsCompHard extends XOGameBoard {
     }
 
     private void showVideo(VideoTypeEnum videoType) {
-
+        if (recordButton.getState()) {
+            saveRecordToFile(hardrecord);
+        }
         DrawForm drawBase = new DrawForm(LevelTypesEnum.Hard);
         switch (videoType) {
             case WIN:
@@ -251,63 +253,69 @@ public class VsCompHard extends XOGameBoard {
         }
     }
 
-    public int getlineNumber(int[] line) { 
-        
+    public int getlineNumber(int[] line) {
+
         //         Rows
         if (Arrays.equals(line, new int[]{0, 1, 2})) {
-            return 0 ; 
+            return 0;
+        } else if (Arrays.equals(line, new int[]{3, 4, 5})) {
+            return 3;
+        } else if (Arrays.equals(line, new int[]{6, 7, 8})) {
+            return 4;
+        } else if (Arrays.equals(line, new int[]{0, 3, 6})) {
+            return 5;
+        } else if (Arrays.equals(line, new int[]{1, 4, 7})) {
+            return 6;
+        } else if (Arrays.equals(line, new int[]{2, 5, 8})) {
+            return 7;
+        } else if (Arrays.equals(line, new int[]{2, 4, 6})) {
+            return 8;
+        } else if (Arrays.equals(line, new int[]{0, 4, 8})) {
+            return 1;
         }
-        else if (Arrays.equals(line, new int[]{3, 4, 5})) {
-            return 3 ; 
-        }
-        else if (Arrays.equals(line, new int[]{6, 7, 8})) {
-            return 4 ; 
-        }
-        else if (Arrays.equals(line, new int[]{0, 3, 6})) {
-            return 5 ; 
-        }
-        else if (Arrays.equals(line, new int[]{1, 4, 7})) {
-            return 6 ; 
-        }
-        else if (Arrays.equals(line, new int[]{2, 5, 8})) {
-            return 7 ; 
-        }
-        else if (Arrays.equals(line, new int[]{2, 4, 6})) {
-            return 8 ; 
-        }
-        else if (Arrays.equals(line, new int[]{0, 4, 8})) {
-            return 2 ; 
-        }
-       return 0 ;
+        return 1;
     }
 
     private void drawWinLine(int winCondition) {
-        
+
         switch (winCondition) {
             case 0:
+                System.out.println(1);
                 line1.setVisible(true);
                 break;
-            case 1:
+            case 7:
+                System.out.println(3);
+                line7.setVisible(true);
+                break;
+            case 3:
+                System.out.println(4);
                 line3.setVisible(true);
                 break;
-            case 2:
-                line4.setVisible(true);
-                break;
             case 5:
+                System.out.println(5);
                 line5.setVisible(true);
                 break;
             case 4:
+                System.out.println(6);
                 line6.setVisible(true);
                 break;
-            case 3:
-                line7.setVisible(true);
+            case 2:
+                System.out.println(7);
+                line8.setVisible(true);
                 break;
             case 6:
+                System.out.println(2);
                 line2.setVisible(true);
                 break;
-            case 7:
+            case 1:
+                System.out.println(8);
                 line8.setVisible(true);
                 break;
         }
+    }
+
+    private void saveRecordToFile(HardRecord hardRecord) {
+        String recordString = JsonUtils.hardRecordTojson(hardRecord);
+        FileHandler.appendToHardFile(recordString);
     }
 }

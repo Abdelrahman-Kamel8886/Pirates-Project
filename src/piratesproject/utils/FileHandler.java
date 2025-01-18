@@ -47,6 +47,15 @@ public class FileHandler {
         }
         return lines;
     }
+        public static void appendToHardFile(String text) {
+        String filePath = Pathes.RECORDS_Hard_FILE_PATH;
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            writer.write(text);
+            writer.newLine();
+        } catch (IOException e) {
+            System.err.println("Error while appending to file: " + e.getMessage());
+        }
+    }
     
     public static ArrayList<RecordModel> getAllRecords(){
         ArrayList<RecordModel> records = new ArrayList();

@@ -38,5 +38,6 @@ public class Pathes {
 
     //Files
     public static final String RECORDS_FILE_PATH = "./database/records.txt";
+    public static final String RECORDS_Hard_FILE_PATH = "./database/recordsHard.txt";
 
 }

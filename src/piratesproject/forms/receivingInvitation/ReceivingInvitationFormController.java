@@ -38,7 +38,7 @@ public class ReceivingInvitationFormController extends ReceivingInvitationFormBa
                     SharedModel.getChallenger(),
                     SharedModel.getUser().getUserName());
             networkAccessLayer.confirmInvitation(invitationModel);
-
+             
         });
 
         declineButton.setOnAction((ActionEvent event) -> {
