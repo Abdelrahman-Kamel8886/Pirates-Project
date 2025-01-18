@@ -95,7 +95,7 @@ public class XOGameBoard extends AnchorPane {
         setPrefHeight(1080.0);
         setPrefWidth(1920.0);
         getStyleClass().add("mainFxmlClass");
-        getStylesheets().add("/piratesproject/ui/game/xogameboard//piratesproject/drawable/styles/xogameboard.css");
+        getStylesheets().add("/piratesproject/ui/game/xogameboard/piratesproject/drawable/styles/xogameboard.css");
 
         AnchorPane.setLeftAnchor(retryIcon, -1.0);
         retryIcon.setFitHeight(1080.0);

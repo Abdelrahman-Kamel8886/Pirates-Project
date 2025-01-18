@@ -9,17 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import piratesproject.ui.game.minmaxalgorithim.State;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
 import piratesproject.enums.GameMovesEnum;
+import piratesproject.enums.VideoTypeEnum;
+import piratesproject.forms.draw.DrawForm;
 import piratesproject.models.MoveModel;
 import piratesproject.models.Player;
 import piratesproject.models.RecordModel;
@@ -124,6 +130,9 @@ public class VsComputerEasy extends XOGameBoard {
             if (isDraw()) {
                 currentPlayer = null;
                 disableAllButtons();
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(event -> showVideo(VideoTypeEnum.DRAW)); // Show the video after the pause
+                pause.play(); // Start the pause
                 return;
             }
             switchPlayer();
@@ -154,12 +163,9 @@ public class VsComputerEasy extends XOGameBoard {
         int row = selectedMove[0];
         int col = selectedMove[1];
 
-        String winCondition = checkWin(row, col);
-        if (winCondition == null) {
             playerMove(row, col);
             return;
-        }
-
+        
     }
 
     private String checkWin(int row, int col) {
@@ -228,7 +234,32 @@ public class VsComputerEasy extends XOGameBoard {
                 break;
         }
         disableAllButtons();
+        if (currentPlayer==player2) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.LOSS)); // Show the video after the pause
+            pause.play(); // Start the pause
+        } else {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> showVideo(VideoTypeEnum.WIN)); // Show the video after the pause
+            pause.play(); // Start the pause
+        }
 
+    }
+
+    private void showVideo(VideoTypeEnum videoType) {
+        
+        DrawForm drawBase = new DrawForm();
+        switch (videoType) {
+            case WIN:
+                drawBase.display(stage, Pathes.WIN_VEDIO_PATH); // Use the correct path for the win video
+                break;
+            case LOSS:
+                drawBase.display(stage, Pathes.LOSS_VEDIO_PATH); // Use the correct path for the loss video
+                break;
+            case DRAW:
+                drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
+                break;
+        }
     }
 
     private void disableAllButtons() {

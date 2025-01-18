@@ -11,7 +11,6 @@ import piratesproject.models.InvitationModel;
 import piratesproject.models.ResponseModel;
 import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.xogameboard.online.OnlineGame;
-import piratesproject.ui.game.xogameboard.online.OnlineGameController;
 import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
