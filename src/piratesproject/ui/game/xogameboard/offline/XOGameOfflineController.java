@@ -140,8 +140,8 @@ public class XOGameOfflineController extends XOGameBoard {
                 return;
             }
             if (isDraw()) {
-                saveRecordToFile();
                 currentPlayer = null;
+                saveRecordToFile();
                 disableAllButtons();
                 
                 return;

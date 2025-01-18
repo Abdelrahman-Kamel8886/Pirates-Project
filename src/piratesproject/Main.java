@@ -30,7 +30,7 @@ public class Main extends Application{
         stage.setFullScreenExitHint("");
 
 
-        Parent root = new HomePageController(stage);
+        Parent root = new SplashController(stage);
         scene = new Scene(root);
         stage.setTitle(Strings.APP_NAME);
         stage.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
