@@ -34,7 +34,7 @@ private NetworkAccessLayer networkAccessLayer;
                     SharedModel.getChallenger(),
                     SharedModel.getUser().getUserName());
             networkAccessLayer.confirmInvitation(invitationModel);
-
+             
         });
 
         declineButton.setOnAction((ActionEvent event) -> {

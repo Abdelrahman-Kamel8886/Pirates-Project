@@ -42,6 +42,9 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
             @Override
             public void handle(ActionEvent event) {
                 boolean b = register();
+                if(b){
+                        gotoHome();
+                }
             }
 
         });
@@ -71,29 +74,14 @@ public class RegisterController extends RegisterBase implements NetworkResponseH
                     logged = false;
 
                 } else //everything is alright only username will be checked from the db
-                {
+                {   logged = true;
                     UserModel user = new UserModel(firstNameTF.getText(),
                             lastNameTF.getText(),
                             usernameTF.getText(),
                             passwordTF.getText());
-
-                    
-//                    Thread th = new Thread(() -> {
-//                        ResponseModel responseModel = NetworkAccessLayer .registerToServer(user);
-//                        checkRegisterState(responseModel);
-//
-//
-////                    Thread th = new Thread(() -> {
-////                        ResponseModel responseModel = NetworkAccessLayer.registerToServer(user);
-////                        checkRegisterState(responseModel);
-////
-////                    });
-////                    th.start();
-//                    SharedModel.setUser(user);
-//                    networkAccessLayer.sendRegisteration(user);
-//
-//                }
+                            networkAccessLayer.sendRegisteration(user);
                             }
+    
 
             }
 
