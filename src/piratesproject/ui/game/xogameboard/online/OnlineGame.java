@@ -138,7 +138,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
             String winCondition = checkWin(row, col);
             line = winCondition != null ? winCondition : "none";
-            saveRecord();
+            //saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
                 saveRecordToFile();
@@ -259,14 +259,14 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         }
     }
 
-    private void saveRecord() {
-        movesSequnce = JsonUtils.movesArrayToJson(moves);
-        gameRecord.setWinner(currentPlayer);
-        gameRecord.setGameSequance(movesSequnce);
-        gameRecord.setLine(line);
-        SharedModel.setSelectedRecord(gameRecord);
-        System.out.println(gameRecord.toString());
-    }
+//    private void saveRecord() {
+//        movesSequnce = JsonUtils.movesArrayToJson(moves);
+//        gameRecord.setWinner(currentPlayer);
+//        gameRecord.setGameSequance(movesSequnce);
+//        gameRecord.setLine(line);
+//        SharedModel.setSelectedRecord(gameRecord);
+//        System.out.println(gameRecord.toString());
+//    }
 
     private void saveRecordToFile() {
         String record = JsonUtils.recordModelToJson(gameRecord);

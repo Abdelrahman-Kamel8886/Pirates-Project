@@ -25,6 +25,7 @@ import static piratesproject.utils.Consts.GRID_X_0_0;
 import static piratesproject.utils.Consts.GRID_Y_0_0;
 import static piratesproject.utils.Consts.REPLAY;
 import static piratesproject.utils.Consts.RETRY_ICON;
+import piratesproject.models.SwitchButton;
 
 public class XOGameBoard extends AnchorPane {
 
@@ -56,7 +57,7 @@ public class XOGameBoard extends AnchorPane {
     protected final ImageView backIcon;
     protected final ImageView avatarIcon;
     protected final ImageView retryIcon0;
-    protected final ToggleButton record;
+    protected final SwitchButton record;
     protected Line line1, line2, line3, line4, line5, line6, line7, line8;
 
     public XOGameBoard(Stage stage) {
@@ -89,7 +90,7 @@ public class XOGameBoard extends AnchorPane {
         backIcon = new ImageView();
         avatarIcon = new ImageView();
         retryIcon0 = new ImageView();
-        record = new ToggleButton();
+        record = new SwitchButton();
 
         setId("AnchorPane");
         setPrefHeight(1080.0);
