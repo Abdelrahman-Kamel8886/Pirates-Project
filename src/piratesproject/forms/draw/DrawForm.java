@@ -11,20 +11,20 @@ public class DrawForm {
     public static void display(Stage owner, String path) {
         if (window != null && window.isShowing()) {
             window.toFront(); // Bring the existing window to the front
-            return; // Exit if the window is already open
+            return; 
         }
 
         window = new Stage();
         window.initOwner(owner);
-        window.initModality(Modality.WINDOW_MODAL);
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Video");
         window.setResizable(false);
 
         // Pass the video path to the DrawController
-        DrawController drawController = new DrawController(owner, path);
+        DrawController drawController = new DrawController(window, path);
         Parent root = drawController;
 
-        Scene scene = new Scene(root, 1100, 1000);
+        Scene scene = new Scene(root);
         window.setScene(scene);
 
         // Add a listener to stop the video when the window is closed

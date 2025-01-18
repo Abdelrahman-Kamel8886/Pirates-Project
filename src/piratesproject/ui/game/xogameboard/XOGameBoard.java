@@ -258,7 +258,7 @@ public class XOGameBoard extends AnchorPane {
         playerOneScore.setLayoutY(147.0);
         playerOneScore.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         playerOneScore.setStrokeWidth(0.0);
-        playerOneScore.setText("99");
+        playerOneScore.setText("");
         playerOneScore.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         playerOneScore.setWrappingWidth(115.0);
         playerOneScore.setFont(new Font(64.0));
@@ -268,7 +268,7 @@ public class XOGameBoard extends AnchorPane {
         playerTowScore.setLayoutY(146.0);
         playerTowScore.setStrokeType(javafx.scene.shape.StrokeType.OUTSIDE);
         playerTowScore.setStrokeWidth(0.0);
-        playerTowScore.setText("22");
+        playerTowScore.setText("");
         playerTowScore.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         playerTowScore.setWrappingWidth(115.0);
         playerTowScore.setFont(new Font(64.0));
@@ -278,14 +278,14 @@ public class XOGameBoard extends AnchorPane {
         playerTwoLabel.setPrefHeight(125.0);
         playerTwoLabel.setPrefWidth(376.0);
         playerTwoLabel.setText("Player TWO");
-        playerTwoLabel.setFont(new Font(72.0));
+        playerTwoLabel.setFont(new Font(36.0));
 
         playerOneLabel.setLayoutX(464.0);
         playerOneLabel.setLayoutY(122.0);
         playerOneLabel.setPrefHeight(125.0);
         playerOneLabel.setPrefWidth(376.0);
         playerOneLabel.setText("Player One");
-        playerOneLabel.setFont(new Font(72.0));
+        playerOneLabel.setFont(new Font(36.0));
 
         mediaView.setFitHeight(700.0);
         mediaView.setFitWidth(1000.0);
