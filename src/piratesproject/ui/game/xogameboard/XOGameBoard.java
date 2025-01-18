@@ -148,10 +148,10 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_2_0.setText("X");
         btnGrid_2_0.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_2_0.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnGrid_2_0.setTextOverrun(javafx.scene.control.OverrunStyle.CLIP);
+        //btnGrid_2_0.setTextOverrun(javafx.scene.control.OverrunStyle.CLIP);
         btnGrid_2_0.setWrapText(true);
         btnGrid_2_0.setFont(new Font(96.0));
-        btnGrid_2_0.setCursor(Cursor.NONE);
+        
 
         btnGrid_0_0.setMnemonicParsing(false);
         btnGrid_0_0.setPrefHeight(230.0);
@@ -196,12 +196,9 @@ public class XOGameBoard extends AnchorPane {
         btnGrid_1_2.setText("X");
         btnGrid_1_2.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
         btnGrid_1_2.setTextFill(javafx.scene.paint.Color.WHITE);
-        btnGrid_1_2.setWrapText(true);
         btnGrid_1_2.setFont(new Font(96.0));
 
-        btnGrid_1_2.setEffect(blend0);
-        btnGrid_1_2.setCursor(Cursor.NONE);
-
+        
         GridPane.setColumnIndex(btnGrid_2_2, 2);
         GridPane.setRowIndex(btnGrid_2_2, 2);
         btnGrid_2_2.setMnemonicParsing(false);
