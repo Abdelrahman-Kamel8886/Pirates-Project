@@ -49,6 +49,7 @@ public class VsComputerEasy extends XOGameBoard {
     private final int SIZE = 3;
     private String movesSequnce, line;
     private NetworkAccessLayer networkAccessLayer;
+    boolean recordFlag = false;
 
     public VsComputerEasy(Stage stage) {
         super(stage);
@@ -107,9 +108,15 @@ public class VsComputerEasy extends XOGameBoard {
         backIcon.setOnMouseClicked((Event event) -> {
             gotoHome();
         });
-        record.setOnAction((ActionEvent event) -> {
-            saveRecordToFile();
-        });
+//        record.setOnAction((ActionEvent event) -> {
+//            //saveRecordToFile();
+//            if(recordFlag){
+//                recordFlag=false;
+//            }
+//            else{
+//                recordFlag=true;
+//            }
+//        });
     }
 
     private void playerMove(int row, int col) {
@@ -122,12 +129,17 @@ public class VsComputerEasy extends XOGameBoard {
             winner = winCondition != null ? currentPlayer : null;
             saveRecord();
             if (winCondition != null) {
-
+                 if(recordFlag){
+                     saveRecordToFile();
+                 }
                 drawWinLine(winCondition);
 
                 return;
             }
             if (isDraw()) {
+                if(recordFlag){
+                     saveRecordToFile();
+                 }
                 currentPlayer = null;
                 disableAllButtons();
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));

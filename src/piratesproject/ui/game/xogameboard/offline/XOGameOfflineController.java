@@ -119,9 +119,9 @@ public class XOGameOfflineController extends XOGameBoard {
       backIcon.setOnMouseClicked((Event event) -> {
           gotoHome();
         });
-      record.setOnAction((ActionEvent event) -> {
-          saveRecordToFile();
-        });
+//      record.setOnAction((ActionEvent event) -> {
+//          saveRecordToFile();
+//        });
     }
 
     public void makeMove(int row, int col) {
@@ -135,13 +135,16 @@ public class XOGameOfflineController extends XOGameBoard {
             saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
-                saveRecordToFile();
+                if(record.getState()){
+                saveRecordToFile();}
                 return;
             }
             if (isDraw()) {
+                if(record.getState()){
+                saveRecordToFile();}
                 currentPlayer = null;
                 disableAllButtons();
-                saveRecordToFile();
+                
                 return;
             }
             switchPlayer();
