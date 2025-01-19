@@ -297,7 +297,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
     }
 
     private void showLevels() {
-        LevelForm.display(myStage);
+        LevelForm lv = new LevelForm();
+        lv.display(myStage);
 
     }
 
