@@ -303,7 +303,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
     }
 
     private void showTwoNames() {
-        TwoNamesForm.display(myStage);
+        TwoNamesForm two = new TwoNamesForm();
+        two.display(myStage);
     }
 
     private void showSimpleAlert(AvalabilePlayer player) {
