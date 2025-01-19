@@ -209,7 +209,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         activePlayersListView.setOnMouseClicked(event -> {
             UserModel selectedItem = activePlayersListView.getSelectionModel().getSelectedItem();
             SharedModel.setSelectedUser(selectedItem);
-            SendInvitationFormHandler.display(myStage);
+            SendInvitationFormHandler s = new SendInvitationFormHandler();
+            s.display(myStage);
         });
         Main.mainStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.R) {
@@ -332,7 +333,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         else if(response.getType() == RequestTypesEnum.RECIEVE_INVITATION){
             System.out.println("8888888888");
             SharedModel.setChallenger(response.getData());
-            InvitationFormHandler.display(myStage);
+            InvitationFormHandler i = new InvitationFormHandler();
+            i.display(myStage);
         }
 
     }
