@@ -41,6 +41,11 @@ This project utilizes **[GameServerEngine](https://github.com/DaTaj-ai/GameServe
   - Logout functionality.
 - **Dynamic User List**: Displays a list of available users online, fetched from the server.
 - **Invitation System**: Allows users to send invitations to other online users for online play.
+- **Funny Videos**: After each game outcome (win, lose, or draw), a funny video will be shown using the media player.
+- **Music Player**: A music player is integrated with multiple songs. The player allows users to:
+  - Play songs.
+  - Pause, stop, and resume playback.
+  - Change songs.
 
 ---
 
@@ -67,18 +72,16 @@ This project utilizes **[GameServerEngine](https://github.com/DaTaj-ai/GameServe
 
 ---
 
-## Technologies Used
-
 - **Programming Language**: Java 8
 - **Development Environment**: NetBeans 8.2
 - **UI Framework**: JavaFX
 - **Networking**: Custom implementation for client-server communication using the [GameServerEngine](https://github.com/DaTaj-ai/GameServerEngine).
 - **AI**: Custom algorithms for three difficulty levels in single-player mode.
 - **File System**: Used for storing game records.
+- **CSS**: Used for styling and managing the UI design.
 - **Libraries**:
   - **Gson**: Used for parsing JSON data in requests and responses.
-
----
+  - **MediaPlayer**: Used for playing funny videos and music songs.
 
 ## Setup Instructions
 
