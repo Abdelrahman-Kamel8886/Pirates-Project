@@ -37,6 +37,7 @@ public class LevelController extends LevelsBase {
 
     private void listenToAllEvents() {
         playb.setOnAction(event -> {
+            SharedModel.setSelectedLevel(level);
             if(level==LevelTypesEnum.Easy){
                 goToXOPageEasy();
             }

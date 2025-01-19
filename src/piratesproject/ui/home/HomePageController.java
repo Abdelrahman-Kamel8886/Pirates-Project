@@ -211,7 +211,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
             SharedModel.setSelectedUser(selectedItem);
             SendInvitationFormHandler.display(myStage);
         });
-        myStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+        Main.mainStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.R) {
                 setRecordsData();
             }
