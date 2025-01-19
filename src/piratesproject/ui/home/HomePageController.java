@@ -332,7 +332,8 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         else if(response.getType() == RequestTypesEnum.RECIEVE_INVITATION){
             System.out.println("8888888888");
             SharedModel.setChallenger(response.getData());
-            InvitationFormHandler.display(myStage);
+            InvitationFormHandler i = new InvitationFormHandler();
+            i.display(myStage);
         }
 
     }
