@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import piratesproject.Main;
 import piratesproject.drawable.values.Pathes;
 
 
@@ -39,7 +40,7 @@ public class SnakeGameForm {
     
 private boolean gameStarted = false;
 
-public void display(Stage owner) {
+public void display(Stage owner1) {
     Canvas canvas = new Canvas(WIDTH * TILE_SIZE, HEIGHT * TILE_SIZE);
     GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -84,8 +85,8 @@ public void display(Stage owner) {
     snake.add(new Point(3, 5));
 
     window = new Stage();
-    window.initOwner(owner);
-    window.initModality(Modality.WINDOW_MODAL);
+    window.initOwner(Main.mainStage);
+    window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle("Snake Game");
     window.setResizable(false);
     window.getIcons().add(new Image(getClass().getResource(Pathes.SNAKE_LOGO_PATH).toString()));

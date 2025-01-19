@@ -138,7 +138,7 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
             String winCondition = checkWin(row, col);
             line = winCondition != null ? winCondition : "none";
-            //saveRecord();
+            saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
                 

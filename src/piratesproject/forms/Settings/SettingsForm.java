@@ -15,10 +15,10 @@ public class SettingsForm {
     private static Stage window;
     public static Stage owner;
     
-    public void display(Stage owner){
-        SettingsForm.owner = owner;
+    public void display(Stage owner1){
+        SettingsForm.owner = Main.mainStage;
         window = new Stage();
-        window.initOwner(owner);
+        window.initOwner(Main.mainStage);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Settings");
         window.setResizable(false);

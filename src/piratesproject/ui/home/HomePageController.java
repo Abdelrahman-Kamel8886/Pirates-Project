@@ -62,6 +62,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
         initView();
         System.out.println("asjncja ncasj");
         setRecordsData();
+        SharedModel.setGameRoom(null);
         if (!SharedModel.isSoundTrackStarted()) {
             playCurrentSong();
             SharedModel.setSoundTrackStarted(true);

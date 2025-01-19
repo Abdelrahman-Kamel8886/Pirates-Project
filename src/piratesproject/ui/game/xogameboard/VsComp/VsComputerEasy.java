@@ -80,7 +80,7 @@ public class VsComputerEasy extends XOGameBoard {
         board = new String[SIZE][SIZE];
         moves = new ArrayList();
         gameRecord = new RecordModel(player1, player2);
-
+        backIcon.setVisible(true);
         initButtons();
         resetBoard();
         onClicks();

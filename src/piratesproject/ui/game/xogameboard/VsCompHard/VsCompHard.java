@@ -43,6 +43,7 @@ public class VsCompHard extends XOGameBoard {
     public VsCompHard(Stage stage) {
         super(stage);
         initGame();
+        backIcon.setVisible(true);
         State state = new State(0, globalBoard);
         if(SharedModel.getUser()==null){
             name1 = "Guest";

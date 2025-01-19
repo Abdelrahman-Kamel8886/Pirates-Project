@@ -20,14 +20,16 @@ import piratesproject.utils.BackgroundMusic;
 public class Main extends Application{
 
     private static Scene scene;
+    public static Stage mainStage;
     private NetworkAccessLayer networkAccessLayer;
 
     @Override
     public void start(Stage stage) throws Exception {
         networkAccessLayer = NetworkAccessLayer.getInstance();
-
+        mainStage=stage;
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
+        stage.setResizable(false);
 
 
         Parent root = new SplashController(stage);

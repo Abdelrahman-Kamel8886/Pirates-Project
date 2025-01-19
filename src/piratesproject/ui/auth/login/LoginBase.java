@@ -58,8 +58,8 @@ public class LoginBase extends AnchorPane {
 
     private void drawAllViews() {
         setId("AnchorPane");
-        setPrefHeight(400.0);
-        setPrefWidth(600.0);
+        //setPrefHeight(400.0);
+        //setPrefWidth(600.0);
         getStyleClass().add("mainFxmlClass");
         getStylesheets().add("/piratesproject/drawable/styles/login.css");
 
