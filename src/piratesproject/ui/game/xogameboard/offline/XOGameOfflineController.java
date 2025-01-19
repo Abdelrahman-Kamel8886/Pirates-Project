@@ -89,9 +89,11 @@ public class XOGameOfflineController extends XOGameBoard {
         board = new String[SIZE][SIZE];
         moves = new ArrayList();
         gameRecord = new RecordModel(player1, player2);
+        backIcon.setVisible(true);
         initButtons();
         resetBoard();
         onClicks();
+        
     }
 
     private void initButtons() {
@@ -140,8 +142,8 @@ public class XOGameOfflineController extends XOGameBoard {
                 return;
             }
             if (isDraw()) {
-                saveRecordToFile();
                 currentPlayer = null;
+                saveRecordToFile();
                 disableAllButtons();
                 
                 return;

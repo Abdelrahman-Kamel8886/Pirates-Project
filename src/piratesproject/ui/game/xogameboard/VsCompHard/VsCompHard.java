@@ -36,13 +36,23 @@ public class VsCompHard extends XOGameBoard {
     HardRecord hardrecord;
     String globalBoard[] = {"", "", "", "", "", "", "", "", ""};
     String recordBoard[] = {"", "", "", "", "", "", "", "", ""};
+    String name1 , name2 = "computer(HARD)";
     AdversarialSearchTicTacToe AiTicTacToe;
     private NetworkAccessLayer networkAccessLayer;
 
     public VsCompHard(Stage stage) {
         super(stage);
         initGame();
+        backIcon.setVisible(true);
         State state = new State(0, globalBoard);
+        if(SharedModel.getUser()==null){
+            name1 = "Guest";
+        }
+        else{
+           name1 = SharedModel.getUser().getUserName(); 
+        }
+        playerOneLabel.setText(name1 + " : ( X )");
+        playerTwoLabel.setText(name2 + " ( O )");
         networkAccessLayer = NetworkAccessLayer.getInstance();
         if (SharedModel.getUser() != null) {
             networkAccessLayer.sentAvilableState(1);

@@ -27,7 +27,7 @@ import piratesproject.utils.SharedModel;
 
 public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
-    private Player player1, player2, currentPlayer, me;
+    private Player player1, player2, currentPlayer, winner,me;
     private String name1, name2, opponent, secondPlayer;
     private String movesSequnce, line;
     private RecordModel gameRecord;
@@ -138,16 +138,15 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
             String winCondition = checkWin(row, col);
             line = winCondition != null ? winCondition : "none";
-            //saveRecord();
+            saveRecord();
             if (winCondition != null) {
                 drawWinLine(winCondition);
-                saveRecordToFile();
-                Player winner = currentPlayer;
+                
+                winner = currentPlayer;
                 Player loser = (winner == player1) ? player2 : player1;
-
-                // Show videos based on the winner and loser
                 showVideo(VideoTypeEnum.WIN, winner);
                 showVideo(VideoTypeEnum.LOSS, loser);
+                saveRecordToFile();
                 return;
             }
             if (isDraw()) {
@@ -172,20 +171,23 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
 
     private String checkWin(int row, int col) {
         String symbol = currentPlayer.getSymbol();
+        String result = null;
+        
 
         if (board[row][0].equals(symbol) && board[row][1].equals(symbol) && board[row][2].equals(symbol)) {
-            return "ROW-" + row;
+            result= "ROW-" + row;
         }
         if (board[0][col].equals(symbol) && board[1][col].equals(symbol) && board[2][col].equals(symbol)) {
-            return "COL-" + col;
+            result= "COL-" + col;
         }
         if (row == col && board[0][0].equals(symbol) && board[1][1].equals(symbol) && board[2][2].equals(symbol)) {
-            return "DIAG-PRIMARY";
+            result= "DIAG-PRIMARY";
         }
         if (row + col == SIZE - 1 && board[0][2].equals(symbol) && board[1][1].equals(symbol) && board[2][0].equals(symbol)) {
-            return "DIAG-SECONDARY";
+            result= "DIAG-SECONDARY";
         }
-        return null;
+        winner = result != null ? currentPlayer : null;
+        return result;
     }
 
     private boolean isDraw() {
@@ -259,18 +261,19 @@ public class OnlineGame extends XOGameBoard implements NetworkResponseHandler {
         }
     }
 
-//    private void saveRecord() {
-//        movesSequnce = JsonUtils.movesArrayToJson(moves);
-//        gameRecord.setWinner(currentPlayer);
-//        gameRecord.setGameSequance(movesSequnce);
-//        gameRecord.setLine(line);
-//        SharedModel.setSelectedRecord(gameRecord);
-//        System.out.println(gameRecord.toString());
-//    }
+    private void saveRecord() {
+        movesSequnce = JsonUtils.movesArrayToJson(moves);
+        gameRecord.setWinner(winner);
+        gameRecord.setGameSequance(movesSequnce);
+        gameRecord.setLine(line);
+        SharedModel.setSelectedRecord(gameRecord);
+    }
 
     private void saveRecordToFile() {
-        String record = JsonUtils.recordModelToJson(gameRecord);
-        FileHandler.appendToFile(record);
+        if(recordButton.getState()){
+           String record = JsonUtils.recordModelToJson(gameRecord);
+           FileHandler.appendToFile(record); 
+        }
 
     }
 
