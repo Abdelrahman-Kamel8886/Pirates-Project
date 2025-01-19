@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {"player1":{"name":"abdokamel8886","symbol":"X"},"player2":{"name":"neniea","symbol":"O"},"winner":{"name":"abdokamel8886","symbol":"X"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":2,\"col\":2,\"symbol\":\"O\"},{\"row\":0,\"col\":1,\"symbol\":\"X\"},{\"row\":1,\"col\":2,\"symbol\":\"O\"},{\"row\":0,\"col\":2,\"symbol\":\"X\"}]","line":"ROW-0"}
 {"player1":{"name":"abdokamel8886","symbol":"X"},"player2":{"name":"n","symbol":"O"},"winner":{"name":"abdokamel8886","symbol":"X"},"gameSequance":"[{\"row\":0,\"col\":0,\"symbol\":\"X\"},{\"row\":1,\"col\":0,\"symbol\":\"O\"},{\"row\":1,\"col\":1,\"symbol\":\"X\"},{\"row\":0,\"col\":1,\"symbol\":\"O\"},{\"row\":1,\"col\":2,\"symbol\":\"X\"},{\"row\":2,\"col\":2,\"symbol\":\"O\"},{\"row\":0,\"col\":2,\"symbol\":\"X\"},{\"row\":2,\"col\":0,\"symbol\":\"O\"},{\"row\":2,\"col\":1,\"symbol\":\"X\"}]","line":"none"}
 {"player1":{"name":"abdo","symbol":"X"},"player2":{"name":"tag","symbol":"O"},"winner":{"name":"abdo","symbol":"X"},"gameSequance":"[{\"row\":1,\"col\":1,\"symbol\":\"X\"},{\"row\":0,\"col\":0,\"symbol\":\"O\"},{\"row\":0,\"col\":1,\"symbol\":\"X\"},{\"row\":0,\"col\":2,\"symbol\":\"O\"},{\"row\":2,\"col\":1,\"symbol\":\"X\"}]","line":"COL-1"}
@@ -62,3 +63,5 @@
 {"player1":{"name":"abram","symbol":"X"},"player2":{"name":"jailan","symbol":"O"},"gameSequance":"","line":""}
 {"player1":{"name":"abram","symbol":"X"},"player2":{"name":"jailan","symbol":"O"},"gameSequance":"","line":""}
 {"player1":{"name":"jailan","symbol":"X"},"player2":{"name":"abram","symbol":"O"},"gameSequance":"","line":""}
+=======
+>>>>>>> 89f09a6967ba61932fac94819b3a60cae4632d0f

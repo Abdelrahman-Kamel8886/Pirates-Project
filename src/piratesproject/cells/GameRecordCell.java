@@ -81,12 +81,14 @@ public class GameRecordCell extends ListCell<RecordModel> {
                 state2 = GameResultEnum.D.name();
                 player1WinStateText.setStyle("-fx-fill: gray; -fx-font-size: 12px; -fx-font-weight: bold;");
                 player2WinStateText.setStyle("-fx-fill: gray; -fx-font-size: 12px; -fx-font-weight: bold;");
-            } else if (match.getWinner().equals(match.getPlayer1())) {
+            } else if (match.getWinner().getName().equals(match.getPlayer1().getName())) {
+                System.out.println("1111111111");
                 state1 = GameResultEnum.W.name();
                 state2 = GameResultEnum.L.name();
                 player1WinStateText.setStyle("-fx-fill: green; -fx-font-size: 12px; -fx-font-weight: bold;");
                 player2WinStateText.setStyle("-fx-fill: red; -fx-font-size: 12px; -fx-font-weight: bold;");
             } else {
+                System.out.println("22222222222");
                 state1 = GameResultEnum.L.name();
                 state2 = GameResultEnum.W.name();
                 player1WinStateText.setStyle("-fx-fill: red; -fx-font-size: 12px; -fx-font-weight: bold;");

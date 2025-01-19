@@ -44,7 +44,8 @@ public class VsComputerEasy extends XOGameBoard {
     private String[][] board;
     private Button[][] buttons;
     private Player player1, player2, currentPlayer, winner;
-    private String name1 = "nour", name2 = "computer";
+    private String name1, name2 = "computer(EASY)";
+    private String firstPlayer, secondPlayer;
     Thread minMaxthread;
     Stage stage;
     private final int SIZE = 3;
@@ -58,10 +59,20 @@ public class VsComputerEasy extends XOGameBoard {
         if(SharedModel.getUser()!=null){
             networkAccessLayer.sentAvilableState(1);
         }
+        if(SharedModel.getUser()==null){
+            name1 = "Guest";
+        }
+        else{
+           name1 = SharedModel.getUser().getUserName(); 
+        }
         initGame();
     }
+    
+
 
     private void initGame() {
+        playerOneLabel.setText(name1 + " : ( X )");
+        playerTwoLabel.setText(name2 + " ( O )");
         player1 = new Player(name1, GameMovesEnum.X.name());
         player2 = new Player(name2, GameMovesEnum.O.name());
         currentPlayer = player1;
@@ -76,6 +87,8 @@ public class VsComputerEasy extends XOGameBoard {
         drawSuccesslines();
 
     }
+    
+    
 
     private void initButtons() {
         buttons[0][0] = btnGrid_0_0;
@@ -130,19 +143,14 @@ public class VsComputerEasy extends XOGameBoard {
             winner = winCondition != null ? currentPlayer : null;
             saveRecord();
             if (winCondition != null) {
-                 if(recordFlag){
-                     saveRecordToFile();
-                 }
                 drawWinLine(winCondition);
-
+                saveRecordToFile();
                 return;
             }
             if (isDraw()) {
-                if(recordFlag){
-                     saveRecordToFile();
-                 }
                 currentPlayer = null;
                 disableAllButtons();
+                saveRecordToFile();
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 pause.setOnFinished(event -> showVideo(VideoTypeEnum.DRAW)); // Show the video after the pause
                 pause.play(); // Start the pause
@@ -298,8 +306,10 @@ public class VsComputerEasy extends XOGameBoard {
     }
 
     private void saveRecordToFile() {
-        String record = JsonUtils.recordModelToJson(gameRecord);
-        FileHandler.appendToFile(record);
+        if(recordButton.getState()){
+           String record = JsonUtils.recordModelToJson(gameRecord);
+           FileHandler.appendToFile(record); 
+        }
 
     }
 }

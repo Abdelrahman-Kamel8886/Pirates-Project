@@ -1,6 +1,7 @@
 package piratesproject.ui.game.xogameboard.VsCompHard;
 
 import com.google.gson.Gson;
+import java.util.Arrays;
 
 import java.util.Scanner;
 import javafx.animation.PauseTransition;
@@ -23,47 +24,53 @@ import piratesproject.network.NetworkAccessLayer;
 import piratesproject.ui.game.minmaxalgorithim.AdversarialSearchTicTacToe;
 import piratesproject.ui.game.xogameboard.XOGameBoard;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.FileHandler;
+import piratesproject.utils.JsonUtils;
 import piratesproject.utils.SharedModel;
 
 public class VsCompHard extends XOGameBoard {
-    
+
     Thread minMaxthread;
     Stage stage;
     State Mystate;
-    HardRecord hardrecord;    
+    HardRecord hardrecord;
     String globalBoard[] = {"", "", "", "", "", "", "", "", ""};
     String recordBoard[] = {"", "", "", "", "", "", "", "", ""};
     AdversarialSearchTicTacToe AiTicTacToe;
     private NetworkAccessLayer networkAccessLayer;
+
     public VsCompHard(Stage stage) {
-        super(stage);        
+        super(stage);
         initGame();
         State state = new State(0, globalBoard);
         networkAccessLayer = NetworkAccessLayer.getInstance();
-        if(SharedModel.getUser()!=null){
+        if (SharedModel.getUser() != null) {
             networkAccessLayer.sentAvilableState(1);
         }
         listenToAllEvents();
     }
 
     public void checkWin(State state) {
-        
+
         int result = AiTicTacToe.utilityOf(state);
         if (result == 1) {
-
+            int[] resultLine = AiTicTacToe.getLine(state);
+            drawWinLine(getlineNumber(resultLine));
             changeButtonDiableEnable(true);
             System.out.println("AI wins!");
-            
-            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+
+            PauseTransition pause = new PauseTransition(Duration.seconds(.2));
             pause.setOnFinished(event -> showVideo(VideoTypeEnum.LOSS)); // Show the video after the pause
             pause.play();
-        changeButtonDiableEnable(true);
-        System.out.println("AI wins!");
-        
+            changeButtonDiableEnable(true);
+            System.out.println("AI wins!");
+
         } else if (result == -1) {
-             PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            int[] resultLine = AiTicTacToe.getLine(state);
+            drawSuccesslines();
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> showVideo(VideoTypeEnum.WIN)); // Show the video after the pause
-            pause.play(); 
+            pause.play();
             changeButtonDiableEnable(true);
             System.out.println("You win!");
         } else {
@@ -71,7 +78,7 @@ public class VsCompHard extends XOGameBoard {
             System.out.println("It's a draw!");
         }
     }
-    
+
     public void clickEvent(int postion, Button button) {
         //check if ""
         if (globalBoard[postion] == "") {
@@ -88,6 +95,7 @@ public class VsCompHard extends XOGameBoard {
             }
         }
     }
+
     public void playRecord() {
         Move move = hardrecord.next();
         if (move != null) {
@@ -95,7 +103,7 @@ public class VsCompHard extends XOGameBoard {
             drawBoard(recordBoard);
         }
     }
-    
+
     public void listenToAllEvents() {
         backIcon.addEventHandler(EventType.ROOT, new EventHandler() {
             @Override
@@ -113,83 +121,82 @@ public class VsCompHard extends XOGameBoard {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(1, btnGrid_0_1);
-                
+
             }
         });
         btnGrid_0_2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(2, btnGrid_0_2);
-                
+
             }
         });
         btnGrid_1_0.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(3, btnGrid_1_0);
-                
+
             }
         });
         btnGrid_1_1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(4, btnGrid_1_1);
-                
+
             }
         });
         btnGrid_1_2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(5, btnGrid_1_2);
-                
+
             }
         });
         btnGrid_2_0.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(6, btnGrid_2_0);
-                
+
             }
         });
         btnGrid_2_1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(7, btnGrid_2_1);
-                
+
             }
         });
         btnGrid_2_2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 clickEvent(8, btnGrid_2_2);
-                
+
             }
         });
-        
-        retryIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+        retryIcon0.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-//                record.print();
-//                String data = JsonUtils.hardRecordTojson(record);
-//                System.out.println(data);
                 hardrecord.clear();
-                hardrecord.currentPostion = 0 ; 
+                hardrecord.currentPostion = 0;
+
                 initGame();
                 changeButtonDiableEnable(false);
             }
-            
+
         });
-        
-        record.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+        recordButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 playRecord();
             }
-            
+
         });
     }
-    
+
     private void initGame() {
+        drawSuccesslines();
         AiTicTacToe = new AdversarialSearchTicTacToe();
         globalBoard = new String[]{"", "", "", "", "", "", "", "", ""};
         recordBoard = new String[]{"", "", "", "", "", "", "", "", ""};
@@ -202,10 +209,8 @@ public class VsCompHard extends XOGameBoard {
         drawBoard(globalBoard);
     }
 
-
-    
     public void drawBoard(String[] state) {
-        
+
         btnGrid_0_0.setText(state[0]);
         btnGrid_0_1.setText(state[1]);
         btnGrid_0_2.setText(state[2]);
@@ -216,9 +221,9 @@ public class VsCompHard extends XOGameBoard {
         btnGrid_2_1.setText(state[7]);
         btnGrid_2_2.setText(state[8]);
     }
-    
+
     public void changeButtonDiableEnable(Boolean flag) {
-        
+
         btnGrid_0_0.setDisable(flag);
         btnGrid_0_1.setDisable(flag);
         btnGrid_0_2.setDisable(flag);
@@ -229,9 +234,11 @@ public class VsCompHard extends XOGameBoard {
         btnGrid_2_1.setDisable(flag);
         btnGrid_2_2.setDisable(flag);
     }
-        
-          private void showVideo(VideoTypeEnum videoType) {
-        
+
+    private void showVideo(VideoTypeEnum videoType) {
+        if (recordButton.getState()) {
+            saveRecordToFile(hardrecord);
+        }
         DrawForm drawBase = new DrawForm(LevelTypesEnum.Hard);
         switch (videoType) {
             case WIN:
@@ -244,5 +251,71 @@ public class VsCompHard extends XOGameBoard {
                 drawBase.display(stage, Pathes.DRAW_VEDIO_PATH); // Use the correct path for the draw video
                 break;
         }
+    }
+
+    public int getlineNumber(int[] line) {
+
+        //         Rows
+        if (Arrays.equals(line, new int[]{0, 1, 2})) {
+            return 0;
+        } else if (Arrays.equals(line, new int[]{3, 4, 5})) {
+            return 3;
+        } else if (Arrays.equals(line, new int[]{6, 7, 8})) {
+            return 4;
+        } else if (Arrays.equals(line, new int[]{0, 3, 6})) {
+            return 5;
+        } else if (Arrays.equals(line, new int[]{1, 4, 7})) {
+            return 6;
+        } else if (Arrays.equals(line, new int[]{2, 5, 8})) {
+            return 7;
+        } else if (Arrays.equals(line, new int[]{2, 4, 6})) {
+            return 8;
+        } else if (Arrays.equals(line, new int[]{0, 4, 8})) {
+            return 1;
+        }
+        return 1;
+    }
+
+    private void drawWinLine(int winCondition) {
+
+        switch (winCondition) {
+            case 0:
+                System.out.println(1);
+                line1.setVisible(true);
+                break;
+            case 7:
+                System.out.println(3);
+                line7.setVisible(true);
+                break;
+            case 3:
+                System.out.println(4);
+                line3.setVisible(true);
+                break;
+            case 5:
+                System.out.println(5);
+                line5.setVisible(true);
+                break;
+            case 4:
+                System.out.println(6);
+                line6.setVisible(true);
+                break;
+            case 2:
+                System.out.println(7);
+                line8.setVisible(true);
+                break;
+            case 6:
+                System.out.println(2);
+                line2.setVisible(true);
+                break;
+            case 1:
+                System.out.println(8);
+                line8.setVisible(true);
+                break;
+        }
+    }
+
+    private void saveRecordToFile(HardRecord hardRecord) {
+        String recordString = JsonUtils.hardRecordTojson(hardRecord);
+        FileHandler.appendToHardFile(recordString);
     }
 }
