@@ -2,22 +2,24 @@ package piratesproject.forms.twoNames;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import piratesproject.Main;
+import piratesproject.drawable.values.Pathes;
 
 
 public class TwoNamesForm {
      private static Stage window;
 
-    public static void display(Stage owner1){
+    public void display(Stage owner1){
 
         window = new Stage();
         window.initOwner(Main.mainStage);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Enter Players Names");
         window.setResizable(false);
-       // window.getIcons().add(new Image(getClass().getResource(Pathes.SETTINGS_LOGO_PATH).toString()));
+        window.getIcons().add(new Image(getClass().getResource(Pathes.APP_LOGO_PATH).toString()));
 
         Parent root = new TwoNamesController(Main.mainStage);
 
