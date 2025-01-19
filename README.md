@@ -75,6 +75,7 @@ This project utilizes **[GameServerEngine](https://github.com/DaTaj-ai/GameServe
 - **Networking**: Custom implementation for client-server communication using the [GameServerEngine](https://github.com/DaTaj-ai/GameServerEngine).
 - **AI**: Custom algorithms for three difficulty levels in single-player mode.
 - **File System**: Used for storing game records.
+- **CSS**: Used for styling and managing the UI design.
 - **Libraries**:
   - **Gson**: Used for parsing JSON data in requests and responses.
 
