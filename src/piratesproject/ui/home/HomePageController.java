@@ -210,7 +210,7 @@ public class HomePageController extends HomePage implements NetworkResponseHandl
             UserModel selectedItem = activePlayersListView.getSelectionModel().getSelectedItem();
             SharedModel.setSelectedUser(selectedItem);
             SendInvitationFormHandler s = new SendInvitationFormHandler();
-           s.display(myStage);
+            s.display(myStage);
         });
         Main.mainStage.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.R) {
