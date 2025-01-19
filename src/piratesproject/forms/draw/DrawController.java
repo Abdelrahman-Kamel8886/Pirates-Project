@@ -13,6 +13,7 @@ import piratesproject.ui.game.xogameboard.VSComp.VsComputerEasy;
 import piratesproject.ui.game.xogameboard.VsCompHard.VsCompHard;
 import piratesproject.ui.game.xogameboard.offline.XOGameOfflineController;
 import piratesproject.ui.home.HomePageController;
+import piratesproject.utils.SharedModel;
 
 public class DrawController extends DrawBase {
 
@@ -20,7 +21,7 @@ public class DrawController extends DrawBase {
     LevelTypesEnum level ; 
     public DrawController(Stage myStage, String path) {
         super(path);
-        this.level = level;
+        this.level = SharedModel.getSelectedLevel();
         this.mystage = myStage;
         listenToAllEvent();
 
@@ -28,7 +29,11 @@ public class DrawController extends DrawBase {
 
     private void listenToAllEvent() {
         exitB.setOnAction(event -> exitToHome());
+        if(SharedModel.getGameRoom()==null){
         playAgainB.setOnAction(event -> goToXOPageToPlayAgin());
+        }else{
+            playAgainB.setVisible(false);
+        }
     }
 
     private void goToXOPageToPlayAgin() {
@@ -42,7 +47,10 @@ public class DrawController extends DrawBase {
         else if(level == LevelTypesEnum.Hard){
             Parent XOgame = new VsCompHard(mystage);
             Main.resetScene(XOgame);
-        } 
+        } else {
+               Parent XOgame = new VsComputerEasy(mystage);
+            Main.resetScene(XOgame);
+        }
         DrawForm.closeForm();
 
     }

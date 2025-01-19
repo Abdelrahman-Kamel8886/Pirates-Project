@@ -4,24 +4,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import piratesproject.Main;
 import piratesproject.enums.LevelTypesEnum;
+import piratesproject.utils.SharedModel;
 
 public class DrawForm {
     private static Stage window;
     static LevelTypesEnum level ; 
 
     public DrawForm(LevelTypesEnum level) {
-        this.level = level ;
+        this.level = SharedModel.getSelectedLevel() ;
     }
     
-    public static void display(Stage owner, String path) {
+    public static void display(Stage owner1, String path) {
         if (window != null && window.isShowing()) {
             window.toFront(); // Bring the existing window to the front
             return; 
         }
 
         window = new Stage();
-        window.initOwner(owner);
+        window.initOwner(Main.mainStage);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Video");
         window.setResizable(false);
