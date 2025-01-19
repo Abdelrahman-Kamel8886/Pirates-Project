@@ -37,14 +37,12 @@ public class ReplayController extends ReplayBase {
         Player2Label.setText(name2 + " ( O )");
 
         if (SharedModel.getSelectedRecord().getWinner() != null) {
-            if (SharedModel.getSelectedRecord().getWinner()
-                    == SharedModel.getSelectedRecord().getPlayer1()) {
+            if (SharedModel.getSelectedRecord().getWinner().getName().equals(SharedModel.getSelectedRecord().getPlayer1().getName())) {
                 label.setText("W");
                 label0.setText("L");
                 label.setStyle("-fx-text-fill: green;");
                 label0.setStyle("-fx-text-fill: red;");
-            }
-            else{
+            } else {
                 label0.setText("W");
                 label.setText("L");
                 label0.setStyle("-fx-text-fill: green;");
@@ -100,8 +98,8 @@ public class ReplayController extends ReplayBase {
         int col = currentMove.getCol();
         String symbol = currentMove.getSymbol();
         buttons[row][col].setText(symbol);
-        if(currentIndex == moves.size() - 1){
-            System.out.println("line "+SharedModel.getSelectedRecord().getLine());
+        if (currentIndex == moves.size() - 1) {
+            System.out.println("line " + SharedModel.getSelectedRecord().getLine());
             drawWinLine(SharedModel.getSelectedRecord().getLine());
             disableAllButtons();
         }
@@ -116,8 +114,8 @@ public class ReplayController extends ReplayBase {
         currentIndex--;
 
     }
-    
-        private void drawWinLine(String winCondition) {
+
+    private void drawWinLine(String winCondition) {
         switch (winCondition) {
             case "ROW-0":
                 line1.setVisible(true);
@@ -144,7 +142,6 @@ public class ReplayController extends ReplayBase {
                 line8.setVisible(true);
                 break;
         }
-        
 
     }
 
@@ -158,7 +155,6 @@ public class ReplayController extends ReplayBase {
         pauseButton.setDisable(true);
         playButton.setDisable(true);
     }
-
 
     public void gotoHome() {
         Parent homePage = new HomePageController(mystage);
