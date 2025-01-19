@@ -30,6 +30,7 @@ public class SendInvitationFormController extends SendInvitationForm implements 
     private void initView() {
         nameText.setText(SharedModel.getSelectedUser().getUserName());
         scoreText.setVisible(false);
+        text0.setVisible(false);
         onClicks();
     }
 
